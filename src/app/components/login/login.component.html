@@ -1,0 +1,56 @@
+<h1>Login Component</h1>
+<div class="row align-items-center">
+    <mat-card class="col-10 col-sm-6 col-md-5 col-lg-4 mx-auto my-4">
+        <mat-tab-group>
+            <mat-tab label="Login">
+                <mat-card-content class="px-2 py-4">
+                    <form ngNativeValidate>
+                        <div class="form-group">
+                            <label for="loginEmail">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail" formControlName="email"
+                                aria-describedby="loginEmailNote" required>
+                            <small id="loginEmailNote" class="form-text text-muted">We'll never share your email with
+                                anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPword">Password</label>
+                            <input type="password" class="form-control" formControlName="password" id="loginPword"
+                                minlength="8" maxlength="20" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </mat-card-content>
+            </mat-tab>
+
+            <mat-tab label="Register">
+                <mat-card-content class="px-2 py-4">
+                    <form ngNativeValidate>
+                        <div class="form-group">
+                            <label for="regEmail">Email address</label>
+                            <input type="email" class="form-control" id="regEmail" formControlName="email"
+                                aria-describedby="regEmailNote" required>
+                            <small id="regEmailNote" class="form-text text-muted">We'll never share your email with
+                                anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPword">Password</label>
+                            <input class="form-control"
+                                formControlName="password" id="regPword" minlength="8" maxlength="20"
+                                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[,.#?!@$%^&*-]).{8,}$" required>
+                            <small id="" class="form-text text-muted">Password must have at least 8 characters, contain
+                                upper case, lower case characters, numbers, and symbols (e.g.: Testing123!)</small>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="regShowPword">
+                            <label class="form-check-label" for="regShowPword">Show password</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </mat-card-content>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>
