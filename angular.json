@@ -13,10 +13,21 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "ja": {
+            "translation": "src/locale/messages.ja.xlf"
+          }
+        }
+      },
+
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "outputPath": "dist/edge-wise",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -34,6 +45,9 @@
             "scripts": []
           },
           "configurations": {
+            "ja": {
+              "localize": ["ja"]
+            },
             "production": {
               "budgets": [
                 {
@@ -69,6 +83,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "ja": {
+              "browserTarget": "edge-wise:build:development,ja"
+            },      
             "production": {
               "browserTarget": "edge-wise:build:production"
             },
