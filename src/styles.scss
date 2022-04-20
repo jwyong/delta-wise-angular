@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+// don't underline links/btns on hover
+a,
+a:hover {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+button:focus,
+mat-list-item:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+// change cursor to pointer (finger)
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+/**
+* bootstrap overrides/additions
+**/
+// full width/height
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
