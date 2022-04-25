@@ -20,13 +20,17 @@ export class ForgotPwordComponent extends BaseAuthComponent implements OnInit {
     this.setIsLoading(true)
 
     setTimeout(() => {
-      // show snackbar
-      this.showSnackbar(`reset email = ${this.email.value}`)
-
       this.setIsLoading(false)
 
-      // go to resetPword page
-      this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
+      // show alert
+      alert(`We have sent an email with a password reset link to ${this.email.value}. Please check your email to reset your password.`)
+
+      // go back to login page after alert dismissed 
+      // this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
+
+      // TODO: TEMP - go to reset pword instead
+      this.navigateTo(RouterConstants.ROUTER_PATH_RESET_PWORD)
+
     }, 2000);
   }
 }

@@ -1,3 +1,4 @@
+import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ForgotPwordComponent } from './components/auth/forgot-pword/forgot-pword.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,11 @@ const routes: Routes = [
     path: RouterConstants.ROUTER_PATH_FORGOT_PWORD,
     component: ForgotPwordComponent,
     data: { title: 'Forgot password' },
+  },
+  {
+    path: RouterConstants.ROUTER_PATH_RESET_PWORD,
+    component: ResetPwordComponent,
+    data: { title: 'Reset password' },
   },
 
   /**

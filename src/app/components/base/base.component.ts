@@ -1,8 +1,9 @@
 import { DataService } from 'src/app/services/data-service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarDismiss } from '@angular/material/snack-bar';
 import { ComponentType } from '@angular/cdk/portal';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-base',
@@ -26,8 +27,12 @@ export class BaseComponent implements OnInit {
   }
 
   // show snackbar
-  showSnackbar(msgStr: string, actionStr?: string, durationInSecs?: number) {
-    this._snackBar.open(msgStr, actionStr ?? "", { duration: durationInSecs ?? 3 * 1000 })
+  showSnackbar(msgStr: string, actionStr?: string, action?: () => void, durationInSecs?: number) {
+    this._snackBar.open(msgStr, actionStr ?? "", {
+      duration: durationInSecs ?? 3 * 1000
+    }).afterDismissed().subscribe(() => {
+      action
+    })
   }
 
   // navigate router to link

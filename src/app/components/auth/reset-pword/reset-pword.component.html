@@ -1,0 +1,32 @@
+<div class="h-100 row align-items-center">
+    <mat-card class="col-8 col-sm-6 col-md-5 col-lg-3 mx-auto my-auto">
+        <mat-card-title i18n="@@reset_pword_title">Reset password</mat-card-title>
+        <mat-card-subtitle i18n="@@reset_pword_desc">
+            Please input your new password.
+            <mat-icon aria-hidden="false" aria-label="Example home icon" [matTooltip]="getPwordTooltipText()">
+                info
+            </mat-icon>
+        </mat-card-subtitle>
+        <mat-card-content>
+            <form (ngSubmit)="resetPwordOnSubmit()">
+                <p>
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label i18n="@@reset_pword_new_pword">New password</mat-label>
+                        <input matInput [formControl]="newPwordFC" required>
+                        <mat-error *ngIf="newPwordFC.invalid">{{getNewPwordErrorMsg()}}</mat-error>
+                        <mat-error *ngIf="newPwordFC.invalid">{{getNewPwordErrorMsg()}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label i18n="@@reset_pword_confirm_pword">Confirm password</mat-label>
+                        <input matInput [formControl]="confirmPwordFC" required>
+                        <mat-error *ngIf="confirmPwordFC.invalid">{{getConfirmPwordErrorMsg()}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <button class="w-100" mat-raised-button type="submit" color="primary"
+                    i18n="@@login_title">Submit</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

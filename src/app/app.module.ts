@@ -13,10 +13,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseAuthComponent } from './components/auth/base-auth/base-auth.component';
+import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent
   ],
   imports: [
     BrowserModule,

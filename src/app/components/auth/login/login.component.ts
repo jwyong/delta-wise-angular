@@ -1,3 +1,4 @@
+import { EWStrings } from './../../../utils/ew_strings';
 import { RouterConstants } from './../../../utils/router_constants';
 import { BaseAuthComponent } from './../base-auth/base-auth.component';
 import { Component } from '@angular/core';
@@ -16,10 +17,10 @@ export class LoginComponent extends BaseAuthComponent {
   pword = new FormControl('', [Validators.required, Validators.minLength(8)]);
   getPwordErrorMsg() {
     if (this.pword.hasError(EWConstants.KEY_REQUIRED)) {
-      return $localize`:@@vld_required:${EWConstants.VAL_REQUIRED}`
+      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
     }
 
-    return this.pword.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWConstants.VAL_INVALID_PWORD}` : '';
+    return this.pword.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWStrings.VAL_INVALID_PWORD}` : '';
   }
 
   // login - go to dashboard
