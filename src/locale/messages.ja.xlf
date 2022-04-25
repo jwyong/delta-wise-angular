@@ -520,7 +520,7 @@
 					</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="7196360912393502967" datatype="html">
+			<trans-unit id="vld_required" datatype="html">
 				<source>
 					You must enter a value
 				</source>
@@ -536,7 +536,7 @@
 					</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="7408541314475571768" datatype="html">
+			<trans-unit id="vld_invalid_email" datatype="html">
 				<source>
 					Not a valid email
 				</source>
@@ -551,6 +551,11 @@
 						18
 					</context>
 				</context-group>
+			</trans-unit>
+			<trans-unit id="vld_invalid_pword" datatype="html">
+				<target>
+					パスワードは8文字以上である必要があります
+				</target>
 			</trans-unit>
 		</body>
 	</file>

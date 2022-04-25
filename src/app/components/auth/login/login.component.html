@@ -1,33 +1,25 @@
 <div class="h-100 row align-items-center">
     <mat-card class="col-8 col-sm-6 col-md-5 col-lg-3 mx-auto my-auto">
-        <!-- <h1 i18n="site header|An introduction header for this sample@@helloH1">Hello i18n!</h1>
-        <span i18n>Updated {minutes, plural, =0 {just now} =1 {one minute ago} other {{{minutes}} minutes ago}}</span>
-        <br>
-        <span i18n>Updated: {minutes, plural,
-            =0 {just now}
-            =1 {one minute ago}
-            other {{{minutes}} minutes ago by {gender, select, male {male} female {female} other {other}}}}
-          </span> -->
-
         <mat-card-title i18n="@@login_title">Login</mat-card-title>
         <mat-card-subtitle i18n="@@login_desc">Welcome to EdgeWise. Please login to continue</mat-card-subtitle>
         <mat-card-content>
-            <form>
+            <form (ngSubmit)="loginFormOnSubmit()">
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@login_email_title">Email</mat-label>
                         <input matInput [formControl]="email" required>
-                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                        <mat-error *ngIf="email.invalid">{{getEmailErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@login_pword_title">Password</mat-label>
-                        <input matInput [formControl]="email" required>
-                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                        <input matInput [formControl]="pword" required type="password">
+                        <mat-error *ngIf="pword.invalid">{{getPwordErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>
-                <button mat-raised-button color="primary" i18n="@@login_title">Login</button>
+                <a href="{{forgotPwordPath}}"><p class="small" i18n="@@login_forgot_pword">Forgot password</p></a>
+                <button class="w-100" mat-raised-button type="submit" color="primary" i18n="@@login_title">Login</button>
             </form>
         </mat-card-content>
     </mat-card>

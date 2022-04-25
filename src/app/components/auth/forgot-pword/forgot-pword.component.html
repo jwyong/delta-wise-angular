@@ -1,0 +1,24 @@
+<div class="h-100 row align-items-center">
+    <mat-card class="col-8 col-sm-6 col-md-5 col-lg-3 mx-auto my-auto">
+        <mat-card-title i18n="@@forgot_pword_title">Forgot password</mat-card-title>
+        <mat-card-subtitle i18n="@@forgot_pword_desc">Please input your email address registered with EdgeWise. We will
+            send an email to reset your password.
+        </mat-card-subtitle>
+        <mat-card-content>
+            <form (ngSubmit)="forgotPwordFormOnSubmit()">
+                <p>
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label i18n="@@login_email_title">Email</mat-label>
+                        <input matInput [formControl]="email" required>
+                        <mat-error *ngIf="email.invalid">{{getEmailErrorMsg()}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <a href="{{backToLoginPath}}">
+                    <p class="small" i18n="@@back_to_login">Back to login</p>
+                </a>
+                <button class="w-100" mat-raised-button type="submit" color="primary"
+                    i18n="@@login_title">Login</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

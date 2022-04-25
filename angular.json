@@ -27,7 +27,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": true,
+            "localize": false,
             "outputPath": "dist/edge-wise",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -85,7 +85,7 @@
           "configurations": {
             "ja": {
               "browserTarget": "edge-wise:build:development,ja"
-            },      
+            },
             "production": {
               "browserTarget": "edge-wise:build:production"
             },

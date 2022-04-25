@@ -8,14 +8,17 @@ body {
 body {
     margin: 0;
     font-family: 'Open Sans', Arial, sans-serif;
-    background-image: linear-gradient(rgb(27, 105, 188), cornflowerblue);
+    background-image: linear-gradient(rgb(63, 153, 250), cornflowerblue);
 }
 
 // don't underline links/btns on hover
-a,
-a:hover {
+a {
     text-decoration: none !important;
     color: inherit;
+}
+
+a:hover {
+    text-decoration: none !important;
 }
 
 button:focus,
