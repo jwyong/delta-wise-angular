@@ -89,11 +89,6 @@ export class ResetPwordComponent extends BaseAuthComponent implements OnInit {
   getPwordTooltipText() {
     return $localize`:@@vld_pword_rule:${EWStrings.VAL_PWORD_RULE}`
   }
-  // isPwordValid(pword: string): boolean {
-  //   if (pword.length < 8) return false
-
-  //   if (pword.)
-  // }
 
   // reset form submitted - go back to login page
   resetPwordOnSubmit() {

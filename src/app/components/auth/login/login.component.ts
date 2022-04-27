@@ -31,10 +31,11 @@ export class LoginComponent extends BaseAuthComponent {
     this.setIsLoading(true)
 
     setTimeout(() => {
-      // this.navigateTo(RouterConstants.ROUTER_PATH_FORGOT_PWORD)
       this.setIsLoading(false)
 
       this.showSnackbar(`email = ${this.email.value}, pword = ${this.pword.value}`)
-    }, 2000);
+
+      this.navigateTo(RouterConstants.ROUTER_PATH_DASHBOARD)
+    }, 1000);
   }
 }

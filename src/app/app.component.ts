@@ -8,8 +8,6 @@ import { DataService } from './services/data-service';
 })
 export class AppComponent implements OnInit {
   constructor(
-    // private localStorageService: LocalStorageService,
-    // private router: Router,
     private dataService: DataService
   ) { }
 
