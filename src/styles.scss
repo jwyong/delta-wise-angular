@@ -21,11 +21,6 @@ a:hover {
     text-decoration: none !important;
 }
 
-// no margin around p tags
-p {
-    margin: 0 !important;
-}
-
 button:focus,
 mat-list-item:focus {
     outline: none !important;
@@ -35,6 +30,15 @@ mat-list-item:focus {
 // change cursor to pointer (finger)
 .cursor-pointer {
     cursor: pointer !important;
+}
+
+.cursor-mouse {
+    cursor: crosshair !important;
+}
+
+// multi-line for matToolTip
+.multiline-tooltip {
+    white-space: pre-line;
 }
 
 /**

@@ -3,7 +3,8 @@
         <mat-card-title i18n="@@reset_pword_title">Reset password</mat-card-title>
         <mat-card-subtitle i18n="@@reset_pword_desc">
             Please input your new password.
-            <mat-icon aria-hidden="false" aria-label="Example home icon" [matTooltip]="getPwordTooltipText()">
+            <mat-icon class="cursor-pointer" #pwordTooltip="matTooltip" [matTooltipPosition]="pwordTooltipPositionFC.value" matTooltipClass="multiline-tooltip"
+                aria-hidden="false" aria-label="Password rules" [matTooltip]="getPwordTooltipText()">
                 info
             </mat-icon>
         </mat-card-subtitle>
@@ -11,9 +12,8 @@
             <form (ngSubmit)="resetPwordOnSubmit()">
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
-                        <mat-label i18n="@@reset_pword_new_pword">New password</mat-label>
+                        <mat-label i18n="@@reset_pword_new_pword">New password (e.g.: Testing123!)</mat-label>
                         <input matInput [formControl]="newPwordFC" required>
-                        <mat-error *ngIf="newPwordFC.invalid">{{getNewPwordErrorMsg()}}</mat-error>
                         <mat-error *ngIf="newPwordFC.invalid">{{getNewPwordErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>

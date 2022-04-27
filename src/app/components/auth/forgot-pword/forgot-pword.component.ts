@@ -23,7 +23,7 @@ export class ForgotPwordComponent extends BaseAuthComponent implements OnInit {
       this.setIsLoading(false)
 
       // show alert
-      alert(`We have sent an email with a password reset link to ${this.email.value}. Please check your email to reset your password.`)
+      alert($localize`:@@vld_forgot_pword_success:We have sent an email with a password reset link to ${this.email.value}. Please check your email to reset your password.`)
 
       // go back to login page after alert dismissed 
       // this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)

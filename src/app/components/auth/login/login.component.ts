@@ -20,7 +20,7 @@ export class LoginComponent extends BaseAuthComponent {
       return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
     }
 
-    return this.pword.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWStrings.VAL_INVALID_PWORD}` : '';
+    return this.pword.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWStrings.VAL_INVALID_PWORD_LENGTH}` : '';
   }
 
   // login - go to dashboard
