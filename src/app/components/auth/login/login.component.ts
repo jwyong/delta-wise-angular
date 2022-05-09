@@ -35,6 +35,9 @@ export class LoginComponent extends BaseAuthComponent {
 
       this.showSnackbar(`email = ${this.email.value}, pword = ${this.pword.value}`)
 
+      // TEMP - set jwtToken
+      this.setJwtToLocalStorage("TEMP_JWT")
+      
       this.navigateTo(RouterConstants.ROUTER_PATH_DASHBOARD)
     }, 1000);
   }

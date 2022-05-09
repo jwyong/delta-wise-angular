@@ -4,26 +4,40 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarDismiss } from '@angular/material/snack-bar';
 import { ComponentType } from '@angular/cdk/portal';
 import { Observable, Observer } from 'rxjs';
+import { RouterConstants } from 'src/app/utils/router_constants';
 
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.css']
 })
-export class BaseComponent implements OnInit {
 
+/**
+ * base component for everything
+ * - all shared funcs e.g. loading, show snackbar, etc here
+ */
+export class BaseComponent implements OnInit {
   constructor(
-    // private localStorageService: LocalStorageService,
     private router: Router,
     private dataService: DataService,
     private _snackBar: MatSnackBar
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   setIsLoading(isLoading: boolean) {
     this.dataService.setIsLoading(isLoading)
+  }
+
+  //=== for jwt
+  private LS_JWT_TOKEN = "LS_JWT_TOKEN"
+
+  setJwtToLocalStorage(jwtToken: string) {
+    localStorage.setItem(this.LS_JWT_TOKEN, jwtToken)
+  }
+
+  getJwtFromLocalStorage() {
+    return localStorage.getItem(this.LS_JWT_TOKEN)
   }
 
   // show snackbar

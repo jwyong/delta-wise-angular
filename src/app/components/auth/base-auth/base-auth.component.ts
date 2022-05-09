@@ -9,6 +9,11 @@ import { EWStrings } from 'src/app/utils/ew_strings';
   templateUrl: './base-auth.component.html',
   styleUrls: ['./base-auth.component.css']
 })
+
+/**
+ * base component for auth (pre-login)
+ * - mostly for shared validation funcs
+ */
 export class BaseAuthComponent extends BaseComponent implements OnInit {
   // email validator
   email = new FormControl('', [Validators.required, Validators.email]);
