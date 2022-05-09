@@ -1,3 +1,4 @@
+import { BaseHomeComponent } from './components/home/base-home/base-home.component';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -13,7 +14,7 @@ const routes: Routes = [
   {
     path: RouterConstants.ROUTER_PATH_LOGIN,
     component: LoginComponent,
-    // data: { title: 'Login to EdgeWise' },
+    data: { title: 'Login to EdgeWise' },
   },
   {
     path: RouterConstants.ROUTER_PATH_FORGOT_PWORD,
@@ -29,10 +30,18 @@ const routes: Routes = [
   /**
    * logged in
    */
-   {
-    path: RouterConstants.ROUTER_PATH_DASHBOARD,
-    component: DashboardComponent,
-    data: { title: 'Dashboard' },
+  {
+    path: RouterConstants.ROUTER_PATH_HOME,
+    component: BaseHomeComponent,
+    data: { title: 'Home' },
+    children: [
+      // show dashboard by default
+      { path: '', redirectTo: RouterConstants.ROUTER_PATH_DASHBOARD, pathMatch: 'full' },
+      {
+        path: RouterConstants.ROUTER_PATH_DASHBOARD,
+        component: DashboardComponent,
+      }
+    ]
   },
 ];
 

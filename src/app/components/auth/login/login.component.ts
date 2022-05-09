@@ -38,7 +38,7 @@ export class LoginComponent extends BaseAuthComponent {
       // TEMP - set jwtToken
       this.setJwtToLocalStorage("TEMP_JWT")
       
-      this.navigateTo(RouterConstants.ROUTER_PATH_DASHBOARD)
+      this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
     }, 1000);
   }
 }
