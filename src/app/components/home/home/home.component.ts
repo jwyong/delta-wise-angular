@@ -1,19 +1,18 @@
-import { User } from './../../../models/build-detail';
-import { BaseComponent } from 'src/app/components/base/base.component';
 import { Component, OnInit } from '@angular/core';
-import { RouterConstants } from 'src/app/utils/router_constants';
+import { BaseComponent } from 'src/app/components/base/base.component';
+import { User } from '../../../models/build-detail';
 
 @Component({
-  selector: 'app-base-home',
-  templateUrl: './base-home.component.html',
-  styleUrls: ['./base-home.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 
 /**
  * base component for home (after logging in)
  * - check jwt validity and re-direct to login if invalid/expired
  */
-export class BaseHomeComponent extends BaseComponent implements OnInit {
+export class HomeComponent extends BaseComponent implements OnInit {
   // user profile
   user = <User>{}
 

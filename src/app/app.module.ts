@@ -15,11 +15,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseAuthComponent } from './components/auth/base-auth/base-auth.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
-import { BaseHomeComponent } from './components/home/base-home/base-home.component';
+import { HomeComponent } from './components/home/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, DashboardComponent, BaseHomeComponent
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, DashboardComponent, HomeComponent
   ],
   imports: [
     BrowserModule,

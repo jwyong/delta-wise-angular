@@ -1,4 +1,4 @@
-import { BaseHomeComponent } from './components/home/base-home/base-home.component';
+import { HomeComponent } from './components/home/home/home.component';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
    */
   {
     path: RouterConstants.ROUTER_PATH_HOME,
-    component: BaseHomeComponent,
+    component: HomeComponent,
     data: { title: 'Home' },
     children: [
       // show dashboard by default
