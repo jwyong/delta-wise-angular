@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
+/**
+ * service for global data transfer
+ */
 export class DataService {
   constructor() {}
 

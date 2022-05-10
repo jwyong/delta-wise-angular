@@ -18,7 +18,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   override ngOnInit(): void {
     console.log("base home comp")
-    
+
     // jwt check
     this.checkJwtExpired()
 
@@ -48,20 +48,21 @@ export class HomeComponent extends BaseComponent implements OnInit {
     console.log(nameArray)
 
     switch (true) {
+      // no username - just return empty
       case nameArray.length == 0:
         userName = ""
         break
 
+      // 1 name only - use that initial
       case nameArray.length == 1:
         userName = nameArray[0].charAt(0) ?? userName
         break
 
+      // all others (2 names and above) - use first and last initial
       default:
-        userName = nameArray[0].charAt(0)
+        userName = nameArray[0].charAt(0) + nameArray[nameArray.length - 1].charAt(0)
     }
 
-      // const initials = (fullName?.shift()?.charAt(0) ?? "" + fullName?.pop()?.charAt(0)) ?? userName;
-
-      return userName.toUpperCase();
+    return userName.toUpperCase();
   }
 }

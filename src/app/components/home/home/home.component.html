@@ -4,7 +4,7 @@
   </a>
   <a i18n="@@dashboard" class="toolbar-tab-title" href="/home/dashboard">Dashboard</a>
   <div class="ms-auto">
-    <button type="button" mat-mini-fab color="primary">
+    <button *ngIf="user.avatar !== undefined" mat-mini-fab color="primary">
       <span>{{user.avatar}}</span>
     </button>
     <span class="ms-2 toolbar-user-name">{{user.user_name}}</span>

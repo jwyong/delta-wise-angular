@@ -4,6 +4,10 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * service for disabling console log on prod
+ */
 export class ConsoleToggleService {
 
   constructor() {
