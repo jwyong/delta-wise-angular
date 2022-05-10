@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
-import { User } from '../../../models/build-detail';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +31,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   getUser() {
     // TODO: TEMP - hardcoded
     setTimeout(() => {
-      let hardCodedUserName = " User Name"
+      let hardCodedUserName = "Hardcoded User Name"
       let avatar = this.getInitials(hardCodedUserName)
 
       this.user = {

@@ -1,6 +1,6 @@
 <mat-toolbar class="py-2">
   <a class="h-100 me-3" href="/">
-    <img class="h-100" src="/assets/img/logo-words.png" alt="EdgeWise"/>
+    <img class="h-100" src="/assets/img/logo-words.png" alt="EdgeWise" />
   </a>
   <a i18n="@@dashboard" class="toolbar-tab-title" href="/home/dashboard">Dashboard</a>
   <div class="ms-auto">
@@ -11,4 +11,8 @@
   </div>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="row my-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>
