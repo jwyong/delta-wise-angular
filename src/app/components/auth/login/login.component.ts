@@ -11,6 +11,9 @@ import { EWConstants } from 'src/app/utils/ew_constants';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent extends BaseAuthComponent {
+  override ngOnInit(): void {
+    this.checkJwtValid()
+  }
   forgotPwordPath = `/${RouterConstants.ROUTER_PATH_FORGOT_PWORD}`
 
   // pword validator

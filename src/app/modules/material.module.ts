@@ -19,7 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatSnackBarModule,
         MatTooltipModule,
         MatIconModule,
-        MatToolbarModule
+        MatToolbarModule,
     ],
     declarations: [
     ],
@@ -32,7 +32,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatSnackBarModule,
         MatTooltipModule,
         MatIconModule,
-        MatToolbarModule
+        MatToolbarModule,
     ]
 })
 export class MaterialModule { }

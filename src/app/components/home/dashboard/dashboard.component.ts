@@ -1,4 +1,4 @@
-import { BaseHomeComponent } from './../base-home/base-home.component';
+import { BaseComponent } from 'src/app/components/base/base.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,5 +6,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent extends BaseHomeComponent implements OnInit {
+export class DashboardComponent extends BaseComponent implements OnInit {
 }

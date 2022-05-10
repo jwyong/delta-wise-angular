@@ -32,6 +32,28 @@ export class BaseComponent implements OnInit {
   //=== for jwt
   private LS_JWT_TOKEN = "LS_JWT_TOKEN"
 
+  // check if jwt is expired then redirect to login if necessary
+  checkJwtExpired() {
+    const jwtToken = this.getJwtFromLocalStorage()
+
+    console.log(`checkJwtExpired, jwtToken = ${jwtToken}`)
+
+    if (jwtToken == null)
+      // TODO: check if null or expired
+      this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
+  }
+
+  // check if jwt is valid and redirect to home if necessary
+  checkJwtValid() {
+    const jwtToken = this.getJwtFromLocalStorage()
+
+    console.log(`checkJwtValid, jwtToken = ${jwtToken}`)
+
+    if (jwtToken != null)
+      // TODO: check if null or expired
+      this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
+  }
+
   setJwtToLocalStorage(jwtToken: string) {
     localStorage.setItem(this.LS_JWT_TOKEN, jwtToken)
   }
