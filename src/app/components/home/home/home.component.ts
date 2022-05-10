@@ -13,9 +13,6 @@ import { User } from '../../../models/user';
  * - check jwt validity and re-direct to login if invalid/expired
  */
 export class HomeComponent extends BaseComponent implements OnInit {
-  // user profile
-  user = <User>{}
-
   override ngOnInit(): void {
     console.log("base home comp")
 
@@ -27,6 +24,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   //=== user related
+  user = <User>{}
+
   // get user object from api (update avatar based on userName)
   getUser() {
     // TODO: TEMP - hardcoded
@@ -64,5 +63,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
     }
 
     return userName.toUpperCase();
+  }
+
+  //=== logout
+  logoutOnClick() {
+    // delete jwtToken from ls
+    this.setJwtToLocalStorage()
   }
 }

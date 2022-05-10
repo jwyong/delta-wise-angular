@@ -54,8 +54,11 @@ export class BaseComponent implements OnInit {
       this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
   }
 
-  setJwtToLocalStorage(jwtToken: string) {
-    localStorage.setItem(this.LS_JWT_TOKEN, jwtToken)
+  setJwtToLocalStorage(jwtToken?: string) {
+    if (jwtToken == null)
+      localStorage.removeItem(this.LS_JWT_TOKEN)
+    else
+      localStorage.setItem(this.LS_JWT_TOKEN, jwtToken)
   }
 
   getJwtFromLocalStorage() {
