@@ -13,14 +13,14 @@
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@reset_pword_new_pword">New password (e.g.: Testing123!)</mat-label>
-                        <input matInput [formControl]="newPwordFC" required>
+                        <input type="password" matInput [formControl]="newPwordFC" required>
                         <mat-error *ngIf="newPwordFC.invalid">{{getNewPwordErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@reset_pword_confirm_pword">Confirm password</mat-label>
-                        <input matInput [formControl]="confirmPwordFC" required>
+                        <input type="password" matInput [formControl]="confirmPwordFC" required>
                         <mat-error *ngIf="confirmPwordFC.invalid">{{getConfirmPwordErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>

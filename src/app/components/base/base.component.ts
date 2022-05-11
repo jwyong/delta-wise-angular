@@ -1,10 +1,9 @@
-import { DataService } from 'src/app/services/data-service';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarDismiss } from '@angular/material/snack-bar';
-import { ComponentType } from '@angular/cdk/portal';
-import { Observable, Observer } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data-service';
 import { RouterConstants } from 'src/app/utils/router_constants';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-base',
@@ -20,6 +19,7 @@ export class BaseComponent implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataService,
+    public http: HttpClient,
     private _snackBar: MatSnackBar
   ) { }
 
