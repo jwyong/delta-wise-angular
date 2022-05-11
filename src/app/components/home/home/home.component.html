@@ -3,12 +3,17 @@
     <img class="h-100" src="/assets/img/logo-words.png" alt="EdgeWise" />
   </a>
   <a i18n="@@dashboard" class="toolbar-tab-title" href="/home/dashboard">Dashboard</a>
-  <div class="ms-auto" (click)="logoutOnClick()">
+  <div class="ms-auto" [matMenuTriggerFor]="userMenu">
     <button *ngIf="user.avatar !== undefined" mat-mini-fab color="primary">
       <span>{{user.avatar}}</span>
     </button>
-    <span class="ms-2 toolbar-user-name">{{user.user_name}}</span>
+    <span class="ms-2 toolbar-user-name cursor-pointer">{{user.user_name}}</span>
   </div>
+  <mat-menu #userMenu="matMenu" xPosition="before"f>
+    <button mat-menu-item i18n="@@settings">Settings</button>
+    <button mat-menu-item i18n="@@logout" (click)="logoutOnClick()">Logout</button>
+  </mat-menu>
+
 </mat-toolbar>
 
 <div class="container h-100">

@@ -1,3 +1,4 @@
+import { RouterConstants } from './../../../utils/router_constants';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { User } from '../../../models/user';
@@ -67,7 +68,16 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   //=== logout
   logoutOnClick() {
-    // delete jwtToken from ls
-    this.setJwtToLocalStorage()
+    this.setIsLoading(true)
+
+    setTimeout(() => {
+      // delete jwtToken from ls
+      this.setJwtToLocalStorage()
+
+      // refresh page
+      this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
+
+      this.setIsLoading(false)
+    }, 1000);
   }
 }
