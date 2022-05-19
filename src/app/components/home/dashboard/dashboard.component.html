@@ -4,7 +4,8 @@
             <mat-form-field class="w-100" appearance="fill">
                 <mat-label i18n="@@company">Company</mat-label>
                 <input type="text" matInput [formControl]="companyAutoFC" [matAutocomplete]="companyAuto">
-                <mat-autocomplete #companyAuto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelected()">
+                <mat-autocomplete #companyAuto="matAutocomplete" [displayWith]="displayFn" >
+                    <!-- (optionSelected)="onSelected()" -->
                     <mat-option *ngFor="let company of filteredCompanies" [value]="company">
                         {{company.Title}} ({{company.Year}})
                     </mat-option>
