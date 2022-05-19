@@ -1,9 +1,13 @@
-import { EWStrings } from './../../../utils/ew_strings';
-import { RouterConstants } from './../../../utils/router_constants';
-import { BaseAuthComponent } from './../base-auth/base-auth.component';
+import { HttpConstants } from './../../../utils/http-constants';
+import { Company } from './../../../models/company';
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { EWConstants } from 'src/app/utils/ew_constants';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { EWConstants } from 'src/app/utils/ew-constants';
+import { EWStrings } from '../../../utils/ew-strings';
+import { RouterConstants } from '../../../utils/router-constants';
+import { BaseAuthComponent } from './../base-auth/base-auth.component';
+import { firstValueFrom } from 'rxjs'
+import { AppModule } from 'src/app/app.module';
 
 @Component({
   selector: 'app-login',
@@ -11,37 +15,49 @@ import { EWConstants } from 'src/app/utils/ew_constants';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent extends BaseAuthComponent {
-  override ngOnInit(): void {
-    this.checkJwtValid()
-  }
+  // DI
+  private formBuilder: FormBuilder = AppModule.injector.get(FormBuilder);
+
+  // router path
   forgotPwordPath = `/${RouterConstants.ROUTER_PATH_FORGOT_PWORD}`
 
   // pword validator
-  pword = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  passwordFC = new FormControl('', [Validators.required, Validators.minLength(8)]);
   getPwordErrorMsg() {
-    if (this.pword.hasError(EWConstants.KEY_REQUIRED)) {
+    if (this.passwordFC.hasError(EWConstants.KEY_REQUIRED)) {
       return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
     }
 
-    return this.pword.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWStrings.VAL_INVALID_PWORD_LENGTH}` : '';
+    return this.passwordFC.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWStrings.VAL_INVALID_PWORD_LENGTH}` : '';
   }
 
-  // login - go to dashboard
-  loginFormOnSubmit() {
-    if (this.email.invalid || this.pword.invalid) return
+  // login form
+  loginForm = this.formBuilder.group({
+    email: this.emailFC,
+    password: this.passwordFC
+  });
 
-    // call login api - TODO: TEMP - show loading for 2 secs, then go dashboard page
+  // login - go to dashboard
+  async loginFormOnSubmit() {
+    if (this.loginForm.invalid) return
+
     this.setIsLoading(true)
 
-    setTimeout(() => {
-      this.setIsLoading(false)
+    // call login api
+    let result = await this.httpPost(HttpConstants.API_AUTH_LOGIN, this.loginForm.value)
 
-      this.showSnackbar(`email = ${this.email.value}, pword = ${this.pword.value}`)
+    console.log("login result = ", result)
+
+    this.setIsLoading(false)
+
+    // update jwt and navigate to home
+    if (result.success) {
+      this.showSnackbar(`email = ${this.emailFC.value}, pword = ${this.passwordFC.value}`)
 
       // TEMP - set jwtToken
-      this.setJwtToLocalStorage("TEMP_JWT")
-      
+      this.localStorageService.setJwtToken("TEMP_JWT")
+
       this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
-    }, 1000);
+    }
   }
 }

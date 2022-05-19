@@ -1,5 +1,5 @@
 /**
- * string values for users
+ * string values for display
  */
 export class EWStrings {
     //=== validation

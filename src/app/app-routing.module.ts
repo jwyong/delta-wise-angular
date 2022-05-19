@@ -4,7 +4,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { ForgotPwordComponent } from './components/auth/forgot-pword/forgot-pword.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RouterConstants } from './utils/router_constants';
+import { RouterConstants } from './utils/router-constants';
 import { HomeComponent } from './components/home/home/home.component';
 
 const routes: Routes = [

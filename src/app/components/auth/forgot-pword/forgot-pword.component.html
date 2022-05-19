@@ -9,8 +9,8 @@
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@login_email_title">Email</mat-label>
-                        <input matInput [formControl]="email" required>
-                        <mat-error *ngIf="email.invalid">{{getEmailErrorMsg()}}</mat-error>
+                        <input matInput [formControl]="emailFC" required>
+                        <mat-error *ngIf="emailFC.invalid">{{getEmailErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>
                 <a href="{{backToLoginPath}}">

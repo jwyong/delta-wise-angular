@@ -1,9 +1,13 @@
+import { Resp } from './../../models/resp';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 import { DataService } from 'src/app/services/data-service';
-import { RouterConstants } from 'src/app/utils/router_constants';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from 'src/app/services/http-service';
+import { HttpConstants } from 'src/app/utils/http-constants';
+import { RouterConstants } from 'src/app/utils/router-constants';
+import { LocalStorageService } from './../../services/local-storage-service';
 
 @Component({
   selector: 'app-base',
@@ -17,10 +21,11 @@ import { HttpClient } from '@angular/common/http';
  */
 export class BaseComponent implements OnInit {
   constructor(
-    private router: Router,
-    private dataService: DataService,
-    public http: HttpClient,
-    private _snackBar: MatSnackBar
+    protected router: Router,
+    protected dataService: DataService,
+    protected localStorageService: LocalStorageService,
+    protected _snackBar: MatSnackBar,
+    protected httpService: HttpService
   ) { }
 
   ngOnInit(): void { }
@@ -29,40 +34,16 @@ export class BaseComponent implements OnInit {
     this.dataService.setIsLoading(isLoading)
   }
 
-  //=== for jwt
-  private LS_JWT_TOKEN = "LS_JWT_TOKEN"
-
   // check if jwt is expired then redirect to login if necessary
-  checkJwtExpired() {
-    const jwtToken = this.getJwtFromLocalStorage()
-
-    console.log(`checkJwtExpired, jwtToken = ${jwtToken}`)
-
-    if (jwtToken == null)
-      // TODO: check if null or expired
+  redirectJwtExpired() {
+    if (!this.localStorageService.isJwtValid())
       this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
   }
 
   // check if jwt is valid and redirect to home if necessary
-  checkJwtValid() {
-    const jwtToken = this.getJwtFromLocalStorage()
-
-    console.log(`checkJwtValid, jwtToken = ${jwtToken}`)
-
-    if (jwtToken != null)
-      // TODO: check if null or expired
+  redirectJwtValid() {
+    if (this.localStorageService.isJwtValid())
       this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
-  }
-
-  setJwtToLocalStorage(jwtToken?: string) {
-    if (jwtToken == null)
-      localStorage.removeItem(this.LS_JWT_TOKEN)
-    else
-      localStorage.setItem(this.LS_JWT_TOKEN, jwtToken)
-  }
-
-  getJwtFromLocalStorage() {
-    return localStorage.getItem(this.LS_JWT_TOKEN)
   }
 
   // show snackbar
@@ -77,5 +58,51 @@ export class BaseComponent implements OnInit {
   // navigate router to link
   navigateTo(routerLink: string) {
     this.router.navigate([routerLink])
+  }
+
+  /**
+   * http calls
+   */
+
+  async httpPost<T>(
+    endpoint: string, body: any, shouldHideErrors?: boolean
+  ) {
+    let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
+
+    console.log("httpPost, fullUrl = ", fullURL)
+
+    let json = JSON.stringify(body);
+
+    console.log('httpPost, json = ', json);
+
+    // do sync http post
+    var resp = <Resp<T>>{}
+    await firstValueFrom(this.httpService.httpClient.post<T>(fullURL, json))
+      .then((data) => {
+        resp = {
+          success: true,
+          data: data
+        }
+      })
+      .catch((error) => {
+        // show snackbar error if need
+        if (shouldHideErrors != true)
+          this.showSnackbar(error.message)
+
+        resp = {
+          success: false,
+          error: error,
+        };
+      });
+
+    console.log("resp = ", resp)
+
+    return resp;
+  }
+
+  async httpGet(endpoint: string) {
+    let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
+
+    return await firstValueFrom(this.httpService.httpClient.get(fullURL))
   }
 }

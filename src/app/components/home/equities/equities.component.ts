@@ -31,13 +31,13 @@ export class EquitiesComponent extends BaseComponent implements OnInit {
         this.filteredCompanies = [];
         this.setIsLoading(true)
       }),
-      switchMap(value => this.http.get('http://www.omdbapi.com/?apikey=e8067b53&s=' + value)
-        .pipe(
-          finalize(() => {
-            this.setIsLoading(false)
-          }),
-        )
-      )
+      // switchMap(value => this.http.get('http://www.omdbapi.com/?apikey=e8067b53&s=' + value)
+      //   .pipe(
+      //     finalize(() => {
+      //       this.setIsLoading(false)
+      //     }),
+      //   )
+      // )
     ).subscribe((data: any) => {
       if (data['Search'] == undefined) {
         console.log("search result undefined")

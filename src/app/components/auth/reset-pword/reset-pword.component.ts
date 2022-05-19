@@ -1,10 +1,10 @@
-import { EWStrings } from './../../../utils/ew_strings';
+import { EWStrings } from '../../../utils/ew-strings';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { BaseAuthComponent } from './../base-auth/base-auth.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EWConstants } from 'src/app/utils/ew_constants';
+import { EWConstants } from 'src/app/utils/ew-constants';
 import { MatTooltip } from '@angular/material/tooltip';
-import { RouterConstants } from 'src/app/utils/router_constants';
+import { RouterConstants } from 'src/app/utils/router-constants';
 
 @Component({
   selector: 'app-reset-pword',

@@ -1,4 +1,4 @@
-import { RouterConstants } from './../../../utils/router_constants';
+import { RouterConstants } from '../../../utils/router-constants';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { User } from '../../../models/user';
@@ -15,10 +15,8 @@ import { User } from '../../../models/user';
  */
 export class HomeComponent extends BaseComponent implements OnInit {
   override ngOnInit(): void {
-    console.log("base home comp")
-
-    // jwt check
-    this.checkJwtExpired()
+    // redirect to login if user not logged in/jwt expired
+    this.redirectJwtExpired()
 
     // get user profile
     this.getUser()
@@ -72,7 +70,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
     setTimeout(() => {
       // delete jwtToken from ls
-      this.setJwtToLocalStorage()
+      this.localStorageService.setJwtToken()
 
       // refresh page
       this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)

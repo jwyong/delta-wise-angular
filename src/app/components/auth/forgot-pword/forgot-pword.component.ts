@@ -1,4 +1,4 @@
-import { RouterConstants } from './../../../utils/router_constants';
+import { RouterConstants } from '../../../utils/router-constants';
 import { BaseAuthComponent } from './../base-auth/base-auth.component';
 import { Component, OnInit } from '@angular/core';
 import { delay } from 'rxjs';
@@ -13,7 +13,7 @@ export class ForgotPwordComponent extends BaseAuthComponent implements OnInit {
 
   // forgot pword - call api and go back to login page
   async forgotPwordFormOnSubmit() {
-    if (this.email.invalid) return
+    if (this.emailFC.invalid) return
 
     // call forgotPword api
     // TODO: temp - show loading for 2 secs
@@ -23,7 +23,7 @@ export class ForgotPwordComponent extends BaseAuthComponent implements OnInit {
       this.setIsLoading(false)
 
       // show alert
-      alert($localize`:@@vld_forgot_pword_success:We have sent an email with a password reset link to ${this.email.value}. Please check your email to reset your password.`)
+      alert($localize`:@@vld_forgot_pword_success:We have sent an email with a password reset link to ${this.emailFC.value}. Please check your email to reset your password.`)
 
       // go back to login page after alert dismissed 
       // this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
