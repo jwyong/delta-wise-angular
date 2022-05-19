@@ -1,29 +1,19 @@
 import { debounceTime, distinctUntilChanged, filter, finalize, map, Observable, startWith, switchMap, tap } from 'rxjs';
-import { Company } from './../../../models/company';
+import { Company } from '../../../models/company';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-equities',
+  templateUrl: './equities.component.html',
+  styleUrls: ['./equities.component.css']
 })
-export class DashboardComponent extends BaseComponent implements OnInit {
+export class EquitiesComponent extends BaseComponent implements OnInit {
   companyAutoFC = new FormControl();
   filteredCompanies = <Company[]>{};
 
   override ngOnInit() {
-    // this.filteredOptions = this.companyAutoFC.valueChanges.pipe(
-    //   startWith(''),
-    //   debounceTime(400),
-    //   distinctUntilChanged(),
-    //   switchMap(val => {
-    //     console.log(`query = ${val}`)
-    //     return this._filter(val || '')
-    //   })
-    // );
-
     this.companyAutoFC.valueChanges.pipe(
       // don't search null or blank strings
       filter(res => {
@@ -70,21 +60,4 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   onSelected(company: Company) {
     console.log("company = ", company)
   }
-
-  // _filter(val: string): Observable<any[]> {
-  //   // call the service which makes the http-request
-  //   return this.service.getData()
-  //     .pipe(
-  //       map(response => response.filter(option => {
-  //         return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
-  //       }))
-  //     )
-  // }
-
-
-  // private _filter(name: string): Company[] {
-  //   const filterValue = name.toLowerCase();
-
-  //   return this.companyList.filter(company => company.name.toLowerCase().includes(filterValue));
-  // }
 }

@@ -1,11 +1,11 @@
-import { HomeComponent } from './components/home/home/home.component';
-import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { EquitiesComponent } from './components/home/equities/equities.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ForgotPwordComponent } from './components/auth/forgot-pword/forgot-pword.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouterConstants } from './utils/router_constants';
+import { HomeComponent } from './components/home/home/home.component';
 
 const routes: Routes = [
   /**
@@ -35,7 +35,7 @@ const routes: Routes = [
       { path: '', redirectTo: RouterConstants.ROUTER_PATH_DASHBOARD, pathMatch: 'full' },
       {
         path: RouterConstants.ROUTER_PATH_DASHBOARD,
-        component: DashboardComponent,
+        component: EquitiesComponent,
       }
     ]
   },

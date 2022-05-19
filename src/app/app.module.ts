@@ -15,12 +15,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseAuthComponent } from './components/auth/base-auth/base-auth.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
-import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { EquitiesComponent } from './components/home/equities/equities.component';
 import { HomeComponent } from './components/home/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, DashboardComponent, HomeComponent
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent
   ],
   imports: [
     BrowserModule,
