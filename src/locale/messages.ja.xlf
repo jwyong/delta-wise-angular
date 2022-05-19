@@ -474,10 +474,10 @@
 			</trans-unit>
 			<trans-unit id="login_desc" datatype="html">
 				<source>
-					Welcome to EdgeWise. Please login to continue
+					Welcome to DeltaWise. Please login to continue
 				</source>
 				<target>
-					EdgeWiseへようこそ。 続行するにはログインしてください
+					DeltaWiseへようこそ。 続行するにはログインしてください
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">

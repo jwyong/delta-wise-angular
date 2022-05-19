@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "edge-wise": {
+    "delta-wise": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -28,7 +28,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "localize": false,
-            "outputPath": "dist/edge-wise",
+            "outputPath": "dist/delta-wise",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -84,13 +84,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "ja": {
-              "browserTarget": "edge-wise:build:development,ja"
+              "browserTarget": "delta-wise:build:development,ja"
             },
             "production": {
-              "browserTarget": "edge-wise:build:production"
+              "browserTarget": "delta-wise:build:production"
             },
             "development": {
-              "browserTarget": "edge-wise:build:development"
+              "browserTarget": "delta-wise:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -98,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "edge-wise:build"
+            "browserTarget": "delta-wise:build"
           }
         },
         "test": {
@@ -122,5 +122,5 @@
       }
     }
   },
-  "defaultProject": "edge-wise"
+  "defaultProject": "delta-wise"
 }

@@ -16,7 +16,7 @@ export class ConsoleToggleService {
 
   disableConsoleInProduction(): void {
     if (environment.production) {
-      console.info(`Welcome to EdgeWise!`);
+      console.info(`Welcome to DeltaWise!`);
       console.log = function (): void { };
       console.debug = function (): void { };
       console.warn = function (): void { };

@@ -14,17 +14,14 @@ const routes: Routes = [
   {
     path: RouterConstants.ROUTER_PATH_LOGIN,
     component: LoginComponent,
-    data: { title: 'Login to EdgeWise' },
   },
   {
     path: RouterConstants.ROUTER_PATH_FORGOT_PWORD,
     component: ForgotPwordComponent,
-    data: { title: 'Forgot password' },
   },
   {
     path: RouterConstants.ROUTER_PATH_RESET_PWORD,
     component: ResetPwordComponent,
-    data: { title: 'Reset password' },
   },
 
   /**
@@ -33,7 +30,6 @@ const routes: Routes = [
   {
     path: RouterConstants.ROUTER_PATH_HOME,
     component: HomeComponent,
-    data: { title: 'Home' },
     children: [
       // show dashboard by default
       { path: '', redirectTo: RouterConstants.ROUTER_PATH_DASHBOARD, pathMatch: 'full' },
