@@ -1,3 +1,4 @@
+import { CryptoComponent } from './components/home/crypto/crypto.component';
 import { EquitiesComponent } from './components/home/equities/equities.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -31,12 +32,20 @@ const routes: Routes = [
     path: RouterConstants.ROUTER_PATH_HOME,
     component: HomeComponent,
     children: [
-      // show dashboard by default
-      { path: '', redirectTo: RouterConstants.ROUTER_PATH_DASHBOARD, pathMatch: 'full' },
+      // TODO: need to check user sub (BE) - TEMP show equities by default
+      { path: '', redirectTo: RouterConstants.ROUTER_PATH_EQUITIES, pathMatch: 'full' },
+      
+      // equities
       {
-        path: RouterConstants.ROUTER_PATH_DASHBOARD,
+        path: RouterConstants.ROUTER_PATH_EQUITIES,
         component: EquitiesComponent,
-      }
+      },
+
+      // crypto
+      {
+        path: RouterConstants.ROUTER_PATH_CRYPTO,
+        component: CryptoComponent,
+      },
     ]
   },
 ];

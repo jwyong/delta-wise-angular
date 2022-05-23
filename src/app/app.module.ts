@@ -18,12 +18,14 @@ import { EquitiesComponent } from './components/home/equities/equities.component
 import { HomeComponent } from './components/home/home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
+import { SearchBarComponent } from './components/common/search-bar/search-bar.component';
+import { CryptoComponent } from './components/home/crypto/crypto.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent
   ],
   imports: [
     BrowserModule,

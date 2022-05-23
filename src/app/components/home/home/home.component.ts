@@ -43,8 +43,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     const nameArray = userName.split(' ').filter(element => {
       return element !== '';
     }) ?? [];
-    console.log(nameArray)
-
+    
     switch (true) {
       // no username - just return empty
       case nameArray.length == 0:

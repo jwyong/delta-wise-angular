@@ -67,12 +67,7 @@ export class BaseComponent implements OnInit {
     endpoint: string, body: any, shouldHideErrors?: boolean
   ) {
     let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
-
-    console.log("httpPost, fullUrl = ", fullURL)
-
     let json = JSON.stringify(body);
-
-    console.log('httpPost, json = ', json);
 
     // do sync http post
     var resp = <Resp<T>>{}
@@ -93,8 +88,6 @@ export class BaseComponent implements OnInit {
           error: error,
         };
       });
-
-    console.log("resp = ", resp)
 
     return resp;
   }

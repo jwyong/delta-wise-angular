@@ -2,6 +2,9 @@
  * string values for display
  */
 export class EWStrings {
+    /**
+     * auth
+     */
     //=== validation
     // required
     public static VAL_REQUIRED: string = `You must enter a value`;
@@ -22,4 +25,15 @@ export class EWStrings {
 
     //=== change pword
     public static VAL_PWORD_UPDATE_SUCCESS: string = 'Password updated successfully, please login with the new password.';
-}
+
+    /**
+     * common
+     */
+
+    /**
+     * equities module
+     */
+     public static VAL_COMPANY: string = "Company"
+     public static VAL_COMMODITY: string = "Commodity"
+     public static VAL_CRYPTO: string = "Cryptocurrency"
+    }

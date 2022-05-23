@@ -3,20 +3,20 @@ import { BaseComponent } from 'src/app/components/base/base.component';
 import { EWStrings } from 'src/app/utils/ew-strings';
 
 @Component({
-  selector: 'app-equities',
-  templateUrl: './equities.component.html',
-  styleUrls: ['./equities.component.css']
+  selector: 'app-crypto',
+  templateUrl: './crypto.component.html',
+  styleUrls: ['./crypto.component.css']
 })
-export class EquitiesComponent extends BaseComponent implements OnInit {
-  searchBarLabel = $localize`:@@company:${EWStrings.VAL_COMPANY}`
+export class CryptoComponent extends BaseComponent implements OnInit {
+  searchBarLabel = $localize`:@@crypto:${EWStrings.VAL_CRYPTO}`
 
   // setup functions for searchbar
   getOptionsLabel = (item: any): string => {
-    return `Equity: ${item.Title} (${item.Year})`
+    return `Crypto: ${item.Title} (${item.Type})`
   }
 
   // go to equity detail page
   onOptionSelected = (item: any): void => {
-    console.log("onOptionSelected, item = ", item)
+    console.log("crypto: onOptionSelected, item = ", item)
   }
 }

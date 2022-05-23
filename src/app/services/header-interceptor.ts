@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage-service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
@@ -9,9 +10,8 @@ export class HeaderInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add auth header with jwt if account is logged in and request is to the api url
-        // const isApiUrl = request.url.startsWith(environment.apiUrl);
-
-        if (this.localStorageService.isJwtValid()) {
+        const isApiUrl = request.url.startsWith(environment.apiUrl);
+        if (this.localStorageService.isJwtValid() && isApiUrl) {
             request = request.clone({
                 setHeaders: { Authorization: `Bearer ${this.localStorageService.getJwtToken}` }
             });

@@ -35,7 +35,7 @@ export class LoginComponent extends BaseAuthComponent {
     password: this.passwordFC
   });
 
-  // login - go to dashboard
+  // login - go to home
   async loginFormOnSubmit() {
     if (this.loginForm.invalid) return
 
