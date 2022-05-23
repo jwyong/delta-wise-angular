@@ -1,13 +1,11 @@
-import { HttpConstants } from './../../../utils/http-constants';
-import { Company } from './../../../models/company';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AppModule } from 'src/app/app.module';
 import { EWConstants } from 'src/app/utils/ew-constants';
 import { EWStrings } from '../../../utils/ew-strings';
 import { RouterConstants } from '../../../utils/router-constants';
+import { HttpConstants } from './../../../utils/http-constants';
 import { BaseAuthComponent } from './../base-auth/base-auth.component';
-import { firstValueFrom } from 'rxjs'
-import { AppModule } from 'src/app/app.module';
 
 @Component({
   selector: 'app-login',

@@ -63,7 +63,6 @@ export class BaseComponent implements OnInit {
   /**
    * http calls
    */
-
   async httpPost<T>(
     endpoint: string, body: any, shouldHideErrors?: boolean
   ) {
