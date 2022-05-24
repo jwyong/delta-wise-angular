@@ -29,6 +29,13 @@ export class EWStrings {
     /**
      * common
      */
+    // date range picker
+    public static VAL_DRP_0: string = "All time"
+    public static VAL_DRP_90: string = "3 months"
+    public static VAL_DRP_28: string = "28 days"
+    public static VAL_DRP_14: string = "14 days"
+    public static VAL_DRP_7: string = "7 days"
+
 
     /**
      * equities module
