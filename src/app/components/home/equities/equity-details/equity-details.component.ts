@@ -16,21 +16,29 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
   }
 
   // TODO: TEMP - hardcoded company obj
-  company = <Company>{}
+  company?: Company
 
   override ngOnInit(): void {
     this.route.params.subscribe(routeParams => {
       // get new company details from api when company id is changed in route
-          this.setIsLoading(true)
-    setTimeout(() => {
-      this.company = {
-        name: "Astrazeneca", code: "AZN", Title: "some title", Year: "2007", imdbID: routeParams['id'] ?? ""
-      }
-      this.setIsLoading(false)
-    }, 1000);
+      this.setIsLoading(true)
+
+      // TODO: TEMP - hardcoded simulate get from api
+      setTimeout(() => {
+        this.company = {
+          name: "Astrazeneca", code: "AZN", Title: "some title", Year: "2007", imdbID: routeParams['id'] ?? ""
+        }
+        this.setIsLoading(false)
+      }, 1000);
     });
+  }
 
-    // TODO: TEMP - simulate get company data from api
-
+  /**
+   * UI binding
+   */
+  // get title (e.g. Aztrazaneca (AZN))
+  getTitle() {
+    if (this.company == null) return ""
+    else return `${this.company.name} (${this.company.code}) - ${this.company.imdbID}`
   }
 }

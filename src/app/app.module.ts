@@ -21,12 +21,13 @@ import { EquityDetailsComponent } from './components/home/equities/equity-detail
 import { HomeComponent } from './components/home/home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
+import { DateRangePickerComponent } from './components/common/date-range-picker/date-range-picker.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent
   ],
   imports: [
     BrowserModule,
