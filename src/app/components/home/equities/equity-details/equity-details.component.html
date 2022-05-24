@@ -1,5 +1,80 @@
 <div class="d-flex align-items-center">
     <h1>{{getTitle()}}</h1>
-
     <app-date-range-picker class="ms-auto"></app-date-range-picker>
 </div>
+
+<table class="estimates-table text-center" mat-table [dataSource]="companyEstimates">
+  <ng-container matColumnDef="rowType">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell [ngClass]="getRowHighlightClass(element.rowType)" *matCellDef="let element">{{element.rowType}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="q122">
+    <th class="text-center" mat-header-cell *matHeaderCellDef>Q1 2022 E</th>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="cellOnClick(element.q122)" (mouseover)="cellOnMouseOver(element.rowType)">{{element.q122}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="q222">
+    <th class="text-center" mat-header-cell *matHeaderCellDef>Q2 2022 E</th>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="cellOnClick(element.q122)" (mouseover)="cellOnMouseOver(element.rowType)">{{element.q222}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="q322">
+    <th class="text-center" mat-header-cell *matHeaderCellDef>Q3 2022 E</th>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="cellOnClick(element.q122)" (mouseover)="cellOnMouseOver(element.rowType)">{{element.q322}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="q422">
+    <th class="text-center" mat-header-cell *matHeaderCellDef>Q4 2022 E</th>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="cellOnClick(element.q122)" (mouseover)="cellOnMouseOver(element.rowType)">{{element.q422}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fy22">
+    <th mat-header-cell *matHeaderCellDef>FY 2022</th>
+    <td mat-cell *matCellDef="let element">{{element.fy22}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fy23">
+    <th mat-header-cell *matHeaderCellDef>FY 2023</th>
+    <td mat-cell *matCellDef="let element">{{element.fy23}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fy24">
+    <th mat-header-cell *matHeaderCellDef>FY 2024</th>
+    <td mat-cell *matCellDef="let element">{{element.fy24}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fy25">
+    <th mat-header-cell *matHeaderCellDef>FY 2025</th>
+    <td mat-cell *matCellDef="let element">{{element.fy25}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fy26">
+    <th mat-header-cell *matHeaderCellDef>FY 2026</th>
+    <td mat-cell *matCellDef="let element">{{element.fy26}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fy27">
+    <th mat-header-cell *matHeaderCellDef>FY 2027</th>
+    <td mat-cell *matCellDef="let element">{{element.fy27}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fy28">
+    <th mat-header-cell *matHeaderCellDef>FY 2028</th>
+    <td mat-cell *matCellDef="let element">{{element.fy28}}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="fy29">
+    <th mat-header-cell *matHeaderCellDef>FY 2029</th>
+    <td mat-cell *matCellDef="let element">{{element.fy29}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
+</table>
+
+<!-- (click)="clickedRows.add(row)"
+[class.demo-row-is-clicked]="clickedRows.has(row)" -->

@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatToolbarModule,
         MatAutocompleteModule,
         MatMenuModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTableModule
     ],
     declarations: [
     ],
@@ -41,7 +43,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatToolbarModule,
         MatAutocompleteModule,
         MatMenuModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTableModule
     ]
 })
 export class MaterialModule { }
