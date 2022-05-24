@@ -40,7 +40,6 @@ export class SearchBarComponent implements OnInit {
     this.formControl.valueChanges.pipe(
       // don't search null or blank strings
       filter(res => {
-        console.log("res = ", res)
         return res !== null && typeof res === 'string' && res.trim().length >= 1
       }),
 
@@ -56,18 +55,15 @@ export class SearchBarComponent implements OnInit {
       switchMap(value => this.httpService.httpClient.get('http://www.omdbapi.com/?apikey=e8067b53&s=' + value)
         .pipe(
           finalize(() => {
-            console.log("finalise, value = ", value)
             this.dataService.setIsLoading(false)
           }),
         )
       )
     ).subscribe((data: any) => {
       if (data['Search'] == undefined) {
-        console.log("search result undefined")
         // this.errorMsg = data['Error'];
         this.filteredItems = [];
       } else {
-        console.log(`data = `, data)
         // this.errorMsg = "";
         this.filteredItems = data['Search'];
       }

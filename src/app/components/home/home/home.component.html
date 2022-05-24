@@ -2,9 +2,9 @@
   <a class="h-100 me-3" href="/">
     <img class="h-100" src="/assets/img/logo-words.png" alt="DeltaWise" />
   </a>
-  <a i18n="@@equities" class="toolbar-tab-title" href="/home/equities">Equities</a>
-  <a i18n="@@equities" class="toolbar-tab-title mx-3" onclick="return false">Commodities</a>
-  <a i18n="@@equities" class="toolbar-tab-title" href="/home/crypto">Cryptocurrencies</a>
+  <a i18n="@@equities" class="toolbar-tab-title" ngClass="{{getToolbarTitleClass(equitiesPath)}}" routerLink="{{equitiesPath}}">Equities</a>
+  <a i18n="@@commodities" class="toolbar-tab-title mx-3" onclick="return false">Commodities</a>
+  <a i18n="@@cryptocurrencies" class="toolbar-tab-title" ngClass="{{getToolbarTitleClass(cryptoPath)}}" routerLink="{{cryptoPath}}">Cryptocurrencies</a>
   <div class="ms-auto" [matMenuTriggerFor]="userMenu">
     <button *ngIf="user.avatar !== undefined" mat-mini-fab color="primary">
       <span>{{user.avatar}}</span>
@@ -15,7 +15,6 @@
     <button mat-menu-item i18n="@@settings">Settings</button>
     <button mat-menu-item i18n="@@logout" (click)="logoutOnClick()">Logout</button>
   </mat-menu>
-
 </mat-toolbar>
 
 <div class="container h-100">

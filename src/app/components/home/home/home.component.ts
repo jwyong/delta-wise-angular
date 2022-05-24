@@ -1,3 +1,4 @@
+import { Crypto } from './../../../models/crypto';
 import { RouterConstants } from '../../../utils/router-constants';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
@@ -14,7 +15,17 @@ import { User } from '../../../models/user';
  * - check jwt validity and re-direct to login if invalid/expired
  */
 export class HomeComponent extends BaseComponent implements OnInit {
+  // router path for html
+  equitiesPath = RouterConstants.ROUTER_PATH_EQUITIES
+  commoditiesPath = RouterConstants.ROUTER_PATH_COMMODITIES
+  cryptoPath = RouterConstants.ROUTER_PATH_CRYPTO
+
+  // user obj
+  user = <User>{}
+
   override ngOnInit(): void {
+    console.log("home init")
+
     // redirect to login if user not logged in/jwt expired
     this.redirectJwtExpired()
 
@@ -22,9 +33,19 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.getUser()
   }
 
-  //=== user related
-  user = <User>{}
+  /**
+   * router link related
+   */
+  getToolbarTitleClass(href: string): string {
+    if (this.router.url.includes(href))
+      return "text-primary"
+    else
+      return ""
+  }
 
+  /**
+   * user related
+   */
   // get user object from api (update avatar based on userName)
   getUser() {
     // TODO: TEMP - hardcoded
@@ -43,7 +64,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     const nameArray = userName.split(' ').filter(element => {
       return element !== '';
     }) ?? [];
-    
+
     switch (true) {
       // no username - just return empty
       case nameArray.length == 0:
@@ -62,6 +83,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
     return userName.toUpperCase();
   }
+
+  // 
 
   //=== logout
   logoutOnClick() {

@@ -1,7 +1,15 @@
-<div class="row align-items-center h-100 bg-white">
-    <div class="col-8 mx-auto">
-        <app-search-bar [searchBarLabel]="searchBarLabel" [getOptionsLabel]="getOptionsLabel" [getSelectedLabel]="getOptionsLabel"
-            [onOptionSelected]="onOptionSelected">
+<div class="p-4 h-100 bg-white">
+    <div>
+        <h3 i18n="@@navigation_title">
+            <a routerLink="./">{{getRouterTitle()}}</a>
+            {{getSeparator()}}
+            <a routerLink="details/{{getCompanyIdFromRoute()}}">{{getRouterSubtitle()}}</a>
+        </h3>
+        <app-search-bar [searchBarLabel]="searchBarLabel" [getOptionsLabel]="getOptionsLabel"
+            [getSelectedLabel]="getOptionsLabel" [onOptionSelected]="onOptionSelected">
         </app-search-bar>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
     </div>
 </div>

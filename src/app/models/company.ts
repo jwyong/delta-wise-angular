@@ -5,4 +5,5 @@ export interface Company {
   // TEMP
   Title: string;
   Year: string;
+  imdbID: string
 }

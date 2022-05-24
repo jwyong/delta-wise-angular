@@ -12,6 +12,8 @@ export class CryptoComponent extends BaseComponent implements OnInit {
 
   // setup functions for searchbar
   getOptionsLabel = (item: any): string => {
+    if (item == null) return ""
+
     return `Crypto: ${item.Title} (${item.Type})`
   }
 

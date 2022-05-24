@@ -14,5 +14,8 @@ export class RouterConstants {
      */
      public static ROUTER_PATH_HOME: string = 'home';
      public static ROUTER_PATH_EQUITIES: string = 'equities';
+     public static ROUTER_PATH_COMMODITIES: string = 'commodities';
      public static ROUTER_PATH_CRYPTO: string = 'crypto';
+
+     public static ROUTER_PATH_DETAILS: string = 'details';
     }

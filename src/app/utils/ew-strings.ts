@@ -33,7 +33,17 @@ export class EWStrings {
     /**
      * equities module
      */
+     public static VAL_EQUITIES: string = "Equities"
      public static VAL_COMPANY: string = "Company"
+     public static VAL_DETAILS: string = "Details"
+
+     /**
+      * commodities module
+      */
      public static VAL_COMMODITY: string = "Commodity"
+
+     /**
+      * crypto module
+      */
      public static VAL_CRYPTO: string = "Cryptocurrency"
     }

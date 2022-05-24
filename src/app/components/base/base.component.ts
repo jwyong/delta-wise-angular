@@ -1,7 +1,7 @@
 import { Resp } from './../../models/resp';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
@@ -22,6 +22,7 @@ import { LocalStorageService } from './../../services/local-storage-service';
 export class BaseComponent implements OnInit {
   constructor(
     protected router: Router,
+    protected route: ActivatedRoute,
     protected dataService: DataService,
     protected localStorageService: LocalStorageService,
     protected _snackBar: MatSnackBar,
@@ -55,9 +56,26 @@ export class BaseComponent implements OnInit {
     })
   }
 
+  /**
+   * router related
+   */
   // navigate router to link
   navigateTo(routerLink: string) {
-    this.router.navigate([routerLink])
+    this.router.navigate([routerLink], { relativeTo: this.route })
+  }
+
+  // get full title for router (e.g. Equities > Details)
+  getRouterTitle() {
+    return this.route.snapshot.data['title']
+  }
+
+  getSeparator() {
+    if (this.route.snapshot.firstChild?.data['subTitle'] == null) return ""
+    else return " > "
+  }
+
+  getRouterSubtitle() {
+    return this.route.snapshot.firstChild?.data['subTitle']
   }
 
   /**
