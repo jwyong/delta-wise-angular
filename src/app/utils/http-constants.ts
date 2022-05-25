@@ -2,8 +2,8 @@
  * api paths
  */
 export class HttpConstants {
-    public static HTTP_BASE_URL = ""
+    public static HTTP_BASE_URL = "http://www.delta-wise.com/api/v1/"
 
     // auth
-    public static API_AUTH_LOGIN = "http://www.omdbapi.com/?apikey=e8067b53&s=test"
+    public static API_AUTH_LOGIN = "auth/login"
 }
