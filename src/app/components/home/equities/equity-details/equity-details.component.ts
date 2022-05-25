@@ -93,8 +93,7 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
 
   // update which row/col is mouse-over now
   cellOnMouseOver(item: CompanyTableType) {
-    console.log(item)
-
+    // TODO: need to col header highlight when BE ready
     this.mouseOverRowType = item
   }
 
