@@ -8,6 +8,7 @@ import { HttpService } from 'src/app/services/http-service';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
 import { LocalStorageService } from './../../services/local-storage-service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-base',
@@ -26,7 +27,8 @@ export class BaseComponent implements OnInit {
     protected dataService: DataService,
     protected localStorageService: LocalStorageService,
     protected _snackBar: MatSnackBar,
-    protected httpService: HttpService
+    protected httpService: HttpService,
+    protected dialog: MatDialog
   ) { }
 
   ngOnInit(): void { }

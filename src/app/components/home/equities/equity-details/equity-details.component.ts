@@ -1,3 +1,4 @@
+import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { Company } from './../../../../models/company';
 import { CompanyTableType, CompEstTable } from './../../../../models/company-estimate';
@@ -22,7 +23,7 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
 
   // list of company estimates from api
   companyEstimates: CompEstTable[] = []
-  displayedColumns = ['rowType', 'q122', 'q222', 'q322', 'q422', 'fy22', 'fy23', 'fy24', 'fy25', 'fy26', 'fy27', 'fy28', 'fy29', ]
+  displayedColumns = ['rowType', 'q122', 'q222', 'q322', 'q422', 'fy22', 'fy23', 'fy24', 'fy25', 'fy26', 'fy27', 'fy28', 'fy29',]
 
   override ngOnInit(): void {
     // subscribe to company id changes
@@ -86,11 +87,6 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
   // for highglighting row/col header on mouseover
   mouseOverRowType?: CompanyTableType
 
-  // show popup when click on cell
-  cellOnClick(item: CompEstTable) {
-    console.log("cellOnClick", item)
-  }
-
   // update which row/col is mouse-over now
   cellOnMouseOver(item: CompanyTableType) {
     // TODO: need to col header highlight when BE ready
@@ -100,8 +96,24 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
   // get class for highlighting
   getRowHighlightClass(rowType: CompanyTableType) {
     if (rowType == this.mouseOverRowType)
-    return "bg-primary"
+      return "bg-primary"
     else return ""
+  }
+
+  /**
+   * input estimate dialog
+   */
+  showEstimateDialog(item: CompEstTable) {
+    console.log("showEstimateDialog", item)
+    const dialogRef = this.dialog.open(EstimateDialogComponent, {
+      data: {
+        title: this.getTitle(),
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   /**
