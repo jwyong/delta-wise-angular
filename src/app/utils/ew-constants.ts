@@ -9,4 +9,7 @@ export class EWConstants {
     // email
     public static KEY_EMAIL: string = 'email';
 
+    // pattern
+    public static KEY_PATTERN: string = 'pattern';
+
 }
