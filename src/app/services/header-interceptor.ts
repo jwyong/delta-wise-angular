@@ -16,6 +16,8 @@ export class HeaderInterceptor implements HttpInterceptor {
         console.log(`intercept, jwt = ${jwt}`)
 
         if (this.localStorageService.isJwtValid() && isApiUrl) {
+            // TODO: add time zone to header (e.g. "+8", "-7")
+
             request = request.clone({
                 setHeaders: { Authorization: jwt}
             });

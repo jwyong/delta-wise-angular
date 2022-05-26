@@ -23,14 +23,14 @@ export class EquitiesComponent extends BaseComponent implements OnInit {
   }
 
   // go to equity detail page on option selected
-  onOptionSelected = (item: any): void => {
-    this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.imdbID}`)
+  onOptionSelected = (item: Company): void => {
+    this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.ticker}`)
   }
 
   /**
    * company details
    */
   getCompanyIdFromRoute() {
-    return this.route.firstChild?.snapshot.paramMap.get('id')
+    return this.route.firstChild?.snapshot.paramMap.get('ticker')
   }
 }

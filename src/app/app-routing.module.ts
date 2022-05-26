@@ -46,7 +46,7 @@ const routes: Routes = [
           // TODO: add watchlist module?
           
           {
-            path: `${RouterConstants.ROUTER_PATH_DETAILS}/:id`,
+            path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
             component: EquityDetailsComponent,
             data: { subTitle: $localize`:@@details:${EWStrings.VAL_DETAILS}` },
           },
