@@ -9,6 +9,8 @@ import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
 import { LocalStorageService } from './../../services/local-storage-service';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpHeaders } from '@angular/common/http';
+import { LoginResp } from 'src/app/models/auth/login-resp';
 
 @Component({
   selector: 'app-base',
@@ -89,24 +91,30 @@ export class BaseComponent implements OnInit {
     let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
     let json = JSON.stringify(body);
 
+    console.log(`url = ${fullURL}, json = ${json}`)
+
     // do sync http post
-    var resp = <Resp<T>>{}
-    await firstValueFrom(this.httpService.httpClient.post<T>(fullURL, json))
+    var resp = <Resp<LoginResp>>{}
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
+    await firstValueFrom(this.httpService.httpClient.post<T>(fullURL, json, { headers: headers }))
       .then((data) => {
-        resp = {
-          success: true,
-          data: data
-        }
+        console.log("httpPost success: data = ", data)
+        resp = data
       })
       .catch((error) => {
-        // show snackbar error if need
-        if (shouldHideErrors != true)
-          this.showSnackbar(error.message)
+        console.log("httpPost error = ", error)
 
-        resp = {
-          success: false,
-          error: error,
-        };
+        // show snackbar error if need
+        if (shouldHideErrors != true) {
+          var msg = error.error.message
+          let firstError = error.error.errors[0]
+
+          if (firstError.length > 0)
+            msg = `${msg} (${firstError})`
+          this.showSnackbar(msg)
+        }
+
+        resp = error.error
       });
 
     return resp;

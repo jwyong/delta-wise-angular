@@ -1,8 +1,8 @@
 import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
 import { Component, OnInit } from '@angular/core';
-import { Company } from './../../../../models/company';
 import { CompanyTableType, CompEstTable } from './../../../../models/company-estimate';
 import { BaseComponent } from './../../../base/base.component';
+import { Company } from 'src/app/models/equities/company';
 
 // TODO: TEMP - hardcoded companyEst list
 @Component({
@@ -34,7 +34,7 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
       setTimeout(() => {
         // get new company details from api when company id is changed in route
         this.company = {
-          name: "Astrazeneca", code: "AZN", Title: "some title", Year: "2007", imdbID: routeParams['id'] ?? ""
+          company: "Astrazeneca", ticker: "AZN"
         }
 
         // get company estimates based on company id
@@ -122,6 +122,6 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
   // get title (e.g. Aztrazaneca (AZN))
   getTitle() {
     if (this.company == null) return ""
-    else return `${this.company.name} (${this.company.code}) - ${this.company.imdbID}`
+    else return `${this.company.company} (${this.company.ticker})`
   }
 }

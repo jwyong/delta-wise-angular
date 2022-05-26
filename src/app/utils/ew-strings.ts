@@ -26,6 +26,8 @@ export class EWStrings {
     public static VAL_INVALID_PWORD_CHARS: string = 'Password must have at least 1 upper case, 1 lower case, 1 number and 1 symbol';
     public static VAL_INVALID_PWORD_DIFF: string = 'Passwords not matching';
 
+    //=== login
+
     //=== change pword
     public static VAL_PWORD_UPDATE_SUCCESS: string = 'Password updated successfully, please login with the new password.';
 

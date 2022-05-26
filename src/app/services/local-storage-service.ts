@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LocalStorageService {
-    private LS_JWT_TOKEN = "LS_JWT_TOKEN"
+  private LS_JWT_TOKEN = "LS_JWT_TOKEN"
+  public static LS_USER_NAME = "LS_USER_NAME"
 
   setJwtToken(jwtToken?: string) {
     if (jwtToken == null)

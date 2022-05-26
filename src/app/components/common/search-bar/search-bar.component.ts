@@ -1,8 +1,10 @@
+import { HttpConstants } from 'src/app/utils/http-constants';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, finalize, switchMap, tap } from 'rxjs';
 import { DataService } from './../../../services/data-service';
 import { HttpService } from './../../../services/http-service';
+import { Company } from 'src/app/models/equities/company';
 
 @Component({
   selector: 'app-search-bar',
@@ -31,12 +33,12 @@ export class SearchBarComponent implements OnInit {
   };
 
   formControl = new FormControl();
-  filteredItems: any;
-
-  // subscription for autocomplete
-  // subscription = <Subscription>{}
+  filteredItems: any
 
   ngOnInit(): void {
+    // prep search url
+    let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITES_SEARCH}?s=`
+
     this.formControl.valueChanges.pipe(
       // don't search null or blank strings
       filter(res => {
@@ -52,21 +54,19 @@ export class SearchBarComponent implements OnInit {
         this.filteredItems = [];
         this.dataService.setIsLoading(true)
       }),
-      switchMap(value => this.httpService.httpClient.get('http://www.omdbapi.com/?apikey=e8067b53&s=' + value)
+      switchMap(value => this.httpService.httpClient.get(url + value)
         .pipe(
           finalize(() => {
+            console.log("finalise")
             this.dataService.setIsLoading(false)
           }),
         )
       )
     ).subscribe((data: any) => {
-      if (data['Search'] == undefined) {
-        // this.errorMsg = data['Error'];
-        this.filteredItems = [];
-      } else {
-        // this.errorMsg = "";
-        this.filteredItems = data['Search'];
-      }
+      console.log("searchResult - data =", data)
+
+      if (data['data'] != null)
+        this.filteredItems = data['data']
     });
   }
 }

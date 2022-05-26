@@ -1,3 +1,4 @@
+import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppModule } from 'src/app/app.module';
@@ -49,11 +50,10 @@ export class LoginComponent extends BaseAuthComponent {
     this.setIsLoading(false)
 
     // update jwt and navigate to home
-    if (result.success) {
-      this.showSnackbar(`email = ${this.emailFC.value}, pword = ${this.passwordFC.value}`)
-
-      // TEMP - set jwtToken
-      this.localStorageService.setJwtToken("TEMP_JWT")
+    if (result.status) {
+      // set jwtToken + username
+      this.localStorageService.setJwtToken(result.data?.token)
+      localStorage.setItem(LocalStorageService.LS_USER_NAME, result.data?.name?? "")
 
       this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
     }

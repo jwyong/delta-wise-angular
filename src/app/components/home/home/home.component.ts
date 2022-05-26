@@ -1,3 +1,4 @@
+import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { Crypto } from './../../../models/crypto';
 import { RouterConstants } from '../../../utils/router-constants';
 import { Component, OnInit } from '@angular/core';
@@ -46,18 +47,15 @@ export class HomeComponent extends BaseComponent implements OnInit {
   /**
    * user related
    */
-  // get user object from api (update avatar based on userName)
+  // get user object from local storage
   getUser() {
-    // TODO: TEMP - hardcoded
-    setTimeout(() => {
-      let hardCodedUserName = "Hardcoded User Name"
-      let avatar = this.getInitials(hardCodedUserName)
+    let userName = localStorage.getItem(LocalStorageService.LS_USER_NAME) ?? ""
+    let avatar = this.getInitials(userName)
 
-      this.user = {
-        user_name: hardCodedUserName,
-        avatar: avatar
-      }
-    }, 1000);
+    this.user = {
+      user_name: userName,
+      avatar: avatar
+    }
   }
 
   getInitials(userName: string) {

@@ -1,5 +1,6 @@
 export interface Resp<T> {
-    success: boolean,
+    status?: boolean,
+    message?: string,
     data?: T,
-    error?: any,
+    errors?: string[],
 }

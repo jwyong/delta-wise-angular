@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
+import { Company } from 'src/app/models/equities/company';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { RouterConstants } from 'src/app/utils/router-constants';
 
@@ -15,15 +16,14 @@ export class EquitiesComponent extends BaseComponent implements OnInit {
   searchBarLabel = $localize`:@@company:${EWStrings.VAL_COMPANY}`
 
   // setup functions for searchbar
-  getOptionsLabel = (item: any): string => {
+  getOptionsLabel = (item: Company): string => {
     if (item == null) return ""
 
-    return `Equity: ${item.Title} (${item.Year})`
+    return `${item.company} (${item.ticker})`
   }
 
   // go to equity detail page on option selected
   onOptionSelected = (item: any): void => {
-    console.log(`id = ${item.imdbID}, Title = ${item.Title}`,)
     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.imdbID}`)
   }
 
