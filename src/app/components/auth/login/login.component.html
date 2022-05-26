@@ -15,7 +15,7 @@
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@login_pword_title">Password</mat-label>
-                        <input matInput formControlName="password" required type="password">
+                        <input matInput [formControl]="passwordFC" formControlName="password" required type="password">
                         <mat-error *ngIf="loginForm.controls['password'].hasError">{{getPwordErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>

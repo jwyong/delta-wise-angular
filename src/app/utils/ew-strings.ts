@@ -9,6 +9,9 @@ export class EWStrings {
     // required
     public static VAL_REQUIRED: string = `You must enter a value`;
 
+    // number
+    public static VAL_NUMBER: string = `You must enter a valid number`;
+
     // email
     public static VAL_INVALID_EMAIL: string = 'Not a valid email';
 
