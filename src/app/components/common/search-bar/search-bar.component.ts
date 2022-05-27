@@ -1,5 +1,6 @@
+import { EWConstants } from 'src/app/utils/ew-constants';
 import { HttpConstants } from 'src/app/utils/http-constants';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, finalize, switchMap, tap } from 'rxjs';
 import { DataService } from './../../../services/data-service';
@@ -13,7 +14,8 @@ import { Company } from 'src/app/models/equities/company';
 })
 export class SearchBarComponent implements OnInit {
   constructor(protected httpService: HttpService, protected dataService: DataService) { }
-
+  @ViewChild('searchInput') searchInput: any; 
+  
   // search bar label (e.g. Search Company)
   @Input() searchBarLabel: string = "";
 
@@ -36,9 +38,6 @@ export class SearchBarComponent implements OnInit {
   filteredItems: any
 
   ngOnInit(): void {
-    // prep search url
-    let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITES_SEARCH}?s=`
-
     this.formControl.valueChanges.pipe(
       // don't search null or blank strings
       filter(res => {
@@ -54,7 +53,7 @@ export class SearchBarComponent implements OnInit {
         this.filteredItems = [];
         this.dataService.setIsLoading(true)
       }),
-      switchMap(value => this.httpService.httpClient.get(url + value)
+      switchMap(value => this.getHttpObserver(value)
         .pipe(
           finalize(() => {
             console.log("finalise")
@@ -66,7 +65,13 @@ export class SearchBarComponent implements OnInit {
       console.log("searchResult - data =", data)
 
       if (data['data'] != null)
-        this.filteredItems = data['data']
+        this.filteredItems = data['data'].slice(0,1000)
     });
+  }
+
+  getHttpObserver(value: any) {
+    let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITES_SEARCH}?s=`
+
+    return this.httpService.httpClient.get(url + value)
   }
 }

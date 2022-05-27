@@ -1,8 +1,8 @@
 <form>
     <mat-form-field class="w-100" appearance="fill">
         <mat-label i18n="@@interpolated-search-label">Search {{searchBarLabel}}</mat-label>
-        <input type="text" matInput [formControl]="formControl" [matAutocomplete]="mainListSearch">
-        <mat-autocomplete #mainListSearch="matAutocomplete" [displayWith]="getSelectedLabel.bind(this)"
+        <input #searchInput type="text" matInput [formControl]="formControl" [matAutocomplete]="mainListSearch">
+        <mat-autocomplete class="main-search" #mainListSearch="matAutocomplete" [displayWith]="getSelectedLabel.bind(this)"
             (optionSelected)='onOptionSelected($event.option.value)'>
         <mat-option *ngFor="let item of filteredItems" [value]="item">
             {{getOptionsLabel(item)}}

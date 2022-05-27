@@ -1,4 +1,4 @@
-<div class="h-100">
+<div class="h-100 d-flex flex-column">
   <mat-toolbar class="py-2">
     <a class="h-100 me-3" href="/">
       <img class="h-100" src="/assets/img/logo-words.png" alt="DeltaWise" />
@@ -20,9 +20,7 @@
     </mat-menu>
   </mat-toolbar>
 
-  <div class="container">
-    <div class="row">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="container px-5 py-3 bg-white" style="flex:1">
+    <router-outlet></router-outlet>
   </div>
 </div>

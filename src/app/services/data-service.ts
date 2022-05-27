@@ -1,3 +1,4 @@
+import { Company } from 'src/app/models/equities/company';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -15,4 +16,10 @@ export class DataService {
   setIsLoading(isLoading: boolean) {
     this.isLoadingSource.next(isLoading);
   }
+
+  /**
+   * equities
+   */
+  // company details for equity details page
+  company = <Company>{}
 }

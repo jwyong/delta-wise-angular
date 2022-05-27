@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { Company } from 'src/app/models/equities/company';
 import { EWStrings } from 'src/app/utils/ew-strings';
@@ -14,6 +14,7 @@ export class EquitiesComponent extends BaseComponent implements OnInit {
    * search bar UI
    */
   searchBarLabel = $localize`:@@company:${EWStrings.VAL_COMPANY}`
+  @ViewChild('searchBar') searchBar: any;
 
   // setup functions for searchbar
   getOptionsLabel = (item: Company): string => {
@@ -24,7 +25,14 @@ export class EquitiesComponent extends BaseComponent implements OnInit {
 
   // go to equity detail page on option selected
   onOptionSelected = (item: Company): void => {
+    // set company to dataService
+    this.setCompanyToLS(item)
+
     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.ticker}`)
+  }
+
+  clearSearchBar() {
+    this.searchBar.searchInput.nativeElement.value = ''
   }
 
   /**
@@ -32,5 +40,18 @@ export class EquitiesComponent extends BaseComponent implements OnInit {
    */
   getCompanyIdFromRoute() {
     return this.route.firstChild?.snapshot.paramMap.get('ticker')
+  }
+
+  // set company to ls
+  getCompanyFromLS() {
+    let company = localStorage.getItem("company")
+    if (company == null)
+      return null
+    else
+      return JSON.parse(company)
+  }
+
+  setCompanyToLS(company: Company) {
+    localStorage.setItem("company", JSON.stringify(company))
   }
 }

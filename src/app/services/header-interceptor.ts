@@ -13,8 +13,7 @@ export class HeaderInterceptor implements HttpInterceptor {
         const isApiUrl = request.url.startsWith(environment.apiUrl);
 
         let jwt = this.localStorageService.getJwtToken()?.toString()?? ""
-        console.log(`intercept, jwt = ${jwt}`)
-
+        
         if (this.localStorageService.isJwtValid() && isApiUrl) {
             // TODO: add time zone to header (e.g. "+8", "-7")
 

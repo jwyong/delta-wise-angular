@@ -1,8 +1,7 @@
-import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
 import { Component, OnInit } from '@angular/core';
-import { CompanyTableType, CompEstTable } from './../../../../models/company-estimate';
-import { BaseComponent } from './../../../base/base.component';
-import { Company } from 'src/app/models/equities/company';
+import { CompanyTableType, CompEstTable } from '../../../../models/equities/company-estimate';
+import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
+import { EquitiesComponent } from './../equities.component';
 
 // TODO: TEMP - hardcoded companyEst list
 @Component({
@@ -10,17 +9,7 @@ import { Company } from 'src/app/models/equities/company';
   templateUrl: './equity-details.component.html',
   styleUrls: ['./equity-details.component.css']
 })
-export class EquityDetailsComponent extends BaseComponent implements OnInit {
-  /**
-   * company details
-   */
-  getCompanyIdFromRoute() {
-    return this.route.snapshot.paramMap.get('id')
-  }
-
-  // this company
-  company?: Company
-
+export class EquityDetailsComponent extends EquitiesComponent implements OnInit {
   // list of company estimates from api
   companyEstimates: CompEstTable[] = []
   displayedColumns = ['rowType', 'q122', 'q222', 'q322', 'q422', 'fy22', 'fy23', 'fy24', 'fy25', 'fy26', 'fy27', 'fy28', 'fy29',]
@@ -32,11 +21,6 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
 
       // TODO: TEMP - hardcoded simulate get from api
       setTimeout(() => {
-        // get new company details from api when company id is changed in route
-        this.company = {
-          company: "Astrazeneca", ticker: "AZN"
-        }
-
         // get company estimates based on company id
         this.companyEstimates = [
           {
@@ -121,7 +105,9 @@ export class EquityDetailsComponent extends BaseComponent implements OnInit {
    */
   // get title (e.g. Aztrazaneca (AZN))
   getTitle() {
-    if (this.company == null) return ""
-    else return `${this.company.company} (${this.company.ticker})`
+    let company = this.getCompanyFromLS()
+    
+    if (company == null) return ""
+    else return `${company.company} (${company.ticker})`
   }
 }

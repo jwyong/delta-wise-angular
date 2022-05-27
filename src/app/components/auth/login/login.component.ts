@@ -49,11 +49,11 @@ export class LoginComponent extends BaseAuthComponent {
 
     this.setIsLoading(false)
 
-    // update jwt and navigate to home
+    // check success status and update jwt + navigate to home
     if (result.status) {
       // set jwtToken + username
       this.localStorageService.setJwtToken(result.data?.token)
-      localStorage.setItem(LocalStorageService.LS_USER_NAME, result.data?.name?? "")
+      localStorage.setItem(LocalStorageService.LS_USER_NAME, result.data?.name ?? "")
 
       this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
     }

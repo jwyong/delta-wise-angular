@@ -1,5 +1,10 @@
+// TODO: pending BE finalised structure
 export interface CompanyEstimate {
-
+    revenue: string
+    ebit: string
+    ebitda: string
+    netIncome: string
+    eps: string
 }
 
 /**

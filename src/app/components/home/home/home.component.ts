@@ -1,5 +1,5 @@
 import { LocalStorageService } from 'src/app/services/local-storage-service';
-import { Crypto } from './../../../models/crypto';
+import { Crypto } from '../../../models/crypto/crypto';
 import { RouterConstants } from '../../../utils/router-constants';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';

@@ -65,7 +65,7 @@ export class BaseComponent implements OnInit {
    */
   // navigate router to link
   navigateTo(routerLink: string) {
-    this.router.navigate([routerLink], { relativeTo: this.route })
+    this.router.navigate([routerLink], { relativeTo: this.route, })
   }
 
   // get full title for router (e.g. Equities > Details)
@@ -102,15 +102,28 @@ export class BaseComponent implements OnInit {
         resp = data
       })
       .catch((error) => {
-        console.log("httpPost error = ", error)
+        console.log("httpPost, error = ", error)
 
         // show snackbar error if need
         if (shouldHideErrors != true) {
-          var msg = error.error.message
-          let firstError = error.error.errors[0]
+          var msg: string
 
-          if (firstError.length > 0)
-            msg = `${msg} (${firstError})`
+          let errorObj = error.error
+
+          // check for errors array from BE
+          let errorsArray: string[] = errorObj.errors
+
+          if (errorsArray != null) {
+            // use BE message if got
+            msg = errorObj.message
+
+            // append first error to msg string if got
+            if (errorsArray.length > 0)
+              msg = `${msg} (${errorsArray[0]})`
+          } else
+            // use http message if nothing from BE
+            msg = error.message
+
           this.showSnackbar(msg)
         }
 
