@@ -56,14 +56,11 @@ export class SearchBarComponent implements OnInit {
       switchMap(value => this.getHttpObserver(value)
         .pipe(
           finalize(() => {
-            console.log("finalise")
             this.dataService.setIsLoading(false)
           }),
         )
       )
     ).subscribe((data: any) => {
-      console.log("searchResult - data =", data)
-
       if (data['data'] != null)
         this.filteredItems = data['data'].slice(0,1000)
     });
@@ -73,5 +70,17 @@ export class SearchBarComponent implements OnInit {
     let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITES_SEARCH}?s=`
 
     return this.httpService.httpClient.get(url + value)
+  }
+
+  /**
+   * search input UX
+   */
+  // show/hide clear icon
+  shouldShowClearIcon() {
+    return this.searchInput.nativeElement.value.length > 0
+  }
+
+  clearIconOnClick() {
+    this.searchInput.nativeElement.value = ""
   }
 }

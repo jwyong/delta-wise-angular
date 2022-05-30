@@ -1,10 +1,8 @@
-<form>
-    <mat-form-field appearance="fill">
-        <mat-label i18n="@@date_range">Date range</mat-label>
-        <mat-select [(ngModel)]="selectedDateRange" name="dateRange" (selectionChange)="onSelect($event.value)">
-            <mat-option *ngFor="let dateRange of dateRanges" [value]="dateRange.value">
-                {{dateRange.displayValue}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-</form>
+<mat-form-field class="w-100" appearance="fill">
+    <mat-label i18n="@@date_range">Date range</mat-label>
+    <mat-select [(ngModel)]="sdr" name="dateRange" (selectionChange)="onDateRangeSelected.emit(sdr)">
+        <mat-option *ngFor="let dateRange of dateRanges" [value]="dateRange.value">
+            {{dateRange.displayValue}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

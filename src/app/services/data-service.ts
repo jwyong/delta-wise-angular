@@ -11,8 +11,7 @@ export class DataService {
 
   //=== app component
   // for loading animation
-  private isLoadingSource = new BehaviorSubject(false);
-  isLoadingObs = this.isLoadingSource.asObservable();
+  isLoadingSource = new BehaviorSubject(false);
   setIsLoading(isLoading: boolean) {
     this.isLoadingSource.next(isLoading);
   }

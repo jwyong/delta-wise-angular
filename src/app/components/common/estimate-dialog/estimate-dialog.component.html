@@ -3,12 +3,21 @@
   <mat-dialog-content class="mat-typography">
     <mat-form-field class="w-100" appearance="fill">
       <mat-label i18n="@@your_estimate">Your estimate</mat-label>
-      <input matInput [formControl]="estimateFC" formControlName="estimate" required>
+      <input matInput [formControl]="estimateFC" formControlName="estimate" placeholder="3.56" required>
       <mat-error *ngIf="inputEstimateForm.controls['estimate'].hasError">{{getEstimateErrorMsg()}}</mat-error>
     </mat-form-field>
+
+    <p i18n="@@last_estimate_date">Date of your last estimate: {{lastEstimateDate}}</p>
+
+    <app-date-range-picker class="w-100" [sdr]="data.sdr.value" (onDateRangeSelected)="onDateRangeSelected($event)"></app-date-range-picker>
+
+    <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}}</p>
+
     <div class="row">
-      <div class="col text-center">
-        <small class="mx-auto text-secondary" i18n="@@input_trials_remaining">You have {{inputTrialsRemaining}} input
+      <div class="col mx-auto text-center">
+        <small class="text-secondary" i18n="@@median_diff">Your estimate is {{getMedianPercentDiffStr()}} compared to the median</small>
+        <br>
+        <small class="text-secondary" i18n="@@input_trials_remaining">You have {{inputTrialsRemaining}} input
           trials
           remaining</small>
       </div>

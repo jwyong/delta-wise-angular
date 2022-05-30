@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center">
   <h1>{{getTitle()}}</h1>
-  <app-date-range-picker class="ms-auto"></app-date-range-picker>
+  <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value" (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
 </div>
 
 <table class="estimates-table text-center" mat-table [dataSource]="companyEstimates">
@@ -17,25 +17,26 @@
 
   <ng-container matColumnDef="q222">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Q2 2022E</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q122)"
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q222)"
       (mouseover)="cellOnMouseOver(element.rowType)">{{element.q222}}</td>
   </ng-container>
 
   <ng-container matColumnDef="q322">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Q3 2022E</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q122)"
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q322)"
       (mouseover)="cellOnMouseOver(element.rowType)">{{element.q322}}</td>
   </ng-container>
 
   <ng-container matColumnDef="q422">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Q4 2022E</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q122)"
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q422)"
       (mouseover)="cellOnMouseOver(element.rowType)">{{element.q422}}</td>
   </ng-container>
 
   <ng-container matColumnDef="fy22">
     <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2022</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy22}}</td>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.fy22)"
+      (mouseover)="cellOnMouseOver(element.rowType)">{{element.fy22}}</td>
   </ng-container>
 
   <ng-container matColumnDef="fy23">
@@ -76,6 +77,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-<!-- (click)="clickedRows.add(row)"
-[class.demo-row-is-clicked]="clickedRows.has(row)" -->

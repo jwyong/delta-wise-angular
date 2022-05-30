@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // subscribe to global obs
-    this.dataService.isLoadingObs.subscribe(
+    this.dataService.isLoadingSource.subscribe(
       (isLoading) => (this.isLoading = isLoading)
     );
   }

@@ -45,8 +45,6 @@ export class LoginComponent extends BaseAuthComponent {
     // call login api
     let result = await this.httpPost(HttpConstants.API_AUTH_LOGIN, this.loginForm.value)
 
-    console.log("login result = ", result)
-
     this.setIsLoading(false)
 
     // check success status and update jwt + navigate to home

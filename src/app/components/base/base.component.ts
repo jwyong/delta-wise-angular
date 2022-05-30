@@ -91,8 +91,6 @@ export class BaseComponent implements OnInit {
     let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
     let json = JSON.stringify(body);
 
-    console.log(`url = ${fullURL}, json = ${json}`)
-
     // do sync http post
     var resp = <Resp<LoginResp>>{}
     let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')

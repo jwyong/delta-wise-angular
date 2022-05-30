@@ -41,6 +41,9 @@ export class EWStrings {
     public static VAL_DRP_14: string = "14 days"
     public static VAL_DRP_7: string = "7 days"
 
+    // estimate %diff
+    public static VAL_LOWER = "lower"
+    public static VAL_HIGHER = "higher"
 
     /**
      * equities module

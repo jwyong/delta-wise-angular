@@ -1,5 +1,5 @@
 import { DateRange } from './../../../models/date-range';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
 
 @Component({
@@ -21,7 +21,8 @@ export class DateRangePickerComponent implements OnInit {
    * 28 = 28 days
    * 14, 7
    */
-  selectedDateRange = 0
+  @Input()
+  sdr = 0
   dateRanges: DateRange[] = [
     { value: 0, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_0}` },
     { value: 90, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_90}` },
@@ -30,7 +31,5 @@ export class DateRangePickerComponent implements OnInit {
     { value: 7, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_7}` },
   ];
 
-  onSelect(item: DateRange) {
-    console.log("selected dateRange = ", item)
-  }
+  @Output() onDateRangeSelected: EventEmitter<number> = new EventEmitter();
 }
