@@ -72,3 +72,18 @@ mat-list-item:focus {
 .main-search {
     max-height: 70vh !important;
 }
+
+/**
+* icon scaling
+**/
+.scale-8 {
+    transform: scale(0.8);
+}
+
+.scale-5 {
+    transform: scale(0.5);
+}
+
+.scale-3 {
+    transform: scale(0.3);
+}

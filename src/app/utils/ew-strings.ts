@@ -46,6 +46,14 @@ export class EWStrings {
     public static VAL_HIGHER = "higher"
 
     /**
+     * watchlist
+     */
+    public static VAL_WATCHLIST: string = "Watchlist"
+    public static deleteWatchlist(name: string): string {
+        return $localize `Delete this watchlist (${name})? This action cannot be undone.`
+    }
+
+    /**
      * equities module
      */
      public static VAL_EQUITIES: string = "Equities"

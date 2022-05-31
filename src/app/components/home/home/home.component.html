@@ -14,13 +14,17 @@
       </button>
       <span class="ms-2 toolbar-user-name cursor-pointer">{{user.user_name}}</span>
     </div>
-    <mat-menu #userMenu="matMenu" xPosition="before" f>
+    <mat-menu #userMenu="matMenu" xPosition="before">
       <button mat-menu-item i18n="@@settings">Settings</button>
       <button mat-menu-item i18n="@@logout" (click)="logoutOnClick()">Logout</button>
     </mat-menu>
   </mat-toolbar>
 
-  <div class="container px-5 py-3 bg-white" style="flex:1">
+  <mat-card class="container my-3 p-4 flex-fill bg-white">
     <router-outlet></router-outlet>
-  </div>
+  </mat-card>
+
+  <footer>
+    <p class="text-center text-white"> © DeltaWise v1.0.0 | <a href="/">Terms of Use </a></p>
+  </footer>
 </div>

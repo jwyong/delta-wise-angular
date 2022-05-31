@@ -68,6 +68,66 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
             fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
             fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
           },
+          {
+            rowType: CompanyTableType.revenue,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.ebit,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.ebitda,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.netIncome,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.eps,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.revenue,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.ebit,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.ebitda,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.netIncome,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
+          {
+            rowType: CompanyTableType.eps,
+            q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
+            fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
+            fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
+          },
         ]
 
         this.setIsLoading(false)

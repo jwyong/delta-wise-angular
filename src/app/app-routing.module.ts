@@ -1,3 +1,4 @@
+import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
 import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
 import { CryptoComponent } from './components/home/crypto/crypto.component';
 import { EquitiesComponent } from './components/home/equities/equities.component';
@@ -43,8 +44,11 @@ const routes: Routes = [
         component: EquitiesComponent,
         data: { title: $localize`:@@equities:${EWStrings.VAL_EQUITIES}` },
         children: [
-          // TODO: add watchlist module?
-          
+          // default - show watchlist
+          {
+            path: '',
+            component: WatchlistComponent,
+          },
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
             component: EquityDetailsComponent,

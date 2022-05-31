@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center mb-2">
+    <h1 class="my-auto" i18n="@@watchlists">Watchlists</h1>
+    <button mat-icon-button (click)="isEditMode = !isEditMode">
+        <mat-icon class="scale-8">{{isEditMode? 'done' : 'edit'}}</mat-icon>
+    </button>
+</div>
+<mat-chip-list cdkDropList cdkDropListOrientation="horizontal">
+    <mat-chip class="cursor-pointer" color="accent" cdkDrag *ngFor="let watchlist of watchlists"
+        (removed)="removeChipOnClick(watchlist)" (click)="chipOnClick(watchlist)">
+        {{watchlist.name}}
+        <button *ngIf="isEditMode" matChipRemove>
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </mat-chip>
+
+    <mat-chip class="cursor-pointer" i18n="@@add_new_watchlist"> + Add new watchlist</mat-chip>
+</mat-chip-list>
+

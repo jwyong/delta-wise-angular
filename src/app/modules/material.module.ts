@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatMenuModule,
         MatSelectModule,
         MatTableModule,
-        MatDialogModule
+        MatDialogModule,
+        MatChipsModule
     ],
     declarations: [
     ],
@@ -47,7 +49,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatMenuModule,
         MatSelectModule,
         MatTableModule,
-        MatDialogModule
+        MatDialogModule,
+        MatChipsModule
     ]
 })
 export class MaterialModule { }
