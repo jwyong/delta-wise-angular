@@ -2,7 +2,7 @@
     <mat-form-field class="w-100" appearance="fill">
         <mat-label i18n="@@interpolated-search-label">Search {{searchBarLabel}}</mat-label>
         <input type="text" #searchInput matInput [formControl]="formControl" [matAutocomplete]="mainListSearch">
-        <button *ngIf="searchInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+        <button *ngIf="searchInput.value.length > 0" type="button" matSuffix mat-icon-button aria-label="Clear"
             (click)="searchInput.value=''">
             <mat-icon class="text-secondary">close</mat-icon>
         </button>

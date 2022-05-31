@@ -14,23 +14,23 @@ import { BaseAuthComponent } from './components/auth/base-auth/base-auth.compone
 import { ForgotPwordComponent } from './components/auth/forgot-pword/forgot-pword.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
+import { DateRangePickerComponent } from './components/common/date-range-picker/date-range-picker.component';
+import { EstimateDialogComponent } from './components/common/estimate-dialog/estimate-dialog.component';
+import { FooterComponent } from './components/common/footer/footer.component';
 import { SearchBarComponent } from './components/common/search-bar/search-bar.component';
+import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
 import { CryptoComponent } from './components/home/crypto/crypto.component';
 import { EquitiesComponent } from './components/home/equities/equities.component';
 import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
 import { HomeComponent } from './components/home/home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
-import { DateRangePickerComponent } from './components/common/date-range-picker/date-range-picker.component';
-import { EstimateDialogComponent } from './components/common/estimate-dialog/estimate-dialog.component';
-import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
-import { FooterComponent } from './components/common/footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent,
   ],
   imports: [
     BrowserModule,

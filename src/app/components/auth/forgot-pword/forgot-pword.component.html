@@ -9,7 +9,11 @@
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@login_email_title">Email</mat-label>
-                        <input matInput [formControl]="emailFC" required>
+                        <input matInput #emailInput [formControl]="emailFC" required>
+                        <button type="button" *ngIf="emailInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="emailInput.value=''">
+                            <mat-icon class="text-secondary">close</mat-icon>
+                        </button>
                         <mat-error *ngIf="emailFC.invalid">{{getEmailErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>
