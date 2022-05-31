@@ -15,6 +15,7 @@ export class EstimateDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: EstimateDialogData,
     protected formBuilder: FormBuilder
   ) { }
+  
   // date range picker related
   selectedDateRangeEE = new EventEmitter()
   onDateRangeSelected(newDr: number) {
@@ -39,8 +40,6 @@ export class EstimateDialogComponent implements OnInit {
   inputEstimateForm = this.formBuilder.group({
     estimate: this.estimateFC
   });
-
-  // /^-?(0|[1-9]\d*)?$/
 
   // validation
   getEstimateErrorMsg() {

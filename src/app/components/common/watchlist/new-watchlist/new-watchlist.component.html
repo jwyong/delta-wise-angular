@@ -1,0 +1,18 @@
+<h2 mat-dialog-title i18n="@@new_watchlist">Create new watchlist</h2>
+<form [formGroup]="newWatchlistForm" (submit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field class="w-100" appearance="fill">
+            <mat-label i18n="@@watchlist_name">Watchlist name</mat-label>
+            <input matInput #nameInput [formControl]="nameFC" formControlName="name" required>
+            <button type="button" *ngIf="nameInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+                (click)="nameInput.value=''">
+                <mat-icon class="text-secondary">close</mat-icon>
+            </button>
+            <mat-error *ngIf="newWatchlistForm.controls['name'].hasError">{{getNameErrorMsg()}}</mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="ms-auto" i18n="@@cancel" mat-raised-button mat-dialog-close>Cancel</button>
+        <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit">Submit</button>
+    </mat-dialog-actions>
+</form>

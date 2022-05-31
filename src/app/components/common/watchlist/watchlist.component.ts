@@ -1,3 +1,4 @@
+import { NewWatchlistComponent } from './new-watchlist/new-watchlist.component';
 import { Company } from './../../../models/equities/company';
 import { Component, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
@@ -20,35 +21,35 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
 
     setTimeout(() => {
       this.watchlists = [
-        { id: "1", name: 'apple' },
-        { id: "2", name: 'banana' },
-        { id: "3", name: 'strawberry' },
-        { id: "4", name: 'orange' },
-        { id: "5", name: 'kiwi' },
-        { id: "6", name: 'cherry' },
+        // { id: "1", name: 'apple' },
+        // { id: "2", name: 'banana' },
+        // { id: "3", name: 'strawberry' },
+        // { id: "4", name: 'orange' },
+        // { id: "5", name: 'kiwi' },
+        // { id: "6", name: 'cherry' },
 
-        { id: "11", name: 'apple' },
-        { id: "12", name: 'banana' },
-        { id: "13", name: 'strawberry' },
-        { id: "14", name: 'orange' },
-        { id: "15", name: 'kiwi' },
-        { id: "16", name: 'cherry' },
-        { id: "21", name: 'apple' },
-        { id: "22", name: 'banana' },
-        { id: "23", name: 'strawberry' },
-        { id: "24", name: 'orange' },
-        { id: "25", name: 'kiwi' },
-        { id: "26", name: 'cherry' },
-        { id: "31", name: 'apple' },
-        { id: "32", name: 'banana' },
-        { id: "33", name: 'strawberry' },
-        { id: "34", name: 'orange' },
-        { id: "35", name: 'kiwi' },
-        { id: "36", name: 'cherry' },
+        // { id: "11", name: 'apple' },
+        // { id: "12", name: 'banana' },
+        // { id: "13", name: 'strawberry' },
+        // { id: "14", name: 'orange' },
+        // { id: "15", name: 'kiwi' },
+        // { id: "16", name: 'cherry' },
+        // { id: "21", name: 'apple' },
+        // { id: "22", name: 'banana' },
+        // { id: "23", name: 'strawberry' },
+        // { id: "24", name: 'orange' },
+        // { id: "25", name: 'kiwi' },
+        // { id: "26", name: 'cherry' },
+        // { id: "31", name: 'apple' },
+        // { id: "32", name: 'banana' },
+        // { id: "33", name: 'strawberry' },
+        // { id: "34", name: 'orange' },
+        // { id: "35", name: 'kiwi' },
+        // { id: "36", name: 'cherry' },
       ]
 
       // simulate click on first list
-      this.chipOnClick(this.watchlists[0])
+      // this.chipOnClick(this.watchlists[0])
 
       this.setIsLoading(false)
     }, 1000);
@@ -157,13 +158,22 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
   emptyWatchlistOnClick() {
     if (this.isWatchlistsEmpty())
       // watchlist empty - add new watchlist
-      console.log("empty")
+      this.showNewWatchlistDialog()
+  }
 
-    else {
-      console.log("search")
+  /**
+   * new watchlist
+   */
+  showNewWatchlistDialog() {
+    const dialogRef = this.dialog.open(NewWatchlistComponent, {
+      maxWidth: '25vw',
+      minWidth: 350,
+    });
 
-      // this.searchBar.nativeElement.focus()
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("afterClosed, result = ", result)
 
-    }
+      this.showSnackbar(`New watchlist created: ${result['name']}`)
+    });
   }
 }

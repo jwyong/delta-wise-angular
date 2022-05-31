@@ -1,6 +1,10 @@
 <div class="d-flex align-items-center">
-  <h1>{{getTitle()}}</h1>
-  <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value" (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
+  <h1 class="my-auto">{{getTitle()}}</h1>
+  <button class="ms-2" mat-icon-button>
+    <mat-icon class="scale-08">add_circle</mat-icon>
+  </button>
+  <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value"
+    (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
 </div>
 
 <table class="estimates-table text-center" mat-table [dataSource]="companyEstimates">
