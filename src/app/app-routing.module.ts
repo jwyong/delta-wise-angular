@@ -44,11 +44,10 @@ const routes: Routes = [
         component: EquitiesComponent,
         data: { title: $localize`:@@equities:${EWStrings.VAL_EQUITIES}` },
         children: [
-          // default - show watchlist
           {
             path: '',
             component: WatchlistComponent,
-          },
+          },          
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
             component: EquityDetailsComponent,

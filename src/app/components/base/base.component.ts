@@ -32,11 +32,14 @@ export class BaseComponent implements OnInit {
     protected httpService: HttpService,
     protected dialog: MatDialog
   ) { }
-
   ngOnInit(): void { }
 
   setIsLoading(isLoading: boolean) {
     this.dataService.setIsLoading(isLoading)
+  }
+
+  isLoading() {
+    return this.dataService.isLoadingSource.value == true
   }
 
   // check if jwt is expired then redirect to login if necessary

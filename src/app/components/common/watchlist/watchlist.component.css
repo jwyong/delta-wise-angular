@@ -1,0 +1,4 @@
+.scrollable-chip-list {
+    overflow-x: auto;
+    white-space: nowrap;
+}

@@ -42,18 +42,6 @@ mat-list-item:focus {
 }
 
 /**
-* bootstrap overrides/additions
-**/
-// full width/height
-.w-100 {
-    width: 100%;
-}
-
-.h-100 {
-    height: 100%;
-}
-
-/**
 * table styling
 **/
 .estimates-table {
@@ -76,14 +64,18 @@ mat-list-item:focus {
 /**
 * icon scaling
 **/
-.scale-8 {
+.scale-08 {
     transform: scale(0.8);
 }
 
-.scale-5 {
+.scale-05 {
     transform: scale(0.5);
 }
 
-.scale-3 {
+.scale-03 {
     transform: scale(0.3);
+}
+
+.scale-2 {
+    transform: scale(2);
 }

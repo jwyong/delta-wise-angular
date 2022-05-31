@@ -24,12 +24,13 @@ import { HeaderInterceptor } from './services/header-interceptor';
 import { DateRangePickerComponent } from './components/common/date-range-picker/date-range-picker.component';
 import { EstimateDialogComponent } from './components/common/estimate-dialog/estimate-dialog.component';
 import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
+import { FooterComponent } from './components/common/footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent
   ],
   imports: [
     BrowserModule,

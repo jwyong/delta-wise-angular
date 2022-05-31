@@ -1,4 +1,4 @@
-<div>
+<div class="d-flex flex-column h-100">
     <h3 i18n="@@navigation_title">
         <a routerLink="./" (click)="clearSearchBar()">{{getRouterTitle()}}</a>
         {{getSeparator()}}
@@ -7,7 +7,8 @@
     <app-search-bar #searchBar [searchBarLabel]="searchBarLabel" [getOptionsLabel]="getOptionsLabel"
         [getSelectedLabel]="getOptionsLabel" [onOptionSelected]="onOptionSelected">
     </app-search-bar>
-</div>
-<div>
-    <router-outlet></router-outlet>
+
+    <div class="h-100">
+        <router-outlet></router-outlet>
+    </div>
 </div>

@@ -2,6 +2,9 @@
  * string values for code use (e.g. keys, params, etc)
  */
 export class EWConstants {
+    // app version
+    public static APP_VERSION = "0.0.2"
+
     //=== validation
     // required
     public static KEY_REQUIRED: string = 'required';
