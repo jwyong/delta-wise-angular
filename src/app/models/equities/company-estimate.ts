@@ -1,4 +1,9 @@
-// TODO: pending BE finalised structure
+export interface CompanyDetail {
+    company_name: string,
+    ticker: string,
+    data: any
+}
+
 export interface CompanyEstimate {
     revenue: string
     ebit: string

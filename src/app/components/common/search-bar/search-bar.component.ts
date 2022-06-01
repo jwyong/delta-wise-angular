@@ -67,7 +67,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   getHttpObserver(value: any) {
-    let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITES_SEARCH}?s=`
+    let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITIES_SEARCH}?s=`
 
     return this.httpService.httpClient.get(url + value)
   }

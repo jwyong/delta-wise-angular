@@ -8,6 +8,7 @@ export class HttpConstants {
     public static API_AUTH_LOGIN = "auth/login"
 
     //=== equities
-    public static API_EQUITES_SEARCH = "equity/search"
+    public static API_EQUITIES_SEARCH = "equity/search"
+    public static API_EQUITIES_DETAIL = "equity/detail"
 
 }

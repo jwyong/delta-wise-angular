@@ -1,3 +1,4 @@
+import { LoginResp } from './../../../models/auth/login-resp';
 import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -43,7 +44,7 @@ export class LoginComponent extends BaseAuthComponent {
     this.setIsLoading(true)
 
     // call login api
-    let result = await this.httpPost(HttpConstants.API_AUTH_LOGIN, this.loginForm.value)
+    let result = await this.httpPost<LoginResp>(HttpConstants.API_AUTH_LOGIN, this.loginForm.value)
 
     this.setIsLoading(false)
 

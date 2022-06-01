@@ -95,7 +95,7 @@ export class BaseComponent implements OnInit {
     let json = JSON.stringify(body);
 
     // do sync http post
-    var resp = <Resp<LoginResp>>{}
+    var resp = <Resp<T>>{}
     let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     await firstValueFrom(this.httpService.httpClient.post<T>(fullURL, json, { headers: headers }))
       .then((data) => {

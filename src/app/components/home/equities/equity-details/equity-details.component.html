@@ -13,7 +13,7 @@
     <td mat-cell [ngClass]="getRowHighlightClass(element.rowType)" *matCellDef="let element">{{element.rowType}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="q122">
+  <!-- <ng-container matColumnDef="q122">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Q1 2022E</th>
     <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q122)"
       (mouseover)="cellOnMouseOver(element.rowType)">{{element.q122}}</td>
@@ -76,7 +76,7 @@
   <ng-container matColumnDef="fy29">
     <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2029</th>
     <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy29}}</td>
-  </ng-container>
+  </ng-container> -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
