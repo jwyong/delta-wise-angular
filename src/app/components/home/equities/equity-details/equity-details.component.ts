@@ -1,7 +1,7 @@
 import { CompanyDetail } from './../../../../models/equities/company-estimate';
 import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { CompanyTableType, CompEstTable } from '../../../../models/equities/company-estimate';
+import { CompanyTableType } from '../../../../models/equities/company-estimate';
 import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
 import { EquitiesComponent } from './../equities.component';
 import { HttpConstants } from 'src/app/utils/http-constants';
@@ -13,7 +13,12 @@ import { HttpConstants } from 'src/app/utils/http-constants';
   styleUrls: ['./equity-details.component.css']
 })
 export class EquityDetailsComponent extends EquitiesComponent implements OnInit {
-  // date range picker (default: all time)
+  // company ticker for currect company
+  companyTicker = ''
+
+  /**
+   * for date range picker
+   */
   selectedDateRangeBS = new BehaviorSubject(0)
   get selectedDateRange() {
     return this.selectedDateRangeBS.value
@@ -24,123 +29,30 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   }
 
   /**
-   * to tidy up
+   * for table
    */
-  // list of company estimates from api
-  companyEstimates: CompEstTable[] = []
-  // displayedColumns = ['rowType', 'q122', 'q222', 'q322', 'q422', 'fy22', 'fy23', 'fy24', 'fy25', 'fy26', 'fy27', 'fy28', 'fy29',]
-  displayedColumns = []
+  // columns to be displayed (all columns)
+  displayedColumns: any[] = []
+
+  // full data to be displayed on table (need to invert from api data)
+  displayedData: any[] = []
+
+  // fixed row on table (to be inverted from api data)
+  inputColumns = ['timeframe', 'revenue', 'ebit', 'ebitda', 'net_income', 'eps']
 
   override ngOnInit(): void {
     // subscribe to company id changes
     this.route.params.subscribe(routeParams => {
-      console.log("routeParams = ", routeParams)
+      this.companyTicker = routeParams['ticker']
 
+      // get company dets when ticker changed
       this.getCompanyDets()
-
-      // this.setIsLoading(true)
-
-      // TODO: TEMP - hardcoded simulate get from api
-      // setTimeout(() => {
-      //   // get company estimates based on company id
-      //   this.companyEstimates = [
-      //     {
-      //       rowType: CompanyTableType.revenue,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.ebit,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.ebitda,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.netIncome,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.eps,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.revenue,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.ebit,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.ebitda,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.netIncome,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.eps,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.revenue,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.ebit,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.ebitda,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.netIncome,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //     {
-      //       rowType: CompanyTableType.eps,
-      //       q122: this.getRandomValue(), q222: this.getRandomValue(), q322: this.getRandomValue(), q422: this.getRandomValue(),
-      //       fy22: this.getRandomValue(), fy23: this.getRandomValue(), fy24: this.getRandomValue(), fy25: this.getRandomValue(),
-      //       fy26: this.getRandomValue(), fy27: this.getRandomValue(), fy28: this.getRandomValue(), fy29: this.getRandomValue()
-      //     },
-      //   ]
-
-      //   this.setIsLoading(false)
-      // }, 1000);
     });
 
+    // subscribe to date range picker changes
     this.selectedDateRangeBS.subscribe((value) => {
+      // get company dets when date range changed
+      // this.getCompanyDets()
       console.log("sdrBS value = ", value)
     })
   }
@@ -163,13 +75,11 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    */
   // get table dets from api
   async getCompanyDets() {
-    console.log("getCompanyDets")
-
     this.setIsLoading(true)
 
     // call api TEMP: hardcode to FB
-    let result = await this.httpPost<CompanyDetail>(HttpConstants.API_EQUITIES_DETAIL, { 
-      current_time: new Date().toISOString(), ticker: "FB"
+    let result = await this.httpPost<CompanyDetail>(HttpConstants.API_EQUITIES_DETAIL, {
+      current_time: new Date().toISOString(), date_range: "", ticker: this.companyTicker
     })
 
     this.setIsLoading(false)
@@ -178,11 +88,49 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     if (result.status) {
       let colList = result.data?.data
 
-      console.log("colList = ", colList)
+      // prep inversed array for pushing BE rows into (BE sending timeframe as rows)
+      var beArray: any[] = []
 
-      // colList?.forEach(value => {
-      //   console.log(value)
-      // })
+      Object.keys(colList).map((key) => {
+        // prep nested beObj which contains rowTypes: { Q2_2022 : {ebit: null, ebitda: -23.30 }}
+        let nestedBeRowTypeObj = colList[key]
+
+        // create row object to be pushed to table array
+        // TODO: try link to enum in comp-est.ts
+        let rowObj = {
+          timeframe: key,
+          revenue: nestedBeRowTypeObj['revenue'],
+          ebit: nestedBeRowTypeObj['ebit'],
+          ebitda: nestedBeRowTypeObj['ebitda'],
+          net_income: nestedBeRowTypeObj['net_income'],
+          eps: nestedBeRowTypeObj['eps'],
+        }
+
+        // push rowObj to beArray
+        beArray.push(rowObj)
+      });
+
+      // invert beArray for FE table UI
+      this.displayedColumns = beArray.map(x => x.timeframe.toString());
+      this.displayedColumns.unshift("name")
+
+      this.displayedData = this.inputColumns.flatMap(x => {
+        if (x != "timeframe") {
+          // prep inverted array rowObj
+          var invertedArrayRowObj: any = { name: x }
+
+          beArray.forEach((item: any, index: number) => {
+            invertedArrayRowObj[item.timeframe] = beArray[index][x];
+          })
+
+          return invertedArrayRowObj
+        } else return []
+      });
+
+      // this.displayedData.splice(0, 1)
+
+      console.log("displayCols = ", this.displayedColumns)
+      console.log("displayData = ", this.displayedData)
     }
   }
 
@@ -190,9 +138,11 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   mouseOverRowType?: CompanyTableType
 
   // update which row/col is mouse-over now
-  cellOnMouseOver(item: CompanyTableType) {
+  cellOnMouseOver(item: string, index: string) {
+    console.log("item = ", item, index)
+
     // TODO: need to col header highlight when BE ready
-    this.mouseOverRowType = item
+    // this.mouseOverRowType = item
   }
 
   // get class for highlighting
@@ -205,7 +155,9 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   /**
    * input estimate dialog
    */
-  showEstimateDialog(item: CompEstTable) {
+  showEstimateDialog(item: any) {
+    console.log(item)
+
     const dialogRef = this.dialog.open(EstimateDialogComponent, {
       maxWidth: '25vw',
       minWidth: 350,

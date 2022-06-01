@@ -1,11 +1,13 @@
+import { EWStrings } from './../../../utils/ew-strings';
 import { EWConstants } from 'src/app/utils/ew-constants';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter, finalize, switchMap, tap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, filter, finalize, of, switchMap, tap } from 'rxjs';
 import { DataService } from './../../../services/data-service';
 import { HttpService } from './../../../services/http-service';
 import { Company } from 'src/app/models/equities/company';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,9 +15,11 @@ import { Company } from 'src/app/models/equities/company';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
-  constructor(protected httpService: HttpService, protected dataService: DataService) { }
-  @ViewChild('searchInput') searchInput: any; 
-  
+  constructor(
+    protected httpService: HttpService, protected dataService: DataService, protected _snackBar: MatSnackBar,
+  ) { }
+  @ViewChild('searchInput') searchInput: any;
+
   // search bar label (e.g. Search Company)
   @Input() searchBarLabel: string = "";
 
@@ -58,11 +62,19 @@ export class SearchBarComponent implements OnInit {
           finalize(() => {
             this.dataService.setIsLoading(false)
           }),
+          catchError(error => of({
+            error
+          }))
         )
-      )
+      ),
     ).subscribe((data: any) => {
       if (data['data'] != null)
-        this.filteredItems = data['data'].slice(0,1000)
+        this.filteredItems = data['data'].slice(0, 1000)
+      else 
+      // show snackbar error
+      this._snackBar.open(EWStrings.errorGeneric(data.error.message), undefined, {
+        duration: 3 * 1000
+      })
     });
   }
 

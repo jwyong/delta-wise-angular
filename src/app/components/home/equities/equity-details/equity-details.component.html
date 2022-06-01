@@ -7,25 +7,34 @@
     (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
 </div>
 
-<table class="estimates-table text-center" mat-table [dataSource]="companyEstimates">
-  <ng-container matColumnDef="rowType">
+<table class="estimates-table text-center" mat-table [dataSource]="displayedData">
+  <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+    <th class="text-center" mat-header-cell *matHeaderCellDef> {{column != 'name'? column : ''}} </th>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element; let index = index;" (click)="showEstimateDialog(element)"
+      (mouseover)="cellOnMouseOver(element.name, column)"> {{element[column]}}</td>
+  </ng-container>
+
+
+
+
+
+  <!-- <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell [ngClass]="getRowHighlightClass(element.rowType)" *matCellDef="let element">{{element.rowType}}</td>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
   </ng-container>
 
-  <!-- <ng-container matColumnDef="q122">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Q1 2022E</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q122)"
-      (mouseover)="cellOnMouseOver(element.rowType)">{{element.q122}}</td>
-  </ng-container>
 
-  <ng-container matColumnDef="q222">
+  <ng-container matColumnDef="FY_2023">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container> -->
+
+  <!-- <ng-container matColumnDef="q222">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Q2 2022E</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q222)"
-      (mouseover)="cellOnMouseOver(element.rowType)">{{element.q222}}</td>
-  </ng-container>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.q222}}</td>
+  </ng-container> -->
 
-  <ng-container matColumnDef="q322">
+  <!-- <ng-container matColumnDef="q322">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Q3 2022E</th>
     <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q322)"
       (mouseover)="cellOnMouseOver(element.rowType)">{{element.q322}}</td>

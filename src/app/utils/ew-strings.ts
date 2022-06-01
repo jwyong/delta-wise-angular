@@ -45,28 +45,38 @@ export class EWStrings {
     public static VAL_LOWER = "lower"
     public static VAL_HIGHER = "higher"
 
+    // generic error
+    public static errorGeneric(error: string) {
+        var errStr = $localize`:@@error_generic:Something went wrong, please try again later`
+
+        if (error.length > 0)
+            errStr = `${errStr} (${error})`
+
+        return errStr
+    }
+
     /**
      * watchlist
      */
     public static VAL_WATCHLIST: string = "Watchlist"
     public static deleteWatchlist(name: string): string {
-        return $localize `Delete this watchlist (${name})? This action cannot be undone.`
+        return $localize`:@@confirm_delete_watchlist:Delete this watchlist (${name})? This action cannot be undone.`
     }
 
     /**
      * equities module
      */
-     public static VAL_EQUITIES: string = "Equities"
-     public static VAL_COMPANY: string = "Company"
-     public static VAL_DETAILS: string = "Details"
+    public static VAL_EQUITIES: string = "Equities"
+    public static VAL_COMPANY: string = "Company"
+    public static VAL_DETAILS: string = "Details"
 
-     /**
-      * commodities module
-      */
-     public static VAL_COMMODITY: string = "Commodity"
+    /**
+     * commodities module
+     */
+    public static VAL_COMMODITY: string = "Commodity"
 
-     /**
-      * crypto module
-      */
-     public static VAL_CRYPTO: string = "Cryptocurrency"
-    }
+    /**
+     * crypto module
+     */
+    public static VAL_CRYPTO: string = "Cryptocurrency"
+}
