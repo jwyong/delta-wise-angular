@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center">
-  <h1 class="my-auto">{{getTitle()}}</h1>
+  <h1 class="my-auto">{{getCompanyTitle()}}</h1>
   <button class="ms-2" mat-icon-button>
     <mat-icon class="scale-08">add_circle</mat-icon>
   </button>
@@ -9,9 +9,11 @@
 
 <table class="estimates-table text-center" mat-table [dataSource]="displayedData">
   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-    <th class="text-center" mat-header-cell *matHeaderCellDef> {{column != 'name'? column : ''}} </th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element; let index = index;" (click)="showEstimateDialog(element)"
-      (mouseover)="cellOnMouseOver(element.name, column)"> {{element[column]}}</td>
+    <th class="text-center" [ngClass]="getHeaderCellClass(column)" mat-header-cell *matHeaderCellDef> {{column !=
+      'name'? column : ''}} </th>
+    <td [ngClass]="getNonHeaderCellClass(element.name, column)" mat-cell *matCellDef="let element; let index = index;"
+      (click)="showEstimateDialog(element.name, column)" (mouseover)="cellOnMouseOver(element.name, column)"> {{element[column]}}
+    </td>
   </ng-container>
 
 

@@ -1,7 +1,6 @@
-import { CompanyDetail } from './../../../../models/equities/company-estimate';
+import { CompanyDetail, CompanyRowType } from './../../../../models/equities/company-estimate';
 import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { CompanyTableType } from '../../../../models/equities/company-estimate';
 import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
 import { EquitiesComponent } from './../equities.component';
 import { HttpConstants } from 'src/app/utils/http-constants';
@@ -37,8 +36,12 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   // full data to be displayed on table (need to invert from api data)
   displayedData: any[] = []
 
+  // static col names
+  timeFrameCol = 'timeframe'
+  nameCol = 'name'
+
   // fixed row on table (to be inverted from api data)
-  inputColumns = ['timeframe', 'revenue', 'ebit', 'ebitda', 'net_income', 'eps']
+  inputColumns = [this.timeFrameCol, CompanyRowType.revenue, CompanyRowType.ebit, CompanyRowType.ebitda, CompanyRowType.net_income, CompanyRowType.eps]
 
   override ngOnInit(): void {
     // subscribe to company id changes
@@ -51,16 +54,11 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
     // subscribe to date range picker changes
     this.selectedDateRangeBS.subscribe((value) => {
+      console.log("selectedDateRange = ", value)
       // get company dets when date range changed
-      // this.getCompanyDets()
-      console.log("sdrBS value = ", value)
+      this.getCompanyDets()
     })
   }
-
-  getRandomValue(): string {
-    return (Math.floor(Math.random() * (100 - -99) + -100)).toString()
-  }
-
 
   /**
    * date range picker related
@@ -92,62 +90,79 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
       var beArray: any[] = []
 
       Object.keys(colList).map((key) => {
-        // prep nested beObj which contains rowTypes: { Q2_2022 : {ebit: null, ebitda: -23.30 }}
-        let nestedBeRowTypeObj = colList[key]
-
         // create row object to be pushed to table array
         // TODO: try link to enum in comp-est.ts
-        let rowObj = {
-          timeframe: key,
-          revenue: nestedBeRowTypeObj['revenue'],
-          ebit: nestedBeRowTypeObj['ebit'],
-          ebitda: nestedBeRowTypeObj['ebitda'],
-          net_income: nestedBeRowTypeObj['net_income'],
-          eps: nestedBeRowTypeObj['eps'],
-        }
+        let rowObj = this.getRowObj(key, colList[key])
 
         // push rowObj to beArray
         beArray.push(rowObj)
       });
 
-      // invert beArray for FE table UI
+      // invert displayedCols
       this.displayedColumns = beArray.map(x => x.timeframe.toString());
-      this.displayedColumns.unshift("name")
+      this.displayedColumns.unshift(this.nameCol)
 
-      this.displayedData = this.inputColumns.flatMap(x => {
-        if (x != "timeframe") {
-          // prep inverted array rowObj
-          var invertedArrayRowObj: any = { name: x }
-
-          beArray.forEach((item: any, index: number) => {
-            invertedArrayRowObj[item.timeframe] = beArray[index][x];
-          })
-
-          return invertedArrayRowObj
-        } else return []
-      });
-
-      // this.displayedData.splice(0, 1)
-
-      console.log("displayCols = ", this.displayedColumns)
-      console.log("displayData = ", this.displayedData)
+      // invert displayedData
+      this.displayedData = this.getInvertedFlatMap(beArray)
     }
   }
 
-  // for highglighting row/col header on mouseover
-  mouseOverRowType?: CompanyTableType
-
-  // update which row/col is mouse-over now
-  cellOnMouseOver(item: string, index: string) {
-    console.log("item = ", item, index)
-
-    // TODO: need to col header highlight when BE ready
-    // this.mouseOverRowType = item
+  // get rowObj based on beArray
+  private getRowObj(key: string, nestedBeRowTypeObj: any) {
+    return {
+      timeframe: key,
+      revenue: nestedBeRowTypeObj[CompanyRowType.revenue],
+      ebit: nestedBeRowTypeObj[CompanyRowType.ebit],
+      ebitda: nestedBeRowTypeObj[CompanyRowType.ebitda],
+      net_income: nestedBeRowTypeObj[CompanyRowType.net_income],
+      eps: nestedBeRowTypeObj[CompanyRowType.eps],
+    }
   }
 
-  // get class for highlighting
-  getRowHighlightClass(rowType: CompanyTableType) {
-    if (rowType == this.mouseOverRowType)
+  // invert beArray to become a flatMap
+  private getInvertedFlatMap(beArray: any[]) {
+    return this.inputColumns.flatMap(x => {
+      if (x != this.timeFrameCol) {
+        // prep inverted array rowObj
+        var invertedArrayRowObj: any = { [this.nameCol]: x }
+
+        beArray.forEach((item: any, index: number) => {
+          invertedArrayRowObj[item.timeframe] = beArray[index][x];
+        })
+
+        return invertedArrayRowObj
+      } else return []
+    });
+  }
+
+  /**
+   * table highlighting related
+   */
+  // for highglighting row/col header on mouseover
+  mouseOverRowName?: string
+  mouseOverColName?: string
+
+  // update which row/col is mouse-over now
+  cellOnMouseOver(rowType: string, colName: string) {
+    if (colName == this.nameCol) return
+
+    this.mouseOverRowName = rowType
+    this.mouseOverColName = colName
+  }
+
+  // get class for header cells (1st row)
+  highlightBgClass = 'bg-primary'
+  getHeaderCellClass(colName: string) {
+    // just need check for highlight
+    if (colName == this.mouseOverColName) return this.highlightBgClass
+    else return ''
+  }
+
+  // get class for non-header cells (not 1st row)
+  getNonHeaderCellClass(rowName: string, colName: string) {
+    // check highlight for first col, cursor-pointer for 2nd col onwards
+    if (colName != this.nameCol) return 'cursor-pointer'
+    else if (rowName == this.mouseOverRowName)
       return "bg-primary"
     else return ""
   }
@@ -155,14 +170,15 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   /**
    * input estimate dialog
    */
-  showEstimateDialog(item: any) {
-    console.log(item)
+  showEstimateDialog(rowName: string, colName: string) {
+    console.log(rowName, colName)
 
     const dialogRef = this.dialog.open(EstimateDialogComponent, {
       maxWidth: '25vw',
       minWidth: 350,
       data: {
-        title: this.getTitle(),
+        title: this.getCompanyTitle(),
+        subTitle: `${colName} ${rowName}`,
         sdr: this.selectedDateRangeBS
       }
     });
@@ -185,10 +201,12 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    * UI binding
    */
   // get title (e.g. Aztrazaneca (AZN))
-  getTitle() {
+  getCompanyTitle() {
     let company = this.getCompanyFromLS()
 
     if (company == null) return ""
     else return `${company.company} (${company.ticker})`
   }
+
+  // get humanised names for table row and columns
 }

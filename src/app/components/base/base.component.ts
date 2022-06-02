@@ -1,5 +1,6 @@
-import { Resp } from './../../models/resp';
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
@@ -7,10 +8,8 @@ import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
+import { Resp } from './../../models/resp';
 import { LocalStorageService } from './../../services/local-storage-service';
-import { MatDialog } from '@angular/material/dialog';
-import { HttpHeaders } from '@angular/common/http';
-import { LoginResp } from 'src/app/models/auth/login-resp';
 
 @Component({
   selector: 'app-base',

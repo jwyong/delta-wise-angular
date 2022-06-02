@@ -4,6 +4,14 @@ export interface CompanyDetail {
     data: any
 }
 
+export enum CompanyRowType {
+    revenue = 'revenue',
+    ebit = 'ebit',
+    ebitda = 'ebitda',
+    net_income = 'net_income',
+    eps = 'eps'
+}
+
 // export interface CompanyEstimate {
 //     revenue: string
 //     ebit: string
@@ -31,10 +39,3 @@ export interface CompanyDetail {
 //     fy29: string,
 // }
 
-export enum CompanyTableType {
-    revenue = "Revenue",
-    ebit = "EBIT",
-    ebitda = "EBITDA",
-    netIncome = "Net Income",
-    eps = "EPS"
-}

@@ -92,5 +92,6 @@ export class EstimateDialogComponent implements OnInit {
 
 export interface EstimateDialogData {
   title: string,
+  subTitle: string,
   sdr: BehaviorSubject<number>
 }
