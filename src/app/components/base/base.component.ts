@@ -90,52 +90,16 @@ export class BaseComponent implements OnInit {
   async httpPost<T>(
     endpoint: string, body: any, shouldHideErrors?: boolean
   ) {
-    let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
-    let json = JSON.stringify(body);
+    let result = await this.httpService.httpPost<T>(endpoint, body, shouldHideErrors)
 
-    // do sync http post
-    var resp = <Resp<T>>{}
-    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
-    await firstValueFrom(this.httpService.httpClient.post<T>(fullURL, json, { headers: headers }))
-      .then((data) => {
-        console.log("httpPost success: data = ", data)
-        resp = data
-      })
-      .catch((error) => {
-        console.log("httpPost, error = ", error)
+    // show error snackbar if failed
+    if (!result.status && result.message != null)
+      this.showSnackbar(result.message)
 
-        // show snackbar error if need
-        if (shouldHideErrors != true) {
-          var msg: string
-
-          let errorObj = error.error
-
-          // check for errors array from BE
-          let errorsArray: string[] = errorObj.errors
-
-          if (errorsArray != null) {
-            // use BE message if got
-            msg = errorObj.message
-
-            // append first error to msg string if got
-            if (errorsArray.length > 0)
-              msg = `${msg} (${errorsArray[0]})`
-          } else
-            // use http message if nothing from BE
-            msg = error.message
-
-          this.showSnackbar(msg)
-        }
-
-        resp = error.error
-      });
-
-    return resp;
+    return result;
   }
 
   async httpGet(endpoint: string) {
-    let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
-
-    return await firstValueFrom(this.httpService.httpClient.get(fullURL))
+    this.httpService.httpGet(endpoint)
   }
 }

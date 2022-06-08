@@ -1,11 +1,14 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
-<form [formGroup]="inputEstimateForm">
+<form [formGroup]="inputEstimateForm" (submit)="formOnSubmit()">
+  <mat-progress-bar *ngIf="isLoadingDialog" mode="indeterminate"></mat-progress-bar>
+
   <mat-dialog-content class="mat-typography">
-    <h4 mat-dialog-subtitle>{{data.subTitle}}</h4>
+    <h4 mat-dialog-subtitle>{{data.timeFrame}} {{data.rowType}}</h4>
 
     <mat-form-field class="w-100" appearance="fill">
       <mat-label i18n="@@your_estimate">Your estimate</mat-label>
-      <input matInput #estInput [formControl]="estimateFC" formControlName="estimate" placeholder="3.56" required>
+      <input matInput #estInput [formControl]="estimateFC" formControlName="estimate" placeholder="3.56"
+        [value]="getCurrentEstimate()" required>
       <button type="button" *ngIf="estInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
         (click)="estInput.value=''">
         <mat-icon class="text-secondary">close</mat-icon>
@@ -13,13 +16,14 @@
       <mat-error *ngIf="inputEstimateForm.controls['estimate'].hasError">{{getEstimateErrorMsg()}}</mat-error>
     </mat-form-field>
 
-    <div style="display: none">
-      <p i18n="@@last_estimate_date">Date of your last estimate: {{lastEstimateDate}}</p>
+    <div [ngClass]="{'d-none': companyEstimate?.estimate != 0? '' : 'd-none'}">
+      <p i18n="@@last_estimate_date">Date of your last estimate: {{getLastEstimateDateTime()}}</p>
 
       <app-date-range-picker class="w-100" [sdr]="data.sdr.value" (onDateRangeSelected)="onDateRangeSelected($event)">
       </app-date-range-picker>
 
-      <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}}</p>
+      <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}}
+        ({{companyEstimate?.no_of_contributors}})</p>
 
       <p class="mb-0 text-secondary text-center" i18n="@@median_diff">
         <small>
@@ -30,12 +34,13 @@
 
     <p class="mt-0 text-secondary text-center" i18n="@@input_trials_remaining">
       <small>
-        You have {{inputTrialsRemaining}} input trials remaining
+        You have {{getInputTrialStr()}} input trials remaining
       </small>
     </p>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button class="ms-auto" i18n="@@cancel" mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit">Submit</button>
+    <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit"
+      [disabled]="isSubmitBtnDisabled()">Submit</button>
   </mat-dialog-actions>
 </form>

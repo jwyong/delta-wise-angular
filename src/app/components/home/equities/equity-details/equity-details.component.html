@@ -9,68 +9,14 @@
 
 <table class="estimates-table text-center" mat-table [dataSource]="displayedData">
   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-    <th class="text-center" [ngClass]="getHeaderCellClass(column)" mat-header-cell *matHeaderCellDef> {{column !=
-      'name'? column : ''}} </th>
+    <th class="text-center" [ngClass]="getHeaderCellClass(column)" mat-header-cell *matHeaderCellDef>
+      {{ getHumanisedHeaderCellValue(column) }}
+    </th>
     <td [ngClass]="getNonHeaderCellClass(element.name, column)" mat-cell *matCellDef="let element; let index = index;"
-      (click)="showEstimateDialog(element.name, column)" (mouseover)="cellOnMouseOver(element.name, column)"> {{element[column]}}
+      (click)="showEstimateDialog(element.name, column)" (mouseover)="cellOnMouseOver(element.name, column)">
+      {{ getHumanisedCellValue(column, element[column]) }}
     </td>
   </ng-container>
-
-
-
-
-  <!-- <ng-container matColumnDef="q322">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Q3 2022E</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q322)"
-      (mouseover)="cellOnMouseOver(element.rowType)">{{element.q322}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="q422">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Q4 2022E</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.q422)"
-      (mouseover)="cellOnMouseOver(element.rowType)">{{element.q422}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy22">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2022</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" (click)="showEstimateDialog(element.fy22)"
-      (mouseover)="cellOnMouseOver(element.rowType)">{{element.fy22}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy23">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2023</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy23}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy24">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2024</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy24}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy25">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2025</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy25}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy26">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2026</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy26}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy27">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2027</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy27}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy28">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2028</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy28}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fy29">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>FY 2029</th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element">{{element.fy29}}</td>
-  </ng-container> -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

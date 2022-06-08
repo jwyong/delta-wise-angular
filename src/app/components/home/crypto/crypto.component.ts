@@ -19,6 +19,5 @@ export class CryptoComponent extends BaseComponent implements OnInit {
 
   // go to equity detail page
   onOptionSelected = (item: any): void => {
-    console.log("crypto: onOptionSelected, item = ", item)
   }
 }

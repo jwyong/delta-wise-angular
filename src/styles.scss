@@ -42,7 +42,7 @@ mat-list-item:focus {
 }
 
 /**
-* table styling (horizontal scroll)
+* table styling
 **/
 .estimates-table {
     width: 100%;
@@ -50,6 +50,7 @@ mat-list-item:focus {
 }
 
 .estimates-table th, .estimates-table td {
+    height: 10px;
     white-space: nowrap;
     border: 1px solid;
 }

@@ -1,9 +1,11 @@
-import { CompanyDetail, CompanyRowType } from './../../../../models/equities/company-estimate';
-import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { DateTimeUtil } from 'src/app/utils/date-time';
+import { EWStrings } from 'src/app/utils/ew-strings';
+import { HttpConstants } from 'src/app/utils/http-constants';
+import { CompanyDetail, CompanyRowType } from '../../../../models/equities/company-detail';
 import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
 import { EquitiesComponent } from './../equities.component';
-import { HttpConstants } from 'src/app/utils/http-constants';
 
 // TODO: TEMP - hardcoded companyEst list
 @Component({
@@ -44,20 +46,13 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   inputColumns = [this.timeFrameCol, CompanyRowType.revenue, CompanyRowType.ebit, CompanyRowType.ebitda, CompanyRowType.net_income, CompanyRowType.eps]
 
   override ngOnInit(): void {
-    // subscribe to company id changes
-    this.route.params.subscribe(routeParams => {
-      this.companyTicker = routeParams['ticker']
+    // combine router ticker changes + data range changes
+    combineLatest([this.route.params, this.selectedDateRangeBS]).subscribe(results => {
+      // get company dets when any of these changed (if no dialog showing)
+      this.companyTicker = results[0]['ticker']
 
-      // get company dets when ticker changed
       this.getCompanyDets()
     });
-
-    // subscribe to date range picker changes
-    this.selectedDateRangeBS.subscribe((value) => {
-      console.log("selectedDateRange = ", value)
-      // get company dets when date range changed
-      this.getCompanyDets()
-    })
   }
 
   /**
@@ -77,7 +72,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
     // call api TEMP: hardcode to FB
     let result = await this.httpPost<CompanyDetail>(HttpConstants.API_EQUITIES_DETAIL, {
-      current_time: new Date().toISOString(), date_range: "", ticker: this.companyTicker
+      date_range: this.selectedDateRange, ticker: this.companyTicker
     })
 
     this.setIsLoading(false)
@@ -97,6 +92,12 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
         // push rowObj to beArray
         beArray.push(rowObj)
       });
+
+      // sort beArray to be quarters first then FY (e.g. Q2_2022, Q3_2022, Q4_2022, FY_2022, FY_2023 ...)
+      const order = ['Q', 'F'];
+      beArray = beArray.sort((a, b) =>
+        order.indexOf(a.timeframe.charAt(0)) - order.indexOf(b.timeframe.charAt(0))
+      );
 
       // invert displayedCols
       this.displayedColumns = beArray.map(x => x.timeframe.toString());
@@ -125,7 +126,6 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
       if (x != this.timeFrameCol) {
         // prep inverted array rowObj
         var invertedArrayRowObj: any = { [this.nameCol]: x }
-
         beArray.forEach((item: any, index: number) => {
           invertedArrayRowObj[item.timeframe] = beArray[index][x];
         })
@@ -171,28 +171,30 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    * input estimate dialog
    */
   showEstimateDialog(rowName: string, colName: string) {
-    console.log(rowName, colName)
-
-    const dialogRef = this.dialog.open(EstimateDialogComponent, {
+    const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
       maxWidth: '25vw',
       minWidth: 350,
       data: {
         title: this.getCompanyTitle(),
-        subTitle: `${colName} ${rowName}`,
-        sdr: this.selectedDateRangeBS
+        sdr: this.selectedDateRangeBS,
+        ticker: this.companyTicker,
+        timeFrame: colName,
+        rowType: rowName
       }
     });
+
+    // check if user has changed dateRange
     var dialogSelectedDR: number
-    const onDialogDateSelectedSub = dialogRef.componentInstance.selectedDateRangeEE.subscribe((value) => {
+    const onDialogDateSelectedSub = estimateDialogRef.componentInstance.selectedDateRangeBS.subscribe((value: number) => {
       dialogSelectedDR = value
     })
 
-    dialogRef.afterClosed().subscribe(result => {
+    estimateDialogRef.afterClosed().subscribe((_: any) => {
       // unsubscribe dialog observer
       onDialogDateSelectedSub.unsubscribe()
 
       // update sdr if got
-      if (dialogSelectedDR != null)
+      if (dialogSelectedDR != null && dialogSelectedDR != this.selectedDateRange)
         this.selectedDateRange = dialogSelectedDR
     });
   }
@@ -208,5 +210,91 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     else return `${company.company} (${company.ticker})`
   }
 
-  // get humanised names for table row and columns
+  // get humanised names for header cells
+  getHumanisedHeaderCellValue(colName: string) {
+    if (colName != this.nameCol)
+      return EWStrings.getHumanisedEqtColName(colName)
+    else return ""
+  }
+
+  // get humanised names for non-header cells
+  getHumanisedCellValue(colName: string, rowName: string) {
+    if (colName == this.nameCol)
+      // name column: show localised rowType (revenue, EPS, etc)
+      return EWStrings.getCompanyRowTypeName(rowName)
+    else {
+
+      /**
+       * data cols:
+       * - show "?" for null cells
+       * - show range of %diff in range of 2.5%, from 0 up to 20%
+       * - e.g. 0 - 2.5%, 2.5 - 5.0%, 5.0 - 7.5%, ... , 17.5 - 20.0%, 20.0%
+       * - add > or < sign in front based on %diff is -ve or +ve
+       * e.g.:
+       * % DIFF = 1.3%, result = > 0 - 2.5%
+       * % DIFF = -1.3%, result = < 0 - 2.5%
+       * % DIFF = 3.3%, result = > 2.5 - 5.0%
+       * % DIFF = -17.2%, result = < 17.5 - 20.0%
+       * % DIFF = 33.2%, result = > 20.0%
+       * % DIFF = -23.2%, result = < 20.0%
+       */
+      // show "?" for nulls
+      if (rowName == null)
+        return "?"
+
+      else {
+        // get humanised range based on %diff range
+        var percentDiff = Number(rowName)
+
+        // return ori value if NaN
+        if (percentDiff == NaN) return rowName
+
+        // get sign before convert to abs
+        let sign = percentDiff >= 0? ">" : "<"
+        percentDiff = Math.abs(percentDiff)
+
+        var strIndex: number
+        switch (true) {
+          case percentDiff < 2.5:
+            strIndex = 0
+            break
+
+          case percentDiff < 5:
+            strIndex = 1
+            break
+
+          case percentDiff < 7.5:
+            strIndex = 2
+            break
+
+          case percentDiff < 10:
+            strIndex = 3
+            break
+
+          case percentDiff < 12.5:
+            strIndex = 4
+            break
+
+          case percentDiff < 15:
+            strIndex = 5
+            break
+
+          case percentDiff < 17.5:
+            strIndex = 6
+            break
+
+          case percentDiff < 20:
+            strIndex = 7
+            break
+
+          default:
+            strIndex = 8
+            break
+        }
+
+        // add sign in front
+        return `${sign} ${EWStrings.VAL_COMP_PERCENT_DIFF[strIndex]}`
+      }
+    }
+  }
 }
