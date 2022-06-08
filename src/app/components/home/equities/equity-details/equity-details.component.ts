@@ -151,20 +151,28 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   }
 
   // get class for header cells (1st row)
-  highlightBgClass = 'bg-primary'
+  highlightBgClass = 'est-table-hover'
   getHeaderCellClass(colName: string) {
-    // just need check for highlight
-    if (colName == this.mouseOverColName) return this.highlightBgClass
-    else return ''
+    if (colName == this.nameCol) return ''
+    else
+      if (colName == this.mouseOverColName) return this.highlightBgClass
+      else return ''
   }
 
   // get class for non-header cells (not 1st row)
   getNonHeaderCellClass(rowName: string, colName: string) {
     // check highlight for first col, cursor-pointer for 2nd col onwards
-    if (colName != this.nameCol) return 'cursor-pointer'
-    else if (rowName == this.mouseOverRowName)
-      return "bg-primary"
-    else return ""
+    if (colName != this.nameCol) {
+      var dataClassBaseName = 'est-table-data-col cursor-pointer'
+      if (colName == this.mouseOverColName && rowName == this.mouseOverRowName)
+        return `${dataClassBaseName} ${this.highlightBgClass}`
+      else return dataClassBaseName
+    } else {
+      var className = 'est-table-first-col'
+      if (rowName == this.mouseOverRowName)
+        return `${className} ${this.highlightBgClass}`
+      else return className
+    }
   }
 
   /**

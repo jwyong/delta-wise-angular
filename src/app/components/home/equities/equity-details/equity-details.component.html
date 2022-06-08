@@ -7,12 +7,12 @@
     (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
 </div>
 
-<table class="estimates-table text-center" mat-table [dataSource]="displayedData">
+<table class="est-table table align-middle" mat-table [dataSource]="displayedData">
   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-    <th class="text-center" [ngClass]="getHeaderCellClass(column)" mat-header-cell *matHeaderCellDef>
+    <th class="px-3 text-black table-light align-middle fw-normal" [ngClass]="getHeaderCellClass(column)" mat-header-cell *matHeaderCellDef>
       {{ getHumanisedHeaderCellValue(column) }}
     </th>
-    <td [ngClass]="getNonHeaderCellClass(element.name, column)" mat-cell *matCellDef="let element; let index = index;"
+    <td class="px-3 " [ngClass]="getNonHeaderCellClass(element.name, column)" mat-cell *matCellDef="let element; let index = index;"
       (click)="showEstimateDialog(element.name, column)" (mouseover)="cellOnMouseOver(element.name, column)">
       {{ getHumanisedCellValue(column, element[column]) }}
     </td>
