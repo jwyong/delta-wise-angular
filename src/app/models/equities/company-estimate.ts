@@ -4,5 +4,5 @@ export interface CompanyEstimate {
   no_of_contributors: number,
   percentage_diff: number,
   remaining_attempt: number,
-  record_exists: boolean
+  record_exist: boolean
 }

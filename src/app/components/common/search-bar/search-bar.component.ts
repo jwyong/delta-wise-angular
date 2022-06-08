@@ -1,13 +1,10 @@
-import { EWStrings } from './../../../utils/ew-strings';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { HttpConstants } from 'src/app/utils/http-constants';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, filter, finalize, of, switchMap, tap } from 'rxjs';
+import { HttpConstants } from 'src/app/utils/http-constants';
+import { CommonServices } from './../../../services/common-services';
 import { DataService } from './../../../services/data-service';
-import { HttpService } from './../../../services/http-service';
-import { Company } from 'src/app/models/equities/company';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { EWStrings } from './../../../utils/ew-strings';
 
 @Component({
   selector: 'app-search-bar',
@@ -16,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SearchBarComponent implements OnInit {
   constructor(
-    protected httpService: HttpService, protected dataService: DataService, protected _snackBar: MatSnackBar,
+    protected dataService: DataService, protected commonServices: CommonServices,
   ) { }
   @ViewChild('searchInput') searchInput: any;
 
@@ -70,18 +67,16 @@ export class SearchBarComponent implements OnInit {
     ).subscribe((data: any) => {
       if (data['data'] != null)
         this.filteredItems = data['data'].slice(0, 1000)
-      else 
-      // show snackbar error
-      this._snackBar.open(EWStrings.errorGeneric(data.error.message), undefined, {
-        duration: 3 * 1000
-      })
+      else
+        // show snackbar error
+        this.commonServices.showSnackbar(EWStrings.errorGeneric(data.error.message))
     });
   }
 
   getHttpObserver(value: any) {
     let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITIES_SEARCH}?s=`
 
-    return this.httpService.httpClient.get(url + value)
+    return this.commonServices.httpService.httpClient.get(url + value)
   }
 
   /**

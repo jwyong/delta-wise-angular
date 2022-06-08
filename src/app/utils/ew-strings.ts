@@ -47,9 +47,22 @@ export class EWStrings {
     // public static VAL_JUST_NOW = "just now"
     // public static VAL_A_MOMENT_AGO = "a moment ago"
 
-    // estimate %diff
-    public static VAL_LOWER = "lower"
-    public static VAL_HIGHER = "higher"
+    // estimates
+    public static VAL_LOWER = $localize`:@@lower:lower`
+    public static VAL_HIGHER = $localize`:@@higher:higher`
+    public static VAL_LESS_THAN = $localize`:@@less_than:less than`
+    public static VAL_MORE_THAN = $localize`:@@more_than:more than`
+    public static VAL_EST_PERCENT_DIFF_RANGE: string[] = [
+        "0 - 2.5%",  "2.5 - 5.0%",  "5.0 - 7.5%",  "7.5 - 10.0%", 
+        "10.0 - 12.5%",  "12.5 - 15.0%",  "15.0 - 17.5%",  "17.5 - 20.0%", "20.0%"
+    ]
+    public static VAL_EST_PERCENT_DIFF: string[] = [
+        "2.5",  "5.0",  "7.5",  "10.0", "12.5",  "15.0",  "17.5",  "20.0", "20.0"
+    ]
+
+    public static estimateUpdated(name: string) {
+        return $localize`:@@est_updated:Your estimate for ${name} has been updated`
+    }
 
     // generic error
     public static errorGeneric(error: string) {
@@ -85,11 +98,6 @@ export class EWStrings {
             [CompanyRowType.eps]: "EPS"
         }[name]
     }
-
-    public static VAL_COMP_PERCENT_DIFF: string[] = [
-        "0 - 2.5%",  "2.5 - 5.0%",  "5.0 - 7.5%",  "7.5 - 10.0%", 
-        "10.0 - 12.5%",  "12.5 - 15.0%",  "15.0 - 17.5%",  "17.5 - 20.0%", "20.0%"
-    ]
 
     // humanised row and col names for equities
     public static getHumanisedEqtColName(colName: string) {

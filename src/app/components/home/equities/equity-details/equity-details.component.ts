@@ -17,6 +17,16 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   // company ticker for currect company
   companyTicker = ''
 
+  override ngOnInit(): void {
+    // combine router ticker changes + data range changes
+    combineLatest([this.route.params, this.selectedDateRangeBS]).subscribe(results => {
+      // get company dets when any of these changed (if no dialog showing)
+      this.companyTicker = results[0]['ticker']
+
+      this.getCompanyDets()
+    });
+  }
+
   /**
    * for date range picker
    */
@@ -44,16 +54,6 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // fixed row on table (to be inverted from api data)
   inputColumns = [this.timeFrameCol, CompanyRowType.revenue, CompanyRowType.ebit, CompanyRowType.ebitda, CompanyRowType.net_income, CompanyRowType.eps]
-
-  override ngOnInit(): void {
-    // combine router ticker changes + data range changes
-    combineLatest([this.route.params, this.selectedDateRangeBS]).subscribe(results => {
-      // get company dets when any of these changed (if no dialog showing)
-      this.companyTicker = results[0]['ticker']
-
-      this.getCompanyDets()
-    });
-  }
 
   /**
    * date range picker related
@@ -171,11 +171,14 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    * input estimate dialog
    */
   showEstimateDialog(rowName: string, colName: string) {
+    const hRowName = EWStrings.getCompanyRowTypeName(rowName)
+    const hColName = EWStrings.getHumanisedEqtColName(colName)
     const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
       maxWidth: '25vw',
       minWidth: 350,
       data: {
         title: this.getCompanyTitle(),
+        subTitle: `${hRowName} (${hColName})`,
         sdr: this.selectedDateRangeBS,
         ticker: this.companyTicker,
         timeFrame: colName,
@@ -188,14 +191,24 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     const onDialogDateSelectedSub = estimateDialogRef.componentInstance.selectedDateRangeBS.subscribe((value: number) => {
       dialogSelectedDR = value
     })
+    var didSubmitEstimate: boolean = false
+    const didSubmitEstimateSub = estimateDialogRef.componentInstance.didSubmitEstimateEE.subscribe((value: boolean) => {
+      if (value)
+        didSubmitEstimate = value
+    })
 
     estimateDialogRef.afterClosed().subscribe((_: any) => {
       // unsubscribe dialog observer
       onDialogDateSelectedSub.unsubscribe()
+      didSubmitEstimateSub.unsubscribe()
 
-      // update sdr if got
-      if (dialogSelectedDR != null && dialogSelectedDR != this.selectedDateRange)
-        this.selectedDateRange = dialogSelectedDR
+      // refresh api if got submit
+      if (didSubmitEstimate)
+        this.getCompanyDets()
+      else
+        // update sdr if got
+        if (dialogSelectedDR != null && dialogSelectedDR != this.selectedDateRange)
+          this.selectedDateRange = dialogSelectedDR
     });
   }
 
@@ -217,27 +230,26 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     else return ""
   }
 
-  // get humanised names for non-header cells
+  /**
+  * humanised cell values for data cols:
+  * - show "?" for null cells
+  * - show range of %diff in range of 2.5%, from 0 up to 20%
+  * - e.g. 0 - 2.5%, 2.5 - 5.0%, 5.0 - 7.5%, ... , 17.5 - 20.0%, 20.0%
+  * - add > or < sign in front based on %diff is -ve or +ve
+  * e.g.:
+  * % DIFF = 1.3%, result = > 0 - 2.5%
+  * % DIFF = -1.3%, result = < 0 - 2.5%
+  * % DIFF = 3.3%, result = > 2.5 - 5.0%
+  * % DIFF = -17.2%, result = < 17.5 - 20.0%
+  * % DIFF = 33.2%, result = > 20.0%
+  * % DIFF = -23.2%, result = < 20.0%
+  */
   getHumanisedCellValue(colName: string, rowName: string) {
     if (colName == this.nameCol)
       // name column: show localised rowType (revenue, EPS, etc)
       return EWStrings.getCompanyRowTypeName(rowName)
-    else {
 
-      /**
-       * data cols:
-       * - show "?" for null cells
-       * - show range of %diff in range of 2.5%, from 0 up to 20%
-       * - e.g. 0 - 2.5%, 2.5 - 5.0%, 5.0 - 7.5%, ... , 17.5 - 20.0%, 20.0%
-       * - add > or < sign in front based on %diff is -ve or +ve
-       * e.g.:
-       * % DIFF = 1.3%, result = > 0 - 2.5%
-       * % DIFF = -1.3%, result = < 0 - 2.5%
-       * % DIFF = 3.3%, result = > 2.5 - 5.0%
-       * % DIFF = -17.2%, result = < 17.5 - 20.0%
-       * % DIFF = 33.2%, result = > 20.0%
-       * % DIFF = -23.2%, result = < 20.0%
-       */
+    else {
       // show "?" for nulls
       if (rowName == null)
         return "?"
@@ -250,7 +262,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
         if (percentDiff == NaN) return rowName
 
         // get sign before convert to abs
-        let sign = percentDiff >= 0? ">" : "<"
+        let sign = percentDiff >= 0 ? ">" : "<"
         percentDiff = Math.abs(percentDiff)
 
         var strIndex: number
@@ -293,7 +305,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
         }
 
         // add sign in front
-        return `${sign} ${EWStrings.VAL_COMP_PERCENT_DIFF[strIndex]}`
+        return `${sign} ${EWStrings.VAL_EST_PERCENT_DIFF_RANGE[strIndex]}`
       }
     }
   }

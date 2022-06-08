@@ -1,3 +1,4 @@
+import { CommonServices } from './services/common-services';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { DateRangePickerComponent } from './components/common/date-range-picker/
 import { EstimateDialogComponent } from './components/common/estimate-dialog/estimate-dialog.component';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { SearchBarComponent } from './components/common/search-bar/search-bar.component';
+import { NewWatchlistComponent } from './components/common/watchlist/new-watchlist/new-watchlist.component';
 import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
 import { CryptoComponent } from './components/home/crypto/crypto.component';
 import { EquitiesComponent } from './components/home/equities/equities.component';
@@ -25,7 +27,6 @@ import { EquityDetailsComponent } from './components/home/equities/equity-detail
 import { HomeComponent } from './components/home/home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
-import { NewWatchlistComponent } from './components/common/watchlist/new-watchlist/new-watchlist.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NewWatchlistComponent } from './components/common/watchlist/new-watchli
     DataService,
     LocalStorageService,
     HttpService,
+    CommonServices,
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
 
   ],
