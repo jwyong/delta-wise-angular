@@ -163,11 +163,14 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   getNonHeaderCellClass(rowName: string, colName: string) {
     // check highlight for first col, cursor-pointer for 2nd col onwards
     if (colName != this.nameCol) {
+      // data columns - use data col css
       var dataClassBaseName = 'est-table-data-col cursor-pointer'
       if (colName == this.mouseOverColName && rowName == this.mouseOverRowName)
         return `${dataClassBaseName} ${this.highlightBgClass}`
       else return dataClassBaseName
+
     } else {
+      // first col
       var className = 'est-table-first-col'
       if (rowName == this.mouseOverRowName)
         return `${className} ${this.highlightBgClass}`
