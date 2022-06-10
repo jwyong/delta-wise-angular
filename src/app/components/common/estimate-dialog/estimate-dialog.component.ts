@@ -125,14 +125,6 @@ export class EstimateDialogComponent implements OnInit {
   /**
    * ui
    */
-  // get current estimate value
-  // getCurrentEstimate() {
-  //   if (this.companyEstimate?.estimate != 0)
-  //     return this.companyEstimate?.estimate
-  //   else
-  //     return ""
-  // }
-
   getLastEstimateDateTime() {
     return DateTimeUtil.getDateAsAgo(this.companyEstimate?.last_update_at)
   }

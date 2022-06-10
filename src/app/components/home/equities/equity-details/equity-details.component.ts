@@ -213,13 +213,21 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
       onDialogDateSelectedSub.unsubscribe()
       didSubmitEstimateSub.unsubscribe()
 
-      // refresh api if got submit
-      if (didSubmitEstimate)
-        this.getCompanyDets()
-      else
-        // update sdr if got
-        if (dialogSelectedDR != null && dialogSelectedDR != this.selectedDateRange)
+      // update sdr/refresh api
+      switch (true) {
+        // update sdr if got changes
+        case dialogSelectedDR != null && dialogSelectedDR != this.selectedDateRange:
           this.selectedDateRange = dialogSelectedDR
+          break
+
+        // refresh api if got submit
+        case didSubmitEstimate:
+          this.getCompanyDets()
+          break
+
+        default:
+          break
+      }
     });
   }
 
