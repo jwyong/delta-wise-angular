@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, filter, finalize, of, switchMap, tap } from 'rxjs';
@@ -74,7 +75,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   getHttpObserver(value: any) {
-    let url = `${HttpConstants.HTTP_BASE_URL}${HttpConstants.API_EQUITIES_SEARCH}?s=`
+    let url = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_EQUITIES_SEARCH}?s=`
 
     return this.commonServices.httpService.httpClient.get(url + value)
   }

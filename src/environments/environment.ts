@@ -5,7 +5,7 @@ import { HttpConstants } from 'src/app/utils/http-constants';
 
 export const environment = {
   production: false,
-  apiUrl: HttpConstants.HTTP_BASE_URL
+  apiUrl: "https://api.delta-wise.com/api"
 };
 
 /*

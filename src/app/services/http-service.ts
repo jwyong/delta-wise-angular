@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
@@ -12,7 +13,7 @@ export class HttpService {
     async httpPost<T>(
         endpoint: string, body: any, shouldHideErrors?: boolean
     ) {
-        let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
+        let fullURL = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${endpoint}`
         let json = JSON.stringify(body);
 
         // do sync http post
@@ -54,7 +55,7 @@ export class HttpService {
     }
 
     async httpGet(endpoint: string) {
-        let fullURL = HttpConstants.HTTP_BASE_URL + endpoint;
+        let fullURL = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${endpoint}`
 
         return await firstValueFrom(this.httpClient.get(fullURL))
     }
