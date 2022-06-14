@@ -48,16 +48,16 @@ export class EWStrings {
     // public static VAL_A_MOMENT_AGO = "a moment ago"
 
     // estimates
-    public static VAL_LOWER = $localize`:@@lower:lower`
-    public static VAL_HIGHER = $localize`:@@higher:higher`
-    public static VAL_LESS_THAN = $localize`:@@less_than:less than`
-    public static VAL_MORE_THAN = $localize`:@@more_than:more than`
+    public static VAL_LOWER = $localize`:@@lower_than:lower`
+    public static VAL_HIGHER = $localize`:@@higher_than:higher`
+    public static VAL_LESS = $localize`:@@less_than:less`
+    public static VAL_MORE = $localize`:@@more_than:more`
     public static VAL_EST_PERCENT_DIFF_RANGE: string[] = [
-        "0 - 2.5%",  "2.5 - 5.0%",  "5.0 - 7.5%",  "7.5 - 10.0%", 
-        "10.0 - 12.5%",  "12.5 - 15.0%",  "15.0 - 17.5%",  "17.5 - 20.0%", "20.0%"
+        "0 - 2.5%", "2.5 - 5.0%", "5.0 - 7.5%", "7.5 - 10.0%",
+        "10.0 - 12.5%", "12.5 - 15.0%", "15.0 - 17.5%", "17.5 - 20.0%", "20.0%"
     ]
     public static VAL_EST_PERCENT_DIFF: string[] = [
-        "2.5",  "5.0",  "7.5",  "10.0", "12.5",  "15.0",  "17.5",  "20.0", "20.0"
+        "2.5", "5.0", "7.5", "10.0", "12.5", "15.0", "17.5", "20.0", "20.0"
     ]
 
     public static estimateUpdated(name: string) {

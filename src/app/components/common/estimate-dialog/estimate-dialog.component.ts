@@ -151,10 +151,31 @@ export class EstimateDialogComponent implements OnInit {
     }
   }
 
-  // estimate %diff: Your estimate is 5.0% lower/higher compared to the median
-  getMedianPercentDiffStr() {
-    const medianPercentDiff = this.companyEstimate?.percentage_diff ?? 0
-    const percentDiff = Math.abs(medianPercentDiff)
+  /**
+   * estimate %diff
+   * e.g. "Your estimate is lower/higher than the median by less/more than 2.5%"
+   */
+  // get "lower" or "higher" str based on percDiff -ve/+ve
+  getMedianPercDiffSignStr() {
+    console.log("percDiff = ", this.companyEstimate?.percentage_diff)
+
+    if ((this.companyEstimate?.percentage_diff ?? 0) < 0)
+      return EWStrings.VAL_LOWER
+    else
+      return EWStrings.VAL_HIGHER
+  }
+
+  // get "less" or "higher" str based on 20% cap
+  getMedianPercDiffRangeStr() {
+    if (Math.abs(this.companyEstimate?.percentage_diff ?? 0) <= 20)
+      return EWStrings.VAL_LESS
+    else
+      return EWStrings.VAL_MORE
+  }
+
+  // get percentage difference str based on 2.5 intervals (20% cap)
+  getMedianPercDiffStr() {
+    const percentDiff = Math.abs(this.companyEstimate?.percentage_diff ?? 0)
 
     var strIndex: number
     switch (true) {
@@ -195,21 +216,7 @@ export class EstimateDialogComponent implements OnInit {
         break
     }
 
-    var str: string = EWStrings.VAL_EST_PERCENT_DIFF[strIndex]
-    if (strIndex == 8)
-      // for 8 means more than 20
-      str = `${EWStrings.VAL_MORE_THAN} ${str}% `
-    else
-      // others just use less than xx
-      str = `${EWStrings.VAL_LESS_THAN} ${str}% `
-
-    // add higher/lower based on sign
-    if (medianPercentDiff >= 0)
-      str = str + EWStrings.VAL_HIGHER
-    else
-      str = str + EWStrings.VAL_LOWER
-
-    return str
+    return EWStrings.VAL_EST_PERCENT_DIFF[strIndex]
   }
 
   getInputTrialStr() {

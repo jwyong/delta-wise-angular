@@ -25,9 +25,8 @@
 
       <p class="mb-0 text-secondary text-center" i18n="@@median_diff">
         <small>
-          <!-- Your estimate is lower/higher than the median by more than 20% -->
-          Your estimate is <b>lower</b> than the median by less than <b>2.5%</b>
-          <!-- Your estimate is {{getMedianPercentDiffStr()}} compared to the median -->
+          Your estimate is <b>{{getMedianPercDiffSignStr()}}</b> than the median by {{getMedianPercDiffRangeStr()}} than
+          <b>{{getMedianPercDiffStr()}}%</b>
         </small>
       </p>
     </div>

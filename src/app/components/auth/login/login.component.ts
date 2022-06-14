@@ -30,6 +30,7 @@ export class LoginComponent extends BaseAuthComponent {
 
     return this.passwordFC.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWStrings.VAL_INVALID_PWORD_LENGTH}` : '';
   }
+  shouldShowPword = false
 
   // login form
   loginForm = this.formBuilder.group({

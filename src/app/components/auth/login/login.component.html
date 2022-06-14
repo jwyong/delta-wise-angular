@@ -8,9 +8,9 @@
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@login_email_title">Email</mat-label>
-                        <input matInput #emailInput [formControl]="emailFC" formControlName="email" required>
-                        <button type="button" *ngIf="emailInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="emailInput.value=''">
+                        <input matInput #emailInput [formControl]="emailFC" formControlName="email" type="email" required>
+                        <button type="button" *ngIf="emailInput.value.length > 0" matSuffix mat-icon-button
+                            aria-label="Clear" (click)="emailInput.value=''">
                             <mat-icon class="text-secondary">close</mat-icon>
                         </button>
                         <mat-error *ngIf="emailFC.invalid">{{getEmailErrorMsg()}}</mat-error>
@@ -19,11 +19,17 @@
                 <p>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label i18n="@@login_pword_title">Password</mat-label>
-                        <input matInput #pwrdInput [formControl]="passwordFC" formControlName="password" required type="password">
-                        <button type="button" *ngIf="pwrdInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="pwrdInput.value=''">
+                        <input matInput #pwrdInput [formControl]="passwordFC" formControlName="password" required
+                            type="{{shouldShowPword? 'text':'password'}}">
+                        <button type="button" *ngIf="pwrdInput.value.length > 0" matSuffix mat-icon-button
+                            aria-label="Clear" (click)="pwrdInput.value=''">
                             <mat-icon class="text-secondary">close</mat-icon>
                         </button>
+                        <button type="button" matSuffix mat-icon-button aria-label="toggle password"
+                        (click)="shouldShowPword = !shouldShowPword">
+                        <mat-icon class="text-secondary">{{shouldShowPword? 'visibility' : 'visibility_off'}}
+                        </mat-icon>
+                    </button>
                         <mat-error *ngIf="loginForm.controls['password'].hasError">{{getPwordErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </p>
