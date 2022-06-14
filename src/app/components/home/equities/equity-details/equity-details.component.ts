@@ -90,6 +90,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
         let rowObj = this.getRowObj(key, colList[key])
 
         // push rowObj to beArray
+        if (beArray.length < 1)
         beArray.push(rowObj)
       });
 
@@ -236,6 +237,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    */
   // get title (e.g. Aztrazaneca (AZN))
   getCompanyTitle() {
+    return "Bitcoin (BTC)"
     let company = this.getCompanyFromLS()
 
     if (company == null) return ""

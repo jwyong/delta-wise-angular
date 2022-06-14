@@ -91,17 +91,18 @@ export class EWStrings {
 
     public static getCompanyRowTypeName(name: string) {
         return {
-            [CompanyRowType.revenue]: $localize`:@@revenue:Revenue`,
-            [CompanyRowType.ebit]: "EBIT",
-            [CompanyRowType.ebitda]: "EBITDA",
-            [CompanyRowType.net_income]: $localize`:@@net_income:Net Income`,
-            [CompanyRowType.eps]: "EPS"
+            [CompanyRowType.revenue]: $localize`:@@revenue:31 May '22`,
+            [CompanyRowType.ebit]: "30 June '22",
+            [CompanyRowType.ebitda]: "30 Sept '22",
+            [CompanyRowType.net_income]: $localize`:@@net_income:31 Dec '22`,
+            [CompanyRowType.eps]: "31 March '23"
         }[name]
     }
 
     // humanised row and col names for equities
     public static getHumanisedEqtColName(colName: string) {
-        return `${colName.replace("_", " ")}E`
+        // return `${colName.replace("_", " ")}E`
+        return "Price Estimates"
     }
 
 

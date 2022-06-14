@@ -44,12 +44,9 @@ mat-list-item:focus {
 /**
 * table styling
 **/
-// .est-table td, th{
-//     border: 1px solid #e7e7e7;
-//     // height: 2px;
-//     // line-height: 1px;
-//     min-height: 1px !important;
-// }
+.est-table {
+    width: 40%;
+}
 
 .est-table-hover {
     background-color: rgb(230,247,255) !important;
