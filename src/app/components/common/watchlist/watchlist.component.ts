@@ -158,10 +158,28 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
     { id: "LEO", name: "UNUS SED LEO" },
     { id: "MATIC", name: "Polygon" },
   ]
-
+	
   randomCommodities: WatchlistItem[] = [
-    { id: "FB", name: "Platforms" },
-
+    { id: "1", name: "Corn" },
+    { id: "2", name: "Purified Terephthalic Acid (PTA)" },
+    { id: "3", name: "Propane" },
+    { id: "4", name: "Gulf Coast Gasoline" },
+    { id: "5", name: "Heating Oil" },
+    { id: "6", name: "Natural gas" },
+    { id: "7", name: "Ethanol" },
+    { id: "8", name: "Brent Crude" },
+    { id: "9", name: "WTI Crude Oil" },
+    { id: "10", name: "Feeder Cattle" },
+    { id: "11", name: "Live Cattle" },
+    { id: "12", name: "Lean Hogs" },
+    { id: "13", name: "Wheat" },
+    { id: "14", name: "Soybean" },
+    { id: "15", name: "Sugar No.11" },
+    { id: "16", name: "Sugar No.14" },
+    { id: "17", name: "Aluminium" },
+    { id: "18", name: "Gold" },
+    { id: "19", name: "Silver" },
+    { id: "20", name: "Platinum" },
   ]
   getRandomWatchlistItems(): any[] {
     switch (this.module) {

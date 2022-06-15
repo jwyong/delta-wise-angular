@@ -108,7 +108,8 @@ export class EWStrings {
     /**
      * commodities module
      */
-    public static VAL_COMMODITY: string = "Commodity"
+     public static VAL_COMMODITY: string = $localize`:@@commodity:Commodity`
+     public static VAL_COMMODITIES: string = $localize`:@@commodities:Commodities`
 
     /**
      * crypto module

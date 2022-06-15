@@ -2,10 +2,10 @@
     <h3 i18n="@@navigation_title">
         <a routerLink="./" (click)="clearSearchBar()">{{getRouterTitle()}}</a>
         {{getSeparator()}}
-        <a routerLink="details/{{getRouterParam('ticker')}}">{{getRouterSubtitle()}}</a>
+        <a routerLink="">{{getRouterSubtitle()}}</a>
     </h3>
     <app-search-bar #searchBar [searchBarLabel]="searchBarLabel" [getOptionsLabel]="getOptionsLabel"
-        [getSelectedLabel]="getOptionsLabel" [onOptionSelected]="onOptionSelected" [searchUrl]="searchUrl">
+        [getSelectedLabel]="getOptionsLabel" [onOptionSelected]="onOptionSelected" [searchUrl]="searchUrl" >
     </app-search-bar>
 
     <div class="h-100">

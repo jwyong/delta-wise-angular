@@ -21,6 +21,15 @@ export class SearchBarComponent implements OnInit {
   // search bar label (e.g. Search Company)
   @Input() searchBarLabel: string = "";
 
+  // http url
+  @Input() searchUrl: string = ""
+
+  // if grouping is required
+  @Input() isGroupingEnabled = false
+
+  /**
+   * non-grped funcs
+   */
   // get label for each option in dropdown
   @Input() getOptionsLabel: ((item: any) => string) = (_: any): string => {
     return ""
@@ -33,6 +42,13 @@ export class SearchBarComponent implements OnInit {
 
   // on option selected function
   @Input() onOptionSelected: ((item: any) => void) = (_: any): string => {
+    return ""
+  };
+
+  /**
+   * grped funcs
+   */
+   @Input() getGroupLabel: ((item: any) => string) = (_: any): string => {
     return ""
   };
 
@@ -51,7 +67,6 @@ export class SearchBarComponent implements OnInit {
       debounceTime(400),
 
       tap(() => {
-        // this.errorMsg = "";
         this.filteredItems = [];
         this.dataService.setIsLoading(true)
       }),
@@ -75,9 +90,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   getHttpObserver(value: any) {
-    let url = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_EQUITIES_SEARCH}?s=`
-
-    return this.commonServices.httpService.httpClient.get(url + value)
+    console.log("url = ", this.searchUrl)
+    return this.commonServices.httpService.httpClient.get(this.searchUrl + value)
   }
 
   /**

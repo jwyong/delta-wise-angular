@@ -1,3 +1,4 @@
+import { CommoditiesComponent } from './components/home/commodities/commodities.component';
 import { EWConstants } from 'src/app/utils/ew-constants';
 import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
 import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
@@ -49,11 +50,29 @@ const routes: Routes = [
             path: '',
             component: WatchlistComponent,
             data: { module: EWConstants.KEY_MODULE_EQUITIES },
-          },          
+          },
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
             component: EquityDetailsComponent,
           },
+        ]
+      },
+
+      // commodities
+      {
+        path: RouterConstants.ROUTER_PATH_COMMODITIES,
+        component: CommoditiesComponent,
+        data: { title: EWStrings.VAL_COMMODITIES },
+        children: [
+          {
+            path: '',
+            component: WatchlistComponent,
+            data: { module: EWConstants.KEY_MODULE_COMMODITIES },
+          },
+          // {
+          //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
+          //   component: EquityDetailsComponent,
+          // },
         ]
       },
 
@@ -67,7 +86,7 @@ const routes: Routes = [
             path: '',
             component: WatchlistComponent,
             data: { module: EWConstants.KEY_MODULE_CRYPTO },
-          },          
+          },
           // {
           //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
           //   component: EquityDetailsComponent,

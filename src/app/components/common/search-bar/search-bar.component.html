@@ -9,9 +9,20 @@
 
         <mat-autocomplete class="main-search" #mainListSearch="matAutocomplete"
             [displayWith]="getSelectedLabel.bind(this)" (optionSelected)='onOptionSelected($event.option.value)'>
-            <mat-option *ngFor="let item of filteredItems" [value]="item">
-                {{getOptionsLabel(item)}}
-            </mat-option>
+
+            <div *ngIf="!isGroupingEnabled">
+                <mat-option *ngFor="let item of filteredItems" [value]="item">
+                    {{getOptionsLabel(item)}}
+                </mat-option>
+            </div>
+
+            <div *ngIf="isGroupingEnabled">
+                <mat-optgroup *ngFor="let group of filteredItems" [label]="getGroupLabel(group)">
+                    <mat-option *ngFor="let item of group" [value]="item">
+                        {{getOptionsLabel(item)}}
+                    </mat-option>
+                </mat-optgroup>
+            </div>
         </mat-autocomplete>
     </mat-form-field>
 </form>

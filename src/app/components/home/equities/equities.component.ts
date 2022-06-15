@@ -4,6 +4,8 @@ import { BaseComponent } from 'src/app/components/base/base.component';
 import { Company } from 'src/app/models/equities/company';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { RouterConstants } from 'src/app/utils/router-constants';
+import { HttpConstants } from 'src/app/utils/http-constants';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-equities',
@@ -18,6 +20,9 @@ export class EquitiesComponent extends BaseHomeComponent implements OnInit {
   /**
    * search bar 
    */
+  // url
+  searchUrl = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_EQUITIES_SEARCH}?s=`
+
   // setup functions for searchbar
   getOptionsLabel = (item: Company): string => {
     if (item == null) return ""

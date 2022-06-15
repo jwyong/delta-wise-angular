@@ -3,7 +3,7 @@
  */
 export class EWConstants {
     // app version
-    public static APP_VERSION = "0.0.4"
+    public static APP_VERSION = "0.0.5"
 
     // modules (equities, commodities, crypto)
     public static KEY_MODULE_EQUITIES = "KEY_MODULE_EQUITIES"

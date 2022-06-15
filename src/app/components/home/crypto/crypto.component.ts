@@ -20,7 +20,7 @@ export class CryptoComponent extends BaseHomeComponent implements OnInit {
     return `Crypto: ${item.Title} (${item.Type})`
   }
 
-  // go to equity detail page
+  // go to coin detail page
   onOptionSelected = (item: any): void => {
   }
 }

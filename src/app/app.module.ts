@@ -28,10 +28,12 @@ import { HomeComponent } from './components/home/home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
 import { BaseHomeComponent } from './components/home/base-home/base-home.component';
+import { CommoditiesComponent } from './components/home/commodities/commodities.component';
+import { SearchBarGrpComponent } from './components/common/search-bar-grp/search-bar-grp.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent,
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, SearchBarGrpComponent,
   ],
   imports: [
     BrowserModule,
