@@ -1,7 +1,14 @@
-<div class="row align-items-center h-100 bg-white">
-    <div class="col-8 mx-auto">
-        <app-search-bar [searchBarLabel]="searchBarLabel" [getOptionsLabel]="getOptionsLabel" [getSelectedLabel]="getOptionsLabel"
-            [onOptionSelected]="onOptionSelected">
-        </app-search-bar>
+<div class="d-flex flex-column h-100">
+    <h3 i18n="@@navigation_title">
+        <a routerLink="./" (click)="clearSearchBar()">{{getRouterTitle()}}</a>
+        {{getSeparator()}}
+        <a routerLink="">{{getRouterSubtitle()}}</a>
+    </h3>
+    <app-search-bar #searchBar [searchBarLabel]="searchBarLabel" [getOptionsLabel]="getOptionsLabel"
+        [getSelectedLabel]="getOptionsLabel" [onOptionSelected]="onOptionSelected">
+    </app-search-bar>
+
+    <div class="h-100">
+        <router-outlet></router-outlet>
     </div>
 </div>

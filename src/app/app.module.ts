@@ -27,10 +27,11 @@ import { EquityDetailsComponent } from './components/home/equities/equity-detail
 import { HomeComponent } from './components/home/home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
+import { BaseHomeComponent } from './components/home/base-home/base-home.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent, NewWatchlistComponent,
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent,
   ],
   imports: [
     BrowserModule,

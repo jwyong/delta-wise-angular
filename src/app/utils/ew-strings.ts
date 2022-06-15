@@ -85,9 +85,9 @@ export class EWStrings {
     /**
      * equities module
      */
-    public static VAL_EQUITIES: string = "Equities"
-    public static VAL_COMPANY: string = "Company"
-    public static VAL_DETAILS: string = "Details"
+    public static VAL_EQUITIES: string = $localize`:@@equities:Equities`
+    public static VAL_COMPANY: string = $localize`:@@company:Company`
+    public static VAL_DETAILS: string = $localize`:@@details:Details`
 
     public static getCompanyRowTypeName(name: string) {
         return {
@@ -113,5 +113,6 @@ export class EWStrings {
     /**
      * crypto module
      */
-    public static VAL_CRYPTO: string = "Cryptocurrency"
-}
+     public static VAL_CRYPTO: string = $localize`:@@crypto:Cryptocurrency`
+     public static VAL_CRYPTOS: string = $localize`:@@cryptos:Cryptocurrencies`
+    }

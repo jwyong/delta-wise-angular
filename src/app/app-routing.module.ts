@@ -1,3 +1,4 @@
+import { EWConstants } from 'src/app/utils/ew-constants';
 import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
 import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
 import { CryptoComponent } from './components/home/crypto/crypto.component';
@@ -42,16 +43,16 @@ const routes: Routes = [
       {
         path: RouterConstants.ROUTER_PATH_EQUITIES,
         component: EquitiesComponent,
-        data: { title: $localize`:@@equities:${EWStrings.VAL_EQUITIES}` },
+        data: { title: EWStrings.VAL_EQUITIES },
         children: [
           {
             path: '',
             component: WatchlistComponent,
+            data: { module: EWConstants.KEY_MODULE_EQUITIES },
           },          
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
             component: EquityDetailsComponent,
-            data: { subTitle: $localize`:@@details:${EWStrings.VAL_DETAILS}` },
           },
         ]
       },
@@ -60,6 +61,19 @@ const routes: Routes = [
       {
         path: RouterConstants.ROUTER_PATH_CRYPTO,
         component: CryptoComponent,
+        data: { title: EWStrings.VAL_CRYPTOS },
+        children: [
+          {
+            path: '',
+            component: WatchlistComponent,
+            data: { module: EWConstants.KEY_MODULE_CRYPTO },
+          },          
+          // {
+          //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
+          //   component: EquityDetailsComponent,
+          //   data: { subTitle: EWStrings.VAL_DETAILS },
+          // },
+        ]
       },
     ]
   },

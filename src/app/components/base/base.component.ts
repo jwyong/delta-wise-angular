@@ -68,7 +68,7 @@ export class BaseComponent implements OnInit {
 
   // get full title for router (e.g. Equities > Details)
   getRouterTitle() {
-    return this.route.snapshot.data['title']
+    return this.getRouterData('title')
   }
 
   getSeparator() {
@@ -78,6 +78,16 @@ export class BaseComponent implements OnInit {
 
   getRouterSubtitle() {
     return this.route.snapshot.firstChild?.data['subTitle']
+  }
+  
+  // get data injected to router
+  getRouterData(id: string) {
+    return this.route.snapshot.data[id]
+  }
+
+  // get data from router param (e.g. /details/ticker)
+  getRouterParam(id: string) {
+    return this.route.firstChild?.snapshot.paramMap.get(id)
   }
 
   /**

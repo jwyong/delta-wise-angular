@@ -1,8 +1,9 @@
+import { EWConstants } from 'src/app/utils/ew-constants';
 import { NewWatchlistComponent } from './new-watchlist/new-watchlist.component';
 import { Company } from './../../../models/equities/company';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
-import { Watchlist } from './../../../models/watchlist';
+import { Watchlist, WatchlistItem } from './../../../models/watchlist';
 import { BaseComponent } from './../../base/base.component';
 
 @Component({
@@ -11,48 +12,71 @@ import { BaseComponent } from './../../base/base.component';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent extends BaseComponent implements OnInit {
+  module: string = ""
   isEditMode = false
   watchlists: Watchlist[] = [];
   selectedWatchlist = <Watchlist>{}
   isLoadingWatchlist = false
 
   override ngOnInit(): void {
-    this.setIsLoading(true)
+    this.module = this.getRouterData('module')
 
-    setTimeout(() => {
-      this.watchlists = [
-        { id: "1", name: 'apple' },
-        { id: "2", name: 'banana' },
-        { id: "3", name: 'strawberry' },
-        { id: "4", name: 'orange' },
-        { id: "5", name: 'kiwi' },
-        { id: "6", name: 'cherry' },
+    this.getWatchlists()
+  }
 
-        { id: "11", name: 'apple' },
-        { id: "12", name: 'banana' },
-        { id: "13", name: 'strawberry' },
-        { id: "14", name: 'orange' },
-        { id: "15", name: 'kiwi' },
-        { id: "16", name: 'cherry' },
-        { id: "21", name: 'apple' },
-        { id: "22", name: 'banana' },
-        { id: "23", name: 'strawberry' },
-        { id: "24", name: 'orange' },
-        { id: "25", name: 'kiwi' },
-        { id: "26", name: 'cherry' },
-        { id: "31", name: 'apple' },
-        { id: "32", name: 'banana' },
-        { id: "33", name: 'strawberry' },
-        { id: "34", name: 'orange' },
-        { id: "35", name: 'kiwi' },
-        { id: "36", name: 'cherry' },
-      ]
+  /**
+   * watchlist
+   */
+  // get watchlists based on module
+  getWatchlists() {
+    switch (this.module) {
+      case EWConstants.KEY_MODULE_EQUITIES:
+        this.getWatchlistForEquities()
+        break
 
-      // simulate click on first list
-      this.chipOnClick(this.watchlists[0])
+      case EWConstants.KEY_MODULE_CRYPTO:
+        this.getWatchlistForCrypto()
+        break
 
-      this.setIsLoading(false)
-    }, 1000);
+      case EWConstants.KEY_MODULE_COMMODITIES:
+        this.getWatchlistForCommodities()
+        break
+    }
+
+    // simulate click on first list
+    this.chipOnClick(this.watchlists[0])
+  }
+
+  getWatchlistForEquities() {
+    this.watchlists = [
+      { id: "1", name: 'Tech' },
+      { id: "2", name: 'Energy' },
+      { id: "3", name: 'Finance' },
+      { id: "4", name: 'Healthcare' },
+      { id: "5", name: 'Consumer' },
+      { id: "6", name: 'Real Estate' },
+      { id: "7", name: 'Utils' },
+    ]
+  }
+
+  getWatchlistForCrypto() {
+    this.watchlists = [
+      { id: "1", name: 'Stable' },
+      { id: "2", name: 'Holding' },
+      { id: "3", name: 'Monitor' },
+      { id: "4", name: 'Hype' },
+      { id: "5", name: 'Meta' },
+    ]
+  }
+
+  getWatchlistForCommodities() {
+    this.watchlists = [
+      { id: "1", name: 'Watchlist' },
+      { id: "2", name: 'agri' },
+      { id: "3", name: 'energy' },
+      { id: "4", name: 'metals' },
+      { id: "5", name: 'KIV' },
+    ]
   }
 
   // chipOnClick: get whatchlist from api
@@ -63,11 +87,11 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
     setTimeout(() => {
       this.selectedWatchlist = {
         id: watchlist.id, name: watchlist.name,
-        children: this.getRandomCompanies()
+        children: this.getRandomWatchlistItems()
       }
       this.isLoadingWatchlist = false
       this.isEditMode = false
-    }, 1000);
+    }, 500);
   }
 
   // remove chip btn: confirm then remove chip on UI + api
@@ -82,43 +106,77 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
   }
 
   // TEMP: generate random items for each watchlist
-  randomCompanies: Company[] = [
-    { ticker: "DTW3", company: "DELTAWISE 3 PLC" },
-    { ticker: "DTW4", company: "DELTAWISE 4 PLC" },
-    { ticker: "DTW5", company: "DELTAWISE 5 PLC" },
-    { ticker: "DTW6", company: "DELTAWISE 6 PLC" },
-    { ticker: "DTW7", company: "DELTAWISE 7 PLC" },
-    { ticker: "AZN", company: "ASTRAZENECA PLC" },
-    { ticker: "FB", company: "Meta" },
-    { ticker: "ABC", company: "Company ABC" },
-    { ticker: "TEST", company: "Test Company" },
-    { ticker: "DTW1", company: "DELTAWISE 1 PLC" },
-    { ticker: "DTW2", company: "DELTAWISE 2 PLC" },
-    { ticker: "DTW3", company: "DELTAWISE 3 PLC" },
-    { ticker: "DTW4", company: "DELTAWISE 4 PLC" },
-    { ticker: "DTW5", company: "DELTAWISE 5 PLC" },
-    { ticker: "DTW6", company: "DELTAWISE 6 PLC" },
-    { ticker: "DTW7", company: "DELTAWISE 7 PLC" },
-    { ticker: "AZN", company: "ASTRAZENECA PLC" },
-    { ticker: "FB", company: "Meta" },
-    { ticker: "ABC", company: "Company ABC" },
-    { ticker: "TEST", company: "Test Company" },
-    { ticker: "DTW1", company: "DELTAWISE 1 PLC" },
-    { ticker: "DTW2", company: "DELTAWISE 2 PLC" },
-    { ticker: "DTW3", company: "DELTAWISE 3 PLC" },
-    { ticker: "DTW4", company: "DELTAWISE 4 PLC" },
-    { ticker: "DTW5", company: "DELTAWISE 5 PLC" },
-    { ticker: "DTW6", company: "DELTAWISE 6 PLC" },
-    { ticker: "DTW7", company: "DELTAWISE 7 PLC" },
-    { ticker: "AZN", company: "ASTRAZENECA PLC" },
-    { ticker: "FB", company: "Meta" },
-    { ticker: "ABC", company: "Company ABC" },
-    { ticker: "TEST", company: "Test Company" },
-    { ticker: "DTW1", company: "DELTAWISE 1 PLC" },
-    { ticker: "DTW2", company: "DELTAWISE 2 PLC" },
+  randomCompanies: WatchlistItem[] = [
+    { id: "FB", name: "Meta Platforms Inc" },
+    { id: "SQ_US", name: "Block, Inc." },
+    { id: "AMZN", name: "AMAZON.COM, INC." },
+    { id: "PYPL", name: "PayPal Holdings, Inc." },
+    { id: "GOOGL", name: "Alphabet Inc." },
+    { id: "CRM", name: "SALESFORCE COM INC" },
+    { id: "NFLX", name: "NETFLIX, INC." },
+    { id: "UBER_US", name: "Uber Technologies Inc" },
+    { id: "NVDA", name: "NVIDIA CORPORATION" },
+    { id: "SNAP_US", name: "Snap Inc" },
+    { id: "LYFT_US", name: "Lyft, Inc" },
+    { id: "ABNB_US", name: "Airbnb Inc" },
+    { id: "PANW", name: "Palo Alto Networks, Inc." },
+    { id: "INTC", name: "INTEL CORPORATION" },
+    { id: "FANG_US", name: "DIAMONDBACK ENERGY INC" },
+    { id: "SPLK", name: "SPLUNK INC." },
+    { id: "TWTR", name: "TWITTER, INC." },
+    { id: "MCD", name: "McDONALDS CORPORATION" },
+    { id: "AAPL", name: "Apple Inc." },
+    { id: "BKNG_US", name: "Booking Holdings Inc" },
+    { id: "MSFT", name: "MICROSOFT CORPORATION" },
+    { id: "GPN_US", name: "Global Payments Inc" },
+    { id: "PXD", name: "PIONEER NATURAL RESOURCES COMPANY" },
+    { id: "FIS", name: "Fidelity National Information Services, Inc." },
+    { id: "FISV", name: "Fiserv, Inc." },
+    { id: "BABA", name: "Alibaba Group Holding Ltd" },
+    { id: "SHOP_US", name: "SHOPIFY INC" },
+    { id: "V", name: "VISA INC." },
+    { id: "EOG", name: "EOG RESOURCES, INC." },
   ]
-  getRandomCompanies(): Company[] {
-    return this.randomCompanies.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
+	
+  randomCryptos: WatchlistItem[] = [
+    { id: "BTC", name: "Bitcoin" },
+    { id: "ETH", name: "Ethereum" },
+    { id: "USDT", name: "Tether" },
+    { id: "USDC", name: "USD Coin" },
+    { id: "BNB", name: "BNB" },
+    { id: "ADA", name: "Cardano" },
+    { id: "XRP", name: "XRP" },
+    { id: "BUSD", name: "Binance USD" },
+    { id: "SOL", name: "Solana" },
+    { id: "DOGE", name: "Dogecoin" },
+    { id: "DOT", name: "Polkadot" },
+    { id: "WBTC", name: "Wrapped Bitcoin" },
+    { id: "TRX", name: "TRON" },
+    { id: "DAI", name: "Dai" },
+    { id: "AVAX", name: "Avalanche" },
+    { id: "SHIB", name: "Shiba Inu" },
+    { id: "LEO", name: "UNUS SED LEO" },
+    { id: "MATIC", name: "Polygon" },
+  ]
+
+  randomCommodities: WatchlistItem[] = [
+    { id: "FB", name: "Platforms" },
+
+  ]
+  getRandomWatchlistItems(): any[] {
+    switch (this.module) {
+      case EWConstants.KEY_MODULE_EQUITIES:
+        return this.randomCompanies.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
+
+      case EWConstants.KEY_MODULE_CRYPTO:
+        return this.randomCryptos.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
+
+      case EWConstants.KEY_MODULE_COMMODITIES:
+        return this.randomCommodities.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
+
+      default:
+        return []
+    }
   }
 
   /**

@@ -2,7 +2,7 @@
     <h3 i18n="@@navigation_title">
         <a routerLink="./" (click)="clearSearchBar()">{{getRouterTitle()}}</a>
         {{getSeparator()}}
-        <a routerLink="details/{{getCompanyIdFromRoute()}}">{{getRouterSubtitle()}}</a>
+        <a routerLink="details/{{getRouterParam('ticker')}}">{{getRouterSubtitle()}}</a>
     </h3>
     <app-search-bar #searchBar [searchBarLabel]="searchBarLabel" [getOptionsLabel]="getOptionsLabel"
         [getSelectedLabel]="getOptionsLabel" [onOptionSelected]="onOptionSelected">

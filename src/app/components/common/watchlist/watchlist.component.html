@@ -31,7 +31,7 @@
 
             <mat-list-item *ngFor="let item of selectedWatchlist.children">
                 <div class="d-flex align-items-center">
-                    <p class="my-0 me-2">{{item.company}} ({{item.ticker}})</p>
+                    <p class="my-0 me-2">{{item.name}} ({{item.id}})</p>
                     <mat-icon class="text-secondary scale-08" *ngIf="isEditMode">cancel</mat-icon>
                 </div>
             </mat-list-item>

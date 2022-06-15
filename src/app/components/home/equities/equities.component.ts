@@ -1,3 +1,4 @@
+import { BaseHomeComponent } from './../base-home/base-home.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { Company } from 'src/app/models/equities/company';
@@ -9,13 +10,14 @@ import { RouterConstants } from 'src/app/utils/router-constants';
   templateUrl: './equities.component.html',
   styleUrls: ['./equities.component.css']
 })
-export class EquitiesComponent extends BaseComponent implements OnInit {
-  /**
-   * search bar UI
-   */
-  searchBarLabel = $localize`:@@company:${EWStrings.VAL_COMPANY}`
-  @ViewChild('searchBar') searchBar: any;
+export class EquitiesComponent extends BaseHomeComponent implements OnInit {
+  override ngOnInit(): void {
+    this.searchBarLabel = EWStrings.VAL_COMPANY
+  }
 
+  /**
+   * search bar 
+   */
   // setup functions for searchbar
   getOptionsLabel = (item: Company): string => {
     if (item == null) return ""
@@ -31,17 +33,9 @@ export class EquitiesComponent extends BaseComponent implements OnInit {
     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.ticker}`)
   }
 
-  clearSearchBar() {
-    this.searchBar.searchInput.nativeElement.value = ''
-  }
-
   /**
    * company details
    */
-  getCompanyIdFromRoute() {
-    return this.route.firstChild?.snapshot.paramMap.get('ticker')
-  }
-
   // set company to ls
   getCompanyFromLS() {
     let company = localStorage.getItem("company")
