@@ -1,17 +1,17 @@
-import { CommoditiesComponent } from './components/home/commodities/commodities.component';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { WatchlistComponent } from './components/common/watchlist/watchlist.component';
-import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
-import { CryptoComponent } from './components/home/crypto/crypto.component';
-import { EquitiesComponent } from './components/home/equities/equities.component';
-import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { ForgotPwordComponent } from './components/auth/forgot-pword/forgot-pword.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RouterConstants } from './utils/router-constants';
+import { EWConstants } from 'src/app/utils/ew-constants';
+import { ForgotPwordComponent } from './components/auth/forgot-pword/forgot-pword.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
+import { CommoditiesComponent } from './components/home/commodities/commodities.component';
+import { CryptoComponent } from './components/home/crypto/crypto.component';
+import { EquitiesComponent } from './components/home/equities/equities.component';
+import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
 import { HomeComponent } from './components/home/home/home.component';
+import { MainComponent } from './components/home/main/main.component';
 import { EWStrings } from './utils/ew-strings';
+import { RouterConstants } from './utils/router-constants';
 
 const routes: Routes = [
   /**
@@ -48,12 +48,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: WatchlistComponent,
+            component: MainComponent,
             data: { module: EWConstants.KEY_MODULE_EQUITIES },
           },
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
             component: EquityDetailsComponent,
+            data: { subTitle: EWStrings.VAL_DETAILS },
           },
         ]
       },
@@ -66,12 +67,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: WatchlistComponent,
+            component: MainComponent,
             data: { module: EWConstants.KEY_MODULE_COMMODITIES },
           },
           // {
           //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
           //   component: EquityDetailsComponent,
+          //   data: { subTitle: EWStrings.VAL_DETAILS },
           // },
         ]
       },
@@ -84,7 +86,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: WatchlistComponent,
+            component: MainComponent,
             data: { module: EWConstants.KEY_MODULE_CRYPTO },
           },
           // {

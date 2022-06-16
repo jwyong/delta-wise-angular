@@ -3,7 +3,7 @@ import { Crypto } from '../../../models/crypto/crypto';
 import { RouterConstants } from '../../../utils/router-constants';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
-import { User } from '../../../models/user';
+import { User } from '../../../models/common/user';
 
 @Component({
   selector: 'app-home',

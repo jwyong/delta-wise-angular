@@ -1,26 +1,22 @@
+import { Component, OnInit } from '@angular/core';
 import { EWConstants } from 'src/app/utils/ew-constants';
-import { NewWatchlistComponent } from './new-watchlist/new-watchlist.component';
-import { Company } from './../../../models/equities/company';
-import { Component, Input, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
-import { Watchlist, WatchlistItem } from './../../../models/watchlist';
-import { BaseComponent } from './../../base/base.component';
+import { Watchlist, WatchlistItem } from './../../../models/common/watchlist';
+import { MainComponent } from './../../home/main/main.component';
+import { NewWatchlistComponent } from './new-watchlist/new-watchlist.component';
 
 @Component({
   selector: 'app-watchlist',
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.css']
 })
-export class WatchlistComponent extends BaseComponent implements OnInit {
-  module: string = ""
+export class WatchlistComponent extends MainComponent implements OnInit {
+  isLoadingWatchlist = false
   isEditMode = false
   watchlists: Watchlist[] = [];
   selectedWatchlist = <Watchlist>{}
-  isLoadingWatchlist = false
 
   override ngOnInit(): void {
-    this.module = this.getRouterData('module')
-
     this.getWatchlists()
   }
 
@@ -43,8 +39,9 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
         break
     }
 
-    // simulate click on first list
-    this.chipOnClick(this.watchlists[0])
+    // select first item by default if got
+    if (this.watchlists.length > 0)
+      this.chipOnClick(this.watchlists[0])
   }
 
   getWatchlistForEquities() {
@@ -71,14 +68,17 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
 
   getWatchlistForCommodities() {
     this.watchlists = [
-      { id: "1", name: 'Watchlist' },
-      { id: "2", name: 'agri' },
-      { id: "3", name: 'energy' },
-      { id: "4", name: 'metals' },
-      { id: "5", name: 'KIV' },
+      // { id: "1", name: 'Watchlist' },
+      // { id: "2", name: 'agri' },
+      // { id: "3", name: 'energy' },
+      // { id: "4", name: 'metals' },
+      // { id: "5", name: 'KIV' },
     ]
   }
 
+  /**
+   * chips
+   */
   // chipOnClick: get whatchlist from api
   chipOnClick(watchlist: Watchlist) {
     // TODO: TEMP - hardcoded selected watchlist
@@ -137,7 +137,30 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
     { id: "V", name: "VISA INC." },
     { id: "EOG", name: "EOG RESOURCES, INC." },
   ]
-	
+
+  randomCommodities: WatchlistItem[] = [
+    // { id: "1", name: "Corn" },
+    // { id: "2", name: "Purified Terephthalic Acid (PTA)" },
+    // { id: "3", name: "Propane" },
+    // { id: "4", name: "Gulf Coast Gasoline" },
+    // { id: "5", name: "Heating Oil" },
+    // { id: "6", name: "Natural gas" },
+    // { id: "7", name: "Ethanol" },
+    // { id: "8", name: "Brent Crude" },
+    // { id: "9", name: "WTI Crude Oil" },
+    // { id: "10", name: "Feeder Cattle" },
+    // { id: "11", name: "Live Cattle" },
+    // { id: "12", name: "Lean Hogs" },
+    // { id: "13", name: "Wheat" },
+    // { id: "14", name: "Soybean" },
+    // { id: "15", name: "Sugar No.11" },
+    // { id: "16", name: "Sugar No.14" },
+    // { id: "17", name: "Aluminium" },
+    // { id: "18", name: "Gold" },
+    // { id: "19", name: "Silver" },
+    // { id: "20", name: "Platinum" },
+  ]
+
   randomCryptos: WatchlistItem[] = [
     { id: "BTC", name: "Bitcoin" },
     { id: "ETH", name: "Ethereum" },
@@ -158,29 +181,7 @@ export class WatchlistComponent extends BaseComponent implements OnInit {
     { id: "LEO", name: "UNUS SED LEO" },
     { id: "MATIC", name: "Polygon" },
   ]
-	
-  randomCommodities: WatchlistItem[] = [
-    { id: "1", name: "Corn" },
-    { id: "2", name: "Purified Terephthalic Acid (PTA)" },
-    { id: "3", name: "Propane" },
-    { id: "4", name: "Gulf Coast Gasoline" },
-    { id: "5", name: "Heating Oil" },
-    { id: "6", name: "Natural gas" },
-    { id: "7", name: "Ethanol" },
-    { id: "8", name: "Brent Crude" },
-    { id: "9", name: "WTI Crude Oil" },
-    { id: "10", name: "Feeder Cattle" },
-    { id: "11", name: "Live Cattle" },
-    { id: "12", name: "Lean Hogs" },
-    { id: "13", name: "Wheat" },
-    { id: "14", name: "Soybean" },
-    { id: "15", name: "Sugar No.11" },
-    { id: "16", name: "Sugar No.14" },
-    { id: "17", name: "Aluminium" },
-    { id: "18", name: "Gold" },
-    { id: "19", name: "Silver" },
-    { id: "20", name: "Platinum" },
-  ]
+
   getRandomWatchlistItems(): any[] {
     switch (this.module) {
       case EWConstants.KEY_MODULE_EQUITIES:

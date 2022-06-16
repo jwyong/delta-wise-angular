@@ -1,4 +1,4 @@
-import { DateRange } from './../../../models/date-range';
+import { DateRange } from '../../../models/common/date-range';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
 

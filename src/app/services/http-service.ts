@@ -2,7 +2,7 @@ import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
-import { Resp } from '../models/resp';
+import { Resp } from '../models/common/resp';
 import { HttpConstants } from '../utils/http-constants';
 
 @Injectable()

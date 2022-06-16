@@ -42,15 +42,15 @@ mat-list-item:focus {
 }
 
 /**
+* watchlist and recent list
+**/
+.wl-rl-item:hover {
+    color: black !important;
+}
+
+/**
 * table styling
 **/
-// .est-table td, th{
-//     border: 1px solid #e7e7e7;
-//     // height: 2px;
-//     // line-height: 1px;
-//     min-height: 1px !important;
-// }
-
 .est-table-hover {
     background-color: rgb(230,247,255) !important;
 }
@@ -62,7 +62,6 @@ mat-list-item:focus {
 .est-table-data-col {
     color: rgb(80, 79, 79);
 }
-
 
 /**
 * search autocomplete dropdown height

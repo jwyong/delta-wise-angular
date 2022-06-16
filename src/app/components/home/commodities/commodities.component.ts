@@ -17,17 +17,17 @@ export class CommoditiesComponent extends BaseHomeComponent implements OnInit {
   /**
    * search bar
    */
-  // url
   searchUrl = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_EQUITIES_SEARCH}?s=`
 
   // setup functions for searchbar
   getOptionsLabel = (item: any): string => {
     if (item == null) return ""
 
-    return `Commodity: ${item.Title} (${item.Type})`
+    return `Commodity`
   }
 
   // go to commodity detail page
   onOptionSelected = (item: any): void => {
+    console.log("item = ", item)
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
+import { Company } from 'src/app/models/equities/company';
 import { DateTimeUtil } from 'src/app/utils/date-time';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
@@ -16,6 +17,7 @@ import { EquitiesComponent } from './../equities.component';
 export class EquityDetailsComponent extends EquitiesComponent implements OnInit {
   // company ticker for currect company
   companyTicker = ''
+  company: Company | undefined
 
   override ngOnInit(): void {
     // combine router ticker changes + data range changes
@@ -79,6 +81,10 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
     // check success status and update jwt + navigate to home
     if (result.status) {
+      this.company = {
+        ticker: result.data?.ticker,
+        company: result.data?.company_name
+      }
       let colList = result.data?.data
 
       // prep inversed array for pushing BE rows into (BE sending timeframe as rows)
@@ -236,10 +242,9 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    */
   // get title (e.g. Aztrazaneca (AZN))
   getCompanyTitle() {
-    let company = this.getCompanyFromLS()
+    if (this.company == null) return ""
 
-    if (company == null) return ""
-    else return `${company.company} (${company.ticker})`
+    else return `${this.company.company} (${this.company.ticker})`
   }
 
   // get humanised names for header cells

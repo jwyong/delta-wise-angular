@@ -1,6 +1,6 @@
-<div class="d-flex flex-column h-100">
+<mat-card class="d-flex flex-column">
     <div class="d-flex align-items-center mb-2">
-        <h1 class="my-auto me-3" i18n="@@watchlists">Watchlists</h1>
+        <h2 class="my-auto me-3" i18n="@@watchlists">Watchlists</h2>
         <mat-chip *ngIf="!isLoading()" class="cursor-pointer" i18n="@@add_new_watchlist"
             (click)="showNewWatchlistDialog()"> + Add new watchlist
         </mat-chip>
@@ -11,7 +11,7 @@
 
     <mat-chip-list class="scrollable-chip-list pb-3" cdkDropList cdkDropListOrientation="horizontal">
         <div *ngIf="shouldShowWatchlists()">
-            <mat-chip class="cursor-pointer" color="accent" cdkDrag *ngFor="let watchlist of watchlists"
+            <mat-chip color="primary" class="cursor-pointer" cdkDrag *ngFor="let watchlist of watchlists"
                 (removed)="removeChipOnClick(watchlist)" (click)="chipOnClick(watchlist)"
                 [selected]="selectedWatchlist.id == watchlist.id">
                 {{watchlist.name}}
@@ -22,14 +22,11 @@
         </div>
     </mat-chip-list>
 
-    <hr class="my-0" *ngIf="shouldShowWatchlists()">
-    <mat-progress-bar *ngIf="isLoadingWatchlist" mode="indeterminate"></mat-progress-bar>
-
-    <div *ngIf="shouldShowWLItems()">
+    <div class="mb-3" *ngIf="shouldShowWLItems()">
         <mat-list role="list">
             <div mat-subheader>{{selectedWatchlist.name}}</div>
 
-            <mat-list-item *ngFor="let item of selectedWatchlist.children">
+            <mat-list-item class="wl-rl-item text-secondary cursor-pointer" (click)="listItemOnClick(item)" *ngFor="let item of selectedWatchlist.children">
                 <div class="d-flex align-items-center">
                     <p class="my-0 me-2">{{item.name}} ({{item.id}})</p>
                     <mat-icon class="text-secondary scale-08" *ngIf="isEditMode">cancel</mat-icon>
@@ -38,7 +35,7 @@
         </mat-list>
     </div>
 
-    <div class="m-auto text-center cursor-pointer" (click)="emptyWatchlistOnClick()" *ngIf="shouldShowEmptyUx()">
+    <div class="m-5 text-center" (click)="emptyWatchlistOnClick()" *ngIf="shouldShowEmptyUx()">
         <mat-icon class="scale-2">
             {{isWatchlistsEmpty()? "playlist_add" : "search"}}
         </mat-icon>
@@ -46,7 +43,11 @@
             {{isWatchlistsEmpty()? "No watchlists yet." : "No items in this watchlist."}}
             <br>
             {{isWatchlistsEmpty()? "Click here to add new watchlist." :
-            "Search for a company and add it to your watchlist."}}
+            "Tap on the search bar above to get started."}}
         </p>
     </div>
-</div>
+
+    <mat-card-footer>
+        <mat-progress-bar *ngIf="isLoadingWatchlist" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+</mat-card>
