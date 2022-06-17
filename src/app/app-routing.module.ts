@@ -1,3 +1,4 @@
+import { EnumModules } from './utils/ew-constants';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EWConstants } from 'src/app/utils/ew-constants';
@@ -44,12 +45,11 @@ const routes: Routes = [
       {
         path: RouterConstants.ROUTER_PATH_EQUITIES,
         component: EquitiesComponent,
-        data: { title: EWStrings.VAL_EQUITIES },
+        data: { module: EnumModules.equities },
         children: [
           {
             path: '',
             component: MainComponent,
-            data: { module: EWConstants.KEY_MODULE_EQUITIES },
           },
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
@@ -63,12 +63,11 @@ const routes: Routes = [
       {
         path: RouterConstants.ROUTER_PATH_COMMODITIES,
         component: CommoditiesComponent,
-        data: { title: EWStrings.VAL_COMMODITIES },
+        data: { module: EnumModules.commodities },
         children: [
           {
             path: '',
             component: MainComponent,
-            data: { module: EWConstants.KEY_MODULE_COMMODITIES },
           },
           // {
           //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
@@ -82,12 +81,11 @@ const routes: Routes = [
       {
         path: RouterConstants.ROUTER_PATH_CRYPTO,
         component: CryptoComponent,
-        data: { title: EWStrings.VAL_CRYPTOS },
+        data: { module: EnumModules.crypto },
         children: [
           {
             path: '',
             component: MainComponent,
-            data: { module: EWConstants.KEY_MODULE_CRYPTO },
           },
           // {
           //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,

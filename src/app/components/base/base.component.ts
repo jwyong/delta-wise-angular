@@ -1,3 +1,5 @@
+import { EWStrings } from 'src/app/utils/ew-strings';
+import { EnumModules } from './../../utils/ew-constants';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -68,7 +70,16 @@ export class BaseComponent implements OnInit {
 
   // get full title for router (e.g. Equities > Details)
   getRouterTitle() {
-    return this.getRouterData('title')
+    switch (this.getRouterData('module')) {
+      case EnumModules.commodities:
+        return EWStrings.VAL_COMMODITIES
+
+      case EnumModules.crypto:
+        return EWStrings.VAL_CRYPTOS
+
+      default:
+        return EWStrings.VAL_EQUITIES
+    }
   }
 
   getSeparator() {
@@ -79,7 +90,7 @@ export class BaseComponent implements OnInit {
   getRouterSubtitle() {
     return this.route.snapshot.firstChild?.data['subTitle']
   }
-  
+
   // get data injected to router
   getRouterData(id: string) {
     return this.route.snapshot.data[id]

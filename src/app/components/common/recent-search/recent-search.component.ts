@@ -1,3 +1,4 @@
+import { EnumModules } from './../../../utils/ew-constants';
 import { RecentSearch } from './../../../models/common/recent-search';
 import { MainComponent } from './../../home/main/main.component';
 import { BaseComponent } from './../../base/base.component';
@@ -25,15 +26,15 @@ export class RecentSearchComponent extends MainComponent implements OnInit {
 
   getRecentSearch() {
     switch (this.module) {
-      case EWConstants.KEY_MODULE_EQUITIES:
+      case EnumModules.equities:
         this.getRecentSearchForEqt()
         break
 
-      case EWConstants.KEY_MODULE_COMMODITIES:
+      case EnumModules.commodities:
         this.getRecentSearchForCommo()
         break
 
-      case EWConstants.KEY_MODULE_CRYPTO:
+      case EnumModules.crypto:
         this.getRecentSearchForCryp()
         break
     }

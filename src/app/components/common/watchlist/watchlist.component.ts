@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EWConstants } from 'src/app/utils/ew-constants';
+import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { Watchlist, WatchlistItem } from './../../../models/common/watchlist';
 import { MainComponent } from './../../home/main/main.component';
@@ -26,15 +26,15 @@ export class WatchlistComponent extends MainComponent implements OnInit {
   // get watchlists based on module
   getWatchlists() {
     switch (this.module) {
-      case EWConstants.KEY_MODULE_EQUITIES:
+      case EnumModules.equities:
         this.getWatchlistForEquities()
         break
 
-      case EWConstants.KEY_MODULE_CRYPTO:
+      case EnumModules.crypto:
         this.getWatchlistForCrypto()
         break
 
-      case EWConstants.KEY_MODULE_COMMODITIES:
+      case EnumModules.commodities:
         this.getWatchlistForCommodities()
         break
     }
@@ -184,14 +184,14 @@ export class WatchlistComponent extends MainComponent implements OnInit {
 
   getRandomWatchlistItems(): any[] {
     switch (this.module) {
-      case EWConstants.KEY_MODULE_EQUITIES:
+      case EnumModules.equities:
         return this.randomCompanies.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
 
-      case EWConstants.KEY_MODULE_CRYPTO:
-        return this.randomCryptos.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
-
-      case EWConstants.KEY_MODULE_COMMODITIES:
+      case EnumModules.commodities:
         return this.randomCommodities.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
+
+      case EnumModules.crypto:
+        return this.randomCryptos.slice(Math.floor(Math.random() * (11 - 3 + 1)) + 3)
 
       default:
         return []

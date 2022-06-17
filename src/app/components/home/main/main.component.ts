@@ -1,3 +1,4 @@
+import { EnumModules } from './../../../utils/ew-constants';
 import { BaseComponent } from './../../base/base.component';
 import { Component, OnInit } from '@angular/core';
 import { EWConstants } from 'src/app/utils/ew-constants';
@@ -18,14 +19,14 @@ export class MainComponent extends BaseComponent implements OnInit {
   // list item on click - go to detail page
   listItemOnClick(item: any) {
     switch (this.module) {
-      case EWConstants.KEY_MODULE_EQUITIES:
+      case EnumModules.equities:
         this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
         break
 
-      case EWConstants.KEY_MODULE_CRYPTO:
+      case EnumModules.commodities:
         break
 
-      case EWConstants.KEY_MODULE_COMMODITIES:
+      case EnumModules.crypto:
         break
     }
   }

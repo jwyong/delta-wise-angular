@@ -1,3 +1,4 @@
+import { Commodity, CommoditySearch } from './../../../models/commodities/commodity';
 import { BaseHomeComponent } from './../base-home/base-home.component';
 import { Component, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
@@ -20,14 +21,20 @@ export class CommoditiesComponent extends BaseHomeComponent implements OnInit {
   searchUrl = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_EQUITIES_SEARCH}?s=`
 
   // setup functions for searchbar
-  getOptionsLabel = (item: any): string => {
+  getGroupLabel = (item: CommoditySearch): string => {
     if (item == null) return ""
 
-    return `Commodity`
+    return item.category
+  }
+
+  getOptionsLabel = (item: Commodity): string => {
+    if (item == null) return ""
+
+    return `${item.commodity} (${item.mainExchange})`
   }
 
   // go to commodity detail page
   onOptionSelected = (item: any): void => {
-    console.log("item = ", item)
+    console.log("onOptionSelected, item = ", item)
   }
 }
