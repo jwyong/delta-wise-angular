@@ -1,3 +1,4 @@
+import { Cryptocurrency } from './../../../models/crypto/crypto';
 import { Component, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
@@ -20,10 +21,10 @@ export class CryptoComponent extends BaseHomeComponent implements OnInit {
   searchUrl = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_EQUITIES_SEARCH}?s=`
 
   // setup functions for searchbar
-  getOptionsLabel = (item: any): string => {
+  getOptionsLabel = (item: Cryptocurrency): string => {
     if (item == null) return ""
 
-    return `Crypto`
+    return `${item.name} (${item.symbol})`
   }
 
   // go to coin detail page

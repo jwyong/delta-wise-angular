@@ -1,9 +1,7 @@
-import { EnumModules } from './../../../utils/ew-constants';
-import { RecentSearch } from './../../../models/common/recent-search';
-import { MainComponent } from './../../home/main/main.component';
-import { BaseComponent } from './../../base/base.component';
 import { Component, OnInit } from '@angular/core';
-import { EWConstants } from 'src/app/utils/ew-constants';
+import { RecentSearch } from './../../../models/common/recent-search';
+import { EnumModules } from './../../../utils/ew-constants';
+import { MainComponent } from './../../home/main/main.component';
 
 @Component({
   selector: 'app-recent-search',

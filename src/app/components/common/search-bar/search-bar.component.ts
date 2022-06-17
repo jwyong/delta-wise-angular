@@ -1,15 +1,13 @@
-import { EnumModules } from './../../../utils/ew-constants';
-import { Commodity, CommoditySearch } from './../../../models/commodities/commodity';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { environment } from './../../../../environments/environment';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { catchError, debounceTime, distinctUntilChanged, filter, finalize, of, switchMap, tap } from 'rxjs';
-import { HttpConstants } from 'src/app/utils/http-constants';
+import { Cryptocurrency } from 'src/app/models/crypto/crypto';
+import { Commodity, CommoditySearch } from './../../../models/commodities/commodity';
 import { CommonServices } from './../../../services/common-services';
 import { DataService } from './../../../services/data-service';
+import { EnumModules } from './../../../utils/ew-constants';
 import { EWStrings } from './../../../utils/ew-strings';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -97,9 +95,9 @@ export class SearchBarComponent implements OnInit {
             this.getCommoList()
             break
 
-          // case EnumModules.crypto:
-          //   this.getCryptoList()
-          //   break
+          case EnumModules.crypto:
+            this.getCryptoList()
+            break
 
           default:
             this.filteredItems = data['data'].slice(0, 1000)
@@ -168,8 +166,60 @@ export class SearchBarComponent implements OnInit {
     })
   }
 
-  getCryptoList() {
+  // TODO: TEMP - hardcoded crypto list
+  cryptoList: Cryptocurrency[] = [
+    {name: "Bitcoin", symbol: "BTC"},
+    {name: "Ethereum", symbol: "ETH"},
+    {name: "Tether", symbol: "USDT"},
+    {name: "USD Coin", symbol: "USDC"},
+    {name: "BNB", symbol: "BNB"},
+    {name: "Cardano", symbol: "ADA"},
+    {name: "XRP", symbol: "XRP"},
+    {name: "Binance USD", symbol: "BUSD"},
+    {name: "Solana", symbol: "SOL"},
+    {name: "Dogecoin", symbol: "DOGE"},
+    {name: "Polkadot", symbol: "DOT"},
+    {name: "Wrapped Bitcoin", symbol: "WBTC"},
+    {name: "TRON", symbol: "TRX"},
+    {name: "Dai", symbol: "DAI"},
+    {name: "Avalanche", symbol: "AVAX"},
+    {name: "Shiba Inu", symbol: "SHIB"},
+    {name: "UNUS SED LEO", symbol: "LEO"},
+    {name: "Polygon", symbol: "MATIC"},
+    {name: "Cronos", symbol: "CRO"},
+    {name: "Litecoin", symbol: "LTC"},
+    {name: "Chainlink", symbol: "LINK"},
+    {name: "FTX Token", symbol: "FTT"},
+    {name: "Uniswap", symbol: "UNI"},
+    {name: "NEAR Protocol", symbol: "NEAR"},
+    {name: "Stellar", symbol: "XLM"},
+    {name: "Bitcoin Cash", symbol: "BCH"},
+    {name: "Monero", symbol: "XMR"},
+    {name: "Ethereum Classic", symbol: "ETC"},
+    {name: "Algorand", symbol: "ALGO"},
+    {name: "Cosmos", symbol: "ATOM"},
+    {name: "Flow", symbol: "FLOW"},
+    {name: "VeChain", symbol: "VET"},
+    {name: "Decentraland", symbol: "MANA"},
+    {name: "ApeCoin", symbol: "APE"},
+    {name: "The Sandbox", symbol: "SAND"},
+    {name: "KuCoin Token", symbol: "KCS"},
+    {name: "Internet Computer", symbol: "ICP"},
+    {name: "Filecoin", symbol: "FIL"},
+    {name: "Elrond", symbol: "EGLD"},
+    {name: "Aave", symbol: "AAVE"},
+    {name: "Theta Network", symbol: "THETA"},
+    {name: "Zcash", symbol: "ZEC"},
+    {name: "TrueUSD", symbol: "TUSD"},
+    {name: "Helium", symbol: "HNT"},
+    {name: "EOS", symbol: "EOS"},
+    {name: "Axie Infinity", symbol: "AXS"},
+    {name: "Maker", symbol: "MKR"},
+    {name: "Huobi Token", symbol: "HT"},
+  ]
 
+  getCryptoList() {
+    this.filteredItems = this.cryptoList.filter(item => item.name.toLowerCase().includes(this.tempSearchValue));
   }
 
   /**

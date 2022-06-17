@@ -1,8 +1,4 @@
-export interface Crypto {
+export interface Cryptocurrency {
   name: string;
-  code: string;
-
-  // TEMP
-  Title: string;
-  Type: string;
+  symbol: string;
 }

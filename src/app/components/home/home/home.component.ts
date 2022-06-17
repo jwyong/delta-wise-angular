@@ -1,9 +1,8 @@
-import { LocalStorageService } from 'src/app/services/local-storage-service';
-import { Crypto } from '../../../models/crypto/crypto';
-import { RouterConstants } from '../../../utils/router-constants';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
+import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { User } from '../../../models/common/user';
+import { RouterConstants } from '../../../utils/router-constants';
 
 @Component({
   selector: 'app-home',
