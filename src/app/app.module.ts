@@ -29,7 +29,6 @@ import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
 import { BaseHomeComponent } from './components/home/base-home/base-home.component';
 import { CommoditiesComponent } from './components/home/commodities/commodities.component';
-import { SearchBarGrpComponent } from './components/common/search-bar-grp/search-bar-grp.component';
 import { MainComponent } from './components/home/main/main.component';
 import { RecentSearchComponent } from './components/common/recent-search/recent-search.component';
 import { CommodityDetailsComponent } from './components/home/commodities/commodity-details/commodity-details.component';
@@ -37,7 +36,10 @@ import { EstTableSingleComponent } from './components/common/est-table-single/es
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent, HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent, WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, SearchBarGrpComponent, MainComponent, RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent,
+    AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent,
+    HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
+    WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, MainComponent,
+    RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent,
   ],
   imports: [
     BrowserModule,

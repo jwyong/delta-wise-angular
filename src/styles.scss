@@ -51,6 +51,10 @@ mat-list-item:focus {
 /**
 * table styling
 **/
+.est-table-single {
+    width: 50% !important;
+}
+
 .est-table-hover {
     background-color: rgb(230,247,255) !important;
 }

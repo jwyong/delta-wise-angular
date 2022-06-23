@@ -1,4 +1,4 @@
-import { EWConstants } from 'src/app/utils/ew-constants';
+import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { Company } from 'src/app/models/equities/company';
@@ -179,7 +179,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
       else return EWConstants.EST_TBL_FIRST_COL_BC
     }
   }
-  
+
   /**
    * input estimate dialog
    */
@@ -251,6 +251,6 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   }
 
   getHumanisedCellValue(colName: string, rowName: string) {
-    return EWConstants.getEstTblHumanisedCellVals(colName, rowName)
+    return EWConstants.getEstTblHumanisedCellVals(EnumModules.equities, colName, rowName)
   }
 }

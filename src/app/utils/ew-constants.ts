@@ -46,10 +46,16 @@ export class EWConstants {
     * % DIFF = 33.2%, result = > 20.0%
     * % DIFF = -23.2%, result = < 20.0%
     */
-    public static getEstTblHumanisedCellVals(colName: string, rowName: string) {
+    public static getEstTblHumanisedCellVals(module: EnumModules, colName: string, rowName: string) {
         if (colName == this.EST_TBL_NAME_COL)
-            // name column: show localised rowType (revenue, EPS, etc)
-            return EWStrings.getCompanyRowTypeName(rowName)
+            // name column: show localised rowType based on mod
+            switch (module) {
+                case EnumModules.equities:
+                    return EWStrings.getCompanyRowTypeName(rowName)
+
+                default:
+                    return rowName
+            }
 
         else {
             // show "?" for nulls

@@ -1,6 +1,6 @@
 import { BaseComponent } from 'src/app/components/base/base.component';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { Component, OnInit } from '@angular/core';
+import { EWConstants, EnumModules } from 'src/app/utils/ew-constants';
+import { Component, Input, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
 
 @Component({
@@ -13,6 +13,9 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
   displayedData: any[] = []
 
   percDiffColName = 'percDiff'
+
+  @Input()
+  module = <EnumModules>{}
 
   override ngOnInit(): void {
     // simulate get table data
@@ -61,8 +64,8 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
     } else {
       // first col
       if (rowName == this.mouseOverRowName)
-        return `${EWConstants.EST_TBL_DATA_CELL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
-      else return EWConstants.EST_TBL_DATA_CELL_BC
+        return `${EWConstants.EST_TBL_FIRST_COL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
+      else return EWConstants.EST_TBL_FIRST_COL_BC
     }
   }
 
@@ -78,6 +81,6 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
 
   getHumanisedCellValue(colName: string, rowName: string) {
     console.log("colName = ", colName, "rowName = ", rowName)
-    return EWConstants.getEstTblHumanisedCellVals(colName, rowName)
+    return EWConstants.getEstTblHumanisedCellVals(this.module, colName, rowName)
   }
 }

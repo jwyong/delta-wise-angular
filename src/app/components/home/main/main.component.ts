@@ -18,18 +18,16 @@ export class MainComponent extends BaseComponent implements OnInit {
 
   // list item on click - go to detail page
   listItemOnClick(item: any) {
-    this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
-
+    // TODO: TEMP - set obj to ls for non-equities (hardcoded without http)
     // switch (this.module) {
-    //   case EnumModules.equities:
-    //     break
-
     //   case EnumModules.commodities:
-    //     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
+    //     localStorage.setItem("commodity", JSON.stringify(item))
     //     break
 
     //   case EnumModules.crypto:
     //     break
     // }
+
+    this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
   }
 }

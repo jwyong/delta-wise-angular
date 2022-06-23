@@ -1,3 +1,4 @@
+import { EnumModules } from 'src/app/utils/ew-constants';
 import { Commodity } from './../../../../models/commodities/commodity';
 import { CommoditiesComponent } from './../commodities.component';
 import { Component, OnInit } from '@angular/core';
@@ -10,14 +11,12 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
 })
 export class CommodityDetailsComponent extends CommoditiesComponent implements OnInit {
   commodity: Commodity | undefined
+  module = EnumModules.commodities
 
   override ngOnInit(): void {
-    // TODO: TEMP - simulate get from api
-    this.commodity = JSON.parse(localStorage.getItem("commodity") ?? "")
-
     // combine router ticker changes + data range changes
     combineLatest([this.route.params, this.selectedDateRangeBS]).subscribe(results => {
-      // this.getCompanyDets()
+      this.getCommodityDetail()
     });
   }
 
@@ -36,6 +35,15 @@ export class CommodityDetailsComponent extends CommoditiesComponent implements O
   // onSelect - make api call with new dateRange
   onSelectDateRange(dateRange: number) {
     this.selectedDateRange = dateRange
+  }
+
+  /**
+   * http
+   */
+  // get commodity est detail
+  getCommodityDetail() {
+    // TODO: TEMP - get commodity obj from ls
+    this.commodity = JSON.parse(localStorage.getItem("commodity") ?? "")
   }
 
   /**

@@ -7,7 +7,7 @@
     (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
 </div>
 
-<table class="est-table table align-middle" mat-table [dataSource]="displayedData">
+<table class="table align-middle" mat-table [dataSource]="displayedData">
   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
     <th class="px-3 text-center text-black table-light align-middle fw-normal" [ngClass]="getHeaderCellClass(column)" mat-header-cell *matHeaderCellDef>
       {{ getHumanisedHeaderCellValue(column) }}
