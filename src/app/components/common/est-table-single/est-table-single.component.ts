@@ -19,17 +19,16 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
 
     setTimeout(() => {
       this.displayedColumns = [EWConstants.EST_TBL_NAME_COL, this.percDiffColName]
-      this.displayedData = []
+      this.displayedData = [
+        {name: '31 May ‘22', value: 35},
+        {name: '30 June ‘22', value: -24},
+        {name: '30 Sept ‘22', value: 13},
+        {name: '31 Dec ‘22', value: -1},
+        {name: '31 March ‘23', value: nukll},
+        {name: '31 June ‘23', value: 93},
+        {name: '31 Sept ’23', value: 1},
+      ]
     }, 800);
-
-    31 May ‘22
-30 June ‘22
-30 Sept ‘22
-31 Dec ‘22
-31 March ‘23
-31 June ‘23
-"31 Sept ’23
-"
   }
 
   /**
