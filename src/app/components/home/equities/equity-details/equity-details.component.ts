@@ -108,6 +108,8 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
       // invert displayedData
       this.displayedData = this.getInvertedFlatMap(beArray)
+
+      console.log("dispData = ", this.displayedData)
     }
   }
 
@@ -177,11 +179,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
       else return EWConstants.EST_TBL_FIRST_COL_BC
     }
   }
-
-  getHumanisedCellValue(colName: string, rowName: string) {
-    return EWConstants.getEstTblHumanisedCellVals(colName, rowName)
-  }
-
+  
   /**
    * input estimate dialog
    */
@@ -250,5 +248,9 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     if (colName != EWConstants.EST_TBL_NAME_COL)
       return EWStrings.getHumanisedEqtColName(colName)
     else return ""
+  }
+
+  getHumanisedCellValue(colName: string, rowName: string) {
+    return EWConstants.getEstTblHumanisedCellVals(colName, rowName)
   }
 }

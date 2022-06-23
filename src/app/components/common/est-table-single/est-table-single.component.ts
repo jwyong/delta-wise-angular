@@ -1,6 +1,7 @@
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { EWConstants } from 'src/app/utils/ew-constants';
 import { Component, OnInit } from '@angular/core';
+import { EWStrings } from 'src/app/utils/ew-strings';
 
 @Component({
   selector: 'app-est-table-single',
@@ -20,14 +21,16 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
     setTimeout(() => {
       this.displayedColumns = [EWConstants.EST_TBL_NAME_COL, this.percDiffColName]
       this.displayedData = [
-        {name: '31 May ‘22', value: 35},
-        {name: '30 June ‘22', value: -24},
-        {name: '30 Sept ‘22', value: 13},
-        {name: '31 Dec ‘22', value: -1},
-        {name: '31 March ‘23', value: nukll},
-        {name: '31 June ‘23', value: 93},
-        {name: '31 Sept ’23', value: 1},
+        { name: '31 May ‘22', [this.percDiffColName]: 35.398 },
+        { name: '30 June ‘22', [this.percDiffColName]: -24.33 },
+        { name: '30 Sept ‘22', [this.percDiffColName]: null },
+        { name: '31 Dec ‘22', [this.percDiffColName]: -1.21 },
+        { name: '31 March ‘23', [this.percDiffColName]: null },
+        { name: '31 June ‘23', [this.percDiffColName]: 16.25 },
+        { name: '31 Sept ’23', [this.percDiffColName]: 12.33 },
       ]
+
+      this.setIsLoading(false)
     }, 800);
   }
 
@@ -63,7 +66,18 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
     }
   }
 
+  /**
+   * ui binding
+   */
+  // get humanised names for header cells
+  getHumanisedHeaderCellValue(colName: string) {
+    if (colName != EWConstants.EST_TBL_NAME_COL)
+      return EWStrings.VAL_EST_DIFF
+    else return ""
+  }
+
   getHumanisedCellValue(colName: string, rowName: string) {
+    console.log("colName = ", colName, "rowName = ", rowName)
     return EWConstants.getEstTblHumanisedCellVals(colName, rowName)
   }
 }

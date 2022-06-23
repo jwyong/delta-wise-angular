@@ -1,12 +1,13 @@
 <div class="d-flex align-items-center">
-    <h1 class="my-auto">{{getCompanyTitle()}}</h1>
-    <button class="ms-2" mat-icon-button>
-      <mat-icon class="scale-08">add_circle</mat-icon>
-    </button>
-    <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value"
-      (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
-  </div>
-  
-  <app-est-table-single></app-est-table-single>
+  <h1 class="my-auto">{{getCompanyTitle()}}</h1>
+  <button class="ms-2" mat-icon-button>
+    <mat-icon class="scale-08">add_circle</mat-icon>
+  </button>
+  <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value"
+    (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
+</div>
 
-  <p class="text-center text-secondary" i81n="@@estimate_table_info">*Cell value reflects your estimate versus the median</p>
+<app-est-table-single></app-est-table-single>
+
+<p class="text-center text-secondary" i81n="@@estimate_table_info">*Cell value reflects your estimate versus the median
+</p>

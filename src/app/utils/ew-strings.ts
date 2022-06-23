@@ -75,6 +75,11 @@ export class EWStrings {
     }
 
     /**
+     * estimates table (single - for commo and crypto mods)
+     */
+    public static VAL_EST_DIFF = $localize`:@@est_diff:Percentage Difference (%)`
+
+    /**
      * watchlist
      */
     public static VAL_WATCHLIST: string = "Watchlist"
@@ -108,12 +113,12 @@ export class EWStrings {
     /**
      * commodities module
      */
-     public static VAL_COMMODITY: string = $localize`:@@commodity:Commodity`
-     public static VAL_COMMODITIES: string = $localize`:@@commodities:Commodities`
+    public static VAL_COMMODITY: string = $localize`:@@commodity:Commodity`
+    public static VAL_COMMODITIES: string = $localize`:@@commodities:Commodities`
 
     /**
      * crypto module
      */
-     public static VAL_CRYPTO: string = $localize`:@@crypto:Cryptocurrency`
-     public static VAL_CRYPTOS: string = $localize`:@@cryptos:Cryptocurrencies`
-    }
+    public static VAL_CRYPTO: string = $localize`:@@crypto:Cryptocurrency`
+    public static VAL_CRYPTOS: string = $localize`:@@cryptos:Cryptocurrencies`
+}
