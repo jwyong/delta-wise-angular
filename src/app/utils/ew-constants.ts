@@ -3,7 +3,7 @@
  */
 export class EWConstants {
     // app version
-    public static APP_VERSION = "0.0.7"
+    public static APP_VERSION = "0.0.8"
 
     //=== validation
     // required
