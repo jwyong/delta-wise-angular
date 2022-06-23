@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { environment } from 'src/environments/environment';
 import { HttpConstants } from 'src/app/utils/http-constants';
+import { RouterConstants } from 'src/app/utils/router-constants';
 
 @Component({
   selector: 'app-commodities',
@@ -34,7 +35,12 @@ export class CommoditiesComponent extends BaseHomeComponent implements OnInit {
   }
 
   // go to commodity detail page
-  onOptionSelected = (item: any): void => {
+  onOptionSelected = (item: Commodity): void => {
     console.log("onOptionSelected, item = ", item)
+
+    // TODO: TEMP - store commodity to ls
+    localStorage.setItem("commodity", JSON.stringify(item))
+
+    this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
   }
 }

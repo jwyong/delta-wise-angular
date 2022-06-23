@@ -1,0 +1,14 @@
+<table class="est-table table align-middle" mat-table [dataSource]="displayedData">
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <th class="px-3 text-center text-black table-light align-middle fw-normal" [ngClass]="getHeaderCellClass(column)" mat-header-cell *matHeaderCellDef>
+        {{ getHumanisedHeaderCellValue(column) }}
+      </th>
+      <td class="px-3" [ngClass]="getNonHeaderCellClass(element.name, column)" mat-cell *matCellDef="let element; let index = index;"
+        (click)="showEstimateDialog(element.name, column)" (mouseover)="cellOnMouseOver(element.name, column)">
+        {{ getHumanisedCellValue(column, element[column]) }}
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

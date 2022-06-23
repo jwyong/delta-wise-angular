@@ -41,6 +41,11 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     this.selectedDateRangeBS.next(value)
   }
 
+  // onSelect - make api call with new dateRange
+  onSelectDateRange(dateRange: number) {
+    this.selectedDateRange = dateRange
+  }
+
   /**
    * for table
    */
@@ -56,14 +61,6 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // fixed row on table (to be inverted from api data)
   inputColumns = [this.timeFrameCol, CompanyRowType.revenue, CompanyRowType.ebit, CompanyRowType.ebitda, CompanyRowType.net_income, CompanyRowType.eps]
-
-  /**
-   * date range picker related
-   */
-  // onSelect - make api call with new dateRange
-  onSelectDateRange(dateRange: number) {
-    this.selectedDateRange = dateRange
-  }
 
   /**
    * table related

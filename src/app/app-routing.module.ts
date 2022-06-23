@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home/home.component';
 import { MainComponent } from './components/home/main/main.component';
 import { EWStrings } from './utils/ew-strings';
 import { RouterConstants } from './utils/router-constants';
+import { CommodityDetailsComponent } from './components/home/commodities/commodity-details/commodity-details.component';
 
 const routes: Routes = [
   /**
@@ -69,11 +70,11 @@ const routes: Routes = [
             path: '',
             component: MainComponent,
           },
-          // {
-          //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
-          //   component: EquityDetailsComponent,
-          //   data: { subTitle: EWStrings.VAL_DETAILS },
-          // },
+          {
+            path: `${RouterConstants.ROUTER_PATH_DETAILS}/:id`,
+            component: CommodityDetailsComponent,
+            data: { subTitle: EWStrings.VAL_DETAILS },
+          },
         ]
       },
 

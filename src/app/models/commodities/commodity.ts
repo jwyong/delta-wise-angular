@@ -1,4 +1,5 @@
 export interface Commodity {
+    id: number,
     commodity: string,
     mainExchange: string,
     category: string
