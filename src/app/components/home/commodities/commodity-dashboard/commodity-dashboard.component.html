@@ -1,8 +1,13 @@
 <div class="row">
+    <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+            <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingDashBoard" mode="indeterminate">
+            </mat-progress-bar>
+        </mat-expansion-panel-header>
+
+        <app-est-table-single></app-est-table-single>
+    </mat-expansion-panel>
+
     <app-recent-search class="mb-3 col-12 col-sm-12 col-md-6"></app-recent-search>
     <app-watchlist class="col-12 col-sm-12 col-md-6"></app-watchlist>
-
-    <mat-card class="col-12">
-        <app-est-table-single></app-est-table-single>
-    </mat-card>
 </div>

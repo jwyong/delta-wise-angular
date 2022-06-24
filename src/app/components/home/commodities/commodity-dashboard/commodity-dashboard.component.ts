@@ -1,3 +1,4 @@
+import { BaseDashboardComponent } from './../../base-dashboard/base-dashboard.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './commodity-dashboard.component.html',
   styleUrls: ['./commodity-dashboard.component.css']
 })
-export class CommodityDashboardComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class CommodityDashboardComponent extends BaseDashboardComponent implements OnInit {
+  isLoadingDashBoard = false
 }
