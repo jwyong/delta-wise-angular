@@ -16,8 +16,21 @@ export class WatchlistComponent extends MainComponent implements OnInit {
   watchlists: Watchlist[] = [];
   selectedWatchlist = <Watchlist>{}
 
-  override ngOnInit(): void {
-    this.getWatchlists()
+  /**
+   * expansion panel
+   */
+  isPanelExpanded = this.shouldExpandPanelsByDefault()
+
+  onPanelExpanded() {
+    this.isPanelExpanded = true
+
+    // only make api call if not already done
+    if (this.watchlists.length == 0)
+      this.getWatchlists()
+  }
+
+  onPanelCollapsed() {
+    this.isPanelExpanded = false
   }
 
   /**
@@ -203,7 +216,7 @@ export class WatchlistComponent extends MainComponent implements OnInit {
    */
   // show edit btn if there are watchlists to edit
   shouldShowWLEditBtn() {
-    return this.watchlists.length > 0
+    return this.isPanelExpanded && !this.isLoadingWatchlist && this.watchlists.length > 0
   }
 
   // show watchlists chips if got watchlist + not loading

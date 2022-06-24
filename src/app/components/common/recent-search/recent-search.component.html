@@ -1,14 +1,13 @@
-<mat-card class="d-flex flex-column">
-    <div class="d-flex align-items-center mb-3">
-        <h2 class="my-auto me-3" i18n="@@recent_search">Recently Searched</h2>
-        <!-- <button mat-icon-button *ngIf="shouldShowList()">
-            <mat-icon>clear</mat-icon>
-        </button> -->
-    </div>
+<mat-expansion-panel [expanded]="shouldExpandPanelsByDefault()" (opened)="onOpen()">
+    <mat-expansion-panel-header>
+        <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingRecentList" mode="indeterminate"></mat-progress-bar>
+        <h2 class="my-auto" i18n="@@recent_search">Recently Searched</h2>
+    </mat-expansion-panel-header>
 
     <div class="mb-3" *ngIf="shouldShowList()">
         <mat-list role="list">
-            <mat-list-item class="wl-rl-item cursor-pointer text-secondary" (click)="listItemOnClick(item)" *ngFor="let item of recentSearchList">
+            <mat-list-item class="wl-rl-item cursor-pointer text-secondary" (click)="listItemOnClick(item)"
+                *ngFor="let item of recentSearchList">
                 <div class="d-flex align-items-center">
                     <p class="my-0 me-2">{{item.name}} ({{item.id}})</p>
                 </div>
@@ -19,13 +18,9 @@
     <div class="m-5 text-center" *ngIf="shouldShowEmptyUx()">
         <mat-icon class="scale-2">search</mat-icon>
         <p class="mt-3" i18n="@@no_recent_search">
-            No recently searhed items yet. 
+            No recently searhed items yet.
             <br>
             Tap on the search bar above to get started.
         </p>
     </div>
-
-    <mat-card-footer>
-        <mat-progress-bar *ngIf="isLoadingRecentList" mode="indeterminate"></mat-progress-bar>
-    </mat-card-footer>
-</mat-card>
+</mat-expansion-panel>

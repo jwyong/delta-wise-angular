@@ -39,4 +39,9 @@ export class MainComponent extends BaseComponent implements OnInit {
 
     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
   }
+
+  // should expand recent search and watchlist by default (current behaviour for equities mod)
+  shouldExpandPanelsByDefault() {
+    return this.module == EnumModules.equities
+  }
 }

@@ -12,30 +12,36 @@ export class RecentSearchComponent extends MainComponent implements OnInit {
   isLoadingRecentList = false
   recentSearchList: RecentSearch[] = []
 
-  override ngOnInit(): void {
-    // TODO: TEMP - populate recent search list based on module
+  /**
+   * expansion panel
+   */
+  onOpen() {
+    // only make api call if not already done
+    if (this.recentSearchList.length == 0)
+      this.getRecentSearch()
+  }
+
+  // get recent search list from api
+  getRecentSearch() {
     this.isLoadingRecentList = true
 
     setTimeout(() => {
-      this.getRecentSearch()
+      switch (this.module) {
+        case EnumModules.equities:
+          this.getRecentSearchForEqt()
+          break
+
+        case EnumModules.commodities:
+          this.getRecentSearchForCommo()
+          break
+
+        case EnumModules.crypto:
+          this.getRecentSearchForCryp()
+          break
+      }
+
       this.isLoadingRecentList = false
     }, 800);
-  }
-
-  getRecentSearch() {
-    switch (this.module) {
-      case EnumModules.equities:
-        this.getRecentSearchForEqt()
-        break
-
-      case EnumModules.commodities:
-        this.getRecentSearchForCommo()
-        break
-
-      case EnumModules.crypto:
-        this.getRecentSearchForCryp()
-        break
-    }
   }
 
   getRecentSearchForEqt() {
