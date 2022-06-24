@@ -5,7 +5,7 @@ import { EWStrings } from "./ew-strings";
  */
 export class EWConstants {
     // app version
-    public static APP_VERSION = "0.0.10"
+    public static APP_VERSION = "0.1.0"
 
     //=== validation
     // required
