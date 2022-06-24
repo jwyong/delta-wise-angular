@@ -108,8 +108,6 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
       // invert displayedData
       this.displayedData = this.getInvertedFlatMap(beArray)
-
-      console.log("dispData = ", this.displayedData)
     }
   }
 
@@ -193,9 +191,10 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
         title: this.getCompanyTitle(),
         subTitle: `${hRowName} (${hColName})`,
         sdr: this.selectedDateRangeBS,
-        ticker: this.companyTicker,
-        timeFrame: colName,
-        rowType: rowName
+        id: this.companyTicker,
+        module: EnumModules.equities,
+        colName: colName,
+        rowName: rowName
       }
     });
 

@@ -1,3 +1,4 @@
+import { Commodity } from './../../../models/commodities/commodity';
 import { EnumModules } from './../../../utils/ew-constants';
 import { BaseComponent } from './../../base/base.component';
 import { Component, OnInit } from '@angular/core';
@@ -18,15 +19,19 @@ export class MainComponent extends BaseComponent implements OnInit {
 
   // list item on click - go to detail page
   listItemOnClick(item: any) {
-    // TODO: TEMP - set obj to ls for non-equities (hardcoded without http)
-    // switch (this.module) {
-    //   case EnumModules.commodities:
-    //     localStorage.setItem("commodity", JSON.stringify(item))
-    //     break
+    console.log('item = ', item)
 
-    //   case EnumModules.crypto:
-    //     break
-    // }
+    // TODO: TEMP - set obj to ls for non-equities (hardcoded without http)
+    switch (this.module) {
+      case EnumModules.commodities:
+        let commodity: Commodity = { id: 23, commodity: item.name, mainExchange: item.id, category: "Metals" }
+
+        localStorage.setItem("commodity", JSON.stringify(commodity))
+        break
+
+      case EnumModules.crypto:
+        break
+    }
 
     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
   }

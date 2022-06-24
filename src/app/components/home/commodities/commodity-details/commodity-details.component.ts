@@ -10,7 +10,8 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
   styleUrls: ['./commodity-details.component.css']
 })
 export class CommodityDetailsComponent extends CommoditiesComponent implements OnInit {
-  commodity: Commodity | undefined
+  title = ""
+  commodity = <Commodity>{}
   module = EnumModules.commodities
 
   override ngOnInit(): void {
@@ -44,15 +45,12 @@ export class CommodityDetailsComponent extends CommoditiesComponent implements O
   getCommodityDetail() {
     // TODO: TEMP - get commodity obj from ls
     this.commodity = JSON.parse(localStorage.getItem("commodity") ?? "")
+
+    // update title after getting commodity obj
+    this.title = `${this.commodity.commodity} (${this.commodity.mainExchange})`
   }
 
   /**
   * UI binding
   */
-  // get title (e.g. Platinum (NYMEX))
-  getCompanyTitle() {
-    if (this.commodity == null) return ""
-
-    else return `${this.commodity.commodity} (${this.commodity.mainExchange})`
-  }
 }

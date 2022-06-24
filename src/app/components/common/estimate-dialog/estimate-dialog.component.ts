@@ -1,3 +1,4 @@
+import { EnumModules } from './../../../utils/ew-constants';
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -79,8 +80,8 @@ export class EstimateDialogComponent implements OnInit {
     this.setIsLoadingDialog(true)
 
     let result = await this.commonServices.httpService.httpPost<CompanyEstimate>(HttpConstants.API_EQUITIES_USER_ESTIMATE, {
-      date_range: this.selectedDateRange, ticker: this.data.ticker,
-      time_frame: this.data.timeFrame, type: this.data.rowType
+      date_range: this.selectedDateRange, ticker: this.data.id,
+      time_frame: this.data.colName, type: this.data.rowName
     })
 
     this.setIsLoadingDialog(false)
@@ -105,8 +106,8 @@ export class EstimateDialogComponent implements OnInit {
     this.setIsLoadingDialog(true)
 
     let result = await this.commonServices.httpService.httpPost(HttpConstants.API_EQUITIES_INSERT, {
-      date_range: this.selectedDateRange, estimate: estimate, ticker: this.data.ticker,
-      time_frame: this.data.timeFrame, type: this.data.rowType
+      date_range: this.selectedDateRange, estimate: estimate, ticker: this.data.id,
+      time_frame: this.data.colName, type: this.data.rowName
     })
 
     this.setIsLoadingDialog(false)
@@ -157,8 +158,6 @@ export class EstimateDialogComponent implements OnInit {
    */
   // get "lower" or "higher" str based on percDiff -ve/+ve
   getMedianPercDiffSignStr() {
-    console.log("percDiff = ", this.companyEstimate?.percentage_diff)
-
     if ((this.companyEstimate?.percentage_diff ?? 0) < 0)
       return EWStrings.VAL_LOWER
     else
@@ -252,9 +251,10 @@ export interface EstimateDialogData {
   title: string,
   subTitle: string,
   sdr: BehaviorSubject<number>,
-  ticker: string,
+  id: string,
 
   // row/col passed from main table
-  timeFrame: string, // e.g. "FY_2022"
-  rowType: string, // e.g. "revenue"
+  module: EnumModules,
+  colName: string, // e.g. "FY_2022"
+  rowName: string, // e.g. "revenue"
 }

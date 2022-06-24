@@ -1,7 +1,9 @@
+import { BehaviorSubject } from 'rxjs';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { EWConstants, EnumModules } from 'src/app/utils/ew-constants';
 import { Component, Input, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
+import { EstimateDialogComponent } from '../estimate-dialog/estimate-dialog.component';
 
 @Component({
   selector: 'app-est-table-single',
@@ -16,6 +18,22 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
 
   @Input()
   module = <EnumModules>{}
+
+  @Input()
+  title = ""
+
+  @Input()
+  id = ""
+
+  @Input()
+  selectedDateRangeBS = <BehaviorSubject<number>>{}
+  get selectedDateRange() {
+    return this.selectedDateRangeBS.value
+  }
+
+  set selectedDateRange(value) {
+    this.selectedDateRangeBS.next(value)
+  }
 
   override ngOnInit(): void {
     // simulate get table data
@@ -80,7 +98,56 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
   }
 
   getHumanisedCellValue(colName: string, rowName: string) {
-    console.log("colName = ", colName, "rowName = ", rowName)
     return EWConstants.getEstTblHumanisedCellVals(this.module, colName, rowName)
+  }
+
+  showEstimateDialog(rowName: string, colName: string) {
+    console.log('title = ', this.title, "id = ", this.id)
+
+    const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
+      maxWidth: '25vw',
+      minWidth: 350,
+      data: {
+        title: this.title,
+        subTitle: rowName,
+        sdr: this.selectedDateRangeBS,
+        id: this.id,
+        timeFrame: colName,
+        rowType: rowName
+      }
+    });
+
+    // check if user has changed dateRange
+    var dialogSelectedDR: number
+    const onDialogDateSelectedSub = estimateDialogRef.componentInstance.selectedDateRangeBS.subscribe((value: number) => {
+      dialogSelectedDR = value
+    })
+    var didSubmitEstimate: boolean = false
+    const didSubmitEstimateSub = estimateDialogRef.componentInstance.didSubmitEstimateEE.subscribe((value: boolean) => {
+      if (value)
+        didSubmitEstimate = value
+    })
+
+    estimateDialogRef.afterClosed().subscribe((_: any) => {
+      // unsubscribe dialog observer
+      onDialogDateSelectedSub.unsubscribe()
+      didSubmitEstimateSub.unsubscribe()
+
+      // update sdr/refresh api
+      switch (true) {
+        // update sdr if got changes
+        case dialogSelectedDR != null && dialogSelectedDR != this.selectedDateRange:
+          this.selectedDateRange = dialogSelectedDR
+          break
+
+        // refresh api if got submit
+        case didSubmitEstimate:
+          // this.getCompanyDets()
+          break
+
+        default:
+          break
+      }
+    });
   }
 }

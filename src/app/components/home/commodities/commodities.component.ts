@@ -36,8 +36,6 @@ export class CommoditiesComponent extends BaseHomeComponent implements OnInit {
 
   // go to commodity detail page
   onOptionSelected = (item: Commodity): void => {
-    console.log("onOptionSelected, item = ", item)
-
     // TODO: TEMP - store commodity to ls
     localStorage.setItem("commodity", JSON.stringify(item))
 
