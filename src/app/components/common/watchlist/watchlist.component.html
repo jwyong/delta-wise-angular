@@ -1,16 +1,19 @@
-<mat-expansion-panel [expanded]="shouldExpandPanelsByDefault()" (opened)="onPanelExpanded()" (afterCollapse)="onPanelCollapsed()">
+<mat-expansion-panel [expanded]="shouldExpandPanelsByDefault()" (opened)="onPanelExpanded()"
+    (afterCollapse)="onPanelCollapsed()">
     <mat-expansion-panel-header>
-        <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingWatchlist" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingWatchlist" mode="indeterminate">
+        </mat-progress-bar>
 
         <div class="d-flex align-items-center">
             <h2 class="my-auto me-3" i18n="@@watchlists">Watchlists</h2>
             <mat-chip *ngIf="!isLoadingWatchlist && isPanelExpanded" class="cursor-pointer" i18n="@@add_new_watchlist"
                 (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + Add new watchlist
             </mat-chip>
-            <button class="ms-2" mat-icon-button (click)="isEditMode = !isEditMode; $event.stopPropagation()">
-                <mat-icon *ngIf="shouldShowWLEditBtn()" class="scale-08">{{isEditMode? 'done' : 'edit'}}</mat-icon>
+            <button *ngIf="shouldShowWLEditBtn()" class="ms-2" mat-icon-button
+                (click)="isEditMode = !isEditMode; $event.stopPropagation()">
+                <mat-icon class="scale-08">{{isEditMode? 'done' : 'edit'}}</mat-icon>
             </button>
-        </div>    
+        </div>
     </mat-expansion-panel-header>
 
     <mat-chip-list class="scrollable-chip-list pb-3" cdkDropList cdkDropListOrientation="horizontal">
@@ -30,7 +33,8 @@
         <mat-list role="list">
             <div mat-subheader>{{selectedWatchlist.name}}</div>
 
-            <mat-list-item class="wl-rl-item text-secondary cursor-pointer" (click)="listItemOnClick(item)" *ngFor="let item of selectedWatchlist.children">
+            <mat-list-item class="wl-rl-item text-secondary cursor-pointer" (click)="listItemOnClick(item)"
+                *ngFor="let item of selectedWatchlist.children">
                 <div class="d-flex align-items-center">
                     <p class="my-0 me-2">{{item.name}} ({{item.id}})</p>
                     <mat-icon class="text-secondary scale-08" *ngIf="isEditMode">cancel</mat-icon>

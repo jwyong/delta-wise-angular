@@ -29,18 +29,21 @@ import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
 import { BaseHomeComponent } from './components/home/base-home/base-home.component';
 import { CommoditiesComponent } from './components/home/commodities/commodities.component';
-import { MainComponent } from './components/home/main/main.component';
+import { BaseDashboardComponent } from './components/home/base-dashboard/base-dashboard.component';
 import { RecentSearchComponent } from './components/common/recent-search/recent-search.component';
 import { CommodityDetailsComponent } from './components/home/commodities/commodity-details/commodity-details.component';
 import { EstTableSingleComponent } from './components/common/est-table-single/est-table-single.component';
 import { CryptoDetailsComponent } from './components/home/crypto/crypto-details/crypto-details.component';
+import { CommodityDashboardComponent } from './components/home/commodities/commodity-dashboard/commodity-dashboard.component';
+import { EquityDashboardComponent } from './components/home/equities/equity-dashboard/equity-dashboard.component';
+import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashboard/crypto-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent,
     HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
-    WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, MainComponent,
-    RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent,
+    WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, BaseDashboardComponent,
+    RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent, CommodityDashboardComponent, EquityDashboardComponent, CryptoDashboardComponent,
   ],
   imports: [
     BrowserModule,

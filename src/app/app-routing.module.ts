@@ -1,3 +1,6 @@
+import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashboard/crypto-dashboard.component';
+import { EquityDashboardComponent } from './components/home/equities/equity-dashboard/equity-dashboard.component';
+import { CommodityDashboardComponent } from './components/home/commodities/commodity-dashboard/commodity-dashboard.component';
 import { CryptoDetailsComponent } from './components/home/crypto/crypto-details/crypto-details.component';
 import { EnumModules } from './utils/ew-constants';
 import { NgModule } from '@angular/core';
@@ -11,7 +14,7 @@ import { CryptoComponent } from './components/home/crypto/crypto.component';
 import { EquitiesComponent } from './components/home/equities/equities.component';
 import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
 import { HomeComponent } from './components/home/home/home.component';
-import { MainComponent } from './components/home/main/main.component';
+import { BaseDashboardComponent } from './components/home/base-dashboard/base-dashboard.component';
 import { EWStrings } from './utils/ew-strings';
 import { RouterConstants } from './utils/router-constants';
 import { CommodityDetailsComponent } from './components/home/commodities/commodity-details/commodity-details.component';
@@ -51,7 +54,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: MainComponent,
+            component: EquityDashboardComponent,
           },
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
@@ -69,7 +72,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: MainComponent,
+            component: CommodityDashboardComponent,
           },
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:id`,
@@ -87,7 +90,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: MainComponent,
+            component: CryptoDashboardComponent,
           },
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:id`,

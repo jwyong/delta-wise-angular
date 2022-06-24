@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { RecentSearch } from './../../../models/common/recent-search';
 import { EnumModules } from './../../../utils/ew-constants';
-import { MainComponent } from './../../home/main/main.component';
+import { BaseDashboardComponent } from '../../home/base-dashboard/base-dashboard.component';
 
 @Component({
   selector: 'app-recent-search',
   templateUrl: './recent-search.component.html',
   styleUrls: ['./recent-search.component.css']
 })
-export class RecentSearchComponent extends MainComponent implements OnInit {
+export class RecentSearchComponent extends BaseDashboardComponent implements OnInit {
   isLoadingRecentList = false
   recentSearchList: RecentSearch[] = []
 

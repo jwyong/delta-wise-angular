@@ -1,7 +1,7 @@
-import { Cryptocurrency } from './../../../models/crypto/crypto';
-import { Commodity } from './../../../models/commodities/commodity';
-import { EnumModules } from './../../../utils/ew-constants';
-import { BaseComponent } from './../../base/base.component';
+import { Cryptocurrency } from '../../../models/crypto/crypto';
+import { Commodity } from '../../../models/commodities/commodity';
+import { EnumModules } from '../../../utils/ew-constants';
+import { BaseComponent } from '../../base/base.component';
 import { Component, OnInit } from '@angular/core';
 import { EWConstants } from 'src/app/utils/ew-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
@@ -12,10 +12,10 @@ import { RouterConstants } from 'src/app/utils/router-constants';
  */
 @Component({
   selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  templateUrl: './base-dashboard.component.html',
+  styleUrls: ['./base-dashboard.component.css']
 })
-export class MainComponent extends BaseComponent implements OnInit {
+export class BaseDashboardComponent extends BaseComponent implements OnInit {
   module: string = this.getRouterData('module')
 
   // list item on click - go to detail page

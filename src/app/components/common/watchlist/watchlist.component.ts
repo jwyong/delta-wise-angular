@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { Watchlist, WatchlistItem } from './../../../models/common/watchlist';
-import { MainComponent } from './../../home/main/main.component';
+import { BaseDashboardComponent } from '../../home/base-dashboard/base-dashboard.component';
 import { NewWatchlistComponent } from './new-watchlist/new-watchlist.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { NewWatchlistComponent } from './new-watchlist/new-watchlist.component';
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.css']
 })
-export class WatchlistComponent extends MainComponent implements OnInit {
+export class WatchlistComponent extends BaseDashboardComponent implements OnInit {
   isLoadingWatchlist = false
   isEditMode = false
   watchlists: Watchlist[] = [];
