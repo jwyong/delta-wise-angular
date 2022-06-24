@@ -33,13 +33,14 @@ import { MainComponent } from './components/home/main/main.component';
 import { RecentSearchComponent } from './components/common/recent-search/recent-search.component';
 import { CommodityDetailsComponent } from './components/home/commodities/commodity-details/commodity-details.component';
 import { EstTableSingleComponent } from './components/common/est-table-single/est-table-single.component';
+import { CryptoDetailsComponent } from './components/home/crypto/crypto-details/crypto-details.component';
 
 @NgModule({
   declarations: [
     AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent,
     HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
     WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, MainComponent,
-    RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent,
+    RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent,
   ],
   imports: [
     BrowserModule,

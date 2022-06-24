@@ -1,23 +1,23 @@
-import { EnumModules } from 'src/app/utils/ew-constants';
-import { Commodity } from './../../../../models/commodities/commodity';
-import { CommoditiesComponent } from './../commodities.component';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
+import { EnumModules } from 'src/app/utils/ew-constants';
+import { Cryptocurrency } from './../../../../models/crypto/crypto';
+import { CryptoComponent } from './../crypto.component';
 
 @Component({
-  selector: 'app-commodity-details',
-  templateUrl: './commodity-details.component.html',
-  styleUrls: ['./commodity-details.component.css']
+  selector: 'app-crypto-details',
+  templateUrl: './crypto-details.component.html',
+  styleUrls: ['./crypto-details.component.css']
 })
-export class CommodityDetailsComponent extends CommoditiesComponent implements OnInit {
+export class CryptoDetailsComponent extends CryptoComponent implements OnInit {
   module = EnumModules.commodities
   title = ""
-  commodity = <Commodity>{}
+  crypto = <Cryptocurrency>{}
 
   override ngOnInit(): void {
     // combine router ticker changes + data range changes
     combineLatest([this.route.params, this.selectedDateRangeBS]).subscribe(results => {
-      this.getCommodityDetail()
+      this.getCryptoDetail()
     });
   }
 
@@ -42,12 +42,12 @@ export class CommodityDetailsComponent extends CommoditiesComponent implements O
    * http
    */
   // get commodity est detail
-  getCommodityDetail() {
+  getCryptoDetail() {
     // TODO: TEMP - get commodity obj from ls
-    this.commodity = JSON.parse(localStorage.getItem("commodity") ?? "")
+    this.crypto = JSON.parse(localStorage.getItem("crypto") ?? "")
 
     // update title after getting commodity obj
-    this.title = `${this.commodity.commodity} (${this.commodity.mainExchange})`
+    this.title = `${this.crypto.name} (${this.crypto.symbol})`
   }
 
   /**

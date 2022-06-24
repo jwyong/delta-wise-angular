@@ -109,7 +109,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
       minWidth: 350,
       data: {
         title: this.title,
-        subTitle: rowName,
+        subTitle: `Period: ${rowName}`,
         sdr: this.selectedDateRangeBS,
         id: this.id,
         timeFrame: colName,

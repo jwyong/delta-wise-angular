@@ -1,3 +1,4 @@
+import { CryptoDetailsComponent } from './components/home/crypto/crypto-details/crypto-details.component';
 import { EnumModules } from './utils/ew-constants';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -88,11 +89,11 @@ const routes: Routes = [
             path: '',
             component: MainComponent,
           },
-          // {
-          //   path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
-          //   component: EquityDetailsComponent,
-          //   data: { subTitle: EWStrings.VAL_DETAILS },
-          // },
+          {
+            path: `${RouterConstants.ROUTER_PATH_DETAILS}/:id`,
+            component: CryptoDetailsComponent,
+            data: { subTitle: EWStrings.VAL_DETAILS },
+          },
         ]
       },
     ]

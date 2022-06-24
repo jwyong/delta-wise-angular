@@ -1,3 +1,4 @@
+import { Cryptocurrency } from './../../../models/crypto/crypto';
 import { Commodity } from './../../../models/commodities/commodity';
 import { EnumModules } from './../../../utils/ew-constants';
 import { BaseComponent } from './../../base/base.component';
@@ -24,12 +25,15 @@ export class MainComponent extends BaseComponent implements OnInit {
     // TODO: TEMP - set obj to ls for non-equities (hardcoded without http)
     switch (this.module) {
       case EnumModules.commodities:
-        let commodity: Commodity = { id: 23, commodity: item.name, mainExchange: item.id, category: "Metals" }
+        let commodity: Commodity = { id: 23, commodity: item.name, mainExchange: item.id, category: "Category" }
 
         localStorage.setItem("commodity", JSON.stringify(commodity))
         break
 
       case EnumModules.crypto:
+        let crypto: Cryptocurrency = { name: item.name, symbol: item.id}
+
+        localStorage.setItem("crypto", JSON.stringify(crypto))
         break
     }
 
