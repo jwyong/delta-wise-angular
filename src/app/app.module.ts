@@ -37,13 +37,14 @@ import { CryptoDetailsComponent } from './components/home/crypto/crypto-details/
 import { CommodityDashboardComponent } from './components/home/commodities/commodity-dashboard/commodity-dashboard.component';
 import { EquityDashboardComponent } from './components/home/equities/equity-dashboard/equity-dashboard.component';
 import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashboard/crypto-dashboard.component';
+import { CommoTableComponent } from './components/home/commodities/commo-table/commo-table.component';
 
 @NgModule({
   declarations: [
     AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent,
     HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
     WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, BaseDashboardComponent,
-    RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent, CommodityDashboardComponent, EquityDashboardComponent, CryptoDashboardComponent,
+    RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent, CommodityDashboardComponent, EquityDashboardComponent, CryptoDashboardComponent, CommoTableComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,10 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
   agri1DisplayedData: any[] = []
   agri2DisplayedData: any[] = []
   energyDD: any[] = []
+  forestDD: any[] = []
+  metals1DD: any[] = []
+  metals2DD: any[] = []
+  othersDD: any[] = []
 
   // TODO: TEMP - hardcoded full list of commo (get from BE when ready)
   commoList: Commodity[] = CDConstants.commodities
@@ -37,6 +41,10 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
       this.agri1DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "\"Grains, food and fiber\"")
       this.agri2DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "Livestock and meat")
       this.energyDD = CDConstants.commodities.filter(item => item.category == "Energy")
+      this.forestDD = CDConstants.commodities.filter(item => item.category == "Forest products")
+      this.metals1DD = CDConstants.commodities.filter(item => item.subCategory == "Industrial")
+      this.metals2DD = CDConstants.commodities.filter(item => item.subCategory == "Precious")
+      this.othersDD = CDConstants.commodities.filter(item => item.category == "Other")
 
       this.setIsLoading(false)
     }, 800);
