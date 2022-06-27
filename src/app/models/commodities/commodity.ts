@@ -1,8 +1,13 @@
 export interface Commodity {
-    id: number,
+    id?: number,
     commodity: string,
     mainExchange: string,
-    category: string
+    category: string,
+    subCategory?: string,
+    mic?: string,
+    contractSize?: string,
+    symbol?: string | null,
+    currency?: string | null
 }
 
 /**

@@ -19,10 +19,8 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
   /**
    * expansion panel
    */
-  isPanelExpanded = this.shouldExpandPanelsByDefault()
-
   onPanelExpanded() {
-    this.isPanelExpanded = true
+    this.isWatchlistExpanded = true
 
     // only make api call if not already done
     if (this.watchlists.length == 0)
@@ -30,7 +28,7 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
   }
 
   onPanelCollapsed() {
-    this.isPanelExpanded = false
+    this.isWatchlistExpanded = false
   }
 
   /**
@@ -216,7 +214,7 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
    */
   // show edit btn if there are watchlists to edit
   shouldShowWLEditBtn() {
-    return this.isPanelExpanded && !this.isLoadingWatchlist && this.watchlists.length > 0
+    return this.isWatchlistExpanded && !this.isLoadingWatchlist && this.watchlists.length > 0
   }
 
   // show watchlists chips if got watchlist + not loading

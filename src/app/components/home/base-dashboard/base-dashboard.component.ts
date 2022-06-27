@@ -17,6 +17,10 @@ import { RouterConstants } from 'src/app/utils/router-constants';
 })
 export class BaseDashboardComponent extends BaseComponent implements OnInit {
   module: string = this.getRouterData('module')
+  
+  // can set wl/rc expanded or not from individual component
+  isWatchlistExpanded = true
+  isRecentSearchExpanded = true
 
   // list item on click - go to detail page
   listItemOnClick(item: any) {
@@ -38,10 +42,5 @@ export class BaseDashboardComponent extends BaseComponent implements OnInit {
     }
 
     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
-  }
-
-  // should expand recent search and watchlist by default (current behaviour for equities mod)
-  shouldExpandPanelsByDefault() {
-    return this.module == EnumModules.equities
   }
 }

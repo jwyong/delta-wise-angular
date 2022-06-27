@@ -1,4 +1,4 @@
-<mat-expansion-panel [expanded]="shouldExpandPanelsByDefault()" (opened)="onPanelExpanded()"
+<mat-expansion-panel [expanded]="isWatchlistExpanded" (opened)="onPanelExpanded()"
     (afterCollapse)="onPanelCollapsed()">
     <mat-expansion-panel-header>
         <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingWatchlist" mode="indeterminate">
@@ -6,7 +6,7 @@
 
         <div class="d-flex align-items-center">
             <h2 class="my-auto me-3" i18n="@@watchlists">Watchlists</h2>
-            <mat-chip *ngIf="!isLoadingWatchlist && isPanelExpanded" class="cursor-pointer" i18n="@@add_new_watchlist"
+            <mat-chip *ngIf="!isLoadingWatchlist && isWatchlistExpanded" class="cursor-pointer" i18n="@@add_new_watchlist"
                 (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + Add new watchlist
             </mat-chip>
             <button *ngIf="shouldShowWLEditBtn()" class="ms-2" mat-icon-button

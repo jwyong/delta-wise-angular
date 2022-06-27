@@ -1,12 +1,100 @@
 <div class="row">
-    <mat-expansion-panel expanded="true">
-        <mat-expansion-panel-header>
-            <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingDashBoard" mode="indeterminate">
-            </mat-progress-bar>
-        </mat-expansion-panel-header>
+    <div class="mb-3 col-12">
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <!-- <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingDashBoard" mode="indeterminate">
+                </mat-progress-bar> -->
+                <mat-panel-title>
+                    <h2 class="my-auto" i18n="@@list_of_commo">List of commodities</h2>
+                </mat-panel-title>
+                <mat-panel-description i18n="@@list_of_commo_desc">
+                    Full list of traded commodities
+                </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <app-est-table-single></app-est-table-single>
-    </mat-expansion-panel>
+            <!-- agri -->
+            <mat-expansion-panel class="mb-3">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h3 class="my-auto" i18n="@@agricultural">Agricultural</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <h2 i18n="@@agri_sub_grains">Grains, food and fiber</h2>
+
+                <table class="table commo-table align-middle" mat-table [dataSource]="agri1DisplayedData">
+                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedCols1">
+                        <th class="px-3 text-center text-black table-light align-middle fw-normal" mat-header-cell
+                            *matHeaderCellDef>
+                            {{ getHumanisedHeaderCellValue(column) }}
+                        </th>
+                        <td class="px-3" class="text-center est-table-data-col cursor-pointer" mat-cell
+                            *matCellDef="let element">
+                            <!-- (click)="showEstimateDialog(element.name, column)" -->
+                            <!-- (mouseover)="cellOnMouseOver(element.name, column)" -->
+                            <!-- {{ getHumanisedCellValue(column, element[column]) }} -->
+                            {{element[column]}}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedCols1"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedCols1;"></tr>
+                </table>
+
+                <h2 i18n="@@agri_sub_livestock">Livestock and meat</h2>
+
+                <table class="table commo-table align-middle" mat-table [dataSource]="agri2DisplayedData">
+                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedCols2">
+                        <th class="px-3 text-center text-black table-light align-middle fw-normal" mat-header-cell
+                            *matHeaderCellDef>
+                            {{ getHumanisedHeaderCellValue(column) }}
+                        </th>
+                        <td class="px-3 text-center est-table-data-col cursor-pointer" mat-cell
+                            *matCellDef="let element">
+                            <!-- (click)="showEstimateDialog(element.name, column)" -->
+                            <!-- (mouseover)="cellOnMouseOver(element.name, column)" -->
+                            <!-- {{ getHumanisedCellValue(column, element[column]) }} -->
+                            {{element[column]}}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedCols2"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedCols2;"></tr>
+                </table>
+
+
+            </mat-expansion-panel>
+
+            <!-- energy -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h3 class="my-auto" i18n="@@energy">Energy</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <table class="table commo-table align-middle" mat-table [dataSource]="energyDD">
+                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedCols3">
+                        <th class="px-3 text-center text-black table-light align-middle fw-normal" mat-header-cell
+                            *matHeaderCellDef>
+                            {{ getHumanisedHeaderCellValue(column) }}
+                        </th>
+                        <td class="px-3" class="text-center est-table-data-col cursor-pointer" mat-cell
+                            *matCellDef="let element">
+                            <!-- (click)="showEstimateDialog(element.name, column)" -->
+                            <!-- (mouseover)="cellOnMouseOver(element.name, column)" -->
+                            <!-- {{ getHumanisedCellValue(column, element[column]) }} -->
+                            {{element[column]}}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedCols3"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedCols3;"></tr>
+                </table>
+
+            </mat-expansion-panel>
+        </mat-expansion-panel>
+    </div>
 
     <app-recent-search class="mb-3 col-12 col-sm-12 col-md-6"></app-recent-search>
     <app-watchlist class="col-12 col-sm-12 col-md-6"></app-watchlist>
