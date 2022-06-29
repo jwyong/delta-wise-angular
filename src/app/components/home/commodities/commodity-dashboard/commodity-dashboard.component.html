@@ -1,9 +1,9 @@
 <div class="row">
     <div class="mb-3 col-12">
-        <mat-expansion-panel>
+        <mat-expansion-panel (opened)="onCommoListExpanded()">
+            <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingDashBoard" mode="indeterminate">
+            </mat-progress-bar>
             <mat-expansion-panel-header>
-                <!-- <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingDashBoard" mode="indeterminate">
-                </mat-progress-bar> -->
                 <mat-panel-title>
                     <h2 class="my-auto" i18n="@@list_of_commo">List of commodities</h2>
                 </mat-panel-title>
@@ -21,12 +21,12 @@
                 </mat-expansion-panel-header>
 
                 <h2 i18n="@@agri_sub_grains">Grains, food and fiber</h2>
-                <app-commo-table [displayedColumns]="displayedCols1" [displayedData]="agri1DisplayedData"
-                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-commo-table>
+                <app-dash-table [displayedColumns]="displayedCols1" [displayedData]="agri1DisplayedData"
+                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
 
                 <h2 i18n="@@agri_sub_livestock">Livestock and meat</h2>
-                <app-commo-table [displayedColumns]="displayedCols2" [displayedData]="agri2DisplayedData"
-                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-commo-table>
+                <app-dash-table [displayedColumns]="displayedCols2" [displayedData]="agri2DisplayedData"
+                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
             </mat-expansion-panel>
 
             <!-- energy -->
@@ -37,8 +37,8 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <app-commo-table [displayedColumns]="displayedCols3" [displayedData]="energyDD"
-                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-commo-table>
+                <app-dash-table [displayedColumns]="displayedCols3" [displayedData]="energyDD"
+                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
             </mat-expansion-panel>
 
             <!-- forest prod -->
@@ -49,8 +49,8 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <app-commo-table [displayedColumns]="displayedCols3" [displayedData]="forestDD"
-                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-commo-table>
+                <app-dash-table [displayedColumns]="displayedCols3" [displayedData]="forestDD"
+                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
             </mat-expansion-panel>
 
             <!-- metals -->
@@ -62,12 +62,12 @@
                 </mat-expansion-panel-header>
 
                 <h2 i18n="@@metal_sub_industrial">Industrial</h2>
-                <app-commo-table [displayedColumns]="displayedCols2" [displayedData]="metals1DD"
-                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-commo-table>
+                <app-dash-table [displayedColumns]="displayedCols2" [displayedData]="metals1DD"
+                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
 
                 <h2 i18n="@@metal_sub_precious">Precious</h2>
-                <app-commo-table [displayedColumns]="displayedCols2" [displayedData]="metals2DD"
-                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-commo-table>
+                <app-dash-table [displayedColumns]="displayedCols2" [displayedData]="metals2DD"
+                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
             </mat-expansion-panel>
 
             <!-- other -->
@@ -78,8 +78,8 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <app-commo-table [displayedColumns]="displayedCols4" [displayedData]="othersDD"
-                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-commo-table>
+                <app-dash-table [displayedColumns]="displayedCols4" [displayedData]="othersDD"
+                    [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
             </mat-expansion-panel>
 
         </mat-expansion-panel>

@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatChipsModule,
         MatListModule,
         MatExpansionModule,
+        MatPaginatorModule,
     ],
     declarations: [
     ],
@@ -57,6 +59,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatChipsModule,
         MatListModule,
         MatExpansionModule,
+        MatPaginatorModule,
     ]
 })
 export class MaterialModule { }

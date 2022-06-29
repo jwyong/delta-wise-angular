@@ -3,7 +3,7 @@ import { EnumModules } from './../../utils/ew-constants';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
 import { RouterConstants } from 'src/app/utils/router-constants';
@@ -29,7 +29,10 @@ export class BaseComponent implements OnInit {
     protected httpService: HttpService,
     protected dialog: MatDialog
   ) { }
-  ngOnInit(): void { }
+
+  private historyStateCache: any[] = [];
+
+  ngOnInit(): void {  }
 
   setIsLoading(isLoading: boolean) {
     this.dataService.setIsLoading(isLoading)

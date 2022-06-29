@@ -16,6 +16,8 @@ export class RecentSearchComponent extends BaseDashboardComponent implements OnI
    * expansion panel
    */
   onOpen() {
+    console.log("opened, list = ", this.recentSearchList)
+
     // only make api call if not already done
     if (this.recentSearchList.length == 0)
       this.getRecentSearch()

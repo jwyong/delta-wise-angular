@@ -1,16 +1,14 @@
-import { RouterConstants } from './../../../../utils/router-constants';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Commodity } from 'src/app/models/commodities/commodity';
 import { EWConstants } from 'src/app/utils/ew-constants';
+import { RouterConstants } from 'src/app/utils/router-constants';
 
 @Component({
-  selector: 'app-commo-table',
-  templateUrl: './commo-table.component.html',
-  styleUrls: ['./commo-table.component.css']
+  selector: 'app-dash-table',
+  templateUrl: './dash-table.component.html',
+  styleUrls: ['./dash-table.component.css']
 })
-export class CommoTableComponent implements OnInit {
-
+export class DashTableComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -33,15 +31,15 @@ export class CommoTableComponent implements OnInit {
 * table highlighting related
 */
   // for highglighting row/col header on mouseover
-  mouseOverItem?: Commodity
+  mouseOverItem?: any
 
   // update which row/col is mouse-over now
-  cellOnMouseOver(item: Commodity) {
+  cellOnMouseOver(item: any) {
     this.mouseOverItem = item
   }
 
   // get class for non-header cells (not 1st row)
-  getNonHeaderCellClass(item: Commodity) {
+  getNonHeaderCellClass(item: any) {
     // data columns - use data col css
     if (item == this.mouseOverItem)
       return `${EWConstants.EST_TBL_DATA_CELL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
@@ -52,4 +50,5 @@ export class CommoTableComponent implements OnInit {
   itemOnClick(id: string) {
     this.router.navigate([`${RouterConstants.ROUTER_PATH_DETAILS}/${id}`], { relativeTo: this.route, })
   }
+
 }

@@ -105,6 +105,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
     console.log('title = ', this.title, "id = ", this.id)
 
     const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
+      panelClass: 'est-dialog',
       maxWidth: '25vw',
       minWidth: 350,
       data: {

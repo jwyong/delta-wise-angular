@@ -372,7 +372,7 @@ export class CDConstants {
             "subCategory": ""
         },
         {
-            "commodity": "Hardwood Pulp[2]",
+            "commodity": "Hardwood Pulp",
             "mainExchange": "Chicago Mercantile Exchange",
             "mic": "",
             "contractSize": "20 metric tonnes",
@@ -382,7 +382,7 @@ export class CDConstants {
             "subCategory": ""
         },
         {
-            "commodity": "Softwood Pulp[2]",
+            "commodity": "Softwood Pulp",
             "mainExchange": "Chicago Mercantile Exchange",
             "mic": "",
             "contractSize": "20 metric tonnes",

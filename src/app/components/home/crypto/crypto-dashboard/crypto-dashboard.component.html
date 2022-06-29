@@ -1,4 +1,25 @@
 <div class="row">
+    <div class="mb-3 col-12">
+        <mat-expansion-panel (opened)="onCryptoListExpanded()">
+            <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingDashBoard" mode="indeterminate">
+            </mat-progress-bar>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h2 class="my-auto" i18n="@@list_of_crypto">List of cryptocurrencies</h2>
+                </mat-panel-title>
+                <mat-panel-description i18n="@@list_of_crypto_desc">
+                    Full list of cryptocurrencies
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-paginator [length]="pageLength" [pageSize]="pageSize" (page)="onPaged($event.pageIndex)"
+                aria-label="Select page">
+            </mat-paginator>
+            <app-dash-table [displayedColumns]="displayedColumns" [displayedData]="displayedData"
+                [getHumanisedHeaderCellValue]="getHumanisedHeaderCellValue"></app-dash-table>
+        </mat-expansion-panel>
+    </div>
+
     <app-recent-search class="mb-3 col-12 col-sm-12 col-md-6"></app-recent-search>
     <app-watchlist class="col-12 col-sm-12 col-md-6"></app-watchlist>
 </div>

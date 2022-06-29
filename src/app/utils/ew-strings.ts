@@ -35,6 +35,11 @@ export class EWStrings {
     /**
      * common
      */
+    // capitalise word
+    public static capitalise(text: string): string {
+        return text[0].toUpperCase() + text.substring(1);
+    }
+
     // date range picker
     public static VAL_DRP_0: string = "All time"
     public static VAL_DRP_90: string = "3 months"

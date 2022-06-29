@@ -1,3 +1,4 @@
+import { EWStrings } from 'src/app/utils/ew-strings';
 import { BaseDashboardComponent } from './../../base-dashboard/base-dashboard.component';
 import { Component, OnInit } from '@angular/core';
 import { Commodity } from 'src/app/models/commodities/commodity';
@@ -9,8 +10,6 @@ import { CDConstants } from './cd-constants';
   styleUrls: ['./commodity-dashboard.component.css']
 })
 export class CommodityDashboardComponent extends BaseDashboardComponent implements OnInit {
-  isLoadingDashBoard = false
-
   /**
    * table related
    */
@@ -32,22 +31,25 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
 
   // TODO: TEMP - hardcoded full list of commo (get from BE when ready)
   commoList: Commodity[] = CDConstants.commodities
+  isCommoListExpanded = false
 
-  override ngOnInit(): void {
-    // simulate get table data
-    this.setIsLoading(true)
+  onCommoListExpanded() {
+    if (this.agri1DisplayedData.length == 0) {
+      // simulate get table data
+      this.isLoadingDashBoard = true
 
-    setTimeout(() => {
-      this.agri1DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "\"Grains, food and fiber\"")
-      this.agri2DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "Livestock and meat")
-      this.energyDD = CDConstants.commodities.filter(item => item.category == "Energy")
-      this.forestDD = CDConstants.commodities.filter(item => item.category == "Forest products")
-      this.metals1DD = CDConstants.commodities.filter(item => item.subCategory == "Industrial")
-      this.metals2DD = CDConstants.commodities.filter(item => item.subCategory == "Precious")
-      this.othersDD = CDConstants.commodities.filter(item => item.category == "Other")
+      setTimeout(() => {
+        this.agri1DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "\"Grains, food and fiber\"")
+        this.agri2DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "Livestock and meat")
+        this.energyDD = CDConstants.commodities.filter(item => item.category == "Energy")
+        this.forestDD = CDConstants.commodities.filter(item => item.category == "Forest products")
+        this.metals1DD = CDConstants.commodities.filter(item => item.subCategory == "Industrial")
+        this.metals2DD = CDConstants.commodities.filter(item => item.subCategory == "Precious")
+        this.othersDD = CDConstants.commodities.filter(item => item.category == "Other")
 
-      this.setIsLoading(false)
-    }, 800);
+        this.isLoadingDashBoard = false
+      }, 800);
+    }
   }
 
   getHumanisedHeaderCellValue(value: string) {
@@ -55,7 +57,7 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
       case "commodity":
       case "symbol":
       case "currency":
-        return value[0].toUpperCase() + value.substring(1);
+        return EWStrings.capitalise(value);
 
       case "mainExchange":
         return "Main Exchange"

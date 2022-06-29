@@ -17,6 +17,7 @@ import { RouterConstants } from 'src/app/utils/router-constants';
 })
 export class BaseDashboardComponent extends BaseComponent implements OnInit {
   module: string = this.getRouterData('module')
+  isLoadingDashBoard = false
   
   // can set wl/rc expanded or not from individual component
   isWatchlistExpanded = true

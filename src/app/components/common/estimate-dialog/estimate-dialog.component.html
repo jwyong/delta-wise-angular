@@ -1,50 +1,55 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
-<form [formGroup]="inputEstimateForm" (submit)="formOnSubmit()" (keydown.enter)="formEnterFunc($event)">
-  <mat-progress-bar *ngIf="isLoadingDialog" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="isLoadingDialog" mode="indeterminate"></mat-progress-bar>
 
-  <mat-dialog-content class="mat-typography">
-    <h4 mat-dialog-subtitle>{{data.subTitle}}</h4>
+<div class="px-4 pt-3 pb-4">
+  <h2 mat-dialog-title>{{data.title}}</h2>
 
-    <mat-form-field class="w-100" appearance="fill">
-      <mat-label i18n="@@your_estimate">Your estimate</mat-label>
-      <input matInput #estInput [formControl]="estimateFC" formControlName="estimate" placeholder="3.56" required>
-      <button type="button" *ngIf="estInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-        (click)="estInput.value=''">
-        <mat-icon class="text-secondary">close</mat-icon>
-      </button>
-      <mat-error *ngIf="inputEstimateForm.controls['estimate'].hasError">{{getEstimateErrorMsg()}}</mat-error>
-    </mat-form-field>
+  <form [formGroup]="inputEstimateForm" (submit)="formOnSubmit()" (keydown.enter)="formEnterFunc($event)">
+    <mat-dialog-content class="mat-typography">
+      <h4 mat-dialog-subtitle>{{data.subTitle}}</h4>
 
-    <div [ngClass]="companyEstimate?.record_exist? 'd-block' : 'd-none'">
-      <p i18n="@@last_estimate_date">Date of your last estimate: {{getLastEstimateDateTime()}}</p>
+      <mat-form-field class="w-100" appearance="fill">
+        <mat-label i18n="@@your_estimate">Your estimate</mat-label>
+        <input matInput #estInput [formControl]="estimateFC" formControlName="estimate" placeholder="3.56" required>
+        <button type="button" *ngIf="estInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+          (click)="estInput.value=''">
+          <mat-icon class="text-secondary">close</mat-icon>
+        </button>
+        <mat-error *ngIf="inputEstimateForm.controls['estimate'].hasError">{{getEstimateErrorMsg()}}</mat-error>
+      </mat-form-field>
 
-      <app-date-range-picker class="w-100" [sdr]="data.sdr.value" (onDateRangeSelected)="onDateRangeSelected($event)">
-      </app-date-range-picker>
+      <div [ngClass]="companyEstimate?.record_exist? 'd-block' : 'd-none'">
+        <p i18n="@@last_estimate_date">Date of your last estimate: {{getLastEstimateDateTime()}}</p>
 
-      <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}}</p>
+        <app-date-range-picker class="w-100" [sdr]="data.sdr.value" (onDateRangeSelected)="onDateRangeSelected($event)">
+        </app-date-range-picker>
 
-      <p class="mb-0 text-secondary text-center" i18n="@@median_diff">
+        <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}}</p>
+
+        <p class="mb-0 text-secondary text-center" i18n="@@median_diff">
+          <small>
+            Your estimate is <b>{{getMedianPercDiffSignStr()}}</b> than the median by {{getMedianPercDiffRangeStr()}}
+            than
+            <b>{{getMedianPercDiffStr()}}%</b>
+          </small>
+        </p>
+      </div>
+
+      <p class="text-secondary text-center" i18n="@@input_trials_remaining">
         <small>
-          Your estimate is <b>{{getMedianPercDiffSignStr()}}</b> than the median by {{getMedianPercDiffRangeStr()}} than
-          <b>{{getMedianPercDiffStr()}}%</b>
+          You have {{getInputTrialStr()}} input trials remaining
+          <mat-icon class="cursor-pointer scale-05 align-middle" #inputTrialTooltip="matTooltip" aria-hidden="false"
+            aria-label="Input trials reset rules" i18n-matTooltip="@@input_trials_reset"
+            matTooltip="Input trials reset every 1st of the month">
+            info
+          </mat-icon>
         </small>
       </p>
-    </div>
+    </mat-dialog-content>
 
-    <p class="text-secondary text-center" i18n="@@input_trials_remaining">
-      <small>
-        You have {{getInputTrialStr()}} input trials remaining
-        <mat-icon class="cursor-pointer scale-05 align-middle" #inputTrialTooltip="matTooltip" aria-hidden="false"
-          aria-label="Input trials reset rules" i18n-matTooltip="@@input_trials_reset"
-          matTooltip="Input trials reset every 1st of the month">
-          info
-        </mat-icon>
-      </small>
-    </p>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button class="ms-auto" i18n="@@cancel" mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit"
-      [disabled]="isSubmitBtnDisabled()">Submit</button>
-  </mat-dialog-actions>
-</form>
+    <mat-dialog-actions>
+      <button class="ms-auto" i18n="@@cancel" mat-raised-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit"
+        [disabled]="isSubmitBtnDisabled()">Submit</button>
+    </mat-dialog-actions>
+  </form>
+</div>

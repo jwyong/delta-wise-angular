@@ -113,13 +113,13 @@ export class EstimateDialogComponent implements OnInit {
     this.setIsLoadingDialog(false)
 
     if (result.status) {
-      this.commonServices.showSnackbar(EWStrings.estimateUpdated(""))
-
       // set submit bool to true for refreshing details page
       this.didSubmitEstimateEE.emit(true)
 
       // make getEsti call once user updated estimate
-      this.getUserEstimate()
+      await this.getUserEstimate()
+
+      this.commonServices.showSnackbar(EWStrings.estimateUpdated(this.data.subTitle))
     }
   }
 

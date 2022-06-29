@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommoTableComponent } from './commo-table.component';
+import { DashTableComponent } from './dash-table.component';
 
-describe('CommoTableComponent', () => {
-  let component: CommoTableComponent;
-  let fixture: ComponentFixture<CommoTableComponent>;
+describe('DashTableComponent', () => {
+  let component: DashTableComponent;
+  let fixture: ComponentFixture<DashTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommoTableComponent ]
+      declarations: [ DashTableComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CommoTableComponent);
+    fixture = TestBed.createComponent(DashTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

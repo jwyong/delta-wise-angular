@@ -3,11 +3,8 @@
         <th class="px-3 text-center text-black table-light align-middle fw-normal" mat-header-cell *matHeaderCellDef>
             {{ getHumanisedHeaderCellValue(column) }}
         </th>
-        <td class="px-3" [ngClass]="getNonHeaderCellClass(element)" mat-cell
-            (mouseover)="cellOnMouseOver(element)" *matCellDef="let element" (click)="itemOnClick(element.id)">
-            <!-- (click)="showEstimateDialog(element.name, column)" -->
-
-            <!-- {{ getHumanisedCellValue(column, element[column]) }} -->
+        <td class="px-3" [ngClass]="getNonHeaderCellClass(element)" mat-cell (mouseover)="cellOnMouseOver(element)"
+            *matCellDef="let element" (click)="itemOnClick(element.id)">
             {{element[column]}}
         </td>
     </ng-container>
