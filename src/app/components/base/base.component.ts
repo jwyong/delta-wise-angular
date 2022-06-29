@@ -1,13 +1,13 @@
-import { EWStrings } from 'src/app/utils/ew-strings';
-import { EnumModules } from './../../utils/ew-constants';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
+import { EWStrings } from 'src/app/utils/ew-strings';
 import { RouterConstants } from 'src/app/utils/router-constants';
 import { LocalStorageService } from './../../services/local-storage-service';
+import { EnumModules } from './../../utils/ew-constants';
 
 @Component({
   selector: 'app-base',
@@ -29,8 +29,6 @@ export class BaseComponent implements OnInit {
     protected httpService: HttpService,
     protected dialog: MatDialog
   ) { }
-
-  private historyStateCache: any[] = [];
 
   ngOnInit(): void {  }
 

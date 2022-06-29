@@ -22,8 +22,6 @@ export class AppComponent implements OnInit {
     );
   }
 
-  title = 'edge-wise';
-
   // universal loading ux
   isLoading = false;
 }

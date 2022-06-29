@@ -9,6 +9,7 @@ import { HttpConstants } from 'src/app/utils/http-constants';
 import { CompanyEstimate } from './../../../models/equities/company-estimate';
 import { CommonServices } from './../../../services/common-services';
 import { DateTimeUtil } from './../../../utils/date-time';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-estimate-dialog',
@@ -16,6 +17,9 @@ import { DateTimeUtil } from './../../../utils/date-time';
   styleUrls: ['./estimate-dialog.component.css']
 })
 export class EstimateDialogComponent implements OnInit {
+    // determine if debug or release version
+    isDebug = !environment.production
+    
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EstimateDialogData,
     protected formBuilder: FormBuilder,

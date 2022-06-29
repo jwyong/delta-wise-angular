@@ -75,7 +75,11 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "index": {
+                "input": "src/index.dev.html",
+                "output": "index.html"
+              }
             }
           },
           "defaultConfiguration": "production"
