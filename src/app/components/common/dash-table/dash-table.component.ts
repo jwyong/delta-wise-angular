@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EWConstants } from 'src/app/utils/ew-constants';
+import { Commodity } from 'src/app/models/commodities/commodity';
+import { Cryptocurrency } from 'src/app/models/crypto/crypto';
+import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
 
 @Component({
@@ -47,8 +49,21 @@ export class DashTableComponent implements OnInit {
   }
 
   // navigate to commodity detail
-  itemOnClick(id: string) {
-    this.router.navigate([`${RouterConstants.ROUTER_PATH_DETAILS}/${id}`], { relativeTo: this.route, })
+  itemOnClick(item: any) {
+    // TODO: TEMP - set obj to ls for non-equities (hardcoded without http)
+    let module = this.route.snapshot.data['module']
+    
+    switch (module) {
+      case EnumModules.commodities:
+        localStorage.setItem("commodity", JSON.stringify(item))
+        break
+
+      case EnumModules.crypto:
+        localStorage.setItem("crypto", JSON.stringify(item))
+        break
+    }
+
+    this.router.navigate([`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`], { relativeTo: this.route, })
   }
 
 }

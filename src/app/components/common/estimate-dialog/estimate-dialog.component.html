@@ -23,7 +23,7 @@
         <app-date-range-picker class="w-100" [sdr]="data.sdr.value" (onDateRangeSelected)="onDateRangeSelected($event)">
         </app-date-range-picker>
 
-        <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}}</p>
+        <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}} ({{companyEstimate?.no_of_contributors}})</p>
 
         <p class="mb-0 text-secondary text-center" i18n="@@median_diff">
           <small>

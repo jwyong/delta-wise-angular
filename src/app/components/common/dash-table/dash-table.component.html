@@ -4,7 +4,7 @@
             {{ getHumanisedHeaderCellValue(column) }}
         </th>
         <td class="px-3" [ngClass]="getNonHeaderCellClass(element)" mat-cell (mouseover)="cellOnMouseOver(element)"
-            *matCellDef="let element" (click)="itemOnClick(element.id)">
+            *matCellDef="let element" (click)="itemOnClick(element)">
             {{element[column]}}
         </td>
     </ng-container>
