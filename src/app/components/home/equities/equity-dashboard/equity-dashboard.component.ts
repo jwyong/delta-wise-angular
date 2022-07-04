@@ -7,4 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./equity-dashboard.component.css']
 })
 export class EquityDashboardComponent extends BaseDashboardComponent implements OnInit {
+  override ngOnInit(): void {
+    console.log('equityDashboard comp')
+  }
 }

@@ -13,6 +13,8 @@ import { BaseHomeComponent } from './../base-home/base-home.component';
 })
 export class EquitiesComponent extends BaseHomeComponent implements OnInit {
   override ngOnInit(): void {
+    console.log("equities comp")
+    
     this.searchBarLabel = EWStrings.VAL_COMPANY
   }
 

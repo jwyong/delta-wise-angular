@@ -57,6 +57,12 @@ export class HttpService {
     async httpGet(endpoint: string) {
         let fullURL = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${endpoint}`
 
-        return await firstValueFrom(this.httpClient.get(fullURL))
+        return await firstValueFrom(this.httpClient.get(fullURL)).catch((error) => {
+            
+        })
+    }
+
+    private handleError500() {
+        
     }
 }

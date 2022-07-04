@@ -42,7 +42,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
     setTimeout(() => {
       this.displayedColumns = [EWConstants.EST_TBL_NAME_COL, this.percDiffColName]
       this.displayedData = [
-        { name: '31 May ‘22', [this.percDiffColName]: 35.398 },
+        { name: '31 May ‘22', percDiff: 35.398 },
         { name: '30 June ‘22', [this.percDiffColName]: -24.33 },
         { name: '30 Sept ‘22', [this.percDiffColName]: null },
         { name: '31 Dec ‘22', [this.percDiffColName]: -1.21 },

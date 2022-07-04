@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { NavigationEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-view-model';
+import { filter } from 'rxjs';
 import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
 import { EWStrings } from 'src/app/utils/ew-strings';
@@ -28,9 +30,9 @@ export class BaseComponent implements OnInit {
     protected _snackBar: MatSnackBar,
     protected httpService: HttpService,
     protected dialog: MatDialog
-  ) { }
+  ) {  }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   setIsLoading(isLoading: boolean) {
     this.dataService.setIsLoading(isLoading)
