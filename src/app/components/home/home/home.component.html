@@ -1,29 +1,16 @@
 <div class="h-100 d-flex flex-column">
   <mat-toolbar class="py-2" fxLayout="row">
-    <a fxFlex class="h-100 me-3" href="/">
+    <a class="h-100 me-3" href="/">
       <img class="h-100" src="/assets/img/logo-words.png" alt="DeltaWise" />
     </a>
 
-    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
-      <mat-icon>menu</mat-icon>
-    </button>
-      <mat-menu #dropMenu="matMenu">
-        <!-- <ng-container *ngFor="let item of menuItems">
-            <button mat-menu-item>
-                <mat-icon class="mr">{{item.icon}}</mat-icon>
-                {{item.label}}
-            </button>
-            <mat-divider></mat-divider>
-        </ng-container> -->
-    </mat-menu>
+    <a i18n="@@equities" class="toolbar-tab-title p-0" ngClass="{{getToolbarTitleClass(equitiesPath)}}"
+      [routerLink]="equitiesPath" fxHide.xs>Equities</a>
+    <a i18n="@@commodities" class="toolbar-tab-title mx-3 p-0" ngClass="{{getToolbarTitleClass(commoditiesPath)}}"
+      [routerLink]="commoditiesPath" fxHide.xs>Commodities</a>
+    <a i18n="@@cryptocurrencies" class="toolbar-tab-title p-0" ngClass="{{getToolbarTitleClass(cryptoPath)}}"
+      [routerLink]="cryptoPath" fxHide.xs>Cryptocurrencies</a>
 
-    <a i18n="@@equities" class="toolbar-tab-title" ngClass="{{getToolbarTitleClass(equitiesPath)}}"
-      [routerLink]="equitiesPath">Equities</a>
-    <a i18n="@@commodities" class="toolbar-tab-title mx-3" ngClass="{{getToolbarTitleClass(commoditiesPath)}}"
-      [routerLink]="commoditiesPath">Commodities</a>
-    <!-- onclick="return false" -->
-    <a i18n="@@cryptocurrencies" class="toolbar-tab-title" ngClass="{{getToolbarTitleClass(cryptoPath)}}"
-      [routerLink]="cryptoPath">Cryptocurrencies</a>
     <div class="ms-auto" [matMenuTriggerFor]="userMenu">
       <button *ngIf="user.avatar !== undefined" mat-mini-fab color="primary">
         <span>{{user.avatar}}</span>
@@ -31,14 +18,23 @@
       <span class="ms-2 toolbar-user-name cursor-pointer">{{user.user_name}}</span>
     </div>
     <mat-menu #userMenu="matMenu" xPosition="before">
+      <button mat-menu-item i18n="@@equities" [routerLink]="equitiesPath"
+        ngClass="{{getToolbarTitleClass(equitiesPath)}}" fxHide fxShow.xs>Equities</button>
+      <button mat-menu-item i18n="@@commodities" [routerLink]="commoditiesPath"
+        ngClass="{{getToolbarTitleClass(commoditiesPath)}}" fxHide fxShow.xs>Commodities</button>
+      <button mat-menu-item i18n="@@cryptocurrencies" [routerLink]="cryptoPath"
+        ngClass="{{getToolbarTitleClass(cryptoPath)}}" fxHide fxShow.xs>Cryptocurrencies</button>
+      <mat-divider fxHide fxShow.xs></mat-divider>
       <button mat-menu-item i18n="@@settings">Settings</button>
       <button mat-menu-item i18n="@@logout" (click)="logoutOnClick()">Logout</button>
     </mat-menu>
   </mat-toolbar>
 
-  <mat-card class="container my-3 p-4 flex-fill bg-white">
-    <router-outlet></router-outlet>
-  </mat-card>
+  <div class="container">
+    <mat-card class="my-3 mx-1 p-4 flex-fill bg-white">
+      <router-outlet></router-outlet>
+    </mat-card>
+  </div>
 
   <app-footer></app-footer>
 </div>

@@ -25,8 +25,6 @@ export class BaseDashboardComponent extends BaseComponent implements OnInit {
 
   // list item on click - go to detail page
   listItemOnClick(item: any) {
-    console.log('item = ', item)
-
     // TODO: TEMP - set obj to ls for non-equities (hardcoded without http)
     switch (this.module) {
       case EnumModules.commodities:

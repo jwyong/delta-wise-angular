@@ -11,6 +11,37 @@ body {
     background: linear-gradient(90deg, rgba(87, 80, 201, 1) 0%, rgba(44, 121, 162, 1) 35%, rgba(98, 213, 237, 1) 100%);
 }
 
+/**
+* basic responsive font size
+**/
+/* xs < 768 */
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 0.9em;
+    }
+}
+
+/* sm */
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 1em;
+    }
+}
+
+/* md */
+@media screen and (min-width: 992px) {
+    body {
+        font-size: 1.2em;
+    }
+}
+
+/* lg */
+@media screen and (min-width: 1200px) {
+    body {
+        font-size: 1.3em;
+    }
+}
+
 // don't underline links/btns on hover
 a {
     text-decoration: none !important;
@@ -51,16 +82,17 @@ mat-list-item:focus {
 /**
 * est table styling
 **/
+// single estimate table (for commo and crypto)
 .est-table-single {
     width: 50% !important;
 }
 
 .est-table-hover {
-    background-color: rgb(230,247,255) !important;
+    background-color: rgb(230, 247, 255) !important;
 }
 
 .est-table-first-col {
-    color: rgb(45,127,180);
+    color: rgb(45, 127, 180);
 }
 
 .est-table-data-col {

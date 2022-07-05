@@ -41,8 +41,6 @@ export class CryptoDashboardComponent extends BaseDashboardComponent implements 
   }
 
   onPaged(pageIndex: number) {
-    console.log("index = ", pageIndex)
-
     this.pageIndex = pageIndex
     this.getCryptoListForCurrentPage()
   }

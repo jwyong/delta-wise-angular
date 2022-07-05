@@ -30,7 +30,6 @@ export class CryptoComponent extends BaseHomeComponent implements OnInit {
 
   // go to coin detail page
   onOptionSelected = (item: Cryptocurrency): void => {
-    console.log("item = ", item)
     // TODO: TEMP - store commodity to ls
     localStorage.setItem("crypto", JSON.stringify(item))
 

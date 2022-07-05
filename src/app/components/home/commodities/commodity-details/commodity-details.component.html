@@ -1,10 +1,18 @@
-<div class="d-flex align-items-center">
-  <h1 class="my-auto">{{title}}</h1>
-  <button class="ms-2" mat-icon-button>
-    <mat-icon class="scale-08">add_circle</mat-icon>
-  </button>
-  <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value"
-    (onDateRangeSelected)="onSelectDateRange($event)"></app-date-range-picker>
+<div class="row align-items-center">
+  <div class="col-12 col-md-8 col-lg-9 col-xl-10">
+    <div class="d-flex align-items-center">
+      <h1 class="my-auto">{{title}}</h1>
+      <button class="ms-2" mat-icon-button>
+        <mat-icon class="scale-08">add_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+    <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value"
+    (onDateRangeSelected)="onSelectDateRange($event)">
+  </app-date-range-picker>
+  </div>
 </div>
 
 <app-est-table-single (module)="module" [title]="title"></app-est-table-single>

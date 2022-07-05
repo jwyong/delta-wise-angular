@@ -6,6 +6,9 @@
     "delta-wise": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
         "@schematics/angular:application": {
           "strict": true
         }
@@ -13,7 +16,6 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-
       "i18n": {
         "sourceLocale": "en-US",
         "locales": {
@@ -22,7 +24,6 @@
           }
         }
       },
-
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -33,12 +34,13 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
@@ -46,7 +48,9 @@
           },
           "configurations": {
             "ja": {
-              "localize": ["ja"]
+              "localize": [
+                "ja"
+              ]
             },
             "production": {
               "budgets": [
@@ -111,6 +115,7 @@
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",

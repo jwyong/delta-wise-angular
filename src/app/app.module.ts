@@ -38,6 +38,7 @@ import { CommodityDashboardComponent } from './components/home/commodities/commo
 import { EquityDashboardComponent } from './components/home/equities/equity-dashboard/equity-dashboard.component';
 import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashboard/crypto-dashboard.component';
 import { DashTableComponent } from './components/common/dash-table/dash-table.component';
+import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,11 @@ import { DashTableComponent } from './components/common/dash-table/dash-table.co
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+
+    // flex layout for responsive home toolbar
+    FlexModule,
+    FlexLayoutModule
   ],
   providers: [
     DataService,
