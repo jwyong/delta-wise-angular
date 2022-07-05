@@ -1,13 +1,16 @@
-import { BaseComponent } from './../../base/base.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { BaseComponent } from '../../base/base.component';
 
+/**
+ * base component for home/main page of each module (page with search bar)
+ * - separated from home component as different modules may have diff search funcs/ui
+ */
 @Component({
   selector: 'app-base-home',
   templateUrl: './base-home.component.html',
   styleUrls: ['./base-home.component.css']
 })
-export class BaseHomeComponent extends BaseComponent implements OnInit {
+export class BaseModuleComponent extends BaseComponent implements OnInit {
   @ViewChild('searchBar') searchBar: any;
 
   /**

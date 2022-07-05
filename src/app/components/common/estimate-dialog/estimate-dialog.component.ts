@@ -11,6 +11,9 @@ import { CommonServices } from './../../../services/common-services';
 import { DateTimeUtil } from './../../../utils/date-time';
 import { environment } from 'src/environments/environment';
 
+/**
+ * dialog for inputting estimates
+ */
 @Component({
   selector: 'app-estimate-dialog',
   templateUrl: './estimate-dialog.component.html',

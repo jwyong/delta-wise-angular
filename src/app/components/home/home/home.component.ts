@@ -11,7 +11,7 @@ import { RouterConstants } from '../../../utils/router-constants';
 })
 
 /**
- * base component for home (after logging in)
+ * home component with toolbar (after logging in)
  * - check jwt validity and re-direct to login if invalid/expired
  */
 export class HomeComponent extends BaseComponent implements OnInit {

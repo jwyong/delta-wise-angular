@@ -27,7 +27,7 @@ import { EquityDetailsComponent } from './components/home/equities/equity-detail
 import { HomeComponent } from './components/home/home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { HeaderInterceptor } from './services/header-interceptor';
-import { BaseHomeComponent } from './components/home/base-home/base-home.component';
+import { BaseModuleComponent } from './components/home/base-home/base-home.component';
 import { CommoditiesComponent } from './components/home/commodities/commodities.component';
 import { BaseDashboardComponent } from './components/home/base-dashboard/base-dashboard.component';
 import { RecentSearchComponent } from './components/common/recent-search/recent-search.component';
@@ -44,7 +44,7 @@ import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
   declarations: [
     AppComponent, LoginComponent, ForgotPwordComponent, BaseComponent, BaseAuthComponent, ResetPwordComponent, EquitiesComponent,
     HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
-    WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseHomeComponent, CommoditiesComponent, BaseDashboardComponent,
+    WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseModuleComponent, CommoditiesComponent, BaseDashboardComponent,
     RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent, CommodityDashboardComponent, 
     EquityDashboardComponent, CryptoDashboardComponent, DashTableComponent,
   ],

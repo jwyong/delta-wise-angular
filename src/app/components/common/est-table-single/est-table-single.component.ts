@@ -5,6 +5,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { EstimateDialogComponent } from '../estimate-dialog/estimate-dialog.component';
 
+/**
+ * single estimates table with only 1 estimate column (e.g. for commo and crypto)
+ */
 @Component({
   selector: 'app-est-table-single',
   templateUrl: './est-table-single.component.html',

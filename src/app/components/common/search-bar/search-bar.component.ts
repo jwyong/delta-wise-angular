@@ -9,6 +9,9 @@ import { DataService } from './../../../services/data-service';
 import { EnumModules } from './../../../utils/ew-constants';
 import { EWStrings } from './../../../utils/ew-strings';
 
+/**
+ * search bar on main module page (includes optional grouping function)
+ */
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',

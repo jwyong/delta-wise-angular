@@ -5,6 +5,9 @@ import { Cryptocurrency } from 'src/app/models/crypto/crypto';
 import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
 
+/**
+ * table for module dashboard (e.g. full list of commodities/crypto)
+ */
 @Component({
   selector: 'app-dash-table',
   templateUrl: './dash-table.component.html',

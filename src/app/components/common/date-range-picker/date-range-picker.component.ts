@@ -2,6 +2,9 @@ import { DateRange } from '../../../models/common/date-range';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EWStrings } from 'src/app/utils/ew-strings';
 
+/**
+ * date range picker for estimates
+ */
 @Component({
   selector: 'app-date-range-picker',
   templateUrl: './date-range-picker.component.html',

@@ -7,8 +7,8 @@ import { EWConstants } from 'src/app/utils/ew-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
 
 /**
- * main landing page for each module after logging in
- * - currently hosts watchlist and recent search
+ * base class for dashboard page for each module
+ * - holds watchlist and recent search, etc
  */
 @Component({
   selector: 'app-main',
