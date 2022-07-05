@@ -15,11 +15,6 @@ import { EWStrings } from 'src/app/utils/ew-strings';
  * - mostly for shared validation funcs
  */
 export class BaseAuthComponent extends BaseComponent implements OnInit {
-  // redirect to home if user already logged in
-  override ngOnInit(): void {
-    this.redirectJwtValid()
-  }
-
   // email validator
   emailFC = new FormControl('', [Validators.required, Validators.email]);
   getEmailErrorMsg() {

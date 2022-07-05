@@ -1,10 +1,9 @@
-import { EWStrings } from '../../../utils/ew-strings';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { BaseAuthComponent } from './../base-auth/base-auth.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { EWConstants } from 'src/app/utils/ew-constants';
-import { MatTooltip } from '@angular/material/tooltip';
 import { RouterConstants } from 'src/app/utils/router-constants';
+import { EWStrings } from '../../../utils/ew-strings';
+import { BaseAuthComponent } from './../base-auth/base-auth.component';
 
 @Component({
   selector: 'app-reset-pword',
@@ -12,10 +11,6 @@ import { RouterConstants } from 'src/app/utils/router-constants';
   styleUrls: ['./reset-pword.component.css']
 })
 export class ResetPwordComponent extends BaseAuthComponent implements OnInit {
-  // tooltip for pword validation
-  @ViewChild('pwordTooltip') pwordTooltip!: MatTooltip;
-  pwordTooltipPositionFC = new FormControl("below")
-
   // validation
   pwordPatternLength = Validators.minLength(8)
   pwordPatternChars = Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
@@ -86,10 +81,6 @@ export class ResetPwordComponent extends BaseAuthComponent implements OnInit {
    * - 1 number
    * - 1 symbol
    */
-  getPwordTooltipText() {
-    return $localize`:@@vld_pword_rule:${EWStrings.VAL_PWORD_RULE}`
-  }
-
   // reset form submitted - go back to login page
   resetPwordOnSubmit() {
     if (this.formGrp.invalid) return

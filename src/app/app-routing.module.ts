@@ -1,3 +1,4 @@
+import { AuthComponent } from './components/auth/auth/auth.component';
 import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashboard/crypto-dashboard.component';
 import { EquityDashboardComponent } from './components/home/equities/equity-dashboard/equity-dashboard.component';
 import { CommodityDashboardComponent } from './components/home/commodities/commodity-dashboard/commodity-dashboard.component';
@@ -24,16 +25,25 @@ const routes: Routes = [
    * auth - login, forgot pword, reset pword
    */
   {
-    path: RouterConstants.ROUTER_PATH_LOGIN,
-    component: LoginComponent,
-  },
-  {
-    path: RouterConstants.ROUTER_PATH_FORGOT_PWORD,
-    component: ForgotPwordComponent,
-  },
-  {
-    path: RouterConstants.ROUTER_PATH_RESET_PWORD,
-    component: ResetPwordComponent,
+    path: '',
+    component: AuthComponent,
+    children: [
+      {
+        path: RouterConstants.ROUTER_PATH_LOGIN,
+        component: LoginComponent,
+        data: { module: EnumModules.login },
+      },
+      {
+        path: RouterConstants.ROUTER_PATH_FORGOT_PWORD,
+        component: ForgotPwordComponent,
+        data: { module: EnumModules.forgotPword },
+      },
+      {
+        path: RouterConstants.ROUTER_PATH_RESET_PWORD,
+        component: ResetPwordComponent,
+        data: { module: EnumModules.resetPword },
+      },
+    ]
   },
 
   /**
@@ -104,9 +114,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { 
+  imports: [RouterModule.forRoot(routes, {
     useHash: true,
-   })],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -99,6 +99,11 @@ export class BaseComponent implements OnInit {
     return this.route.snapshot.data[id]
   }
 
+  // get data injected to nested route
+  getNestedRouterData(id: string) {
+    return this.route.firstChild?.snapshot.data[id]
+  }
+
   // get data from router param (e.g. /details/ticker)
   getRouterParam(id: string) {
     return this.route.firstChild?.snapshot.paramMap.get(id)

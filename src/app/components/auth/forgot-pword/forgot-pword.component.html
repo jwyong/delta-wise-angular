@@ -1,30 +1,17 @@
-<div class="h-100 row">
-    <mat-card class="col-8 col-sm-6 col-md-5 col-lg-3 mx-auto mt-auto">
-        <mat-card-title i18n="@@forgot_pword_title">Forgot password</mat-card-title>
-        <mat-card-subtitle class="mt-1" i18n="@@forgot_pword_desc">Please input your email address registered with DeltaWise. We will
-            send an email to reset your password.
-        </mat-card-subtitle>
-        <mat-card-content>
-            <form (ngSubmit)="forgotPwordFormOnSubmit()">
-                <p>
-                    <mat-form-field class="w-100" appearance="fill">
-                        <mat-label i18n="@@login_email_title">Email</mat-label>
-                        <input matInput #emailInput [formControl]="emailFC" required>
-                        <button type="button" *ngIf="emailInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="emailInput.value=''">
-                            <mat-icon class="text-secondary">close</mat-icon>
-                        </button>
-                        <mat-error *ngIf="emailFC.invalid">{{getEmailErrorMsg()}}</mat-error>
-                    </mat-form-field>
-                </p>
-                <a href="{{backToLoginPath}}">
-                    <p class="small" i18n="@@back_to_login">Back to login</p>
-                </a>
-                <button class="w-100" mat-raised-button type="submit" color="primary"
-                    i18n="@@login_title">Submit</button>
-            </form>
-        </mat-card-content>
-    </mat-card>
-
-    <app-footer class="mt-auto"></app-footer>
-</div>
+<form (ngSubmit)="forgotPwordFormOnSubmit()">
+    <p>
+        <mat-form-field class="w-100" appearance="fill">
+            <mat-label i18n="@@login_email_title">Email</mat-label>
+            <input matInput #emailInput [formControl]="emailFC" required>
+            <button type="button" *ngIf="emailInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+                (click)="emailInput.value=''">
+                <mat-icon class="text-secondary">close</mat-icon>
+            </button>
+            <mat-error *ngIf="emailFC.invalid">{{getEmailErrorMsg()}}</mat-error>
+        </mat-form-field>
+    </p>
+    <a [routerLink]="backToLoginPath">
+        <p class="small" i18n="@@back_to_login">Back to login</p>
+    </a>
+    <button class="w-100" mat-raised-button type="submit" color="primary" i18n="@@login_title">Submit</button>
+</form>

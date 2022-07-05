@@ -3,6 +3,7 @@ import { BaseComponent } from '../../base/base.component';
 
 /**
  * base component for home/main page of each module (page with search bar)
+ * - holds router link for home modules e.g. equitites, commo, crypto
  * - separated from home component as different modules may have diff search funcs/ui
  */
 @Component({

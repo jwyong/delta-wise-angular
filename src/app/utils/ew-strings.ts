@@ -6,6 +6,16 @@ export class EWStrings {
     /**
      * auth
      */
+    //=== card title/subTitles
+    public static VAL_LOGIN = $localize`:@@login:Login`
+    public static VAL_FORGOT_PWORD = $localize`:@@forgot_pword:Forgot password`
+    public static VAL_RESET_PWORD = $localize`:@@reset_pword:Reset password`
+
+    public static VAL_LOGIN_SUBTITLE = $localize`:@@login_sub:Welcome to DeltaWise. Please login to continue`
+    public static VAL_FORGOT_PWORD_SUBTITLE = $localize`:@@forgot_pword_sub:Please input your registered email address. We will
+    send an email to reset your password.`
+    public static VAL_RESET_PWORD_SUBTITLE = $localize`:@@reset_pword_sub:Please input your new password.`    
+
     //=== validation
     // required
     public static VAL_REQUIRED: string = `You must enter a value`;
