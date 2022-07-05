@@ -1,5 +1,5 @@
-import { EWConstants } from './../../../utils/ew-constants';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -9,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
   constructor() { }
 
-  appVersion = EWConstants.APP_VERSION
+  appVersion = environment.version
 
   ngOnInit(): void {
+    console.log(this.appVersion)
   }
 }

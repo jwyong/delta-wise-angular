@@ -1,6 +1,7 @@
-import { HttpConstants } from "src/app/utils/http-constants";
+import packageJson from '../../package.json';
 
 export const environment = {
   production: true,
+  version: packageJson.version,
   apiUrl: "https://api.delta-wise.com/api"
 };

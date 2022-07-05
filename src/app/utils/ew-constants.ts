@@ -4,9 +4,6 @@ import { EWStrings } from "./ew-strings";
  * string values for code use (e.g. keys, params, etc)
  */
 export class EWConstants {
-    // app version
-    public static APP_VERSION = "0.1.1"
-
     //=== validation
     // required
     public static KEY_REQUIRED: string = 'required';

@@ -1,10 +1,12 @@
-import { HttpConstants } from 'src/app/utils/http-constants';
+import packageJson from '../../package.json';
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
   production: false,
+  version: `${packageJson.version} (Dev)`,
   apiUrl: "https://api.delta-wise.com/api"
 };
 
