@@ -14,6 +14,9 @@
                 <mat-option *ngFor="let item of filteredItems" [value]="item">
                     {{getOptionsLabel(item)}}
                 </mat-option>
+                <mat-option *ngIf="shouldShowNSROption" (click)="showRequestAdditionDialog()">
+                    {{noSearchResultsStr}}
+                </mat-option>
             </div>
 
             <div *ngIf="isGroupingEnabled">
@@ -22,6 +25,9 @@
                         {{getOptionsLabel(item)}}
                     </mat-option>
                 </mat-optgroup>
+                <mat-option *ngIf="shouldShowNSROption" (click)="showRequestAdditionDialog()">
+                    {{noSearchResultsStr}}
+                </mat-option>
             </div>
         </mat-autocomplete>
     </mat-form-field>

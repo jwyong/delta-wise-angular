@@ -185,7 +185,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     const hRowName = EWStrings.getCompanyRowTypeName(rowName)
     const hColName = EWStrings.getHumanisedEqtColName(colName)
     const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
-      panelClass: 'est-dialog',
+      panelClass: 'loader-dialog',
       maxWidth: '25vw',
       minWidth: 350,
       data: {

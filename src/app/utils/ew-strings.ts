@@ -50,6 +50,14 @@ export class EWStrings {
         return text[0].toUpperCase() + text.substring(1);
     }
 
+    // request addition dialog
+    public static addNew(item: string) {
+        return $localize`:@@add_new:Add new ${item}`
+    }
+    public static VAL_COMP_NAME = $localize`:@@company_name:Company name and ticker`
+    public static VAL_COMMO_NAME = $localize`:@@commo_name:Commodity name, main exchange, category, etc.`
+    public static VAL_CRYPTO_NAME = $localize`:@@crypto_name:Cryptocurrency name and symbol`
+
     // date range picker
     public static VAL_DRP_0: string = "All time"
     public static VAL_DRP_90: string = "3 months"
@@ -79,6 +87,9 @@ export class EWStrings {
         return $localize`:@@est_updated:Your estimate for ${name} has been updated`
     }
 
+    /**
+     * error msges
+     */
     // generic error
     public static errorGeneric(error: string) {
         var errStr = $localize`:@@error_generic:Something went wrong, please try again later`
@@ -88,6 +99,9 @@ export class EWStrings {
 
         return errStr
     }
+
+    // no search result
+    public static VAL_ERR_NO_SEARCH_RES = $localize`:@@err_no_search_res:No search results. Click here to request addition.`
 
     /**
      * estimates table (single - for commo and crypto mods)

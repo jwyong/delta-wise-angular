@@ -1,3 +1,5 @@
+import { RequestAddDialogComponent } from './request-add-dialog/request-add-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -19,12 +21,13 @@ import { EWStrings } from './../../../utils/ew-strings';
 })
 export class SearchBarComponent implements OnInit {
   constructor(
-    protected dataService: DataService, protected commonServices: CommonServices,
+    protected dataService: DataService, protected commonServices: CommonServices, protected dialog: MatDialog,
 
     // TODO: TEMP
     protected route: ActivatedRoute,
 
   ) { }
+
   @ViewChild('searchInput') searchInput: any;
 
   // search bar label (e.g. Search Company)
@@ -61,9 +64,16 @@ export class SearchBarComponent implements OnInit {
     return ""
   };
 
+  module: EnumModules = this.route.snapshot.data['module']
   formControl = new FormControl();
   filteredItems: any
   tempSearchValue = ""
+
+  /**
+   * no search results related
+   */
+  shouldShowNSROption = false
+  noSearchResultsStr = EWStrings.VAL_ERR_NO_SEARCH_RES
 
   ngOnInit(): void {
     this.formControl.valueChanges.pipe(
@@ -92,8 +102,15 @@ export class SearchBarComponent implements OnInit {
       ),
     ).subscribe((data: any) => {
       if (data['data'] != null) {
+        // reset nsr option
+        this.shouldShowNSROption = false
+
         // TODO: TEMP - get hardcoded data for commo and crypto mods
-        switch (this.route.snapshot.data['module']) {
+        switch (this.module) {
+          case EnumModules.equities:
+            this.filteredItems = data['data'].slice(0, 1000)
+            break
+
           case EnumModules.commodities:
             this.getCommoList()
             break
@@ -103,12 +120,17 @@ export class SearchBarComponent implements OnInit {
             break
 
           default:
-            this.filteredItems = data['data'].slice(0, 1000)
+            console.log(`search-bar: module "${this.module}" not implemented`)
             break
         }
-      } else
-        // show snackbar error
-        this.commonServices.showSnackbar(EWStrings.errorGeneric(data.error.message))
+      } else {
+        if (data['errors'] == null)
+          // no search results
+          this.shouldShowNSROption = true
+        else
+          // show snackbar error
+          this.commonServices.showSnackbar(EWStrings.errorGeneric(data.error.message))
+      }
     });
   }
 
@@ -171,54 +193,54 @@ export class SearchBarComponent implements OnInit {
 
   // TODO: TEMP - hardcoded crypto list
   cryptoList: Cryptocurrency[] = [
-    {name: "Bitcoin", symbol: "BTC"},
-    {name: "Ethereum", symbol: "ETH"},
-    {name: "Tether", symbol: "USDT"},
-    {name: "USD Coin", symbol: "USDC"},
-    {name: "BNB", symbol: "BNB"},
-    {name: "Cardano", symbol: "ADA"},
-    {name: "XRP", symbol: "XRP"},
-    {name: "Binance USD", symbol: "BUSD"},
-    {name: "Solana", symbol: "SOL"},
-    {name: "Dogecoin", symbol: "DOGE"},
-    {name: "Polkadot", symbol: "DOT"},
-    {name: "Wrapped Bitcoin", symbol: "WBTC"},
-    {name: "TRON", symbol: "TRX"},
-    {name: "Dai", symbol: "DAI"},
-    {name: "Avalanche", symbol: "AVAX"},
-    {name: "Shiba Inu", symbol: "SHIB"},
-    {name: "UNUS SED LEO", symbol: "LEO"},
-    {name: "Polygon", symbol: "MATIC"},
-    {name: "Cronos", symbol: "CRO"},
-    {name: "Litecoin", symbol: "LTC"},
-    {name: "Chainlink", symbol: "LINK"},
-    {name: "FTX Token", symbol: "FTT"},
-    {name: "Uniswap", symbol: "UNI"},
-    {name: "NEAR Protocol", symbol: "NEAR"},
-    {name: "Stellar", symbol: "XLM"},
-    {name: "Bitcoin Cash", symbol: "BCH"},
-    {name: "Monero", symbol: "XMR"},
-    {name: "Ethereum Classic", symbol: "ETC"},
-    {name: "Algorand", symbol: "ALGO"},
-    {name: "Cosmos", symbol: "ATOM"},
-    {name: "Flow", symbol: "FLOW"},
-    {name: "VeChain", symbol: "VET"},
-    {name: "Decentraland", symbol: "MANA"},
-    {name: "ApeCoin", symbol: "APE"},
-    {name: "The Sandbox", symbol: "SAND"},
-    {name: "KuCoin Token", symbol: "KCS"},
-    {name: "Internet Computer", symbol: "ICP"},
-    {name: "Filecoin", symbol: "FIL"},
-    {name: "Elrond", symbol: "EGLD"},
-    {name: "Aave", symbol: "AAVE"},
-    {name: "Theta Network", symbol: "THETA"},
-    {name: "Zcash", symbol: "ZEC"},
-    {name: "TrueUSD", symbol: "TUSD"},
-    {name: "Helium", symbol: "HNT"},
-    {name: "EOS", symbol: "EOS"},
-    {name: "Axie Infinity", symbol: "AXS"},
-    {name: "Maker", symbol: "MKR"},
-    {name: "Huobi Token", symbol: "HT"},
+    { name: "Bitcoin", symbol: "BTC" },
+    { name: "Ethereum", symbol: "ETH" },
+    { name: "Tether", symbol: "USDT" },
+    { name: "USD Coin", symbol: "USDC" },
+    { name: "BNB", symbol: "BNB" },
+    { name: "Cardano", symbol: "ADA" },
+    { name: "XRP", symbol: "XRP" },
+    { name: "Binance USD", symbol: "BUSD" },
+    { name: "Solana", symbol: "SOL" },
+    { name: "Dogecoin", symbol: "DOGE" },
+    { name: "Polkadot", symbol: "DOT" },
+    { name: "Wrapped Bitcoin", symbol: "WBTC" },
+    { name: "TRON", symbol: "TRX" },
+    { name: "Dai", symbol: "DAI" },
+    { name: "Avalanche", symbol: "AVAX" },
+    { name: "Shiba Inu", symbol: "SHIB" },
+    { name: "UNUS SED LEO", symbol: "LEO" },
+    { name: "Polygon", symbol: "MATIC" },
+    { name: "Cronos", symbol: "CRO" },
+    { name: "Litecoin", symbol: "LTC" },
+    { name: "Chainlink", symbol: "LINK" },
+    { name: "FTX Token", symbol: "FTT" },
+    { name: "Uniswap", symbol: "UNI" },
+    { name: "NEAR Protocol", symbol: "NEAR" },
+    { name: "Stellar", symbol: "XLM" },
+    { name: "Bitcoin Cash", symbol: "BCH" },
+    { name: "Monero", symbol: "XMR" },
+    { name: "Ethereum Classic", symbol: "ETC" },
+    { name: "Algorand", symbol: "ALGO" },
+    { name: "Cosmos", symbol: "ATOM" },
+    { name: "Flow", symbol: "FLOW" },
+    { name: "VeChain", symbol: "VET" },
+    { name: "Decentraland", symbol: "MANA" },
+    { name: "ApeCoin", symbol: "APE" },
+    { name: "The Sandbox", symbol: "SAND" },
+    { name: "KuCoin Token", symbol: "KCS" },
+    { name: "Internet Computer", symbol: "ICP" },
+    { name: "Filecoin", symbol: "FIL" },
+    { name: "Elrond", symbol: "EGLD" },
+    { name: "Aave", symbol: "AAVE" },
+    { name: "Theta Network", symbol: "THETA" },
+    { name: "Zcash", symbol: "ZEC" },
+    { name: "TrueUSD", symbol: "TUSD" },
+    { name: "Helium", symbol: "HNT" },
+    { name: "EOS", symbol: "EOS" },
+    { name: "Axie Infinity", symbol: "AXS" },
+    { name: "Maker", symbol: "MKR" },
+    { name: "Huobi Token", symbol: "HT" },
   ]
 
   getCryptoList() {
@@ -235,5 +257,20 @@ export class SearchBarComponent implements OnInit {
 
   clearIconOnClick() {
     this.searchInput.nativeElement.value = ""
+  }
+
+  /**
+   * no search results
+   */
+  // show dialog for request addition
+  showRequestAdditionDialog() {
+    console.log("showRequestAdditionDialog()")
+    const dialogRef = this.dialog.open(RequestAddDialogComponent, {
+      panelClass: 'loader-dialog',
+      minWidth: 400,
+      data: {
+        module: this.module
+      }
+    });
   }
 }

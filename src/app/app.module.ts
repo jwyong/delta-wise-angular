@@ -40,6 +40,7 @@ import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashbo
 import { DashTableComponent } from './components/common/dash-table/dash-table.component';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { AuthComponent } from './components/auth/auth/auth.component';
+import { RequestAddDialogComponent } from './components/common/search-bar/request-add-dialog/request-add-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { AuthComponent } from './components/auth/auth/auth.component';
     HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
     WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseModuleComponent, CommoditiesComponent, BaseDashboardComponent,
     RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent, CommodityDashboardComponent, 
-    EquityDashboardComponent, CryptoDashboardComponent, DashTableComponent, AuthComponent,
+    EquityDashboardComponent, CryptoDashboardComponent, DashTableComponent, AuthComponent, RequestAddDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<mat-progress-bar *ngIf="isLoadingDialog" mode="indeterminate"></mat-progress-bar>
+
+<div class="px-4 pt-3 pb-4">
+    <h2 mat-dialog-title>{{getDialogTitle()}}</h2>
+    <form [formGroup]="requestAddForm" (submit)="onSubmit()">
+        <mat-dialog-content class="mat-typography">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{getInputLabel()}}</mat-label>
+                <input matInput #nameInput [formControl]="nameFC" formControlName="name" required>
+                <button type="button" *ngIf="nameInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="nameInput.value=''">
+                    <mat-icon class="text-secondary">close</mat-icon>
+                </button>
+                <mat-error *ngIf="requestAddForm.controls['name'].hasError">{{getNameErrorMsg()}}</mat-error>
+            </mat-form-field>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button class="ms-auto" i18n="@@cancel" mat-raised-button mat-dialog-close>Cancel</button>
+            <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit">Submit</button>
+        </mat-dialog-actions>
+    </form>
+</div>

@@ -23,6 +23,7 @@ export class EquitiesComponent extends BaseModuleComponent implements OnInit {
 
   // setup functions for searchbar
   getOptionsLabel = (item: Company): string => {
+    // null means no search results
     if (item == null) return ""
 
     return `${item.company} (${item.ticker})`
