@@ -6,7 +6,7 @@
 
         <div class="d-flex align-items-center">
             <h2 class="my-auto me-3" i18n="@@watchlists">Watchlists</h2>
-            <mat-chip *ngIf="!isLoadingWatchlist && isWatchlistExpanded" class="cursor-pointer" i18n="@@add_new_watchlist"
+            <mat-chip  class="cursor-pointer" *ngIf="!isLoadingWatchlist && isWatchlistExpanded" i18n="@@add_new_watchlist"
                 (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + Add new watchlist
             </mat-chip>
             <button *ngIf="shouldShowWLEditBtn()" class="ms-2" mat-icon-button
@@ -16,8 +16,8 @@
         </div>
     </mat-expansion-panel-header>
 
-    <mat-chip-list class="scrollable-chip-list pb-3" cdkDropList cdkDropListOrientation="horizontal">
-        <div *ngIf="shouldShowWatchlists()">
+    <mat-chip-list cdkDropList cdkDropListOrientation="horizontal">
+        <div class="scrollable-chip-list pb-2" *ngIf="shouldShowWatchlists()">
             <mat-chip color="primary" class="cursor-pointer" cdkDrag *ngFor="let watchlist of watchlists"
                 (removed)="removeChipOnClick(watchlist)" (click)="chipOnClick(watchlist)"
                 [selected]="selectedWatchlist.id == watchlist.id">
