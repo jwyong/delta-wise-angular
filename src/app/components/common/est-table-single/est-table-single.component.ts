@@ -16,6 +16,7 @@ import { EstimateDialogComponent } from '../estimate-dialog/estimate-dialog.comp
 export class EstTableSingleComponent extends BaseComponent implements OnInit {
   displayedColumns: any[] = []
   displayedData: any[] = []
+  isLoadingTable = false
 
   percDiffColName = 'percDiff'
 
@@ -41,6 +42,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
   override ngOnInit(): void {
     // simulate get table data
     this.setIsLoading(true)
+    this.isLoadingTable = true
 
     setTimeout(() => {
       this.displayedColumns = [EWConstants.EST_TBL_NAME_COL, this.percDiffColName]
@@ -55,6 +57,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
       ]
 
       this.setIsLoading(false)
+      this.isLoadingTable = false
     }, 800);
   }
 

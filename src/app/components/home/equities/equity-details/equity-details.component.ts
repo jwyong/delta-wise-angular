@@ -1,8 +1,7 @@
-import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { Company } from 'src/app/models/equities/company';
-import { DateTimeUtil } from 'src/app/utils/date-time';
+import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
 import { EWStrings } from 'src/app/utils/ew-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { CompanyDetail, CompanyRowType } from '../../../../models/equities/company-detail';
@@ -19,6 +18,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   // company ticker for currect company
   companyTicker = ''
   company: Company | undefined
+  isLoadingTable = false
 
   override ngOnInit(): void {
     // combine router ticker changes + data range changes
@@ -68,13 +68,15 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   // get table dets from api
   async getCompanyDets() {
     this.setIsLoading(true)
+    this.isLoadingTable = true
 
-    // call api TEMP: hardcode to FB
+    // call api
     let result = await this.httpPost<CompanyDetail>(HttpConstants.API_EQUITIES_DETAIL, {
       date_range: this.selectedDateRange, ticker: this.companyTicker
     })
 
     this.setIsLoading(false)
+    this.isLoadingTable = false
 
     // check success status and update jwt + navigate to home
     if (result.status) {

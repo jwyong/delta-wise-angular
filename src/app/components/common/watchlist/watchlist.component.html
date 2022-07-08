@@ -1,13 +1,13 @@
-<mat-expansion-panel [expanded]="isWatchlistExpanded" (opened)="onPanelExpanded()"
-    (afterCollapse)="onPanelCollapsed()">
+<mat-expansion-panel [expanded]="isWatchlistExpanded" (opened)="onPanelExpanded()" (afterCollapse)="onPanelCollapsed()">
     <mat-expansion-panel-header>
         <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingWatchlist" mode="indeterminate">
         </mat-progress-bar>
 
         <div class="d-flex align-items-center">
             <h2 class="my-auto me-3" i18n="@@watchlists">Watchlists</h2>
-            <mat-chip  class="cursor-pointer" *ngIf="!isLoadingWatchlist && isWatchlistExpanded" i18n="@@add_new_watchlist"
-                (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + Add new watchlist
+            <mat-chip class="cursor-pointer" *ngIf="!isLoadingWatchlist && isWatchlistExpanded"
+                i18n="@@add_new_watchlist" (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + Add new
+                watchlist
             </mat-chip>
             <button *ngIf="shouldShowWLEditBtn()" class="ms-2" mat-icon-button
                 (click)="isEditMode = !isEditMode; $event.stopPropagation()">
@@ -15,6 +15,16 @@
             </button>
         </div>
     </mat-expansion-panel-header>
+
+    <div class="ph-col-120" *ngIf="isLoadingWatchlist && watchlists.length == 0">
+        <div class="ph-row">
+            <div class="ph-col-8 big"></div>
+            <div class="ph-col-4 empty big"></div>
+            <div class="ph-col-12 empty"></div>
+        </div>
+    </div>
+
+    <app-ph-list *ngIf="isLoadingWatchlist && watchlists.length == 0"></app-ph-list>
 
     <mat-chip-list cdkDropList cdkDropListOrientation="horizontal">
         <div class="scrollable-chip-list pb-2" *ngIf="shouldShowWatchlists()">

@@ -36,23 +36,34 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
    */
   // get watchlists based on module
   getWatchlists() {
-    switch (this.module) {
-      case EnumModules.equities:
-        this.getWatchlistForEquities()
-        break
+    this.isLoadingWatchlist = true
 
-      case EnumModules.crypto:
-        this.getWatchlistForCrypto()
-        break
+    setTimeout(() => {
+      switch (this.module) {
+        case EnumModules.equities:
+          this.getWatchlistForEquities()
+          break
 
-      case EnumModules.commodities:
-        this.getWatchlistForCommodities()
-        break
-    }
+        case EnumModules.crypto:
+          this.getWatchlistForCrypto()
+          break
 
-    // select first item by default if got
-    if (this.watchlists.length > 0)
-      this.chipOnClick(this.watchlists[0])
+        case EnumModules.commodities:
+          this.getWatchlistForCommodities()
+          break
+      }
+
+      // select first item by default if got
+      if (this.watchlists.length > 0) {
+        this.selectedWatchlist = {
+          id: this.watchlists[0].id, name: this.watchlists[0].name,
+          children: this.getRandomWatchlistItems()
+        }
+      }
+
+      this.isLoadingWatchlist = false
+    }, 800);
+
   }
 
   getWatchlistForEquities() {
@@ -96,9 +107,12 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
     this.isLoadingWatchlist = true
 
     setTimeout(() => {
+      var children: WatchlistItem[] = []
+      if (watchlist.id != "2") children = this.getRandomWatchlistItems()
+
       this.selectedWatchlist = {
         id: watchlist.id, name: watchlist.name,
-        children: this.getRandomWatchlistItems()
+        children: children
       }
       this.isLoadingWatchlist = false
       this.isEditMode = false
@@ -224,7 +238,7 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
 
   // show watchlist items if got items in selected watchlist + not loading
   shouldShowWLItems() {
-    return !this.isLoadingWatchlist && (this.selectedWatchlist.children ?? []).length > 0
+    return (this.selectedWatchlist.children ?? []).length > 0
   }
 
   // show empty UX if no watchlists / items in selected watchlist after loading

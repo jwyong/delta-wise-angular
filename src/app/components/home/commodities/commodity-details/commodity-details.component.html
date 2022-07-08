@@ -1,4 +1,6 @@
-<div class="row align-items-center">
+<app-ph-est-table-single *ngIf="shouldShowTablePH(estTable)"></app-ph-est-table-single>
+
+<div class="row align-items-center" *ngIf="!shouldShowTablePH(estTable)">
   <div class="col-12 col-md-8 col-lg-9 col-xl-10">
     <div class="d-flex align-items-center">
       <h1 class="my-auto">{{title}}</h1>
@@ -10,12 +12,13 @@
 
   <div class="col-12 col-md-4 col-lg-3 col-xl-2">
     <app-date-range-picker class="ms-auto" [sdr]="selectedDateRangeBS.value"
-    (onDateRangeSelected)="onSelectDateRange($event)">
-  </app-date-range-picker>
+      (onDateRangeSelected)="onSelectDateRange($event)">
+    </app-date-range-picker>
   </div>
 </div>
 
-<app-est-table-single (module)="module" [title]="title"></app-est-table-single>
+<app-est-table-single #estTable (module)="module" [title]="title"></app-est-table-single>
 
-<p class="text-secondary" i81n="@@estimate_table_info">*Cell value reflects your estimate versus the median
+<p class="text-secondary" i81n="@@estimate_table_info" *ngIf="!shouldShowTablePH(estTable)">
+  *Cell value reflects your estimate versus the median
 </p>

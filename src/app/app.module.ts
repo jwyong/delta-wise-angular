@@ -41,6 +41,9 @@ import { DashTableComponent } from './components/common/dash-table/dash-table.co
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { AuthComponent } from './components/auth/auth/auth.component';
 import { RequestAddDialogComponent } from './components/common/search-bar/request-add-dialog/request-add-dialog.component';
+import { PhEstTableSingleComponent } from './components/common/placeholders/ets-placeholder/ph-est-table-single.component';
+import { PhListComponent } from './components/common/placeholders/ph-list/ph-list.component';
+import { PhEstTableEqtComponent } from './components/common/placeholders/ph-est-table-eqt/ph-est-table-eqt.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,7 @@ import { RequestAddDialogComponent } from './components/common/search-bar/reques
     HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
     WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseModuleComponent, CommoditiesComponent, BaseDashboardComponent,
     RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent, CommodityDashboardComponent, 
-    EquityDashboardComponent, CryptoDashboardComponent, DashTableComponent, AuthComponent, RequestAddDialogComponent,
+    EquityDashboardComponent, CryptoDashboardComponent, DashTableComponent, AuthComponent, RequestAddDialogComponent, PhEstTableSingleComponent, PhListComponent, PhEstTableEqtComponent,
   ],
   imports: [
     BrowserModule,

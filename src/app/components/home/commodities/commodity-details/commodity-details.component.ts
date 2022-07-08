@@ -1,7 +1,8 @@
+import { EstTableSingleComponent } from './../../../common/est-table-single/est-table-single.component';
 import { EnumModules } from 'src/app/utils/ew-constants';
 import { Commodity } from './../../../../models/commodities/commodity';
 import { CommoditiesComponent } from './../commodities.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 
 @Component({
@@ -53,4 +54,7 @@ export class CommodityDetailsComponent extends CommoditiesComponent implements O
   /**
   * UI binding
   */
+  shouldShowTablePH(estTable?: EstTableSingleComponent) {
+    return estTable?.isLoadingTable && estTable.displayedData.length == 0
+  }
 }

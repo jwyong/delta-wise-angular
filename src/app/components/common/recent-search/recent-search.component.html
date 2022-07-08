@@ -1,8 +1,11 @@
 <mat-expansion-panel [expanded]="isRecentSearchExpanded" (opened)="onOpen()">
     <mat-expansion-panel-header>
-        <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingRecentList" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar class="position-absolute fixed-top" *ngIf="isLoadingRecentList" mode="indeterminate">
+        </mat-progress-bar>
         <h2 class="my-auto" i18n="@@recent_search">Recently Searched</h2>
     </mat-expansion-panel-header>
+
+    <app-ph-list *ngIf="isLoadingRecentList && recentSearchList.length == 0"></app-ph-list>
 
     <div class="mb-3" *ngIf="shouldShowList()">
         <mat-list role="list">

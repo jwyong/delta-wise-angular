@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
+import { EstTableSingleComponent } from 'src/app/components/common/est-table-single/est-table-single.component';
 import { EnumModules } from 'src/app/utils/ew-constants';
 import { Cryptocurrency } from './../../../../models/crypto/crypto';
 import { CryptoComponent } from './../crypto.component';
@@ -53,4 +54,7 @@ export class CryptoDetailsComponent extends CryptoComponent implements OnInit {
   /**
   * UI binding
   */
+  shouldShowTablePH(estTable?: EstTableSingleComponent) {
+    return estTable?.isLoadingTable && estTable.displayedData.length == 0
+  }
 }
