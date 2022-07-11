@@ -41,7 +41,7 @@ export class RecentSearchComponent extends BaseDashboardComponent implements OnI
       }
 
       this.isLoadingRecentList = false
-    }, 800);
+    }, 1000);
   }
 
   getRecentSearchForEqt() {

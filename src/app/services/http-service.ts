@@ -11,7 +11,7 @@ export class HttpService {
     constructor(public httpClient: HttpClient) { }
 
     async httpPost<T>(
-        endpoint: string, body: any, shouldHideErrors?: boolean
+        endpoint: string, body: any
     ) {
         let fullURL = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${endpoint}`
         let json = JSON.stringify(body);
@@ -28,24 +28,22 @@ export class HttpService {
                 console.log("httpPost, error = ", error)
 
                 // add error msg to resp obj
+                let errorObj = error.error
+
+                // check for errors array from BE
+                let errorsArray: string[] = errorObj.errors
+
                 var msg: string = ''
-                if (shouldHideErrors != true) {
-                    let errorObj = error.error
+                if (errorsArray != null) {
+                    // use BE message if got
+                    msg = errorObj.message
 
-                    // check for errors array from BE
-                    let errorsArray: string[] = errorObj.errors
-
-                    if (errorsArray != null) {
-                        // use BE message if got
-                        msg = errorObj.message
-
-                        // append first error to msg string if got
-                        if (errorsArray.length > 0)
-                            msg = `${msg} (${errorsArray[0]})`
-                    } else
-                        // use http message if nothing from BE
-                        msg = error.message
-                }
+                    // append first error to msg string if got
+                    if (errorsArray.length > 0)
+                        msg = `${msg} (${errorsArray[0]})`
+                } else
+                    // use http message if nothing from BE
+                    msg = error.message
 
                 resp = error.error
                 resp.message = msg
@@ -58,11 +56,7 @@ export class HttpService {
         let fullURL = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${endpoint}`
 
         return await firstValueFrom(this.httpClient.get(fullURL)).catch((error) => {
-            
-        })
-    }
 
-    private handleError500() {
-        
+        })
     }
 }

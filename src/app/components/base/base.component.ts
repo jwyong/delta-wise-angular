@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { NavigationEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-view-model';
 import { filter } from 'rxjs';
+import { Resp } from 'src/app/models/common/resp';
 import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
 import { EWStrings } from 'src/app/utils/ew-strings';
@@ -30,7 +31,7 @@ export class BaseComponent implements OnInit {
     protected _snackBar: MatSnackBar,
     protected httpService: HttpService,
     protected dialog: MatDialog
-  ) {  }
+  ) { }
 
   ngOnInit(): void { }
 
@@ -113,18 +114,43 @@ export class BaseComponent implements OnInit {
    * http calls
    */
   async httpPost<T>(
-    endpoint: string, body: any, shouldHideErrors?: boolean
+    endpoint: string, body: any, shouldShowErrors: boolean = true
   ) {
-    let result = await this.httpService.httpPost<T>(endpoint, body, shouldHideErrors)
+    let result = await this.httpService.httpPost<T>(endpoint, body)
 
-    // show error snackbar if failed
-    if (!result.status && result.message != null)
-      this.showSnackbar(result.message)
+    // handle resp error
+    this.handleRespError(result, shouldShowErrors)
 
     return result;
   }
 
   async httpGet(endpoint: string) {
     this.httpService.httpGet(endpoint)
+  }
+
+  // handle http resp error
+  private handleRespError(result: Resp<any>, shouldShowErrors: boolean) {
+    if (!result.status)
+      // show logout dialog if token expired
+      if (result.errors?.includes("Your token is not valid")) {
+        alert(EWStrings.VAL_HTTP_TOKEN_EXPIRED)
+        this.logout()
+      } else
+        // show snackbar for normal errors if should show
+        if (shouldShowErrors && result.message != null)
+          this.showSnackbar(result.message)
+  }
+
+  /**
+   * logout
+   */
+  // delete jwt from ls then navigate to main page
+  // TODO: add http logout query when BE ready
+  logout() {
+    // delete jwtToken from ls
+    this.localStorageService.setJwtToken()
+
+    // refresh page
+    this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
   }
 }

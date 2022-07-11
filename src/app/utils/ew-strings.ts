@@ -37,7 +37,8 @@ export class EWStrings {
     public static VAL_INVALID_PWORD_CHARS: string = 'Password must have at least 1 upper case, 1 lower case, 1 number and 1 symbol';
     public static VAL_INVALID_PWORD_DIFF: string = 'Passwords not matching';
 
-    //=== login
+    //=== login/logout
+    public static VAL_LOGOUT_CONFIRM = $localize`:@@logout_confirm:Are you sure you want to logout?`
 
     //=== change pword
     public static VAL_PWORD_UPDATE_SUCCESS: string = 'Password updated successfully, please login with the new password.';
@@ -99,6 +100,9 @@ export class EWStrings {
 
         return errStr
     }
+
+    // token expiry (logout dialog)
+    public static VAL_HTTP_TOKEN_EXPIRED = $localize`:@@err_token_expired:Your session has expired. Please login again to continue.`
 
     // no search result
     public static VAL_ERR_NO_SEARCH_RES = $localize`:@@err_no_search_res:No search results. Click here to request addition.`

@@ -1,3 +1,4 @@
+import { EWStrings } from 'src/app/utils/ew-strings';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { LocalStorageService } from 'src/app/services/local-storage-service';
@@ -85,16 +86,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   //=== logout
   logoutOnClick() {
-    this.setIsLoading(true)
-
-    setTimeout(() => {
-      // delete jwtToken from ls
-      this.localStorageService.setJwtToken()
-
-      // refresh page
-      this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
-
-      this.setIsLoading(false)
-    }, 1000);
+    if (confirm(EWStrings.VAL_LOGOUT_CONFIRM)) {
+      this.logout()
+    }
   }
 }
