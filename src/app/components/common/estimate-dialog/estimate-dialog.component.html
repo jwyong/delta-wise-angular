@@ -48,9 +48,9 @@
     </mat-dialog-content>
 
     <mat-dialog-actions>
-      <button class="ms-auto" i18n="@@cancel" mat-raised-button mat-dialog-close>Cancel</button>
+      <button class="ms-auto" i18n="@@close" mat-raised-button mat-dialog-close>Close</button>
       <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit"
-        [disabled]="isSubmitBtnDisabled()">Submit</button>
+        *ngIf="!isSubmitBtnDisabled()">Submit</button>
     </mat-dialog-actions>
   </form>
 </div>
