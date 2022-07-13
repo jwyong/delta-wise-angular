@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Commodity } from 'src/app/models/commodities/commodity';
-import { Cryptocurrency } from 'src/app/models/crypto/crypto';
-import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
+import { COMMON_STR } from 'src/app/constants/common-strings';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { RouterConstants } from 'src/app/utils/router-constants';
 
 /**
@@ -47,8 +46,8 @@ export class DashTableComponent implements OnInit {
   getNonHeaderCellClass(item: any) {
     // data columns - use data col css
     if (item == this.mouseOverItem)
-      return `${EWConstants.EST_TBL_DATA_CELL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
-    else return EWConstants.EST_TBL_DATA_CELL_BC
+      return `${COMMON_STR.estimates.constants.table.data_cell_base_class} ${COMMON_STR.estimates.constants.table.highlight_class}`
+    else return COMMON_STR.estimates.constants.table.data_cell_base_class
   }
 
   // navigate to commodity detail

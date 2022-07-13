@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/app/models/equities/company';
-import { EWStrings } from 'src/app/utils/ew-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
 import { environment } from 'src/environments/environment';
 import { BaseModuleComponent } from '../base-home/base-home.component';
+import { EQT_STR } from '../../../constants/modules/equities-strings';
 
 @Component({
   selector: 'app-equities',
@@ -13,7 +13,7 @@ import { BaseModuleComponent } from '../base-home/base-home.component';
 })
 export class EquitiesComponent extends BaseModuleComponent implements OnInit {
   override ngOnInit(): void {
-    this.searchBarLabel = EWStrings.VAL_COMPANY
+    this.searchBarLabel = EQT_STR.company.singular
   }
 
   /**

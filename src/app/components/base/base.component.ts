@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { Resp } from 'src/app/models/common/resp';
 import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
-import { EWStrings } from 'src/app/utils/ew-strings';
 import { RouterConstants } from 'src/app/utils/router-constants';
+import { ERROR_STR } from '../../constants/error-strings';
+import { COMMODITY_STR } from '../../constants/modules/commo-strings';
+import { CRYPTO_STR } from '../../constants/modules/crypto-strings';
+import { EQT_STR } from '../../constants/modules/equities-strings';
 import { LocalStorageService } from './../../services/local-storage-service';
-import { EnumModules } from './../../utils/ew-constants';
 import { DialogGenericComponent, DialogGenericData } from './../common/dialog-generic/dialog-generic.component';
 
 @Component({
@@ -94,14 +97,11 @@ export class BaseComponent implements OnInit {
   // get full title for router (e.g. Equities > Details)
   getRouterTitle() {
     switch (this.getRouterData('module')) {
-      case EnumModules.commodities:
-        return EWStrings.VAL_COMMODITIES
+      case EnumModules.commodities: return COMMODITY_STR.commodity.plural
 
-      case EnumModules.crypto:
-        return EWStrings.VAL_CRYPTOS
+      case EnumModules.crypto: return CRYPTO_STR.crypto.plural
 
-      default:
-        return EWStrings.VAL_EQUITIES
+      default: return EQT_STR.equity.plural
     }
   }
 
@@ -154,8 +154,8 @@ export class BaseComponent implements OnInit {
       if (result.errors?.includes("Your token is not valid")) {
         this.showGenericDialog(
           {
-            title: EWStrings.VAL_HTTP_TOKEN_EXPIRED_TITLE,
-            subTitle: EWStrings.VAL_HTTP_TOKEN_EXPIRED_DESC,
+            title: ERROR_STR.jwt.expired.title,
+            subTitle: ERROR_STR.jwt.expired.subTitle,
             isSingleAction: true,
             positiveBtnFunc: () => this.logout()
           }, true)

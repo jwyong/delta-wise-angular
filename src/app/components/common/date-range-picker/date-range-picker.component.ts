@@ -1,6 +1,6 @@
-import { DateRange } from '../../../models/common/date-range';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { DateRange } from '../../../models/common/date-range';
+import { COMMON_STR } from '../../../constants/common-strings';
 
 /**
  * date range picker for estimates
@@ -27,11 +27,11 @@ export class DateRangePickerComponent implements OnInit {
   @Input()
   sdr = 0
   dateRanges: DateRange[] = [
-    { value: 0, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_0}` },
-    { value: 90, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_90}` },
-    { value: 28, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_28}` },
-    { value: 14, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_14}` },
-    { value: 7, displayValue: $localize`:@@company:${EWStrings.VAL_DRP_7}` },
+    { value: 0, displayValue: COMMON_STR.date_range_picker[0] },
+    { value: 90, displayValue: COMMON_STR.date_range_picker[90] },
+    { value: 28, displayValue: COMMON_STR.date_range_picker[28] },
+    { value: 14, displayValue: COMMON_STR.date_range_picker[14] },
+    { value: 7, displayValue: COMMON_STR.date_range_picker[7] },
   ];
 
   @Output() onDateRangeSelected: EventEmitter<number> = new EventEmitter();

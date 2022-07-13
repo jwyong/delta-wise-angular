@@ -1,11 +1,10 @@
-import { LoginResp } from './../../../models/auth/login-resp';
-import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppModule } from 'src/app/app.module';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { EWStrings } from '../../../utils/ew-strings';
+import { VALIDATION_STR } from 'src/app/constants/validation-strings';
+import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { RouterConstants } from '../../../utils/router-constants';
+import { LoginResp } from './../../../models/auth/login-resp';
 import { HttpConstants } from './../../../utils/http-constants';
 import { BaseAuthComponent } from './../base-auth/base-auth.component';
 
@@ -24,11 +23,11 @@ export class LoginComponent extends BaseAuthComponent {
   // pword validator
   passwordFC = new FormControl('', [Validators.required, Validators.minLength(8)]);
   getPwordErrorMsg() {
-    if (this.passwordFC.hasError(EWConstants.KEY_REQUIRED)) {
-      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
+    if (this.passwordFC.hasError(VALIDATION_STR.keys.required)) {
+      return VALIDATION_STR.validation.required
     }
 
-    return this.passwordFC.value.length < 8 ? $localize`:@@vld_invalid_pword:${EWStrings.VAL_INVALID_PWORD_LENGTH}` : '';
+    return this.passwordFC.value.length < 8 ? VALIDATION_STR.validation.pword.length: '';
   }
   shouldShowPword = false
 

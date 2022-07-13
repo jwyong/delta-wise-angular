@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
-import { EnumModules } from 'src/app/utils/ew-constants';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
+import { VALIDATION_STR } from 'src/app/constants/validation-strings';
+import { AUTH_STR } from '../../../constants/auth-strings';
 
 /**
  * main page for auth module
@@ -25,7 +26,7 @@ export class AuthComponent extends BaseComponent implements OnInit {
     return this.getNestedRouterData('module') == EnumModules.resetPword
   }
   getPwordTooltipText() {
-    return $localize`:@@vld_pword_rule:${EWStrings.VAL_PWORD_RULE}`
+    return VALIDATION_STR.rules.pword
   }
 
 
@@ -33,13 +34,13 @@ export class AuthComponent extends BaseComponent implements OnInit {
   getCardTitle() {
     switch (this.getNestedRouterData('module')) {
       case EnumModules.login:
-        return EWStrings.VAL_LOGIN
+        return AUTH_STR.login.title
 
       case EnumModules.forgotPword:
-        return EWStrings.VAL_FORGOT_PWORD
+        return AUTH_STR.forgot_pword.title
 
       case EnumModules.resetPword:
-        return EWStrings.VAL_RESET_PWORD
+        return AUTH_STR.reset_pword.title
 
       default:
         return ""
@@ -49,13 +50,13 @@ export class AuthComponent extends BaseComponent implements OnInit {
   getCardSubTitle() {
     switch (this.getNestedRouterData('module')) {
       case EnumModules.login:
-        return EWStrings.VAL_LOGIN_SUBTITLE
+        return AUTH_STR.login.subTitle
 
       case EnumModules.forgotPword:
-        return EWStrings.VAL_FORGOT_PWORD_SUBTITLE
+        return AUTH_STR.forgot_pword.subTitle
 
       case EnumModules.resetPword:
-        return EWStrings.VAL_RESET_PWORD_SUBTITLE
+        return AUTH_STR.reset_pword.subTitle
 
       default:
         return ""

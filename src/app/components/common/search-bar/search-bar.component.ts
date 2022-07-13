@@ -1,15 +1,15 @@
-import { RequestAddDialogComponent } from './request-add-dialog/request-add-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { catchError, debounceTime, distinctUntilChanged, filter, finalize, of, switchMap, tap } from 'rxjs';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { Cryptocurrency } from 'src/app/models/crypto/crypto';
+import { ERROR_STR, ErroStrDyn } from '../../../constants/error-strings';
 import { Commodity, CommoditySearch } from './../../../models/commodities/commodity';
 import { CommonServices } from './../../../services/common-services';
 import { DataService } from './../../../services/data-service';
-import { EnumModules } from './../../../utils/ew-constants';
-import { EWStrings } from './../../../utils/ew-strings';
+import { RequestAddDialogComponent } from './request-add-dialog/request-add-dialog.component';
 
 /**
  * search bar on main module page (includes optional grouping function)
@@ -73,7 +73,7 @@ export class SearchBarComponent implements OnInit {
    * no search results related
    */
   shouldShowNSROption = false
-  noSearchResultsStr = EWStrings.VAL_ERR_NO_SEARCH_RES
+  noSearchResultsStr = ERROR_STR.search.no_results
 
   ngOnInit(): void {
     this.formControl.valueChanges.pipe(
@@ -129,7 +129,7 @@ export class SearchBarComponent implements OnInit {
           this.shouldShowNSROption = true
         else
           // show snackbar error
-          this.commonServices.showSnackbar(EWStrings.errorGeneric(data.error.message))
+          this.commonServices.showSnackbar(ErroStrDyn.errorGeneric(data.error.message))
       }
     });
   }

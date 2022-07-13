@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { EstTableSingleComponent } from 'src/app/components/common/est-table-single/est-table-single.component';
-import { EnumModules } from 'src/app/utils/ew-constants';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { Cryptocurrency } from './../../../../models/crypto/crypto';
 import { CryptoComponent } from './../crypto.component';
 

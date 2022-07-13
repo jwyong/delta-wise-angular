@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { EWConstants } from 'src/app/utils/ew-constants';
+import { VALIDATION_STR } from 'src/app/constants/validation-strings';
 import { RouterConstants } from 'src/app/utils/router-constants';
-import { EWStrings } from '../../../utils/ew-strings';
+import { AUTH_STR } from '../../../constants/auth-strings';
 import { BaseAuthComponent } from './../base-auth/base-auth.component';
 
 @Component({
@@ -50,26 +50,26 @@ export class ResetPwordComponent extends BaseAuthComponent implements OnInit {
 
   getNewPwordErrorMsg() {
     // required
-    if (this.newPwordFC.hasError(EWConstants.KEY_REQUIRED))
-      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
+    if (this.newPwordFC.hasError(VALIDATION_STR.keys.required))
+      return VALIDATION_STR.validation.required
 
     // length
     if (this.newPwordFC.value.length < 8)
-      return $localize`:@@vld_invalid_pword_length:${EWStrings.VAL_INVALID_PWORD_LENGTH}`
+      return VALIDATION_STR.validation.pword.length
 
     // characters - show error
-    return $localize`:@@vld_invalid_pword_chars:${EWStrings.VAL_INVALID_PWORD_CHARS}`
+    return VALIDATION_STR.validation.pword.chars
   }
 
   getConfirmPwordErrorMsg() {
     // required
-    if (this.confirmPwordFC.hasError(EWConstants.KEY_REQUIRED)) {
-      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
+    if (this.confirmPwordFC.hasError(VALIDATION_STR.keys.required)) {
+      return VALIDATION_STR.validation.required
     }
 
     // doesn't match new pword
     if (this.confirmPwordFC.value != this.newPwordFC.value)
-      return $localize`:@@vld_pword_diff:${EWStrings.VAL_INVALID_PWORD_DIFF}`
+      return VALIDATION_STR.validation.pword.match
     else return ''
   }
 
@@ -91,7 +91,7 @@ export class ResetPwordComponent extends BaseAuthComponent implements OnInit {
     setTimeout(() => {
       this.setIsLoading(false)
 
-      alert($localize`:@@vld_pword_update_success:${EWStrings.VAL_PWORD_UPDATE_SUCCESS}`)
+      alert(AUTH_STR.change_pword.success)
       this.navigateTo(RouterConstants.ROUTER_PATH_LOGIN)
     }, 2000);
   }

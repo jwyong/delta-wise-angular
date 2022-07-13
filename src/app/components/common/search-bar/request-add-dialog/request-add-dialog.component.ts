@@ -1,8 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { CommonStrDyn } from 'src/app/constants/common-strings';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
+import { VALIDATION_STR } from 'src/app/constants/validation-strings';
+import { COMMON_STR } from '../../../../constants/common-strings';
+import { COMMODITY_STR } from '../../../../constants/modules/commo-strings';
+import { CRYPTO_STR } from '../../../../constants/modules/crypto-strings';
+import { EQT_STR } from '../../../../constants/modules/equities-strings';
 
 @Component({
   selector: 'app-request-add-dialog',
@@ -31,31 +36,36 @@ export class RequestAddDialogComponent implements OnInit {
    */
   // "Request new company" based on module
   getDialogTitle() {
+    var moduleName: string
     switch (this.data.module) {
       case EnumModules.equities:
-        return EWStrings.addNew(EWStrings.VAL_COMPANY)
+        moduleName = EQT_STR.company.singular
+        break
 
       case EnumModules.commodities:
-        return EWStrings.addNew(EWStrings.VAL_COMMODITY)
+        moduleName = COMMODITY_STR.commodity.singular
+        break
 
       case EnumModules.crypto:
-        return EWStrings.addNew(EWStrings.VAL_CRYPTO)
+        moduleName = CRYPTO_STR.crypto.singular
+        break
 
-      default: return ""
+      default:
+        moduleName = ""
+        break
     }
+
+    return CommonStrDyn.addNew(moduleName)
   }
 
   // "Company name"
   getInputLabel() {
     switch (this.data.module) {
-      case EnumModules.equities:
-        return EWStrings.VAL_COMP_NAME
+      case EnumModules.equities: return COMMON_STR.request_add.input_label.equity
 
-      case EnumModules.commodities:
-        return EWStrings.VAL_COMMO_NAME
+      case EnumModules.commodities: return COMMON_STR.request_add.input_label.commodity
 
-      case EnumModules.crypto:
-        return EWStrings.VAL_CRYPTO_NAME
+      case EnumModules.crypto: return COMMON_STR.request_add.input_label.crypto
 
       default: return ''
     }
@@ -64,8 +74,8 @@ export class RequestAddDialogComponent implements OnInit {
   // validation
   getNameErrorMsg() {
     // required
-    if (this.nameFC.hasError(EWConstants.KEY_REQUIRED))
-      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
+    if (this.nameFC.hasError(VALIDATION_STR.keys.required))
+      return VALIDATION_STR.validation.required
 
     return ""
   }

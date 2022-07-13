@@ -1,24 +1,22 @@
-import { AuthComponent } from './components/auth/auth/auth.component';
-import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashboard/crypto-dashboard.component';
-import { EquityDashboardComponent } from './components/home/equities/equity-dashboard/equity-dashboard.component';
-import { CommodityDashboardComponent } from './components/home/commodities/commodity-dashboard/commodity-dashboard.component';
-import { CryptoDetailsComponent } from './components/home/crypto/crypto-details/crypto-details.component';
-import { EnumModules } from './utils/ew-constants';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EWConstants } from 'src/app/utils/ew-constants';
+import { AuthComponent } from './components/auth/auth/auth.component';
 import { ForgotPwordComponent } from './components/auth/forgot-pword/forgot-pword.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ResetPwordComponent } from './components/auth/reset-pword/reset-pword.component';
 import { CommoditiesComponent } from './components/home/commodities/commodities.component';
+import { CommodityDashboardComponent } from './components/home/commodities/commodity-dashboard/commodity-dashboard.component';
+import { CommodityDetailsComponent } from './components/home/commodities/commodity-details/commodity-details.component';
+import { CryptoDashboardComponent } from './components/home/crypto/crypto-dashboard/crypto-dashboard.component';
+import { CryptoDetailsComponent } from './components/home/crypto/crypto-details/crypto-details.component';
 import { CryptoComponent } from './components/home/crypto/crypto.component';
 import { EquitiesComponent } from './components/home/equities/equities.component';
+import { EquityDashboardComponent } from './components/home/equities/equity-dashboard/equity-dashboard.component';
 import { EquityDetailsComponent } from './components/home/equities/equity-details/equity-details.component';
 import { HomeComponent } from './components/home/home/home.component';
-import { BaseDashboardComponent } from './components/home/base-dashboard/base-dashboard.component';
-import { EWStrings } from './utils/ew-strings';
+import { COMMON_STR } from './constants/common-strings';
+import { EnumModules } from './constants/enum/enum-modules';
 import { RouterConstants } from './utils/router-constants';
-import { CommodityDetailsComponent } from './components/home/commodities/commodity-details/commodity-details.component';
 
 const routes: Routes = [
   /**
@@ -69,7 +67,7 @@ const routes: Routes = [
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:ticker`,
             component: EquityDetailsComponent,
-            data: { subTitle: EWStrings.VAL_DETAILS },
+            data: { subTitle: COMMON_STR.details },
           },
         ]
       },
@@ -87,7 +85,7 @@ const routes: Routes = [
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:id`,
             component: CommodityDetailsComponent,
-            data: { subTitle: EWStrings.VAL_DETAILS },
+            data: { subTitle: COMMON_STR.details },
           },
         ]
       },
@@ -105,7 +103,7 @@ const routes: Routes = [
           {
             path: `${RouterConstants.ROUTER_PATH_DETAILS}/:id`,
             component: CryptoDetailsComponent,
-            data: { subTitle: EWStrings.VAL_DETAILS },
+            data: { subTitle: COMMON_STR.details },
           },
         ]
       },

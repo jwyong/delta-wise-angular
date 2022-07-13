@@ -1,10 +1,9 @@
-import { Cryptocurrency } from '../../../models/crypto/crypto';
-import { Commodity } from '../../../models/commodities/commodity';
-import { EnumModules } from '../../../utils/ew-constants';
-import { BaseComponent } from '../../base/base.component';
 import { Component, OnInit } from '@angular/core';
-import { EWConstants } from 'src/app/utils/ew-constants';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { RouterConstants } from 'src/app/utils/router-constants';
+import { Commodity } from '../../../models/commodities/commodity';
+import { Cryptocurrency } from '../../../models/crypto/crypto';
+import { BaseComponent } from '../../base/base.component';
 
 /**
  * base class for dashboard page for each module

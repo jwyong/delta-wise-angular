@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecentSearch } from './../../../models/common/recent-search';
-import { EnumModules } from './../../../utils/ew-constants';
 import { BaseDashboardComponent } from '../../home/base-dashboard/base-dashboard.component';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 
 @Component({
   selector: 'app-recent-search',

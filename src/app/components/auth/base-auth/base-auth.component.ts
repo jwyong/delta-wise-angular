@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/components/base/base.component';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { VALIDATION_STR } from '../../../constants/validation-strings';
 
 @Component({
   selector: 'app-base-auth',
@@ -18,10 +17,10 @@ export class BaseAuthComponent extends BaseComponent implements OnInit {
   // email validator
   emailFC = new FormControl('', [Validators.required, Validators.email]);
   getEmailErrorMsg() {
-    if (this.emailFC.hasError(EWConstants.KEY_REQUIRED)) {
-      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
+    if (this.emailFC.hasError(VALIDATION_STR.keys.required)) {
+      return VALIDATION_STR.validation.required
     }
 
-    return this.emailFC.hasError('email') ? $localize`:@@vld_invalid_email:${EWStrings.VAL_INVALID_EMAIL}` : '';
+    return this.emailFC.hasError(VALIDATION_STR.keys.email) ? VALIDATION_STR.validation.email : '';
   }
 }

@@ -1,10 +1,10 @@
-import { Cryptocurrency } from './../../../models/crypto/crypto';
 import { Component, OnInit } from '@angular/core';
-import { EWStrings } from 'src/app/utils/ew-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
+import { RouterConstants } from 'src/app/utils/router-constants';
 import { environment } from 'src/environments/environment';
 import { BaseModuleComponent } from '../base-home/base-home.component';
-import { RouterConstants } from 'src/app/utils/router-constants';
+import { CRYPTO_STR } from '../../../constants/modules/crypto-strings';
+import { Cryptocurrency } from './../../../models/crypto/crypto';
 
 @Component({
   selector: 'app-crypto',
@@ -13,7 +13,7 @@ import { RouterConstants } from 'src/app/utils/router-constants';
 })
 export class CryptoComponent extends BaseModuleComponent implements OnInit {
   override ngOnInit(): void {
-    this.searchBarLabel = EWStrings.VAL_CRYPTO
+    this.searchBarLabel = CRYPTO_STR.crypto.singular
   }
 
   /**

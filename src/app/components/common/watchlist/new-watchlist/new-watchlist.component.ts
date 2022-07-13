@@ -1,8 +1,7 @@
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { VALIDATION_STR } from 'src/app/constants/validation-strings';
 
 @Component({
   selector: 'app-new-watchlist',
@@ -26,8 +25,8 @@ export class NewWatchlistComponent implements OnInit {
   // validation
   getNameErrorMsg() {
     // required
-    if (this.nameFC.hasError(EWConstants.KEY_REQUIRED))
-      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
+    if (this.nameFC.hasError(VALIDATION_STR.keys.required))
+      return VALIDATION_STR.validation.required
 
     return ""
   }

@@ -1,7 +1,7 @@
-import { EWStrings } from 'src/app/utils/ew-strings';
-import { BaseDashboardComponent } from './../../base-dashboard/base-dashboard.component';
 import { Component, OnInit } from '@angular/core';
+import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { Commodity } from 'src/app/models/commodities/commodity';
+import { BaseDashboardComponent } from './../../base-dashboard/base-dashboard.component';
 import { CDConstants } from './cd-constants';
 
 @Component({
@@ -57,7 +57,7 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
       case "commodity":
       case "symbol":
       case "currency":
-        return EWStrings.capitalise(value);
+        return CommonStrDyn.capitalise(value);
 
       case "mainExchange":
         return "Main Exchange"

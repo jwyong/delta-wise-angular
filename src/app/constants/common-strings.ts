@@ -1,0 +1,209 @@
+import { EnumModules } from "./enum/enum-modules";
+import { EqtStrDyn } from "./modules/equities-strings";
+
+export const COMMON_STR = {
+    // common
+    details: $localize`:@@details:Details`,
+
+    // date as ago
+    date_as_ago: {
+        long_time_ago: $localize`:@@long_time_ago:a long time ago`,
+        just_now: $localize`:@@just_now:just now`,
+        moment_ago: $localize`:@@moment_ago:a moment ago`,
+        units_ago: {
+            singular: [
+                $localize`:@@second_ago:second ago`, $localize`:@@minute_ago:minute ago`, $localize`:@@hour_ago:hour ago`, 
+                $localize`:@@day_ago:day ago`, $localize`:@@month_ago:month ago`, $localize`:@@year_ago:year ago`,
+            ],
+            plural: [
+                $localize`:@@seconds_ago:seconds ago`, $localize`:@@minutes_ago:minutes ago`, $localize`:@@hours_ago:hours ago`, 
+                $localize`:@@days_ago:days ago`, $localize`:@@months_ago:months ago`, $localize`:@@years_ago:years ago`,
+            ]
+        }
+    },
+
+    // search > request add 
+    request_add: {
+        input_label: {
+            equity: $localize`:@@equity_ra_input:Company name and ticker`,
+            commodity: $localize`:@@commo_ra_input:Commodity name, main exchange, category, etc.`,
+            crypto: $localize`:@@crypto_ra_input:Cryptocurrency name and symbol`
+        }
+    },
+
+    // watchlist
+    watchlist: {
+        delete: {
+            title: $localize`:@@delete_watchlist_title:Delete watchlist`
+        }
+    },
+
+    // estimates
+    estimates: {
+        constants: {
+            table: {
+                name_col: 'name',
+                highlight_class: 'est-table-hover',
+                first_col_base_class: 'est-table-first-col',
+                data_cell_base_class: 'text-center est-table-data-col cursor-pointer',
+            }
+        },
+        perc_diff: {
+            title: $localize`:@@est_diff:Percentage Difference (%)`,
+            arr_value: [
+                "2.5", "5.0", "7.5", "10.0", "12.5", "15.0", "17.5", "20.0", "20.0"
+            ],
+            arr_range: [
+                "0 - 2.5%", "2.5 - 5.0%", "5.0 - 7.5%", "7.5 - 10.0%",
+                "10.0 - 12.5%", "12.5 - 15.0%", "15.0 - 17.5%", "17.5 - 20.0%", "20.0%"
+            ]
+        },
+        lower: $localize`:@@lower_than:lower`,
+        higher: $localize`:@@higher_than:higher`,
+        less: $localize`:@@less_than:less`,
+        more: $localize`:@@more_than:more`,
+    },
+
+    // date range picker
+    date_range_picker: {
+        0: $localize`:@@all_time:All time`,
+        90: $localize`:@@3_months:3 months`,
+        28: $localize`:@@28_days:28 days`,
+        14: $localize`:@@14_days:14 days`,
+        7: $localize`:@@7_days:7 days`,
+
+        // date range picker
+        // public static VAL_DRP_0: string = "All time"
+        // public static VAL_DRP_90: string = "3 months"
+        // public static VAL_DRP_28: string = "28 days"
+        // public static VAL_DRP_14: string = "14 days"
+        // public static VAL_DRP_7: string = "7 days"
+    },
+
+    // dialog confirmations
+    confirmation: {
+        ok: $localize`:@@ok:Ok`,
+        cancel: $localize`:@@canel:Cancel`,
+        yes: $localize`:@@yes:Yes`,
+        no: $localize`:@@no:No`
+    },
+}
+
+export class CommonStrDyn {
+    /**
+     * common functions
+     */
+    // capitalise word
+    public static capitalise(text: string): string {
+        return text[0].toUpperCase() + text.substring(1);
+    }
+
+    /**
+     * search
+     */
+    // request addition dialog
+    public static addNew(item: string) {
+        return $localize`:@@add_new:Add new ${item}`
+    }
+
+    /**
+     * watchlist
+     */
+    public static deleteWatchlist(name: string): string {
+        return $localize`:@@delete_watchlist_desc:Are you sure you want to delete this watchlist (${name})? This action cannot be undone.`
+    }
+
+    /**
+     * estiamtes
+     */
+    public static estimateUpdated(name: string) {
+        return $localize`:@@est_updated:Your estimate for ${name} has been updated`
+    }
+
+
+    /**
+    * humanised cell values for est table data cols:
+    * - show "?" for null cells
+    * - show range of %diff in range of 2.5%, from 0 up to 20%
+    * - e.g. 0 - 2.5%, 2.5 - 5.0%, 5.0 - 7.5%, ... , 17.5 - 20.0%, 20.0%
+    * - add > or < sign in front based on %diff is -ve or +ve
+    * e.g.:
+    * % DIFF = 1.3%, result = > 0 - 2.5%
+    * % DIFF = -1.3%, result = < 0 - 2.5%
+    * % DIFF = 3.3%, result = > 2.5 - 5.0%
+    * % DIFF = -17.2%, result = < 17.5 - 20.0%
+    * % DIFF = 33.2%, result = > 20.0%
+    * % DIFF = -23.2%, result = < 20.0%
+    */
+    public static getEstTblHumanisedCellVals(module: EnumModules, colName: string, rowName: string) {
+        if (colName == COMMON_STR.estimates.constants.table.name_col)
+            // name column: show localised rowType based on mod
+            switch (module) {
+                case EnumModules.equities:
+                    return EqtStrDyn.getCompanyRowTypeName(rowName)
+
+                default:
+                    return rowName
+            }
+
+        else {
+            // show "?" for nulls
+            if (rowName == null)
+                return "?"
+
+            else {
+                // get humanised range based on %diff range
+                var percentDiff = Number(rowName)
+
+                // return ori value if NaN
+                if (percentDiff == NaN) return rowName
+
+                // get sign before convert to abs
+                let sign = percentDiff >= 0 ? ">" : "<"
+                percentDiff = Math.abs(percentDiff)
+
+                var strIndex: number
+                switch (true) {
+                    case percentDiff < 2.5:
+                        strIndex = 0
+                        break
+
+                    case percentDiff < 5:
+                        strIndex = 1
+                        break
+
+                    case percentDiff < 7.5:
+                        strIndex = 2
+                        break
+
+                    case percentDiff < 10:
+                        strIndex = 3
+                        break
+
+                    case percentDiff < 12.5:
+                        strIndex = 4
+                        break
+
+                    case percentDiff < 15:
+                        strIndex = 5
+                        break
+
+                    case percentDiff < 17.5:
+                        strIndex = 6
+                        break
+
+                    case percentDiff < 20:
+                        strIndex = 7
+                        break
+
+                    default:
+                        strIndex = 8
+                        break
+                }
+
+                // add sign in front
+                return `${sign} ${COMMON_STR.estimates.perc_diff.arr_range[strIndex]}`
+            }
+        }
+    }
+}

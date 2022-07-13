@@ -1,7 +1,7 @@
-import { EWStrings } from 'src/app/utils/ew-strings';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonServices } from 'src/app/services/common-services';
+import { COMMON_STR } from '../../../constants/common-strings';
 
 @Component({
   selector: 'app-dialog-generic',
@@ -24,7 +24,7 @@ export class DialogGenericComponent implements OnInit {
   // positive btn - default to "Yes" for double action, "Ok" for single action
   getPositiveBtnStr() {
     return this.data.positiveBtnStr ?? this.data.isSingleAction != true ?
-      EWStrings.VAL_YES : EWStrings.VAL_OK
+      COMMON_STR.confirmation.yes : COMMON_STR.confirmation.ok
   }
 
   positiveBtnFunc() {
@@ -37,7 +37,7 @@ export class DialogGenericComponent implements OnInit {
 
   // negative btn - not shown for singleAction, default to "No" for double action
   getNegativeBtnStr() {
-    return this.data.negativeBtnStr ??  EWStrings.VAL_NO
+    return this.data.negativeBtnStr ??  COMMON_STR.confirmation.no
   }
 
   negativeBtnFunc() {

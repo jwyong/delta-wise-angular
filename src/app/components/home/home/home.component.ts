@@ -1,9 +1,9 @@
-import { EWStrings } from 'src/app/utils/ew-strings';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { User } from '../../../models/common/user';
 import { RouterConstants } from '../../../utils/router-constants';
+import { AUTH_STR } from '../../../constants/auth-strings';
 
 @Component({
   selector: 'app-home',
@@ -87,8 +87,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
   //=== logout
   logoutOnClick() {
     this.showGenericDialog({
-      title: EWStrings.VAL_LOGOUT,
-      subTitle: EWStrings.VAL_LOGOUT_CONFIRM,
+      title: AUTH_STR.logout.title,
+      subTitle: AUTH_STR.logout.subTitle,
       positiveBtnFunc: () => this.logout()
     })
   }

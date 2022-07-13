@@ -1,9 +1,9 @@
-import { EstTableSingleComponent } from './../../../common/est-table-single/est-table-single.component';
-import { EnumModules } from 'src/app/utils/ew-constants';
-import { Commodity } from './../../../../models/commodities/commodity';
-import { CommoditiesComponent } from './../commodities.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
+import { Commodity } from './../../../../models/commodities/commodity';
+import { EstTableSingleComponent } from './../../../common/est-table-single/est-table-single.component';
+import { CommoditiesComponent } from './../commodities.component';
 
 @Component({
   selector: 'app-commodity-details',

@@ -1,15 +1,16 @@
-import { EnumModules } from './../../../utils/ew-constants';
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
-import { EWConstants } from 'src/app/utils/ew-constants';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { CommonStrDyn } from 'src/app/constants/common-strings';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
+import { VALIDATION_STR } from 'src/app/constants/validation-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
+import { environment } from 'src/environments/environment';
+import { COMMON_STR } from '../../../constants/common-strings';
 import { CompanyEstimate } from './../../../models/equities/company-estimate';
 import { CommonServices } from './../../../services/common-services';
 import { DateTimeUtil } from './../../../utils/date-time';
-import { environment } from 'src/environments/environment';
 
 /**
  * dialog for inputting estimates
@@ -72,12 +73,12 @@ export class EstimateDialogComponent implements OnInit {
   // validation
   getEstimateErrorMsg() {
     // required
-    if (this.estimateFC.hasError(EWConstants.KEY_REQUIRED))
-      return $localize`:@@vld_required:${EWStrings.VAL_REQUIRED}`
+    if (this.estimateFC.hasError(VALIDATION_STR.keys.required))
+      return VALIDATION_STR.validation.required
 
     // not a number
-    if (this.estimateFC.hasError(EWConstants.KEY_PATTERN))
-      return $localize`:@@vld_nan:${EWStrings.VAL_NUMBER}`
+    if (this.estimateFC.hasError(VALIDATION_STR.keys.pattern))
+      return VALIDATION_STR.validation.number
 
     return ""
   }
@@ -126,7 +127,7 @@ export class EstimateDialogComponent implements OnInit {
       // make getEsti call once user updated estimate
       await this.getUserEstimate()
 
-      this.commonServices.showSnackbar(EWStrings.estimateUpdated(this.data.subTitle))
+      this.commonServices.showSnackbar(CommonStrDyn.estimateUpdated(this.data.subTitle))
     }
   }
 
@@ -166,17 +167,17 @@ export class EstimateDialogComponent implements OnInit {
   // get "lower" or "higher" str based on percDiff -ve/+ve
   getMedianPercDiffSignStr() {
     if ((this.companyEstimate?.percentage_diff ?? 0) < 0)
-      return EWStrings.VAL_LOWER
+      return COMMON_STR.estimates.lower
     else
-      return EWStrings.VAL_HIGHER
+      return COMMON_STR.estimates.higher
   }
 
   // get "less" or "higher" str based on 20% cap
   getMedianPercDiffRangeStr() {
     if (Math.abs(this.companyEstimate?.percentage_diff ?? 0) <= 20)
-      return EWStrings.VAL_LESS
+      return COMMON_STR.estimates.less
     else
-      return EWStrings.VAL_MORE
+      return COMMON_STR.estimates.more
   }
 
   // get percentage difference str based on 2.5 intervals (20% cap)
@@ -222,7 +223,7 @@ export class EstimateDialogComponent implements OnInit {
         break
     }
 
-    return EWStrings.VAL_EST_PERCENT_DIFF[strIndex]
+    return COMMON_STR.estimates.perc_diff.arr_value[strIndex]
   }
 
   getInputTrialStr() {

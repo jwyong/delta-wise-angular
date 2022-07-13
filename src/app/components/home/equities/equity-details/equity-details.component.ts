@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
+import { CommonStrDyn, COMMON_STR } from 'src/app/constants/common-strings';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { Company } from 'src/app/models/equities/company';
-import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
-import { EWStrings } from 'src/app/utils/ew-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
+import { EqtStrDyn } from '../../../../constants/modules/equities-strings';
 import { CompanyDetail, CompanyRowType } from '../../../../models/equities/company-detail';
 import { EstimateDialogComponent } from './../../../common/estimate-dialog/estimate-dialog.component';
 import { EquitiesComponent } from './../equities.component';
@@ -106,7 +107,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
       // invert displayedCols
       this.displayedColumns = beArray.map(x => x.timeframe.toString());
-      this.displayedColumns.unshift(EWConstants.EST_TBL_NAME_COL)
+      this.displayedColumns.unshift(COMMON_STR.estimates.constants.table.name_col)
 
       // invert displayedData
       this.displayedData = this.getInvertedFlatMap(beArray)
@@ -130,7 +131,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     return this.inputColumns.flatMap(x => {
       if (x != this.timeFrameCol) {
         // prep inverted array rowObj
-        var invertedArrayRowObj: any = { [EWConstants.EST_TBL_NAME_COL]: x }
+        var invertedArrayRowObj: any = { [COMMON_STR.estimates.constants.table.name_col]: x }
         beArray.forEach((item: any, index: number) => {
           invertedArrayRowObj[item.timeframe] = beArray[index][x];
         })
@@ -149,7 +150,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // update which row/col is mouse-over now
   cellOnMouseOver(rowType: string, colName: string) {
-    if (colName == EWConstants.EST_TBL_NAME_COL) return
+    if (colName == COMMON_STR.estimates.constants.table.name_col) return
 
     this.mouseOverRowName = rowType
     this.mouseOverColName = colName
@@ -157,26 +158,26 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // get class for header cells (1st row)
   getHeaderCellClass(colName: string) {
-    if (colName == EWConstants.EST_TBL_NAME_COL) return ''
+    if (colName == COMMON_STR.estimates.constants.table.name_col) return ''
     else
-      if (colName == this.mouseOverColName) return EWConstants.EST_TBL_HIGHLIGHT_CLASS
+      if (colName == this.mouseOverColName) return COMMON_STR.estimates.constants.table.highlight_class
       else return ''
   }
 
   // get class for non-header cells (not 1st row)
   getNonHeaderCellClass(rowName: string, colName: string) {
     // check highlight for first col, cursor-pointer for 2nd col onwards
-    if (colName != EWConstants.EST_TBL_NAME_COL) {
+    if (colName != COMMON_STR.estimates.constants.table.name_col) {
       // data columns - use data col css
       if (colName == this.mouseOverColName && rowName == this.mouseOverRowName)
-        return `${EWConstants.EST_TBL_DATA_CELL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
-      else return EWConstants.EST_TBL_DATA_CELL_BC
+        return `${COMMON_STR.estimates.constants.table.data_cell_base_class} ${COMMON_STR.estimates.constants.table.highlight_class}`
+      else return COMMON_STR.estimates.constants.table.data_cell_base_class
 
     } else {
       // first col
       if (rowName == this.mouseOverRowName)
-        return `${EWConstants.EST_TBL_FIRST_COL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
-      else return EWConstants.EST_TBL_FIRST_COL_BC
+        return `${COMMON_STR.estimates.constants.table.first_col_base_class} ${COMMON_STR.estimates.constants.table.highlight_class}`
+      else return COMMON_STR.estimates.constants.table.first_col_base_class
     }
   }
 
@@ -184,8 +185,8 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    * input estimate dialog
    */
   showEstimateDialog(rowName: string, colName: string) {
-    const hRowName = EWStrings.getCompanyRowTypeName(rowName)
-    const hColName = EWStrings.getHumanisedEqtColName(colName)
+    const hRowName = EqtStrDyn.getCompanyRowTypeName(rowName)
+    const hColName = EqtStrDyn.getHumanisedEqtColName(colName)
     const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
       panelClass: 'loader-dialog',
       maxWidth: '25vw',
@@ -247,12 +248,12 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // get humanised names for header cells
   getHumanisedHeaderCellValue(colName: string) {
-    if (colName != EWConstants.EST_TBL_NAME_COL)
-      return EWStrings.getHumanisedEqtColName(colName)
+    if (colName != COMMON_STR.estimates.constants.table.name_col)
+      return EqtStrDyn.getHumanisedEqtColName(colName)
     else return ""
   }
 
   getHumanisedCellValue(colName: string, rowName: string) {
-    return EWConstants.getEstTblHumanisedCellVals(EnumModules.equities, colName, rowName)
+    return CommonStrDyn.getEstTblHumanisedCellVals(EnumModules.equities, colName, rowName)
   }
 }

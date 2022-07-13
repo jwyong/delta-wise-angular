@@ -1,10 +1,10 @@
-import { Commodity, CommoditySearch } from './../../../models/commodities/commodity';
-import { BaseModuleComponent } from '../base-home/base-home.component';
 import { Component, OnInit } from '@angular/core';
-import { EWStrings } from 'src/app/utils/ew-strings';
-import { environment } from 'src/environments/environment';
+import { COMMODITY_STR } from 'src/app/constants/modules/commo-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
+import { environment } from 'src/environments/environment';
+import { BaseModuleComponent } from '../base-home/base-home.component';
+import { Commodity, CommoditySearch } from './../../../models/commodities/commodity';
 
 @Component({
   selector: 'app-commodities',
@@ -13,7 +13,7 @@ import { RouterConstants } from 'src/app/utils/router-constants';
 })
 export class CommoditiesComponent extends BaseModuleComponent implements OnInit {
   override ngOnInit(): void {
-    this.searchBarLabel = EWStrings.VAL_COMMODITY
+    this.searchBarLabel = COMMODITY_STR.commodity.singular
   }
 
   /**

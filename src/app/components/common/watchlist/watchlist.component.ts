@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { EnumModules, EWConstants } from 'src/app/utils/ew-constants';
-import { EWStrings } from 'src/app/utils/ew-strings';
-import { Watchlist, WatchlistItem } from './../../../models/common/watchlist';
+import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { BaseDashboardComponent } from '../../home/base-dashboard/base-dashboard.component';
+import { COMMON_STR } from '../../../constants/common-strings';
+import { Watchlist, WatchlistItem } from './../../../models/common/watchlist';
 import { NewWatchlistComponent } from './new-watchlist/new-watchlist.component';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
 
 @Component({
   selector: 'app-watchlist',
@@ -123,8 +124,8 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
   removeChipOnClick(watchlist: Watchlist): void {
     this.showGenericDialog(
       {
-        title: EWStrings.VAL_DEL_WATCHLIST_TITLE,
-        subTitle: EWStrings.deleteWatchlist(watchlist.name),
+        title: COMMON_STR.watchlist.delete.title,
+        subTitle: CommonStrDyn.deleteWatchlist(watchlist.name),
         positiveBtnFunc: () => {
           const index = this.watchlists.indexOf(watchlist);
 

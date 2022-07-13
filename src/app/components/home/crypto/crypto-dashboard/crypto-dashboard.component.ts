@@ -1,9 +1,8 @@
-import { EWStrings } from 'src/app/utils/ew-strings';
-import { CryptoConstants } from './cr-constants';
-import { Cryptocurrency } from 'src/app/models/crypto/crypto';
 import { Component, OnInit } from '@angular/core';
+import { Cryptocurrency } from 'src/app/models/crypto/crypto';
 import { BaseDashboardComponent } from '../../base-dashboard/base-dashboard.component';
-import { PageEvent } from '@angular/material/paginator';
+import { CommonStrDyn } from '../../../../constants/common-strings';
+import { CryptoConstants } from './cr-constants';
 
 @Component({
   selector: 'app-crypto-dashboard',
@@ -37,7 +36,7 @@ export class CryptoDashboardComponent extends BaseDashboardComponent implements 
   }
 
   getHumanisedHeaderCellValue(value: string) {
-    return EWStrings.capitalise(value)
+    return CommonStrDyn.capitalise(value)
   }
 
   onPaged(pageIndex: number) {

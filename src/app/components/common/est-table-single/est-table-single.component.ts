@@ -1,8 +1,9 @@
+import { CommonStrDyn } from 'src/app/constants/common-strings';
+import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BaseComponent } from 'src/app/components/base/base.component';
-import { EWConstants, EnumModules } from 'src/app/utils/ew-constants';
-import { Component, Input, OnInit } from '@angular/core';
-import { EWStrings } from 'src/app/utils/ew-strings';
+import { EnumModules } from 'src/app/constants/enum/enum-modules';
+import { COMMON_STR } from '../../../constants/common-strings';
 import { EstimateDialogComponent } from '../estimate-dialog/estimate-dialog.component';
 
 /**
@@ -45,7 +46,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
     this.isLoadingTable = true
 
     setTimeout(() => {
-      this.displayedColumns = [EWConstants.EST_TBL_NAME_COL, this.percDiffColName]
+      this.displayedColumns = [COMMON_STR.estimates.constants.table.name_col, this.percDiffColName]
       this.displayedData = [
         { name: '31 May ‘22', percDiff: 35.398 },
         { name: '30 June ‘22', [this.percDiffColName]: -24.33 },
@@ -70,7 +71,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
 
   // update which row/col is mouse-over now
   cellOnMouseOver(rowType: string, colName: string) {
-    if (colName == EWConstants.EST_TBL_NAME_COL) return
+    if (colName == COMMON_STR.estimates.constants.table.name_col) return
 
     this.mouseOverRowName = rowType
     this.mouseOverColName = colName
@@ -79,17 +80,17 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
   // get class for non-header cells (not 1st row)
   getNonHeaderCellClass(rowName: string, colName: string) {
     // check highlight for first col, cursor-pointer for 2nd col onwards
-    if (colName != EWConstants.EST_TBL_NAME_COL) {
+    if (colName != COMMON_STR.estimates.constants.table.name_col) {
       // data columns - use data col css
       if (colName == this.mouseOverColName && rowName == this.mouseOverRowName)
-        return `${EWConstants.EST_TBL_DATA_CELL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
-      else return EWConstants.EST_TBL_DATA_CELL_BC
+        return `${COMMON_STR.estimates.constants.table.data_cell_base_class} ${COMMON_STR.estimates.constants.table.highlight_class}`
+      else return COMMON_STR.estimates.constants.table.data_cell_base_class
 
     } else {
       // first col
       if (rowName == this.mouseOverRowName)
-        return `${EWConstants.EST_TBL_FIRST_COL_BC} ${EWConstants.EST_TBL_HIGHLIGHT_CLASS}`
-      else return EWConstants.EST_TBL_FIRST_COL_BC
+        return `${COMMON_STR.estimates.constants.table.first_col_base_class} ${COMMON_STR.estimates.constants.table.highlight_class}`
+      else return COMMON_STR.estimates.constants.table.first_col_base_class
     }
   }
 
@@ -98,13 +99,13 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
    */
   // get humanised names for header cells
   getHumanisedHeaderCellValue(colName: string) {
-    if (colName != EWConstants.EST_TBL_NAME_COL)
-      return EWStrings.VAL_EST_DIFF
+    if (colName != COMMON_STR.estimates.constants.table.name_col)
+      return COMMON_STR.estimates.perc_diff.title
     else return ""
   }
 
   getHumanisedCellValue(colName: string, rowName: string) {
-    return EWConstants.getEstTblHumanisedCellVals(this.module, colName, rowName)
+    return CommonStrDyn.getEstTblHumanisedCellVals(this.module, colName, rowName)
   }
 
   showEstimateDialog(rowName: string, colName: string) {
