@@ -38,7 +38,8 @@ export class EWStrings {
     public static VAL_INVALID_PWORD_DIFF: string = 'Passwords not matching';
 
     //=== login/logout
-    public static VAL_LOGOUT_CONFIRM = $localize`:@@logout_confirm:Are you sure you want to logout?`
+    public static VAL_LOGOUT = $localize`:@@logout:Logout`
+    public static VAL_LOGOUT_CONFIRM = $localize`:@@logout_confirm:Are you sure you want to logout from DeltaWise?`
 
     //=== change pword
     public static VAL_PWORD_UPDATE_SUCCESS: string = 'Password updated successfully, please login with the new password.';
@@ -50,6 +51,13 @@ export class EWStrings {
     public static capitalise(text: string): string {
         return text[0].toUpperCase() + text.substring(1);
     }
+
+    // generic dialog btns
+    public static VAL_OK = $localize`:@@ok:Ok`
+    public static VAL_CANCEL = $localize`:@@canel:Cancel`
+    public static VAL_YES = $localize`:@@yes:Yes`
+    public static VAL_NO = $localize`:@@no:No`
+
 
     // request addition dialog
     public static addNew(item: string) {
@@ -102,7 +110,8 @@ export class EWStrings {
     }
 
     // token expiry (logout dialog)
-    public static VAL_HTTP_TOKEN_EXPIRED = $localize`:@@err_token_expired:Your session has expired. Please login again to continue.`
+    public static VAL_HTTP_TOKEN_EXPIRED_TITLE = $localize`:@@err_token_expired_title:Session expired`
+    public static VAL_HTTP_TOKEN_EXPIRED_DESC = $localize`:@@err_token_expired_desc:Your session has expired. Please login again to continue.`
 
     // no search result
     public static VAL_ERR_NO_SEARCH_RES = $localize`:@@err_no_search_res:No search results. Click here to request addition.`
@@ -115,9 +124,9 @@ export class EWStrings {
     /**
      * watchlist
      */
-    public static VAL_WATCHLIST: string = "Watchlist"
+    public static VAL_DEL_WATCHLIST_TITLE = $localize`:@@delete_watchlist_title:Delete watchlist`
     public static deleteWatchlist(name: string): string {
-        return $localize`:@@confirm_delete_watchlist:Delete this watchlist (${name})? This action cannot be undone.`
+        return $localize`:@@delete_watchlist_desc:Are you sure you want to delete this watchlist (${name})? This action cannot be undone.`
     }
 
     /**

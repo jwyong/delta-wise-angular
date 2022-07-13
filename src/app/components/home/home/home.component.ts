@@ -86,8 +86,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   //=== logout
   logoutOnClick() {
-    if (confirm(EWStrings.VAL_LOGOUT_CONFIRM)) {
-      this.logout()
-    }
+    this.showGenericDialog({
+      title: EWStrings.VAL_LOGOUT,
+      subTitle: EWStrings.VAL_LOGOUT_CONFIRM,
+      positiveBtnFunc: () => this.logout()
+    })
   }
 }

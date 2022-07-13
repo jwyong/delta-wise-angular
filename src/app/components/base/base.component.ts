@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
-import { NavigationEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-view-model';
-import { filter } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Resp } from 'src/app/models/common/resp';
 import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
@@ -11,6 +9,7 @@ import { EWStrings } from 'src/app/utils/ew-strings';
 import { RouterConstants } from 'src/app/utils/router-constants';
 import { LocalStorageService } from './../../services/local-storage-service';
 import { EnumModules } from './../../utils/ew-constants';
+import { DialogGenericComponent, DialogGenericData } from './../common/dialog-generic/dialog-generic.component';
 
 @Component({
   selector: 'app-base',
@@ -35,14 +34,9 @@ export class BaseComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  setIsLoading(isLoading: boolean) {
-    this.dataService.setIsLoading(isLoading)
-  }
-
-  isLoading() {
-    return this.dataService.isLoadingSource.value == true
-  }
-
+  /**
+   * jwt
+   */
   // check if jwt is expired then redirect to login if necessary
   redirectJwtExpired() {
     if (!this.localStorageService.isJwtValid())
@@ -55,6 +49,17 @@ export class BaseComponent implements OnInit {
       this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
   }
 
+  /**
+   * UI/UX
+   */
+  setIsLoading(isLoading: boolean) {
+    this.dataService.setIsLoading(isLoading)
+  }
+
+  isLoading() {
+    return this.dataService.isLoadingSource.value == true
+  }
+
   // show snackbar
   showSnackbar(msgStr: string, actionStr?: string, action?: () => void, durationInSecs?: number) {
     this._snackBar.open(msgStr, actionStr ?? "", {
@@ -62,6 +67,20 @@ export class BaseComponent implements OnInit {
     }).afterDismissed().subscribe(() => {
       action
     })
+  }
+
+  // show generic dialog 
+  showGenericDialog(data: DialogGenericData, disableClose?: boolean, afterClosed?: () => void) {
+    const dialogRef = this.dialog.open(DialogGenericComponent, {
+      maxWidth: '25vw',
+      minWidth: 350,
+      data: data,
+      disableClose: disableClose
+    });
+
+    dialogRef.afterClosed().subscribe((_: any) => {
+      if (afterClosed != null) afterClosed()
+    });
   }
 
   /**
@@ -133,8 +152,13 @@ export class BaseComponent implements OnInit {
     if (!result.status)
       // show logout dialog if token expired
       if (result.errors?.includes("Your token is not valid")) {
-        alert(EWStrings.VAL_HTTP_TOKEN_EXPIRED)
-        this.logout()
+        this.showGenericDialog(
+          {
+            title: EWStrings.VAL_HTTP_TOKEN_EXPIRED_TITLE,
+            subTitle: EWStrings.VAL_HTTP_TOKEN_EXPIRED_DESC,
+            isSingleAction: true,
+            positiveBtnFunc: () => this.logout()
+          }, true)
       } else
         // show snackbar for normal errors if should show
         if (shouldShowErrors && result.message != null)

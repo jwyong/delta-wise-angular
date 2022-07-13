@@ -121,13 +121,19 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
 
   // remove chip btn: confirm then remove chip on UI + api
   removeChipOnClick(watchlist: Watchlist): void {
-    if (confirm(EWStrings.deleteWatchlist(watchlist.name))) {
-      const index = this.watchlists.indexOf(watchlist);
+    this.showGenericDialog(
+      {
+        title: EWStrings.VAL_DEL_WATCHLIST_TITLE,
+        subTitle: EWStrings.deleteWatchlist(watchlist.name),
+        positiveBtnFunc: () => {
+          const index = this.watchlists.indexOf(watchlist);
 
-      if (index >= 0) {
-        this.watchlists.splice(index, 1);
+          if (index >= 0) {
+            this.watchlists.splice(index, 1);
+          }
+        }
       }
-    }
+    )
   }
 
   // TEMP: generate random items for each watchlist

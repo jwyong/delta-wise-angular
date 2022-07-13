@@ -1,0 +1,13 @@
+<h2 mat-dialog-title *ngIf="data.title != null">{{data.title}}</h2>
+<mat-dialog-content *ngIf="data.subTitle != null" class="mat-typography">
+    <h4 mat-dialog-subtitle>{{data.subTitle}}</h4>
+</mat-dialog-content>
+
+<mat-dialog-actions class="pb-3">
+    <div class="ms-auto">
+        <button *ngIf="data.isSingleAction != true" mat-raised-button
+            (click)="negativeBtnFunc()">{{getNegativeBtnStr()}}</button>
+        <button mat-raised-button cdkFocusInitial color="primary" type="submit"
+            (click)="positiveBtnFunc()">{{getPositiveBtnStr()}}</button>
+    </div>
+</mat-dialog-actions>

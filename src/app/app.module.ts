@@ -44,6 +44,7 @@ import { RequestAddDialogComponent } from './components/common/search-bar/reques
 import { PhEstTableSingleComponent } from './components/common/placeholders/ets-placeholder/ph-est-table-single.component';
 import { PhListComponent } from './components/common/placeholders/ph-list/ph-list.component';
 import { PhEstTableEqtComponent } from './components/common/placeholders/ph-est-table-eqt/ph-est-table-eqt.component';
+import { DialogGenericComponent } from './components/common/dialog-generic/dialog-generic.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { PhEstTableEqtComponent } from './components/common/placeholders/ph-est-
     HomeComponent, SearchBarComponent, CryptoComponent, EquityDetailsComponent, DateRangePickerComponent, EstimateDialogComponent,
     WatchlistComponent, FooterComponent, NewWatchlistComponent, BaseModuleComponent, CommoditiesComponent, BaseDashboardComponent,
     RecentSearchComponent, CommodityDetailsComponent, EstTableSingleComponent, CryptoDetailsComponent, CommodityDashboardComponent, 
-    EquityDashboardComponent, CryptoDashboardComponent, DashTableComponent, AuthComponent, RequestAddDialogComponent, PhEstTableSingleComponent, PhListComponent, PhEstTableEqtComponent,
+    EquityDashboardComponent, CryptoDashboardComponent, DashTableComponent, AuthComponent, RequestAddDialogComponent, PhEstTableSingleComponent, PhListComponent, PhEstTableEqtComponent, DialogGenericComponent,
   ],
   imports: [
     BrowserModule,
