@@ -3,6 +3,6 @@ export const COMMODITY_STR = {
         singular: $localize`:@@commodity:Commodity`,
         plural: $localize`:@@commodities:Commodities`,
     },
-    request_add: {
-    }
+    list_of_commo: $localize`:@@list_of_commo:List of commodities`,
+    list_of_commo_desc: $localize`:@@list_of_commo_desc:Full list of traded commodities`,
 }

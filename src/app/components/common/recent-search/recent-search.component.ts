@@ -1,3 +1,4 @@
+import { COMMON_STR } from 'src/app/constants/common-strings';
 import { Component, OnInit } from '@angular/core';
 import { RecentSearch } from './../../../models/common/recent-search';
 import { BaseDashboardComponent } from '../../home/base-dashboard/base-dashboard.component';
@@ -9,6 +10,9 @@ import { EnumModules } from 'src/app/constants/enum/enum-modules';
   styleUrls: ['./recent-search.component.css']
 })
 export class RecentSearchComponent extends BaseDashboardComponent implements OnInit {
+  recentStr = COMMON_STR.recent_search
+  tapSearchStr = COMMON_STR.tap_search_get_started
+
   isLoadingRecentList = false
   recentSearchList: RecentSearch[] = []
 

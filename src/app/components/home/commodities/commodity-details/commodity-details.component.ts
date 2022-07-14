@@ -1,3 +1,4 @@
+import { COMMON_STR } from 'src/app/constants/common-strings';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { EnumModules } from 'src/app/constants/enum/enum-modules';
@@ -11,6 +12,8 @@ import { CommoditiesComponent } from './../commodities.component';
   styleUrls: ['./commodity-details.component.css']
 })
 export class CommodityDetailsComponent extends CommoditiesComponent implements OnInit {
+  tableStr = COMMON_STR.estimates.est_table_disclaimer
+
   module = EnumModules.commodities
   title = ""
   commodity = <Commodity>{}

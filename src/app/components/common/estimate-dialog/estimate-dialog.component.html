@@ -8,7 +8,7 @@
       <h4 mat-dialog-subtitle>{{data.subTitle}}</h4>
 
       <mat-form-field class="w-100" appearance="fill">
-        <mat-label i18n="@@your_estimate">Your estimate</mat-label>
+        <mat-label>{{estStr.your_est}}</mat-label>
         <input matInput #estInput [formControl]="estimateFC" formControlName="estimate" placeholder="3.56" required>
         <button type="button" *ngIf="estInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
           (click)="estInput.value=''">
@@ -18,26 +18,23 @@
       </mat-form-field>
 
       <div [ngClass]="companyEstimate?.record_exist? 'd-block' : 'd-none'">
-        <p i18n="@@last_estimate_date">Date of your last estimate: {{getLastEstimateDateTime()}}</p>
+        <p>{{getLastEstimateDateTime()}}</p>
 
         <app-date-range-picker class="w-100" [sdr]="data.sdr.value" (onDateRangeSelected)="onDateRangeSelected($event)">
         </app-date-range-picker>
 
-        <p i18n="@@no_of_contributors">No. of contributors: {{getNumberOfContStr()}} {{isDebug?
-          '('+companyEstimate?.no_of_contributors+')' : ''}}</p>
+        <p>{{getNumberOfContStr()}} {{isDebug? '('+companyEstimate?.no_of_contributors+')' : ''}}</p>
 
         <p class="mb-0 text-secondary text-center" i18n="@@median_diff">
           <small>
             Your estimate is <b>{{getMedianPercDiffSignStr()}}</b> than the median by {{getMedianPercDiffRangeStr()}}
-            than
-            <b>{{getMedianPercDiffStr()}}%</b>
+            than <b>{{getMedianPercDiffStr()}}%</b>
           </small>
         </p>
       </div>
 
-      <p class="text-secondary text-center" i18n="@@input_trials_remaining">
-        <small>
-          You have {{getInputTrialStr()}} input trials remaining
+      <p class="text-secondary text-center">
+        <small>{{getInputTrialStr()}}
           <mat-icon class="cursor-pointer scale-05 align-middle" #inputTrialTooltip="matTooltip" aria-hidden="false"
             aria-label="Input trials reset rules" i18n-matTooltip="@@input_trials_reset"
             matTooltip="Input trials reset every 1st of the month">
@@ -48,9 +45,9 @@
     </mat-dialog-content>
 
     <mat-dialog-actions>
-      <button class="ms-auto" i18n="@@close" mat-raised-button mat-dialog-close>Close</button>
-      <button mat-raised-button i18n="@@submit" cdkFocusInitial color="primary" type="submit"
-        *ngIf="!isSubmitBtnDisabled()">Submit</button>
+      <button class="ms-auto" mat-raised-button mat-dialog-close>{{confStr.close}}</button>
+      <button mat-raised-button cdkFocusInitial color="primary" type="submit"
+        *ngIf="!isSubmitBtnDisabled()">{{confStr.submit}}</button>
     </mat-dialog-actions>
   </form>
 </div>

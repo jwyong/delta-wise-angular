@@ -12,6 +12,9 @@ import { EnumModules } from 'src/app/constants/enum/enum-modules';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent extends BaseDashboardComponent implements OnInit {
+  watchlistStr = COMMON_STR.watchlist
+  tapSearchStr = COMMON_STR.tap_search_get_started
+
   isLoadingWatchlist = false
   isEditMode = false
   watchlists: Watchlist[] = [];
@@ -124,7 +127,7 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
   removeChipOnClick(watchlist: Watchlist): void {
     this.showGenericDialog(
       {
-        title: COMMON_STR.watchlist.delete.title,
+        title: COMMON_STR.watchlist.delete,
         subTitle: CommonStrDyn.deleteWatchlist(watchlist.name),
         positiveBtnFunc: () => {
           const index = this.watchlists.indexOf(watchlist);

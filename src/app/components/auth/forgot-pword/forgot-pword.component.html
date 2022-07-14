@@ -1,7 +1,7 @@
 <form (ngSubmit)="forgotPwordFormOnSubmit()">
     <p>
         <mat-form-field class="w-100" appearance="fill">
-            <mat-label i18n="@@login_email_title">Email</mat-label>
+            <mat-label>{{authStr.common.email}}</mat-label>
             <input matInput #emailInput [formControl]="emailFC" required>
             <button type="button" *ngIf="emailInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
                 (click)="emailInput.value=''">
@@ -11,7 +11,7 @@
         </mat-form-field>
     </p>
     <a [routerLink]="backToLoginPath">
-        <p class="small" i18n="@@back_to_login">Back to login</p>
+        <p class="small">{{authStr.forgot_pword.back_to_login}}</p>
     </a>
-    <button class="w-100" mat-raised-button type="submit" color="primary" i18n="@@login_title">Submit</button>
+    <button class="w-100" mat-raised-button type="submit" color="primary">{{authStr.common.submit}}</button>
 </form>

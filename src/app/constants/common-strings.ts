@@ -4,6 +4,9 @@ import { EqtStrDyn } from "./modules/equities-strings";
 export const COMMON_STR = {
     // common
     details: $localize`:@@details:Details`,
+    terms_of_use: $localize`:@@terms_of_use:Terms of Use`,
+    tap_search_get_started: $localize`:@@tap_search_get_started:Tap on the search bar above to get started.`,
+    settings: $localize`:@@settings:Settings`,
 
     // date as ago
     date_as_ago: {
@@ -12,14 +15,19 @@ export const COMMON_STR = {
         moment_ago: $localize`:@@moment_ago:a moment ago`,
         units_ago: {
             singular: [
-                $localize`:@@second_ago:second ago`, $localize`:@@minute_ago:minute ago`, $localize`:@@hour_ago:hour ago`, 
+                $localize`:@@second_ago:second ago`, $localize`:@@minute_ago:minute ago`, $localize`:@@hour_ago:hour ago`,
                 $localize`:@@day_ago:day ago`, $localize`:@@month_ago:month ago`, $localize`:@@year_ago:year ago`,
             ],
             plural: [
-                $localize`:@@seconds_ago:seconds ago`, $localize`:@@minutes_ago:minutes ago`, $localize`:@@hours_ago:hours ago`, 
+                $localize`:@@seconds_ago:seconds ago`, $localize`:@@minutes_ago:minutes ago`, $localize`:@@hours_ago:hours ago`,
                 $localize`:@@days_ago:days ago`, $localize`:@@months_ago:months ago`, $localize`:@@years_ago:years ago`,
             ]
         }
+    },
+
+    // main search bar
+    search_bar: {
+        search: $localize`:@@search:Search`,
     },
 
     // search > request add 
@@ -33,9 +41,22 @@ export const COMMON_STR = {
 
     // watchlist
     watchlist: {
-        delete: {
-            title: $localize`:@@delete_watchlist_title:Delete watchlist`
-        }
+        plural: $localize`:@@watchlists:Watchlists`,
+        delete: $localize`:@@delete_watchlist_title:Delete watchlist`,
+        create_new: $localize`:@@create_new_wl:Create new watchlist`,
+        add_new: $localize`:@@add_new_wl:Add new watchlist`,
+        watchlist_name: $localize`:@@watchlist_name:Watchlist name`,
+
+        // blank ux
+        no_watchlists: $localize`:@@no_watchlists:No watchlists yet.`,
+        no_items: $localize`:@@no_items_in_wl:No items in this watchlist.`,
+        click_add_new_wl: $localize`:@@click_add_new_wl:Click here to add new watchlist.`,
+    },
+
+    // recently searched
+    recent_search: {
+        recently_searched: $localize`:@@recently_searched:Recently Searched`,
+        no_recent_search: $localize`:@@no_recent_search:No recently searhed items yet.`,
     },
 
     // estimates
@@ -62,22 +83,25 @@ export const COMMON_STR = {
         higher: $localize`:@@higher_than:higher`,
         less: $localize`:@@less_than:less`,
         more: $localize`:@@more_than:more`,
+
+        your_est: $localize`:@@your_est:Your estimate`,
+        last_est_date: $localize`:@@last_est_date:Date of your last estimate`,
+        no_of_contributors: $localize`:@@no_of_contributors:No. of contributors`,
+        est_table_disclaimer: $localize`:@@est_table_disclaimer:*Cell value reflects your estimate versus the median`,
+
     },
 
     // date range picker
     date_range_picker: {
-        0: $localize`:@@all_time:All time`,
-        90: $localize`:@@3_months:3 months`,
-        28: $localize`:@@28_days:28 days`,
-        14: $localize`:@@14_days:14 days`,
-        7: $localize`:@@7_days:7 days`,
+        date_range: $localize`:@@date_range:Date range`,
+        options: {
+            0: $localize`:@@all_time:All time`,
+            90: $localize`:@@3_months:3 months`,
+            28: $localize`:@@28_days:28 days`,
+            14: $localize`:@@14_days:14 days`,
+            7: $localize`:@@7_days:7 days`,
+        }
 
-        // date range picker
-        // public static VAL_DRP_0: string = "All time"
-        // public static VAL_DRP_90: string = "3 months"
-        // public static VAL_DRP_28: string = "28 days"
-        // public static VAL_DRP_14: string = "14 days"
-        // public static VAL_DRP_7: string = "7 days"
     },
 
     // dialog confirmations
@@ -85,7 +109,9 @@ export const COMMON_STR = {
         ok: $localize`:@@ok:Ok`,
         cancel: $localize`:@@canel:Cancel`,
         yes: $localize`:@@yes:Yes`,
-        no: $localize`:@@no:No`
+        no: $localize`:@@no:No`,
+        submit: $localize`:@@submit:Submit`,
+        close: $localize`:@@close:Close`
     },
 }
 
@@ -101,6 +127,11 @@ export class CommonStrDyn {
     /**
      * search
      */
+    // "Search Company"
+    public static searchBarLabel(item: string) {
+        return $localize`:@@search_label:Search ${item}`
+    }
+
     // request addition dialog
     public static addNew(item: string) {
         return $localize`:@@add_new:Add new ${item}`
@@ -119,7 +150,9 @@ export class CommonStrDyn {
     public static estimateUpdated(name: string) {
         return $localize`:@@est_updated:Your estimate for ${name} has been updated`
     }
-
+    public static inputTrialsRemaining(name: string) {
+        return $localize`:@@input_trials_remaining:You have ${name} input trials remaining`
+    }
 
     /**
     * humanised cell values for est table data cols:

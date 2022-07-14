@@ -1,3 +1,4 @@
+import { COMMON_STR } from 'src/app/constants/common-strings';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +14,8 @@ export class NewWatchlistComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<NewWatchlistComponent>
   ) { }
+  watchlistStr = COMMON_STR.watchlist
+  confStr = COMMON_STR.confirmation
 
   nameFC = new FormControl('', [Validators.required]);
   newWatchlistForm = this.formBuilder.group({

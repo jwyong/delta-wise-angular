@@ -1,3 +1,4 @@
+import { CRYPTO_STR } from './../../../../constants/modules/crypto-strings';
 import { Component, OnInit } from '@angular/core';
 import { Cryptocurrency } from 'src/app/models/crypto/crypto';
 import { BaseDashboardComponent } from '../../base-dashboard/base-dashboard.component';
@@ -10,6 +11,8 @@ import { CryptoConstants } from './cr-constants';
   styleUrls: ['./crypto-dashboard.component.css']
 })
 export class CryptoDashboardComponent extends BaseDashboardComponent implements OnInit {
+  cryptoStr = CRYPTO_STR
+  
   /**
    * table related
    */

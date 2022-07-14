@@ -1,3 +1,4 @@
+import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -250,6 +251,11 @@ export class SearchBarComponent implements OnInit {
   /**
    * search input UX
    */
+  // "Search Company"
+  getSearchLabel() {
+    return CommonStrDyn.searchBarLabel(this.searchBarLabel)
+  }
+
   // show/hide clear icon
   shouldShowClearIcon() {
     return this.searchInput.nativeElement.value.length > 0

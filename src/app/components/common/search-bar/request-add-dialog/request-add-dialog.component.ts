@@ -5,7 +5,7 @@ import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { VALIDATION_STR } from 'src/app/constants/validation-strings';
 import { COMMON_STR } from '../../../../constants/common-strings';
-import { COMMODITY_STR } from '../../../../constants/modules/commo-strings';
+import { COMMODITY_STR } from '../../../../constants/modules/commodity-strings';
 import { CRYPTO_STR } from '../../../../constants/modules/crypto-strings';
 import { EQT_STR } from '../../../../constants/modules/equities-strings';
 
@@ -20,6 +20,7 @@ export class RequestAddDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<RequestAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RequestAddDialogData,
   ) { }
+  confStr = COMMON_STR.confirmation
 
   isLoadingDialog = false
 

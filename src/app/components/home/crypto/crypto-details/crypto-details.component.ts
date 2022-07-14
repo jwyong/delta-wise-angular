@@ -1,3 +1,4 @@
+import { COMMON_STR } from 'src/app/constants/common-strings';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { EstTableSingleComponent } from 'src/app/components/common/est-table-single/est-table-single.component';
@@ -11,6 +12,8 @@ import { CryptoComponent } from './../crypto.component';
   styleUrls: ['./crypto-details.component.css']
 })
 export class CryptoDetailsComponent extends CryptoComponent implements OnInit {
+  tableStr = COMMON_STR.estimates.est_table_disclaimer
+
   module = EnumModules.commodities
   title = ""
   crypto = <Cryptocurrency>{}

@@ -19,6 +19,4 @@
 
 <app-est-table-single #estTable (module)="module" [title]="title"></app-est-table-single>
 
-<p class="text-secondary" i81n="@@estimate_table_info" *ngIf="!shouldShowTablePH(estTable)">
-  *Cell value reflects your estimate versus the median
-</p>
+<p class="text-secondary" i81n="@@estimate_table_info" *ngIf="!shouldShowTablePH(estTable)">{{tableStr}}</p>

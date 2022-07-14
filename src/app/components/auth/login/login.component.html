@@ -1,7 +1,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="loginFormOnSubmit()">
     <p>
         <mat-form-field class="w-100" appearance="fill">
-            <mat-label i18n="@@login_email_title">Email</mat-label>
+            <mat-label>{{authStr.common.email}}</mat-label>
             <input matInput #emailInput [formControl]="emailFC" formControlName="email" type="email" required>
             <button type="button" *ngIf="emailInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
                 (click)="emailInput.value=''">
@@ -12,7 +12,7 @@
     </p>
     <p>
         <mat-form-field class="w-100" appearance="fill">
-            <mat-label i18n="@@login_pword_title">Password</mat-label>
+            <mat-label>{{authStr.common.pword}}</mat-label>
             <input matInput #pwrdInput [formControl]="passwordFC" formControlName="password" required
                 type="{{shouldShowPword? 'text':'password'}}">
             <button type="button" *ngIf="pwrdInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
@@ -28,7 +28,7 @@
         </mat-form-field>
     </p>
     <a [routerLink]="forgotPwordPath">
-        <p class="small" i18n="@@login_forgot_pword">Forgot password</p>
+        <p class="small">{{authStr.forgot_pword.title}}</p>
     </a>
-    <button class="w-100" mat-raised-button type="submit" color="primary" i18n="@@login_title">Login</button>
+    <button class="w-100" mat-raised-button type="submit" color="primary">{{authStr.login.title}}</button>
 </form>

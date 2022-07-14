@@ -5,13 +5,12 @@
             </mat-progress-bar>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <h2 class="my-auto" i18n="@@list_of_commo">List of commodities</h2>
+                    <h2 class="my-auto">{{commoStr.list_of_commo}}</h2>
                 </mat-panel-title>
-                <mat-panel-description fxHide.lt-md i18n="@@list_of_commo_desc">
-                    Full list of traded commodities
-                </mat-panel-description>
+                <mat-panel-description fxHide.lt-md>{{commoStr.list_of_commo_desc}}</mat-panel-description>
             </mat-expansion-panel-header>
 
+            <!-- TODO: hardcoded table -->
             <!-- agri -->
             <mat-expansion-panel class="my-3">
                 <mat-expansion-panel-header>

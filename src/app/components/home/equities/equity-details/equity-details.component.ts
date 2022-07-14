@@ -16,6 +16,8 @@ import { EquitiesComponent } from './../equities.component';
   styleUrls: ['./equity-details.component.css']
 })
 export class EquityDetailsComponent extends EquitiesComponent implements OnInit {
+  tableStr = COMMON_STR.estimates.est_table_disclaimer
+  
   // company ticker for currect company
   companyTicker = ''
   company: Company | undefined

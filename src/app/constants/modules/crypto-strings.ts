@@ -3,6 +3,6 @@ export const CRYPTO_STR = {
         singular: $localize`:@@crypto:Cryptocurrency`,
         plural: $localize`:@@cryptos:Cryptocurrencies`
     },
-    request_add: {
-    }
+    list_of_crypto: $localize`:@@list_of_crypto:List of cryptocurrencies`,
+    list_of_crypto_desc: $localize`:@@list_of_crypto_desc:Full list of cryptocurrencies`,
 }

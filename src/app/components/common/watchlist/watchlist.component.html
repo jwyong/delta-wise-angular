@@ -4,10 +4,9 @@
         </mat-progress-bar>
 
         <div class="d-flex align-items-center">
-            <h2 class="my-auto me-3" i18n="@@watchlists">Watchlists</h2>
+            <h2 class="my-auto me-3">{{watchlistStr.plural}}</h2>
             <mat-chip class="cursor-pointer" *ngIf="!isLoadingWatchlist && isWatchlistExpanded"
-                i18n="@@add_new_watchlist" (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + Add new
-                watchlist
+                (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + {{watchlistStr.add_new}}
             </mat-chip>
             <button *ngIf="shouldShowWLEditBtn()" class="ms-2" mat-icon-button
                 (click)="isEditMode = !isEditMode; $event.stopPropagation()">
@@ -57,11 +56,10 @@
         <mat-icon class="scale-2">
             {{isWatchlistsEmpty()? "playlist_add" : "search"}}
         </mat-icon>
-        <p class="mt-3" i18n="@@no_watchlist">
-            {{isWatchlistsEmpty()? "No watchlists yet." : "No items in this watchlist."}}
+        <p class="mt-3">
+            {{isWatchlistsEmpty()? watchlistStr.no_watchlists : watchlistStr.no_items}}
             <br>
-            {{isWatchlistsEmpty()? "Click here to add new watchlist." :
-            "Tap on the search bar above to get started."}}
+            {{isWatchlistsEmpty()? watchlistStr.click_add_new_wl : tapSearchStr}}
         </p>
     </div>
 </mat-expansion-panel>

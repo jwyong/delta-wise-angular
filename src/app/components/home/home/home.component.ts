@@ -1,3 +1,7 @@
+import { COMMON_STR } from 'src/app/constants/common-strings';
+import { CRYPTO_STR } from './../../../constants/modules/crypto-strings';
+import { COMMODITY_STR } from 'src/app/constants/modules/commodity-strings';
+import { EQT_STR } from './../../../constants/modules/equities-strings';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { LocalStorageService } from 'src/app/services/local-storage-service';
@@ -16,6 +20,12 @@ import { AUTH_STR } from '../../../constants/auth-strings';
  * - check jwt validity and re-direct to login if invalid/expired
  */
 export class HomeComponent extends BaseComponent implements OnInit {
+  eqtPluralStr = EQT_STR.equity.plural
+  commoPluralStr = COMMODITY_STR.commodity.plural
+  cryptoPluralStr = CRYPTO_STR.crypto.plural
+  settingsStr = COMMON_STR.settings
+  logoutStr = AUTH_STR.logout.title
+
   // router path for html
   equitiesPath = RouterConstants.ROUTER_PATH_EQUITIES
   commoditiesPath = RouterConstants.ROUTER_PATH_COMMODITIES

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { COMMODITY_STR } from 'src/app/constants/modules/commo-strings';
+import { COMMODITY_STR } from 'src/app/constants/modules/commodity-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
 import { environment } from 'src/environments/environment';

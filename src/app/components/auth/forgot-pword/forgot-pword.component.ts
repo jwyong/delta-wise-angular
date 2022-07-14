@@ -1,7 +1,7 @@
+import { COMMON_STR } from 'src/app/constants/common-strings';
+import { Component, OnInit } from '@angular/core';
 import { RouterConstants } from '../../../utils/router-constants';
 import { BaseAuthComponent } from './../base-auth/base-auth.component';
-import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-forgot-pword',
@@ -9,8 +9,6 @@ import { delay } from 'rxjs';
   styleUrls: ['./forgot-pword.component.css']
 })
 export class ForgotPwordComponent extends BaseAuthComponent implements OnInit {
-  backToLoginPath = `/${RouterConstants.ROUTER_PATH_LOGIN}`
-
   // forgot pword - call api and go back to login page
   async forgotPwordFormOnSubmit() {
     if (this.emailFC.invalid) return
@@ -33,4 +31,9 @@ export class ForgotPwordComponent extends BaseAuthComponent implements OnInit {
 
     }, 2000);
   }
+
+  /**
+   * UI binding
+   */
+   backToLoginPath = `/${RouterConstants.ROUTER_PATH_LOGIN}`
 }

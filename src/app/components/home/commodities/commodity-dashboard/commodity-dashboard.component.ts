@@ -1,3 +1,4 @@
+import { COMMODITY_STR } from 'src/app/constants/modules/commodity-strings';
 import { Component, OnInit } from '@angular/core';
 import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { Commodity } from 'src/app/models/commodities/commodity';
@@ -10,6 +11,8 @@ import { CDConstants } from './cd-constants';
   styleUrls: ['./commodity-dashboard.component.css']
 })
 export class CommodityDashboardComponent extends BaseDashboardComponent implements OnInit {
+  commoStr = COMMODITY_STR
+
   /**
    * table related
    */

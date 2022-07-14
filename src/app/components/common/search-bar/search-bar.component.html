@@ -1,6 +1,6 @@
 <form>
     <mat-form-field class="w-100" appearance="fill">
-        <mat-label i18n="@@interpolated-search-label">Search {{searchBarLabel}}</mat-label>
+        <mat-label>{{getSearchLabel()}}</mat-label>
         <input type="text" #searchInput matInput [formControl]="formControl" [matAutocomplete]="mainListSearch">
         <button *ngIf="searchInput.value.length > 0" type="button" matSuffix mat-icon-button aria-label="Clear"
             (click)="searchInput.value=''">

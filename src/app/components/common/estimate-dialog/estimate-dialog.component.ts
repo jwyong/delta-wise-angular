@@ -21,9 +21,12 @@ import { DateTimeUtil } from './../../../utils/date-time';
   styleUrls: ['./estimate-dialog.component.css']
 })
 export class EstimateDialogComponent implements OnInit {
-    // determine if debug or release version
-    isDebug = !environment.production
-    
+  estStr = COMMON_STR.estimates
+  confStr = COMMON_STR.confirmation
+
+  // determine if debug or release version
+  isDebug = !environment.production
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EstimateDialogData,
     protected formBuilder: FormBuilder,
@@ -135,29 +138,37 @@ export class EstimateDialogComponent implements OnInit {
    * ui
    */
   getLastEstimateDateTime() {
-    return DateTimeUtil.getDateAsAgo(this.companyEstimate?.last_update_at)
+    return `${this.estStr.last_est_date}: ${DateTimeUtil.getDateAsAgo(this.companyEstimate?.last_update_at)}`
   }
 
   // No. of contributors: 1-5, 6-10, 11-15, 16-20, >20
   getNumberOfContStr() {
     let contributorCount = this.companyEstimate?.no_of_contributors ?? 0
 
+    var noOfCont: string
     switch (true) {
       case (contributorCount > 20):
-        return ">20"
+        noOfCont = ">20"
+        break
 
       case (contributorCount > 15):
-        return "16-20"
+        noOfCont = "16-20"
+        break
 
       case (contributorCount > 10):
-        return "11-15"
+        noOfCont = "11-15"
+        break
 
       case (contributorCount > 5):
-        return "6-10"
+        noOfCont = "6-10"
+        break
 
       default:
-        return "1-5"
+        noOfCont = "1-5"
+        break
     }
+
+    return `${this.estStr.no_of_contributors}: ${noOfCont}`
   }
 
   /**
@@ -167,17 +178,17 @@ export class EstimateDialogComponent implements OnInit {
   // get "lower" or "higher" str based on percDiff -ve/+ve
   getMedianPercDiffSignStr() {
     if ((this.companyEstimate?.percentage_diff ?? 0) < 0)
-      return COMMON_STR.estimates.lower
+      return this.estStr.lower
     else
-      return COMMON_STR.estimates.higher
+      return this.estStr.higher
   }
 
   // get "less" or "higher" str based on 20% cap
   getMedianPercDiffRangeStr() {
     if (Math.abs(this.companyEstimate?.percentage_diff ?? 0) <= 20)
-      return COMMON_STR.estimates.less
+      return this.estStr.less
     else
-      return COMMON_STR.estimates.more
+      return this.estStr.more
   }
 
   // get percentage difference str based on 2.5 intervals (20% cap)
@@ -223,11 +234,11 @@ export class EstimateDialogComponent implements OnInit {
         break
     }
 
-    return COMMON_STR.estimates.perc_diff.arr_value[strIndex]
+    return this.estStr.perc_diff.arr_value[strIndex]
   }
 
   getInputTrialStr() {
-    return this.companyEstimate?.remaining_attempt ?? 0
+    return CommonStrDyn.inputTrialsRemaining((this.companyEstimate?.remaining_attempt ?? 0).toString())
   }
 
   /**

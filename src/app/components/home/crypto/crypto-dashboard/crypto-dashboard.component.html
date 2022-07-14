@@ -5,11 +5,9 @@
             </mat-progress-bar>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <h2 class="my-auto" i18n="@@list_of_crypto">List of cryptocurrencies</h2>
+                    <h2 class="my-auto">{{cryptoStr.list_of_crypto}}</h2>
                 </mat-panel-title>
-                <mat-panel-description fxHide.lt-md i18n="@@list_of_crypto_desc">
-                    Full list of cryptocurrencies
-                </mat-panel-description>
+                <mat-panel-description fxHide.lt-md>{{cryptoStr.list_of_crypto_desc}} </mat-panel-description>
             </mat-expansion-panel-header>
 
             <mat-paginator [length]="pageLength" [pageSize]="pageSize" (page)="onPaged($event.pageIndex)"

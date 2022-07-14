@@ -8,7 +8,7 @@ import { DataService } from 'src/app/services/data-service';
 import { HttpService } from 'src/app/services/http-service';
 import { RouterConstants } from 'src/app/utils/router-constants';
 import { ERROR_STR } from '../../constants/error-strings';
-import { COMMODITY_STR } from '../../constants/modules/commo-strings';
+import { COMMODITY_STR } from '../../constants/modules/commodity-strings';
 import { CRYPTO_STR } from '../../constants/modules/crypto-strings';
 import { EQT_STR } from '../../constants/modules/equities-strings';
 import { LocalStorageService } from './../../services/local-storage-service';

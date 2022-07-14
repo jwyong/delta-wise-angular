@@ -1,7 +1,7 @@
 <form (ngSubmit)="resetPwordOnSubmit()">
     <p>
         <mat-form-field class="w-100" appearance="fill">
-            <mat-label i18n="@@reset_pword_new_pword">New password (e.g.: Testing123!)</mat-label>
+            <mat-label>{{authStr.reset_pword.new_pword_input}}</mat-label>
             <input type="password" #newPwrdInput matInput [formControl]="newPwordFC" required>
             <button type="button" *ngIf="newPwrdInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
                 (click)="newPwrdInput.value=''">
@@ -12,7 +12,7 @@
     </p>
     <p>
         <mat-form-field class="w-100" appearance="fill">
-            <mat-label i18n="@@reset_pword_confirm_pword">Confirm password</mat-label>
+            <mat-label>{{authStr.reset_pword.confirm_pword}}</mat-label>
             <input type="password" #confPwrdInput matInput [formControl]="confirmPwordFC" required>
             <button type="button" *ngIf="confPwrdInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
                 (click)="confPwrdInput.value=''">
@@ -21,5 +21,5 @@
             <mat-error *ngIf="confirmPwordFC.invalid">{{getConfirmPwordErrorMsg()}}</mat-error>
         </mat-form-field>
     </p>
-    <button class="w-100" mat-raised-button type="submit" color="primary" i18n="@@login_title">Submit</button>
+    <button class="w-100" mat-raised-button type="submit" color="primary">{{authStr.common.submit}}</button>
 </form>
