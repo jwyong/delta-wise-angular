@@ -15,6 +15,5 @@ export class FooterComponent implements OnInit {
   appVersion = environment.version
 
   ngOnInit(): void {
-    console.log(this.appVersion)
   }
 }

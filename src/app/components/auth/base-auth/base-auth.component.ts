@@ -20,11 +20,11 @@ export class BaseAuthComponent extends BaseComponent implements OnInit {
   
   // email validator
   emailFC = new FormControl('', [Validators.required, Validators.email]);
-  getEmailErrorMsg() {
-    if (this.emailFC.hasError(VALIDATION_STR.keys.required)) {
+  getEmailErrorMsg(formControl: FormControl) {
+    if (formControl.hasError(VALIDATION_STR.keys.required)) {
       return VALIDATION_STR.validation.required
     }
 
-    return this.emailFC.hasError(VALIDATION_STR.keys.email) ? VALIDATION_STR.validation.email : '';
+    return formControl.hasError(VALIDATION_STR.keys.email) ? VALIDATION_STR.validation.email : '';
   }
 }

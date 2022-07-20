@@ -11,7 +11,7 @@ export const VALIDATION_STR = {
         pword: {
             length: $localize`:@@vld_pword_length:Password must have at least 8 characters`,
             chars: $localize`:@@vld_pword_chars:Password must have at least 1 upper case, 1 lower case, 1 number and 1 symbol`,
-            match: $localize`:@@vld_pwrod_match:Passwords not matching`,
+            no_match: $localize`:@@vld_pwrod_match:Passwords not matching`,
         }
     },
     rules: {

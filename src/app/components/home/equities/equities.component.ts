@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/app/models/equities/company';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
-import { environment } from 'src/environments/environment';
 import { BaseModuleComponent } from '../base-home/base-home.component';
 import { EQT_STR } from '../../../constants/modules/equities-strings';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-equities',

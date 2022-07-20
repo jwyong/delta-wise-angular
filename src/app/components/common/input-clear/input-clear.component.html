@@ -1,0 +1,14 @@
+<mat-form-field class="w-100" appearance="fill">
+    <mat-label>{{_label}}</mat-label>
+    <input matInput #input [formControl]="_formControl" [type]="getType()">
+    <button type="button" tabindex="-1" *ngIf="input.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+        (click)="_formControl.reset()">
+        <mat-icon class="text-secondary">close</mat-icon>
+    </button>
+    <button type="button" tabindex="-1" *ngIf="_hasPwordToggle" matSuffix mat-icon-button
+        aria-label="toggle password" (click)="_shouldShowPword = !_shouldShowPword">
+        <mat-icon class="text-secondary">{{_shouldShowPword? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+    </button>
+    <mat-error *ngIf="getErrorMsg(_formControl) != '' && _formControl.invalid">{{getErrorMsg(_formControl)}}</mat-error>
+</mat-form-field>

@@ -1,25 +1,11 @@
 <form (ngSubmit)="resetPwordOnSubmit()">
     <p>
-        <mat-form-field class="w-100" appearance="fill">
-            <mat-label>{{authStr.reset_pword.new_pword_input}}</mat-label>
-            <input type="password" #newPwrdInput matInput [formControl]="newPwordFC" required>
-            <button type="button" *ngIf="newPwrdInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-                (click)="newPwrdInput.value=''">
-                <mat-icon class="text-secondary">close</mat-icon>
-            </button>
-            <mat-error *ngIf="newPwordFC.invalid">{{getNewPwordErrorMsg()}}</mat-error>
-        </mat-form-field>
+        <app-input-clear [_label]="authStr.reset_pword.new_pword_input" [_formControl]="newPwordFC"
+            [_hasPwordToggle]="true" [getErrorMsg]="getNewPwordErrorMsg"></app-input-clear>
     </p>
     <p>
-        <mat-form-field class="w-100" appearance="fill">
-            <mat-label>{{authStr.reset_pword.confirm_pword}}</mat-label>
-            <input type="password" #confPwrdInput matInput [formControl]="confirmPwordFC" required>
-            <button type="button" *ngIf="confPwrdInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-                (click)="confPwrdInput.value=''">
-                <mat-icon class="text-secondary">close</mat-icon>
-            </button>
-            <mat-error *ngIf="confirmPwordFC.invalid">{{getConfirmPwordErrorMsg()}}</mat-error>
-        </mat-form-field>
+        <app-input-clear [_label]="authStr.reset_pword.confirm_pword" [_formControl]="confirmPwordFC"
+            [_hasPwordToggle]="true" [getErrorMsg]="getConfirmPwordErrorMsg"></app-input-clear>
     </p>
     <button class="w-100" mat-raised-button type="submit" color="primary">{{authStr.common.submit}}</button>
 </form>

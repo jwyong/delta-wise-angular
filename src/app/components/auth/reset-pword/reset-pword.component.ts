@@ -48,28 +48,29 @@ export class ResetPwordComponent extends BaseAuthComponent implements OnInit {
     }, this.pwordMatchVld);
   }
 
-  getNewPwordErrorMsg() {
+  getNewPwordErrorMsg(formControl: FormControl) {
     // required
-    if (this.newPwordFC.hasError(VALIDATION_STR.keys.required))
+    if (formControl.hasError(VALIDATION_STR.keys.required))
       return VALIDATION_STR.validation.required
 
     // length
-    if (this.newPwordFC.value.length < 8)
+    if (formControl.value.length < 8)
       return VALIDATION_STR.validation.pword.length
 
     // characters - show error
     return VALIDATION_STR.validation.pword.chars
   }
 
-  getConfirmPwordErrorMsg() {
+  // check if passwords match: use fat arrow to access parent component context
+  getConfirmPwordErrorMsg = (formControl: FormControl) => {
     // required
-    if (this.confirmPwordFC.hasError(VALIDATION_STR.keys.required)) {
+    if (formControl.hasError(VALIDATION_STR.keys.required)) {
       return VALIDATION_STR.validation.required
     }
 
     // doesn't match new pword
-    if (this.confirmPwordFC.value != this.newPwordFC.value)
-      return VALIDATION_STR.validation.pword.match
+    if (formControl.value != this.newPwordFC.value)
+      return VALIDATION_STR.validation.pword.no_match
     else return ''
   }
 

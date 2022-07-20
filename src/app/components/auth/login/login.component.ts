@@ -22,12 +22,12 @@ export class LoginComponent extends BaseAuthComponent {
 
   // pword validator
   passwordFC = new FormControl('', [Validators.required, Validators.minLength(8)]);
-  getPwordErrorMsg() {
-    if (this.passwordFC.hasError(VALIDATION_STR.keys.required)) {
+  getPwordErrorMsg(formControl: FormControl) {
+    if (formControl.hasError(VALIDATION_STR.keys.required)) {
       return VALIDATION_STR.validation.required
     }
 
-    return this.passwordFC.value.length < 8 ? VALIDATION_STR.validation.pword.length: '';
+    return formControl.value.length < 8 ? VALIDATION_STR.validation.pword.length: '';
   }
   shouldShowPword = false
 
