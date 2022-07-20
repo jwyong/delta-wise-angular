@@ -55,8 +55,8 @@ export const COMMON_STR = {
 
     // recently searched
     recent_search: {
-        recently_searched: $localize`:@@recently_searched:Recently Searched`,
-        no_recent_search: $localize`:@@no_recent_search:No recently searhed items yet.`,
+        recently_searched: $localize`:@@recently_searched:Recently searched`,
+        no_recent_search: $localize`:@@no_recent_search:No recently searched items yet.`,
     },
 
     // estimates

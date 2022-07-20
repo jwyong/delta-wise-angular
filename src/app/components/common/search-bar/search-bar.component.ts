@@ -253,7 +253,7 @@ export class SearchBarComponent implements OnInit {
    */
   // "Search Company"
   getSearchLabel() {
-    return CommonStrDyn.searchBarLabel(this.searchBarLabel)
+    return CommonStrDyn.searchBarLabel(this.searchBarLabel.toLocaleLowerCase())
   }
 
   // show/hide clear icon

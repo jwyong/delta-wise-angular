@@ -6,7 +6,7 @@ import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { VALIDATION_STR } from 'src/app/constants/validation-strings';
 import { HttpConstants } from 'src/app/utils/http-constants';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.dev';
 import { COMMON_STR } from '../../../constants/common-strings';
 import { CompanyEstimate } from './../../../models/equities/company-estimate';
 import { CommonServices } from './../../../services/common-services';

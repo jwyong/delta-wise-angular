@@ -4,11 +4,8 @@
         </mat-progress-bar>
 
         <div class="d-flex align-items-center">
-            <h2 class="my-auto me-3">{{watchlistStr.plural}}</h2>
-            <mat-chip class="cursor-pointer" *ngIf="!isLoadingWatchlist && isWatchlistExpanded"
-                (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + {{watchlistStr.add_new}}
-            </mat-chip>
-            <button *ngIf="shouldShowWLEditBtn()" class="ms-2" mat-icon-button
+            <h2 class="my-auto me-2">{{watchlistStr.plural}}</h2>
+            <button *ngIf="shouldShowWLEditBtn()" class="" mat-icon-button
                 (click)="isEditMode = !isEditMode; $event.stopPropagation()">
                 <mat-icon class="scale-08">{{isEditMode? 'done' : 'edit'}}</mat-icon>
             </button>
@@ -35,6 +32,9 @@
                     <mat-icon>cancel</mat-icon>
                 </button>
             </mat-chip>
+            <mat-chip class="cursor-pointer" *ngIf="!isLoadingWatchlist && isWatchlistExpanded"
+                (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + 
+            </mat-chip>
         </div>
     </mat-chip-list>
 
@@ -52,7 +52,7 @@
         </mat-list>
     </div>
 
-    <div class="m-5 text-center" (click)="emptyWatchlistOnClick()" *ngIf="shouldShowEmptyUx()">
+    <div class="m-5 text-center" [ngClass]="isWatchlistsEmpty()? 'cursor-pointer' : ''" (click)="emptyWatchlistOnClick()" *ngIf="shouldShowEmptyUx()">
         <mat-icon class="scale-2">
             {{isWatchlistsEmpty()? "playlist_add" : "search"}}
         </mat-icon>

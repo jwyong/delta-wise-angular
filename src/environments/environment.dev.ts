@@ -7,7 +7,7 @@ import packageJson from '../../package.json';
 export const environment = {
   production: false,
   version: `${packageJson.version} (Dev)`,
-  apiUrl: "https://api.delta-wise.com/api"
+  apiUrl: "https://dev.api.delta-wise.com/api"
 };
 
 /*

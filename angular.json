@@ -67,11 +67,36 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
+                  "replace": "src/environments/environment.dev.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/environment.stg.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "index": {
+                "input": "src/index.stg.html",
+                "output": "index.html"
+              }
             },
             "development": {
               "buildOptimizer": false,
@@ -99,6 +124,9 @@
             },
             "development": {
               "browserTarget": "delta-wise:build:development"
+            },
+            "staging": {
+              "browserTarget": "delta-wise:build:staging"
             }
           },
           "defaultConfiguration": "development"
