@@ -1,4 +1,4 @@
-import { environment } from '../../environments/environment.dev';
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage-service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
