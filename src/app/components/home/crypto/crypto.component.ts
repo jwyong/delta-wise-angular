@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
-import { BaseModuleComponent } from '../base-home/base-home.component';
+import { BaseHomeComponent } from '../base-home/base-home.component';
 import { CRYPTO_STR } from '../../../constants/modules/crypto-strings';
 import { Cryptocurrency } from './../../../models/crypto/crypto';
 import { environment } from 'src/environments/environment';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './crypto.component.html',
   styleUrls: ['./crypto.component.css']
 })
-export class CryptoComponent extends BaseModuleComponent implements OnInit {
+export class CryptoComponent extends BaseHomeComponent implements OnInit {
   override ngOnInit(): void {
     this.searchBarLabel = CRYPTO_STR.crypto.singular
   }

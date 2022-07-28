@@ -53,6 +53,7 @@ export class LoginComponent extends BaseAuthComponent {
       // set jwtToken + username
       this.localStorageService.setJwtToken(result.data?.token)
       localStorage.setItem(LocalStorageService.LS_USER_NAME, result.data?.name ?? "")
+      localStorage.setItem(LocalStorageService.LS_USER_EMAIL, result.data?.email ?? "")
 
       this.navigateTo(RouterConstants.ROUTER_PATH_HOME)
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { User } from 'src/app/models/common/user';
 import { BaseComponent } from '../../base/base.component';
 
 /**
@@ -11,7 +12,7 @@ import { BaseComponent } from '../../base/base.component';
   templateUrl: './base-home.component.html',
   styleUrls: ['./base-home.component.css']
 })
-export class BaseModuleComponent extends BaseComponent implements OnInit {
+export class BaseHomeComponent extends BaseComponent implements OnInit {
   @ViewChild('searchBar') searchBar: any;
 
   /**

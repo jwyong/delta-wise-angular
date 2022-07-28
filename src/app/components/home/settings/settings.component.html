@@ -1,0 +1,21 @@
+<div class="row h-100">
+    <div class="col-12 col-sm-5 col-lg-4">
+        <h3>{{settingsStr}}</h3>
+        <hr class="m-0">
+
+        <mat-list role="list">
+            <mat-list-item class="wl-rl-item cursor-pointer" [ngClass]="getSettingsTitleClass(profilePath)"
+                (click)="listItemOnClick(profilePath)">
+                {{profileStr}}
+            </mat-list-item>
+            <mat-list-item class="wl-rl-item cursor-pointer" [ngClass]="getSettingsTitleClass(changePwordPath)"
+                (click)="listItemOnClick(changePwordPath)">
+                {{changePwordTitleStr}}
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div class="col-12 col-sm-7 col-lg-8">
+        <router-outlet></router-outlet>
+    </div>
+</div>

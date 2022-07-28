@@ -12,10 +12,19 @@ export class RouterConstants {
     /**
      * logged in
      */
-     public static ROUTER_PATH_HOME: string = 'home';
-     public static ROUTER_PATH_EQUITIES: string = 'equities';
-     public static ROUTER_PATH_COMMODITIES: string = 'commodities';
-     public static ROUTER_PATH_CRYPTO: string = 'crypto';
+    // common
+    public static ROUTER_PATH_HOME: string = 'home';
+    public static ROUTER_PATH_DETAILS: string = 'details';
 
-     public static ROUTER_PATH_DETAILS: string = 'details';
-    }
+    // settings
+    public static ROUTER_PATH_SETTINGS: string = 'settings';
+    public static ROUTER_PATH_UESR_PROFILE: string = 'profile';
+    public static ROUTER_PATH_CHANGE_PWORD: string = 'change-pword';
+
+
+    // modules
+    public static ROUTER_PATH_EQUITIES: string = 'equities';
+    public static ROUTER_PATH_COMMODITIES: string = 'commodities';
+    public static ROUTER_PATH_CRYPTO: string = 'crypto';
+
+}

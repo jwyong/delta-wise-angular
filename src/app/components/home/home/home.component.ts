@@ -1,3 +1,4 @@
+import { BaseHomeComponent } from './../base-home/base-home.component';
 import { COMMON_STR } from 'src/app/constants/common-strings';
 import { CRYPTO_STR } from './../../../constants/modules/crypto-strings';
 import { COMMODITY_STR } from 'src/app/constants/modules/commodity-strings';
@@ -19,7 +20,7 @@ import { AUTH_STR } from '../../../constants/auth-strings';
  * home component with toolbar (after logging in)
  * - check jwt validity and re-direct to login if invalid/expired
  */
-export class HomeComponent extends BaseComponent implements OnInit {
+export class HomeComponent extends BaseHomeComponent implements OnInit {
   eqtPluralStr = EQT_STR.equity.plural
   commoPluralStr = COMMODITY_STR.commodity.plural
   cryptoPluralStr = CRYPTO_STR.crypto.plural
@@ -64,6 +65,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
     this.user = {
       user_name: userName,
+      email: localStorage.getItem(LocalStorageService.LS_USER_EMAIL) ?? "",
       avatar: avatar
     }
   }
@@ -92,9 +94,15 @@ export class HomeComponent extends BaseComponent implements OnInit {
     return userName.toUpperCase();
   }
 
-  // 
+  /**
+   * dropdown items onClick
+   */
+  // settings
+  settingsOnClick() {
+    this.navigateTo(RouterConstants.ROUTER_PATH_SETTINGS)
+  }
 
-  //=== logout
+  // logout
   logoutOnClick() {
     this.showGenericDialog({
       title: AUTH_STR.logout.title,

@@ -1,6 +1,7 @@
 import { Company } from 'src/app/models/equities/company';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/common/user';
 
 @Injectable()
 /**
@@ -15,10 +16,4 @@ export class DataService {
   setIsLoading(isLoading: boolean) {
     this.isLoadingSource.next(isLoading);
   }
-
-  /**
-   * equities
-   */
-  // company details for equity details page
-  company = <Company>{}
 }

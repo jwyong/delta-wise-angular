@@ -22,6 +22,8 @@ export const AUTH_STR = {
         confirm_pword: $localize`:@@confirm_pword:Confirm password`,
     },
     change_pword: {
+        title: $localize`:@@change_pword:Change password`,
+        current_pword: $localize`:@@current_pword:Current password`,
         success: $localize`:@@change_pword_success:Password updated successfully, please login with the new password.`
     },
     logout: {

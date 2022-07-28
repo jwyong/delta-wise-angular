@@ -7,6 +7,8 @@ export const COMMON_STR = {
     terms_of_use: $localize`:@@terms_of_use:Terms of Use`,
     tap_search_get_started: $localize`:@@tap_search_get_started:Tap on the search bar above to get started.`,
     settings: $localize`:@@settings:Settings`,
+    user_profile: $localize`:@@user_profile:User Profile`,
+    user_name: $localize`:@@user_name:Username`,
 
     // date as ago
     date_as_ago: {
@@ -111,6 +113,7 @@ export const COMMON_STR = {
         yes: $localize`:@@yes:Yes`,
         no: $localize`:@@no:No`,
         submit: $localize`:@@submit:Submit`,
+        update: $localize`:@@update:Update`,
         close: $localize`:@@close:Close`
     },
 }

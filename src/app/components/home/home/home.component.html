@@ -25,7 +25,7 @@
       <button mat-menu-item [routerLink]="cryptoPath" ngClass="{{getToolbarTitleClass(cryptoPath)}}" fxHide
         fxShow.xs>{{cryptoPluralStr}}</button>
       <mat-divider fxHide fxShow.xs></mat-divider>
-      <button mat-menu-item>{{settingsStr}}</button>
+      <button mat-menu-item (click)="settingsOnClick()">{{settingsStr}}</button>
       <button mat-menu-item (click)="logoutOnClick()">{{logoutStr}}</button>
     </mat-menu>
   </mat-toolbar>

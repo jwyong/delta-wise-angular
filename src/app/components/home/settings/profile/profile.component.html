@@ -1,0 +1,21 @@
+<h2>{{profileStr}}</h2>
+
+<form [formGroup]="formGrp" (ngSubmit)="updateProfileOnSubmit()">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <p>
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{authStr.email}}</mat-label>
+                <input matInput [value]="user.email" readonly>
+            </mat-form-field>
+        </p>
+        <p>
+            <app-input-clear [_label]="usernameStr" [_formControl]="usernameFC" _name="username"
+                [getErrorMsg]="getUsernameErrorMsg"></app-input-clear>
+        </p>
+
+        <div class="d-flex">
+            <button class="ms-auto" mat-raised-button type="submit" color="primary"
+                [disabled]="isUpdateBtnDisabled()">{{updateStr}}</button>
+        </div>
+    </div>
+</form>

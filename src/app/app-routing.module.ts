@@ -1,3 +1,6 @@
+import { ProfileComponent } from './components/home/settings/profile/profile.component';
+import { ChangePwordComponent } from './components/home/settings/change-pword/change-pword.component';
+import { SettingsComponent } from './components/home/settings/settings.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './components/auth/auth/auth.component';
@@ -53,6 +56,23 @@ const routes: Routes = [
     children: [
       // TODO: need to check user sub (BE) - TEMP show equities by default
       { path: '', redirectTo: RouterConstants.ROUTER_PATH_EQUITIES, pathMatch: 'full' },
+
+      // settings
+      {
+        path: RouterConstants.ROUTER_PATH_SETTINGS,
+        component: SettingsComponent,
+        children: [
+          { path: '', redirectTo: RouterConstants.ROUTER_PATH_UESR_PROFILE, pathMatch: 'full' },
+          {
+            path: RouterConstants.ROUTER_PATH_UESR_PROFILE,
+            component: ProfileComponent,
+          },
+          {
+            path: RouterConstants.ROUTER_PATH_CHANGE_PWORD,
+            component: ChangePwordComponent,
+          },
+        ]
+      },
 
       // equities
       {

@@ -1,0 +1,22 @@
+<h2>{{authStr.change_pword.title}}</h2>
+
+<form [formGroup]="changePwordFormGrp" (ngSubmit)="changePwordOnSubmit()">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <p>
+            <app-input-clear [_label]="authStr.change_pword.current_pword" [_formControl]="currentPwordFC"
+                _name="currentPword" [_hasPwordToggle]="true" [getErrorMsg]="getCurrentPwordErrorMsg"></app-input-clear>
+        </p>
+        <p>
+            <app-input-clear [_label]="authStr.reset_pword.new_pword_input" [_formControl]="newPwordFC" _name="newPword"
+                [_hasPwordToggle]="true" [getErrorMsg]="getNewPwordErrorMsg"></app-input-clear>
+        </p>
+        <p>
+            <app-input-clear [_label]="authStr.reset_pword.confirm_pword" [_formControl]="confirmPwordFC"
+                _name="confirmPword" [_hasPwordToggle]="true" [getErrorMsg]="getConfirmPwordErrorMsg"></app-input-clear>
+        </p>
+
+        <div class="d-flex">
+            <button class="ms-auto" mat-raised-button type="submit" color="primary">{{authStr.common.submit}}</button>
+        </div>
+    </div>
+</form>
