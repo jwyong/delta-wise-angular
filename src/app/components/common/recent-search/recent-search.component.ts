@@ -109,6 +109,6 @@ export class RecentSearchComponent extends BaseDashboardComponent implements OnI
 
   // show empty UX if no watchlists / items in selected watchlist after loading
   shouldShowEmptyUx() {
-    return !this.isLoading() && !this.isLoadingRecentList && this.recentSearchList.length == 0
+    return !this.isLoadingRecentList && this.recentSearchList.length == 0
   }
 }

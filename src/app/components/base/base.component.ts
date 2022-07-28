@@ -143,12 +143,8 @@ export class BaseComponent implements OnInit {
     return result;
   }
 
-  async httpGet(endpoint: string) {
-    this.httpService.httpGet(endpoint)
-  }
-
   // handle http resp error
-  private handleRespError(result: Resp<any>, shouldShowErrors: boolean) {
+  handleRespError(result: Resp<any>, shouldShowErrors: boolean = true) {
     if (!result.status)
       // show logout dialog if token expired
       if (result.errors?.includes("Your token is not valid")) {

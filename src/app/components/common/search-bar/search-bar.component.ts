@@ -1,3 +1,5 @@
+import { Resp } from 'src/app/models/common/resp';
+import { BaseComponent } from 'src/app/components/base/base.component';
 import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -20,15 +22,7 @@ import { RequestAddDialogComponent } from './request-add-dialog/request-add-dial
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent implements OnInit {
-  constructor(
-    protected dataService: DataService, protected commonServices: CommonServices, protected dialog: MatDialog,
-
-    // TODO: TEMP
-    protected route: ActivatedRoute,
-
-  ) { }
-
+export class SearchBarComponent extends BaseComponent implements OnInit {
   @ViewChild('searchInput') searchInput: any;
 
   // search bar label (e.g. Search Company)
@@ -76,7 +70,7 @@ export class SearchBarComponent implements OnInit {
   shouldShowNSROption = false
   noSearchResultsStr = ERROR_STR.search.no_results
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.formControl.valueChanges.pipe(
       // don't search null or blank strings
       filter(res => {
@@ -102,42 +96,53 @@ export class SearchBarComponent implements OnInit {
         )
       ),
     ).subscribe((data: any) => {
-      if (data['data'] != null) {
-        // reset nsr option
-        this.shouldShowNSROption = false
+      console.log('search-bar, data = ', data)
 
-        // TODO: TEMP - get hardcoded data for commo and crypto mods
-        switch (this.module) {
-          case EnumModules.equities:
-            this.filteredItems = data['data'].slice(0, 1000)
-            break
+      let error = data['error']
 
-          case EnumModules.commodities:
-            this.getCommoList()
-            break
+      if (error == null) {
+        // no http error - check if got results
+        let result = data['data']
 
-          case EnumModules.crypto:
-            this.getCryptoList()
-            break
+        if (result == null)
+          // no results - show no results item
+          this.shouldShowNSROption = true
 
-          default:
-            console.log(`search-bar: module "${this.module}" not implemented`)
-            break
+        else {
+          // got results - populate autocomplete list
+          this.shouldShowNSROption = false
+
+          // TODO: TEMP - get hardcoded data for commo and crypto mods
+          switch (this.module) {
+            case EnumModules.equities:
+              this.filteredItems = result.slice(0, 1000)
+              break
+
+            case EnumModules.commodities:
+              this.getCommoList()
+              break
+
+            case EnumModules.crypto:
+              this.getCryptoList()
+              break
+
+            default:
+              console.log(`search-bar: module "${this.module}" not implemented`)
+              break
+          }
         }
       } else {
-        if (data['errors'] == null)
-          // no search results
-          this.shouldShowNSROption = true
-        else
-          // show snackbar error
-          this.commonServices.showSnackbar(ErroStrDyn.errorGeneric(data.error.message))
+        console.log('search-bar, error = ', error)
+
+        // http error - check token/etc
+        this.handleRespError(<Resp<string>>{ status: false, message: error.message, data: data, errors: error.error.errors })
       }
     });
   }
 
   getHttpObserver(value: any) {
     this.tempSearchValue = value
-    return this.commonServices.httpService.httpClient.get(this.searchUrl + value)
+    return this.httpService.httpClient.get(this.searchUrl + value)
   }
 
   // TODO: TEMP - hardcoded results for commo and crypto mods
@@ -173,6 +178,7 @@ export class SearchBarComponent implements OnInit {
     { id: 30, commodity: "Palladium", mainExchange: "NYMEX", category: "Metals" },
     { id: 31, commodity: "Silver", mainExchange: "COMEX", category: "Metals" },
   ]
+
   getCommoList() {
     this.filteredItems = [] as CommoditySearch[]
     const filteredList = this.commoList.filter(item => item.commodity.toLowerCase().includes(this.tempSearchValue));
@@ -270,7 +276,6 @@ export class SearchBarComponent implements OnInit {
    */
   // show dialog for request addition
   showRequestAdditionDialog() {
-    console.log("showRequestAdditionDialog()")
     const dialogRef = this.dialog.open(RequestAddDialogComponent, {
       panelClass: 'loader-dialog',
       minWidth: 400,

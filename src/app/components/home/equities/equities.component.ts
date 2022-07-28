@@ -31,6 +31,7 @@ export class EquitiesComponent extends BaseModuleComponent implements OnInit {
 
   // go to equity detail page on option selected
   onOptionSelected = (item: Company): void => {
+    if (item == null) return
     this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.ticker}`)
   }
 }

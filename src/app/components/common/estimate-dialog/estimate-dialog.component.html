@@ -7,15 +7,8 @@
     <mat-dialog-content class="mat-typography">
       <h4 mat-dialog-subtitle>{{data.subTitle}}</h4>
 
-      <mat-form-field class="w-100" appearance="fill">
-        <mat-label>{{estStr.your_est}}</mat-label>
-        <input matInput #estInput [formControl]="estimateFC" formControlName="estimate" placeholder="3.56" required>
-        <button type="button" *ngIf="estInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-          (click)="estInput.value=''">
-          <mat-icon class="text-secondary">close</mat-icon>
-        </button>
-        <mat-error *ngIf="inputEstimateForm.controls['estimate'].hasError">{{getEstimateErrorMsg()}}</mat-error>
-      </mat-form-field>
+      <app-input-clear [_label]="estStr.your_est" [_formControl]="estimateFC" _placeholder="3.56" _name="estimate"
+        [getErrorMsg]="getEstimateErrorMsg"></app-input-clear>
 
       <div [ngClass]="companyEstimate?.record_exist? 'd-block' : 'd-none'">
         <p>{{getLastEstimateDateTime()}}</p>

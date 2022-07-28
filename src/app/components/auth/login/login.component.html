@@ -1,10 +1,10 @@
 <form [formGroup]="loginForm" (ngSubmit)="loginFormOnSubmit()">
     <p>
-        <app-input-clear [_label]="authStr.common.email" [_formControl]="emailFC" _type="email"
+        <app-input-clear [_label]="authStr.common.email" [_formControl]="emailFC" _type="email" _name="email"
             [getErrorMsg]="getEmailErrorMsg"></app-input-clear>
     </p>
     <p>
-        <app-input-clear [_label]="authStr.common.pword" [_formControl]="passwordFC" 
+        <app-input-clear [_label]="authStr.common.pword" [_formControl]="passwordFC" _name="pword"
         [_hasPwordToggle]="true" [getErrorMsg]="getPwordErrorMsg"></app-input-clear>
     </p>
     <a [routerLink]="forgotPwordPath">

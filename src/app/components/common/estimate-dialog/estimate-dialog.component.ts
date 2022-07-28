@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, EventEmitter, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
@@ -18,7 +19,8 @@ import { DateTimeUtil } from './../../../utils/date-time';
 @Component({
   selector: 'app-estimate-dialog',
   templateUrl: './estimate-dialog.component.html',
-  styleUrls: ['./estimate-dialog.component.css']
+  styleUrls: ['./estimate-dialog.component.css'],
+  providers: [CurrencyPipe]
 })
 export class EstimateDialogComponent implements OnInit {
   estStr = COMMON_STR.estimates
@@ -31,6 +33,7 @@ export class EstimateDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: EstimateDialogData,
     protected formBuilder: FormBuilder,
     protected commonServices: CommonServices,
+    protected currencyPipe: CurrencyPipe
   ) { }
 
   // company estimate obj
@@ -40,9 +43,43 @@ export class EstimateDialogComponent implements OnInit {
   didSubmitEstimateEE = new EventEmitter(false)
 
   ngOnInit(): void {
+    // format input as user types 
+    // this.subscribeCurrencyFormatter()
+
     // make api call to get user estimates
     this.getUserEstimate()
   }
+
+  /**
+   * observers
+   */
+  // TODO: halfway - reached validator part
+  // subscribe est input to currency formatter
+  // private subscribeCurrencyFormatter() {
+  //   this.estimateFC.valueChanges.subscribe(value => {
+  //     if (value == null) return
+
+  //     // replace inputted string to number
+  //     var replaced = value.replace(/[^0-9-.]/g, '').replace(/^0+/, '')
+ 
+  //     // don't proceed if NaN
+  //     if (isNaN(replaced)) return
+
+  //     // limit 2 decimals max
+  //     if (replaced.includes('.') && replaced.split('.')[1].length > 2)
+  //       replaced = replaced.slice(0, -1)
+
+  //     // transform to currency format with currencyPipe
+  //     var trans = this.currencyPipe.transform(replaced, 'GBP', 'symbol', '1.0-2')
+
+  //     // add "." back to transformed string if last digit is dot
+  //     if (replaced.slice(-1) == ".")
+  //       trans = trans + "."
+
+  //     // update form value
+  //     this.estimateFC.patchValue(trans, { emitEvent: false })
+  //   })
+  // }
 
   // loading ux for this dialog
   isLoadingDialog = false
@@ -69,18 +106,19 @@ export class EstimateDialogComponent implements OnInit {
 
   // input estimate form
   estimateFC = new FormControl('', [Validators.required, Validators.pattern(/^-?\d+(\.\d{1,2})?$/)]);
+  
   inputEstimateForm = this.formBuilder.group({
     estimate: this.estimateFC
   });
 
   // validation
-  getEstimateErrorMsg() {
+  getEstimateErrorMsg = (formControl: FormControl) => {
     // required
-    if (this.estimateFC.hasError(VALIDATION_STR.keys.required))
+    if (formControl.hasError(VALIDATION_STR.keys.required))
       return VALIDATION_STR.validation.required
 
     // not a number
-    if (this.estimateFC.hasError(VALIDATION_STR.keys.pattern))
+    if (formControl.hasError(VALIDATION_STR.keys.pattern))
       return VALIDATION_STR.validation.number
 
     return ""
@@ -112,7 +150,7 @@ export class EstimateDialogComponent implements OnInit {
 
     // convert form string to number
     let estimate = Number(this.estimateFC.value)
-    if (estimate == NaN) return
+    if (isNaN(estimate)) return
 
     this.setIsLoadingDialog(true)
 
@@ -253,7 +291,7 @@ export class EstimateDialogComponent implements OnInit {
 
     // check input length for first time input
     if (!this.companyEstimate?.record_exist)
-      return this.estimateFC.value.length == 0
+      return (this.estimateFC.value ?? '').length == 0
 
     // all others - just check input vs. server value
     return this.estimateFC.value == this.companyEstimate?.estimate

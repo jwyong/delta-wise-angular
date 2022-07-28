@@ -36,6 +36,8 @@ export class CommoditiesComponent extends BaseModuleComponent implements OnInit 
 
   // go to commodity detail page
   onOptionSelected = (item: Commodity): void => {
+    if (item == null) return
+
     // TODO: TEMP - store commodity to ls
     localStorage.setItem("commodity", JSON.stringify(item))
 

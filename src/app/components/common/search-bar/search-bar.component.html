@@ -6,29 +6,29 @@
             (click)="searchInput.value=''">
             <mat-icon class="text-secondary">close</mat-icon>
         </button>
+    </mat-form-field>
 
-        <mat-autocomplete class="main-search" #mainListSearch="matAutocomplete"
-            [displayWith]="getSelectedLabel.bind(this)" (optionSelected)='onOptionSelected($event.option.value)'>
+    <mat-autocomplete class="main-search" #mainListSearch="matAutocomplete" [displayWith]="getSelectedLabel.bind(this)"
+        (optionSelected)='onOptionSelected($event.option.value)'>
 
-            <div *ngIf="!isGroupingEnabled">
-                <mat-option *ngFor="let item of filteredItems" [value]="item">
+        <div *ngIf="!isGroupingEnabled">
+            <mat-option *ngFor="let item of filteredItems" [value]="item">
+                {{getOptionsLabel(item)}}
+            </mat-option>
+            <mat-option *ngIf="shouldShowNSROption" (click)="showRequestAdditionDialog()">
+                {{noSearchResultsStr}}
+            </mat-option>
+        </div>
+
+        <div *ngIf="isGroupingEnabled">
+            <mat-optgroup *ngFor="let group of filteredItems" [label]="getGroupLabel(group)">
+                <mat-option *ngFor="let item of group.items" [value]="item">
                     {{getOptionsLabel(item)}}
                 </mat-option>
-                <mat-option *ngIf="shouldShowNSROption" (click)="showRequestAdditionDialog()">
-                    {{noSearchResultsStr}}
-                </mat-option>
-            </div>
-
-            <div *ngIf="isGroupingEnabled">
-                <mat-optgroup *ngFor="let group of filteredItems" [label]="getGroupLabel(group)">
-                    <mat-option *ngFor="let item of group.items" [value]="item">
-                        {{getOptionsLabel(item)}}
-                    </mat-option>
-                </mat-optgroup>
-                <mat-option *ngIf="shouldShowNSROption" (click)="showRequestAdditionDialog()">
-                    {{noSearchResultsStr}}
-                </mat-option>
-            </div>
-        </mat-autocomplete>
-    </mat-form-field>
+            </mat-optgroup>
+            <mat-option *ngIf="shouldShowNSROption" (click)="showRequestAdditionDialog()">
+                {{noSearchResultsStr}}
+            </mat-option>
+        </div>
+    </mat-autocomplete>
 </form>

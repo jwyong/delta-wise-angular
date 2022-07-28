@@ -1,6 +1,6 @@
 <form (ngSubmit)="forgotPwordFormOnSubmit()">
     <p>
-        <app-input-clear [_label]="authStr.common.email" [_formControl]="emailFC" _type="email"
+        <app-input-clear [_label]="authStr.common.email" [_formControl]="emailFC" _type="email" _name="email"
             [getErrorMsg]="getEmailErrorMsg"></app-input-clear>
     </p>
     <a [routerLink]="backToLoginPath">

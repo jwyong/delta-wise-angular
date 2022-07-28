@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpConstants } from 'src/app/utils/http-constants';
 import { RouterConstants } from 'src/app/utils/router-constants';
-import { environment } from 'src/environments/environment';
 import { BaseModuleComponent } from '../base-home/base-home.component';
 import { CRYPTO_STR } from '../../../constants/modules/crypto-strings';
 import { Cryptocurrency } from './../../../models/crypto/crypto';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-crypto',
@@ -30,6 +30,8 @@ export class CryptoComponent extends BaseModuleComponent implements OnInit {
 
   // go to coin detail page
   onOptionSelected = (item: Cryptocurrency): void => {
+    if (item == null) return
+
     // TODO: TEMP - store commodity to ls
     localStorage.setItem("crypto", JSON.stringify(item))
 

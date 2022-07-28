@@ -12,13 +12,13 @@ export class HeaderInterceptor implements HttpInterceptor {
         // add auth header with jwt if account is logged in and request is to the api url
         const isApiUrl = request.url.startsWith(environment.apiUrl);
 
-        let jwt = this.localStorageService.getJwtToken()?.toString()?? ""
-        
+        let jwt = this.localStorageService.getJwtToken()?.toString() ?? ""
+
         if (this.localStorageService.isJwtValid() && isApiUrl) {
             // TODO: add time zone to header (e.g. "+8", "-7")
 
             request = request.clone({
-                setHeaders: { Authorization: jwt}
+                setHeaders: { Authorization: jwt }
             });
         }
 

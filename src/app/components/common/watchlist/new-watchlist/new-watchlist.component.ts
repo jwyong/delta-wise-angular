@@ -26,9 +26,9 @@ export class NewWatchlistComponent implements OnInit {
   }
 
   // validation
-  getNameErrorMsg() {
+  getNameErrorMsg(formControl: FormControl) {
     // required
-    if (this.nameFC.hasError(VALIDATION_STR.keys.required))
+    if (formControl.hasError(VALIDATION_STR.keys.required))
       return VALIDATION_STR.validation.required
 
     return ""

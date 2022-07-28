@@ -1,10 +1,10 @@
 <form (ngSubmit)="resetPwordOnSubmit()">
     <p>
-        <app-input-clear [_label]="authStr.reset_pword.new_pword_input" [_formControl]="newPwordFC"
+        <app-input-clear [_label]="authStr.reset_pword.new_pword_input" [_formControl]="newPwordFC" _name="newPword"
             [_hasPwordToggle]="true" [getErrorMsg]="getNewPwordErrorMsg"></app-input-clear>
     </p>
     <p>
-        <app-input-clear [_label]="authStr.reset_pword.confirm_pword" [_formControl]="confirmPwordFC"
+        <app-input-clear [_label]="authStr.reset_pword.confirm_pword" [_formControl]="confirmPwordFC" _name="confirmPword"
             [_hasPwordToggle]="true" [getErrorMsg]="getConfirmPwordErrorMsg"></app-input-clear>
     </p>
     <button class="w-100" mat-raised-button type="submit" color="primary">{{authStr.common.submit}}</button>

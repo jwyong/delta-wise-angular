@@ -243,7 +243,7 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
 
   // show watchlists chips if got watchlist + not loading
   shouldShowWatchlists() {
-    return !this.isLoading() && this.watchlists.length > 0
+    return this.watchlists.length > 0
   }
 
   // show watchlist items if got items in selected watchlist + not loading
@@ -253,7 +253,7 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
 
   // show empty UX if no watchlists / items in selected watchlist after loading
   shouldShowEmptyUx() {
-    return !this.isLoading() && !this.isLoadingWatchlist &&
+    return !this.isLoadingWatchlist &&
       (this.watchlists.length == 0 || (this.selectedWatchlist.children ?? []).length == 0)
   }
 
@@ -281,7 +281,8 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.showSnackbar(`New watchlist created: ${result['name']}`)
+      if (result != null)
+        this.showSnackbar(`New watchlist created: ${result['name']}`)
     });
   }
 }

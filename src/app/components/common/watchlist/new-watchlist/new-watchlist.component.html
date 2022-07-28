@@ -1,16 +1,11 @@
 <h2 mat-dialog-title>{{watchlistStr.create_new}}</h2>
 <form [formGroup]="newWatchlistForm" (submit)="onSubmit()">
     <mat-dialog-content class="mat-typography">
-        <mat-form-field class="w-100" appearance="fill">
-            <mat-label>{{watchlistStr.watchlist_name}}</mat-label>
-            <input matInput #nameInput [formControl]="nameFC" formControlName="name" required>
-            <button type="button" *ngIf="nameInput.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
-                (click)="nameInput.value=''">
-                <mat-icon class="text-secondary">close</mat-icon>
-            </button>
-            <mat-error *ngIf="newWatchlistForm.controls['name'].hasError">{{getNameErrorMsg()}}</mat-error>
-        </mat-form-field>
+        <app-input-clear [_label]="watchlistStr.watchlist_name" [_formControl]="nameFC" _name="addNewWatchlist"
+            [getErrorMsg]="getNameErrorMsg" [_shouldCapitalize]="true">
+        </app-input-clear>
     </mat-dialog-content>
+
     <mat-dialog-actions>
         <button class="ms-auto" mat-raised-button mat-dialog-close>{{confStr.cancel}}</button>
         <button mat-raised-button cdkFocusInitial color="primary" type="submit">{{confStr.submit}}</button>
