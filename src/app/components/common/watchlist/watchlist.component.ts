@@ -176,30 +176,9 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
 
   randomCommodities: WatchlistItem[] = []
 
-  randomCryptos: WatchlistItem[] = CryptoConstants.cryptoList.flatMap(item => {
+  randomCryptos: WatchlistItem[] = CryptoConstants.cryptoList.slice(0,25).flatMap(item => {
     return { id: item.id?.toString()!!, name: item.name!!, symbol: item.symbol!! }
   })
-
-  // [
-  //   { id: "BTC", name: "Bitcoin" },
-  //   { id: "ETH", name: "Ethereum" },
-  //   { id: "USDT", name: "Tether" },
-  //   { id: "USDC", name: "USD Coin" },
-  //   { id: "BNB", name: "BNB" },
-  //   { id: "ADA", name: "Cardano" },
-  //   { id: "XRP", name: "XRP" },
-  //   { id: "BUSD", name: "Binance USD" },
-  //   { id: "SOL", name: "Solana" },
-  //   { id: "DOGE", name: "Dogecoin" },
-  //   { id: "DOT", name: "Polkadot" },
-  //   { id: "WBTC", name: "Wrapped Bitcoin" },
-  //   { id: "TRX", name: "TRON" },
-  //   { id: "DAI", name: "Dai" },
-  //   { id: "AVAX", name: "Avalanche" },
-  //   { id: "SHIB", name: "Shiba Inu" },
-  //   { id: "LEO", name: "UNUS SED LEO" },
-  //   { id: "MATIC", name: "Polygon" },
-  // ]
 
   getRandomWatchlistItems(): any[] {
     switch (this.module) {
