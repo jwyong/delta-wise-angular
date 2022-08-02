@@ -19,7 +19,7 @@ export class CryptoComponent extends BaseHomeComponent implements OnInit {
   /**
    * search bar
    */
-  searchUrl = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_EQUITIES_SEARCH}?s=`
+  searchUrl = `${environment.apiUrl}/${HttpConstants.HTTP_API_VERSION}/${HttpConstants.API_CRYPTO_SEARCH}?s=`
 
   // setup functions for searchbar
   getOptionsLabel = (item: Cryptocurrency): string => {
@@ -32,9 +32,6 @@ export class CryptoComponent extends BaseHomeComponent implements OnInit {
   onOptionSelected = (item: Cryptocurrency): void => {
     if (item == null) return
 
-    // TODO: TEMP - store commodity to ls
-    localStorage.setItem("crypto", JSON.stringify(item))
-
-    this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.symbol}`)
+    this.navigateTo(`${RouterConstants.ROUTER_PATH_DETAILS}/${item.id}`)
   }
 }

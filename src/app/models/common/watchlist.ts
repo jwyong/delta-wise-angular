@@ -7,4 +7,5 @@ export interface Watchlist {
 export interface WatchlistItem {
     id: string,
     name: string,
+    symbol?: string
 }

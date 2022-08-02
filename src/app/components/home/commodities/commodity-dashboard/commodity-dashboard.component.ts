@@ -17,11 +17,11 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
    * table related
    */
   // disaplayed cols based on wiki grps
-  // fullDC = ["commodity", "mainExchange", "mic", "contractSize", "symbol", "currency", "category", "subCategory"]
-  displayedCols1 = ["commodity", "mainExchange", "mic", "contractSize", "symbol"]
-  displayedCols2 = ["commodity", "contractSize", "currency", "mainExchange", "symbol"]
-  displayedCols3 = ["commodity", "mainExchange", "contractSize", "symbol"]
-  displayedCols4 = ["commodity", "contractSize", "currency", "mainExchange"]
+  // fullDC = ["commodity", "main_exchange", "mic", "contractSize", "symbol", "currency", "category", "subCategory"]
+  displayedCols1 = ["commodity", "main_exchange", "mic", "contractSize", "symbol"]
+  displayedCols2 = ["commodity", "contractSize", "currency", "main_exchange", "symbol"]
+  displayedCols3 = ["commodity", "main_exchange", "contractSize", "symbol"]
+  displayedCols4 = ["commodity", "contractSize", "currency", "main_exchange"]
 
   // displayed data for each sub/category
   agri1DisplayedData: any[] = []
@@ -42,12 +42,12 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
       this.isLoadingDashBoard = true
 
       setTimeout(() => {
-        this.agri1DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "\"Grains, food and fiber\"")
-        this.agri2DisplayedData = CDConstants.commodities.filter(item => item.subCategory == "Livestock and meat")
+        this.agri1DisplayedData = CDConstants.commodities.filter(item => item.sub_category == "\"Grains, food and fiber\"")
+        this.agri2DisplayedData = CDConstants.commodities.filter(item => item.sub_category == "Livestock and meat")
         this.energyDD = CDConstants.commodities.filter(item => item.category == "Energy")
         this.forestDD = CDConstants.commodities.filter(item => item.category == "Forest products")
-        this.metals1DD = CDConstants.commodities.filter(item => item.subCategory == "Industrial")
-        this.metals2DD = CDConstants.commodities.filter(item => item.subCategory == "Precious")
+        this.metals1DD = CDConstants.commodities.filter(item => item.sub_category == "Industrial")
+        this.metals2DD = CDConstants.commodities.filter(item => item.sub_category == "Precious")
         this.othersDD = CDConstants.commodities.filter(item => item.category == "Other")
 
         this.isLoadingDashBoard = false
@@ -62,7 +62,7 @@ export class CommodityDashboardComponent extends BaseDashboardComponent implemen
       case "currency":
         return CommonStrDyn.capitalise(value);
 
-      case "mainExchange":
+      case "main_exchange":
         return "Main Exchange"
 
       case "contractSize":

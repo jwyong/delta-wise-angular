@@ -15,11 +15,12 @@ import { EstimateDialogComponent } from '../estimate-dialog/estimate-dialog.comp
   styleUrls: ['./est-table-single.component.css']
 })
 export class EstTableSingleComponent extends BaseComponent implements OnInit {
-  displayedColumns: any[] = []
-  displayedData: any[] = []
-  isLoadingTable = false
-
+  nameCol = COMMON_STR.estimates.constants.table.name_col
   percDiffColName = 'percDiff'
+  displayedColumns = [this.nameCol, this.percDiffColName]
+
+  @Input()
+  isLoadingTable = false
 
   @Input()
   module = <EnumModules>{}
@@ -28,7 +29,10 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
   title = ""
 
   @Input()
-  id = ""
+  id: number | undefined
+
+  @Input()
+  displayedData: any[] = []
 
   @Input()
   selectedDateRangeBS = <BehaviorSubject<number>>{}
@@ -40,28 +44,6 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
     this.selectedDateRangeBS.next(value)
   }
 
-  override ngOnInit(): void {
-    // simulate get table data
-    this.setIsLoading(true)
-    this.isLoadingTable = true
-
-    setTimeout(() => {
-      this.displayedColumns = [COMMON_STR.estimates.constants.table.name_col, this.percDiffColName]
-      this.displayedData = [
-        { name: '31 May ‘22', percDiff: 35.398 },
-        { name: '30 June ‘22', [this.percDiffColName]: -24.33 },
-        { name: '30 Sept ‘22', [this.percDiffColName]: null },
-        { name: '31 Dec ‘22', [this.percDiffColName]: -1.21 },
-        { name: '31 March ‘23', [this.percDiffColName]: null },
-        { name: '31 June ‘23', [this.percDiffColName]: 16.25 },
-        { name: '31 Sept ’23', [this.percDiffColName]: 12.33 },
-      ]
-
-      this.setIsLoading(false)
-      this.isLoadingTable = false
-    }, 800);
-  }
-
   /**
   * table highlighting related
   */
@@ -71,7 +53,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
 
   // update which row/col is mouse-over now
   cellOnMouseOver(rowType: string, colName: string) {
-    if (colName == COMMON_STR.estimates.constants.table.name_col) return
+    if (colName == this.nameCol) return
 
     this.mouseOverRowName = rowType
     this.mouseOverColName = colName
@@ -80,7 +62,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
   // get class for non-header cells (not 1st row)
   getNonHeaderCellClass(rowName: string, colName: string) {
     // check highlight for first col, cursor-pointer for 2nd col onwards
-    if (colName != COMMON_STR.estimates.constants.table.name_col) {
+    if (colName != this.nameCol) {
       // data columns - use data col css
       if (colName == this.mouseOverColName && rowName == this.mouseOverRowName)
         return `${COMMON_STR.estimates.constants.table.data_cell_base_class} ${COMMON_STR.estimates.constants.table.highlight_class}`
@@ -99,7 +81,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
    */
   // get humanised names for header cells
   getHumanisedHeaderCellValue(colName: string) {
-    if (colName != COMMON_STR.estimates.constants.table.name_col)
+    if (colName != this.nameCol)
       return COMMON_STR.estimates.perc_diff.title
     else return ""
   }
@@ -109,17 +91,24 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
   }
 
   showEstimateDialog(rowName: string, colName: string) {
+    if (colName == this.nameCol) return
+
+    // convert rowName (date) to human readable subtitle
+    const split = rowName.split("_")
+    const subTitle = `${split[2]} ${COMMON_STR.months_short[Number(split[1]) - 1]} '${split[0]}`
+
     const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
       panelClass: 'loader-dialog',
       maxWidth: '25vw',
       minWidth: 350,
       data: {
         title: this.title,
-        subTitle: `Period: ${rowName}`,
+        subTitle: `${COMMON_STR.period}: ${subTitle}`,
         sdr: this.selectedDateRangeBS,
+        module: this.module,
         id: this.id,
         timeFrame: colName,
-        rowType: rowName
+        rowName: rowName
       }
     });
 
@@ -148,7 +137,7 @@ export class EstTableSingleComponent extends BaseComponent implements OnInit {
 
         // refresh api if got submit
         case didSubmitEstimate:
-          // this.getCompanyDets()
+          this.dataService.shouldRefreshDetails.next(!this.dataService.shouldRefreshDetails)
           break
 
         default:

@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, timer } from 'rxjs';
 import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { EnumModules } from 'src/app/constants/enum/enum-modules';
 import { VALIDATION_STR } from 'src/app/constants/validation-strings';
@@ -61,7 +61,7 @@ export class EstimateDialogComponent implements OnInit {
 
   //     // replace inputted string to number
   //     var replaced = value.replace(/[^0-9-.]/g, '').replace(/^0+/, '')
- 
+
   //     // don't proceed if NaN
   //     if (isNaN(replaced)) return
 
@@ -106,7 +106,7 @@ export class EstimateDialogComponent implements OnInit {
 
   // input estimate form
   estimateFC = new FormControl('', [Validators.required, Validators.pattern(/^-?\d+(\.\d{1,2})?$/)]);
-  
+
   inputEstimateForm = this.formBuilder.group({
     estimate: this.estimateFC
   });
@@ -128,9 +128,40 @@ export class EstimateDialogComponent implements OnInit {
   async getUserEstimate() {
     this.setIsLoadingDialog(true)
 
-    let result = await this.commonServices.httpService.httpPost<CompanyEstimate>(HttpConstants.API_EQUITIES_USER_ESTIMATE, {
-      date_range: this.selectedDateRange, ticker: this.data.id,
-      time_frame: this.data.colName, type: this.data.rowName
+    // set http data based on module
+    var httpUrl = ''
+    var idFieldName = ''
+    var id: any
+    var timeFrame = ''
+
+    switch (this.data.module) {
+      case EnumModules.equities:
+        httpUrl = HttpConstants.API_EQUITIES_USER_ESTIMATE
+        idFieldName = "ticker"
+        id = this.data.id
+        timeFrame = this.data.colName
+        break
+
+      case EnumModules.commodities:
+        httpUrl = HttpConstants.API_COMMO_USER_ESTIMATE
+        idFieldName = "commodity_id"
+        id = Number(this.data.id)
+        timeFrame = this.data.rowName
+        break
+
+      case EnumModules.crypto:
+        httpUrl = HttpConstants.API_CRYPTO_USER_ESTIMATE
+        idFieldName = "crypto_id"
+        id = Number(this.data.id)
+        timeFrame = this.data.rowName
+        break
+    }
+
+    console.log('module = ', this.data.module)
+
+    let result = await this.commonServices.httpService.httpPost<CompanyEstimate>(httpUrl, {
+      date_range: this.selectedDateRange, [idFieldName]: id,
+      time_frame: timeFrame, type: this.data.rowName
     })
 
     this.setIsLoadingDialog(false)
@@ -154,9 +185,37 @@ export class EstimateDialogComponent implements OnInit {
 
     this.setIsLoadingDialog(true)
 
-    let result = await this.commonServices.httpService.httpPost(HttpConstants.API_EQUITIES_INSERT, {
-      date_range: this.selectedDateRange, estimate: estimate, ticker: this.data.id,
-      time_frame: this.data.colName, type: this.data.rowName
+    var httpUrl = ''
+    var idFieldName = ""
+    var id: any
+    var timeFrame = ''
+
+    switch (this.data.module) {
+      case EnumModules.equities:
+        httpUrl = HttpConstants.API_EQUITIES_INSERT
+        idFieldName = "ticker"
+        id = this.data.id
+        timeFrame = this.data.colName
+        break
+
+      case EnumModules.commodities:
+        httpUrl = HttpConstants.API_COMMO_INSERT
+        idFieldName = "commodity_id"
+        id = Number(this.data.id)
+        timeFrame = this.data.rowName
+        break
+
+      case EnumModules.crypto:
+        httpUrl = HttpConstants.API_CRYPTO_INSERT
+        idFieldName = "crypto_id"
+        id = Number(this.data.id)
+        timeFrame = this.data.rowName
+        break
+    }
+
+    let result = await this.commonServices.httpService.httpPost(httpUrl, {
+      date_range: this.selectedDateRange, estimate: estimate, [idFieldName]: id,
+      time_frame: timeFrame, type: this.data.rowName
     })
 
     this.setIsLoadingDialog(false)

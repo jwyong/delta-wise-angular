@@ -1,3 +1,4 @@
+import { CryptoConstants } from './../../home/crypto/crypto-dashboard/cr-constants';
 import { Component, OnInit } from '@angular/core';
 import { CommonStrDyn } from 'src/app/constants/common-strings';
 import { BaseDashboardComponent } from '../../home/base-dashboard/base-dashboard.component';
@@ -173,49 +174,32 @@ export class WatchlistComponent extends BaseDashboardComponent implements OnInit
     { id: "EOG", name: "EOG RESOURCES, INC." },
   ]
 
-  randomCommodities: WatchlistItem[] = [
-    // { id: "1", name: "Corn" },
-    // { id: "2", name: "Purified Terephthalic Acid (PTA)" },
-    // { id: "3", name: "Propane" },
-    // { id: "4", name: "Gulf Coast Gasoline" },
-    // { id: "5", name: "Heating Oil" },
-    // { id: "6", name: "Natural gas" },
-    // { id: "7", name: "Ethanol" },
-    // { id: "8", name: "Brent Crude" },
-    // { id: "9", name: "WTI Crude Oil" },
-    // { id: "10", name: "Feeder Cattle" },
-    // { id: "11", name: "Live Cattle" },
-    // { id: "12", name: "Lean Hogs" },
-    // { id: "13", name: "Wheat" },
-    // { id: "14", name: "Soybean" },
-    // { id: "15", name: "Sugar No.11" },
-    // { id: "16", name: "Sugar No.14" },
-    // { id: "17", name: "Aluminium" },
-    // { id: "18", name: "Gold" },
-    // { id: "19", name: "Silver" },
-    // { id: "20", name: "Platinum" },
-  ]
+  randomCommodities: WatchlistItem[] = []
 
-  randomCryptos: WatchlistItem[] = [
-    { id: "BTC", name: "Bitcoin" },
-    { id: "ETH", name: "Ethereum" },
-    { id: "USDT", name: "Tether" },
-    { id: "USDC", name: "USD Coin" },
-    { id: "BNB", name: "BNB" },
-    { id: "ADA", name: "Cardano" },
-    { id: "XRP", name: "XRP" },
-    { id: "BUSD", name: "Binance USD" },
-    { id: "SOL", name: "Solana" },
-    { id: "DOGE", name: "Dogecoin" },
-    { id: "DOT", name: "Polkadot" },
-    { id: "WBTC", name: "Wrapped Bitcoin" },
-    { id: "TRX", name: "TRON" },
-    { id: "DAI", name: "Dai" },
-    { id: "AVAX", name: "Avalanche" },
-    { id: "SHIB", name: "Shiba Inu" },
-    { id: "LEO", name: "UNUS SED LEO" },
-    { id: "MATIC", name: "Polygon" },
-  ]
+  randomCryptos: WatchlistItem[] = CryptoConstants.cryptoList.flatMap(item => {
+    return { id: item.id?.toString()!!, name: item.name!!, symbol: item.symbol!! }
+  })
+
+  // [
+  //   { id: "BTC", name: "Bitcoin" },
+  //   { id: "ETH", name: "Ethereum" },
+  //   { id: "USDT", name: "Tether" },
+  //   { id: "USDC", name: "USD Coin" },
+  //   { id: "BNB", name: "BNB" },
+  //   { id: "ADA", name: "Cardano" },
+  //   { id: "XRP", name: "XRP" },
+  //   { id: "BUSD", name: "Binance USD" },
+  //   { id: "SOL", name: "Solana" },
+  //   { id: "DOGE", name: "Dogecoin" },
+  //   { id: "DOT", name: "Polkadot" },
+  //   { id: "WBTC", name: "Wrapped Bitcoin" },
+  //   { id: "TRX", name: "TRON" },
+  //   { id: "DAI", name: "Dai" },
+  //   { id: "AVAX", name: "Avalanche" },
+  //   { id: "SHIB", name: "Shiba Inu" },
+  //   { id: "LEO", name: "UNUS SED LEO" },
+  //   { id: "MATIC", name: "Polygon" },
+  // ]
 
   getRandomWatchlistItems(): any[] {
     switch (this.module) {

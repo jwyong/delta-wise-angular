@@ -1,3 +1,4 @@
+import { CDConstants } from './../../home/commodities/commodity-dashboard/cd-constants';
 import { COMMON_STR } from 'src/app/constants/common-strings';
 import { Component, OnInit } from '@angular/core';
 import { RecentSearch } from './../../../models/common/recent-search';
@@ -50,53 +51,59 @@ export class RecentSearchComponent extends BaseDashboardComponent implements OnI
 
   getRecentSearchForEqt() {
     this.recentSearchList = [
-      { id: "FB", name: "Meta Platforms Inc" },
-      { id: "AMZN", name: "AMAZON.COM, INC." },
-      { id: "PYPL", name: "PayPal Holdings, Inc." },
-      { id: "NFLX", name: "NETFLIX, INC." },
-      { id: "UBER_US", name: "Uber Technologies Inc" },
-      { id: "NVDA", name: "NVIDIA CORPORATION" },
-      { id: "SNAP_US", name: "Snap Inc" },
-      { id: "PANW", name: "Palo Alto Networks, Inc." },
-      { id: "INTC", name: "INTEL CORPORATION" },
-      { id: "SPLK", name: "SPLUNK INC." },
-      { id: "TWTR", name: "TWITTER, INC." },
-      { id: "AAPL", name: "Apple Inc." },
-      { id: "BKNG_US", name: "Booking Holdings Inc" },
-      { id: "GPN_US", name: "Global Payments Inc" },
-      { id: "PXD", name: "PIONEER NATURAL RESOURCES COMPANY" },
-      { id: "BABA", name: "Alibaba Group Holding Ltd" },
-      { id: "EOG", name: "EOG RESOURCES, INC." },
+      { id: "FB", name: "Meta Platforms Inc", symbol: "FB" },
+      { id: "AMZN", name: "AMAZON.COM, INC.", symbol: "AMZN" },
+      { id: "PYPL", name: "PayPal Holdings, Inc.", symbol: "PYPL" },
+      { id: "NFLX", name: "NETFLIX, INC.", symbol: "NFLX" },
+      { id: "UBER_US", name: "Uber Technologies Inc", symbol: "UBER_US" },
+      { id: "NVDA", name: "NVIDIA CORPORATION", symbol: "NVDA" },
+      { id: "SNAP_US", name: "Snap Inc", symbol: "SNAP_US" },
+      { id: "PANW", name: "Palo Alto Networks, Inc.", symbol: "PANW" },
+      { id: "INTC", name: "INTEL CORPORATION", symbol: "INTC" },
+      { id: "SPLK", name: "SPLUNK INC.", symbol: "SPLK" },
+      { id: "TWTR", name: "TWITTER, INC.", symbol: "TWTR" },
+      { id: "AAPL", name: "Apple Inc.", symbol: "AAPL" },
+      { id: "BKNG_US", name: "Booking Holdings Inc", symbol: "BKNG_US" },
+      { id: "GPN_US", name: "Global Payments Inc", symbol: "GPN_US" },
+      { id: "PXD", name: "PIONEER NATURAL RESOURCES COMPANY", symbol: "PXD" },
+      { id: "BABA", name: "Alibaba Group Holding Ltd", symbol: "BABA" },
+      { id: "EOG", name: "EOG RESOURCES, INC.", symbol: "EOG" },
     ]
   }
 
   getRecentSearchForCommo() {
-    this.recentSearchList = [
-      { id: "CBOT", name: "Corn" },
-      { id: "NYMEX", name: "Propane" },
-      { id: "NYMEX", name: "Gulf Coast Gasoline" },
-      { id: "NYMEX", name: "Heating Oil" },
-      { id: "ICE", name: "Natural gas" },
-      { id: "ICE", name: "Brent Crude" },
-      { id: "Chicago Mercantile Exchange", name: "Feeder Cattle" },
-      { id: "Chicago Mercantile Exchange", name: "Live Cattle" },
-      { id: "Chicago Mercantile Exchange", name: "Lean Hogs" },
-      { id: "COMEX", name: "Gold" },
-      { id: "COMEX", name: "Silver" },
-      { id: "NYMEX", name: "Platinum" },
-    ]
+    this.recentSearchList = CDConstants.commodities.slice(0, 24).flatMap(item => {
+      return { id: item.id?.toString()!!, name: item.name!!, symbol: item.main_exchange!! }
+    })
   }
 
   getRecentSearchForCryp() {
     this.recentSearchList = [
-      // { id: "BTC", name: "Bitcoin" },
-      // { id: "ETH", name: "Ethereum" },
-      // { id: "USDC", name: "USD Coin" },
-      // { id: "ADA", name: "Cardano" },
-      // { id: "XRP", name: "XRP" },
-      // { id: "DOGE", name: "Dogecoin" },
-      // { id: "TRX", name: "TRON" },
-      // { id: "AVAX", name: "Avalanche" },
+      {
+        "id": "35",
+        "name": "Decentraland",
+        "symbol": "MANA"
+      },
+      {
+        "id": "36",
+        "name": "ApeCoin",
+        "symbol": "APE"
+      },
+      {
+        "id": "37",
+        "name": "The Sandbox",
+        "symbol": "SAND"
+      },
+      {
+        "id": "38",
+        "name": "KuCoin Token",
+        "symbol": "KCS"
+      },
+      {
+        "id": "39",
+        "name": "Internet Computer",
+        "symbol": "ICP"
+      },
     ]
   }
 

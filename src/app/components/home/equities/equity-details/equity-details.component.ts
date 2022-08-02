@@ -16,8 +16,9 @@ import { EquitiesComponent } from './../equities.component';
   styleUrls: ['./equity-details.component.css']
 })
 export class EquityDetailsComponent extends EquitiesComponent implements OnInit {
+  nameCol = COMMON_STR.estimates.constants.table.name_col
   tableStr = COMMON_STR.estimates.est_table_disclaimer
-  
+
   // company ticker for currect company
   companyTicker = ''
   company: Company | undefined
@@ -63,7 +64,8 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   timeFrameCol = 'timeframe'
 
   // fixed row on table (to be inverted from api data)
-  inputColumns = [this.timeFrameCol, CompanyRowType.revenue, CompanyRowType.ebit, CompanyRowType.ebitda, CompanyRowType.net_income, CompanyRowType.eps]
+  inputColumns = [this.timeFrameCol, CompanyRowType.revenue, CompanyRowType.ebit, CompanyRowType.ebitda,
+  CompanyRowType.net_income, CompanyRowType.eps]
 
   /**
    * table related
@@ -109,7 +111,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
       // invert displayedCols
       this.displayedColumns = beArray.map(x => x.timeframe.toString());
-      this.displayedColumns.unshift(COMMON_STR.estimates.constants.table.name_col)
+      this.displayedColumns.unshift(this.nameCol)
 
       // invert displayedData
       this.displayedData = this.getInvertedFlatMap(beArray)
@@ -133,7 +135,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
     return this.inputColumns.flatMap(x => {
       if (x != this.timeFrameCol) {
         // prep inverted array rowObj
-        var invertedArrayRowObj: any = { [COMMON_STR.estimates.constants.table.name_col]: x }
+        var invertedArrayRowObj: any = { [this.nameCol]: x }
         beArray.forEach((item: any, index: number) => {
           invertedArrayRowObj[item.timeframe] = beArray[index][x];
         })
@@ -152,7 +154,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // update which row/col is mouse-over now
   cellOnMouseOver(rowType: string, colName: string) {
-    if (colName == COMMON_STR.estimates.constants.table.name_col) return
+    if (colName == this.nameCol) return
 
     this.mouseOverRowName = rowType
     this.mouseOverColName = colName
@@ -160,7 +162,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // get class for header cells (1st row)
   getHeaderCellClass(colName: string) {
-    if (colName == COMMON_STR.estimates.constants.table.name_col) return ''
+    if (colName == this.nameCol) return ''
     else
       if (colName == this.mouseOverColName) return COMMON_STR.estimates.constants.table.highlight_class
       else return ''
@@ -169,7 +171,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
   // get class for non-header cells (not 1st row)
   getNonHeaderCellClass(rowName: string, colName: string) {
     // check highlight for first col, cursor-pointer for 2nd col onwards
-    if (colName != COMMON_STR.estimates.constants.table.name_col) {
+    if (colName != this.nameCol) {
       // data columns - use data col css
       if (colName == this.mouseOverColName && rowName == this.mouseOverRowName)
         return `${COMMON_STR.estimates.constants.table.data_cell_base_class} ${COMMON_STR.estimates.constants.table.highlight_class}`
@@ -187,6 +189,8 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
    * input estimate dialog
    */
   showEstimateDialog(rowName: string, colName: string) {
+    if (colName == this.nameCol) return
+    
     const hRowName = EqtStrDyn.getCompanyRowTypeName(rowName)
     const hColName = EqtStrDyn.getHumanisedEqtColName(colName)
     const estimateDialogRef = this.dialog.open(EstimateDialogComponent, {
@@ -250,7 +254,7 @@ export class EquityDetailsComponent extends EquitiesComponent implements OnInit 
 
   // get humanised names for header cells
   getHumanisedHeaderCellValue(colName: string) {
-    if (colName != COMMON_STR.estimates.constants.table.name_col)
+    if (colName != this.nameCol)
       return EqtStrDyn.getHumanisedEqtColName(colName)
     else return ""
   }

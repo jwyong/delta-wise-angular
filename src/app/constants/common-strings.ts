@@ -9,6 +9,7 @@ export const COMMON_STR = {
     settings: $localize`:@@settings:Settings`,
     user_profile: $localize`:@@user_profile:User Profile`,
     user_name: $localize`:@@user_name:Username`,
+    period: $localize`:@@period:Period`,
 
     // date as ago
     date_as_ago: {
@@ -26,6 +27,16 @@ export const COMMON_STR = {
             ]
         }
     },
+
+    months_short: [
+        $localize`:@@jan:Jan`, $localize`:@@feb:Feb`, $localize`:@@mar:Mar`, $localize`:@@apr:Apr`, $localize`:@@may:May`, $localize`:@@jun:Jun`,
+        $localize`:@@jul:Jul`, $localize`:@@aug:Aug`, $localize`:@@sep:Sep`, $localize`:@@oct:Oct`, $localize`:@@nov:Nov`, $localize`:@@dec:Dec`,
+    ],
+
+    months_long: [
+        $localize`:@@jan:January`, $localize`:@@feb:February`, $localize`:@@mar:March`, $localize`:@@apr:April`, $localize`:@@may:May`, $localize`:@@jun:June`,
+        $localize`:@@jul:July`, $localize`:@@aug:August`, $localize`:@@sep:September`, $localize`:@@oct:October`, $localize`:@@nov:November`, $localize`:@@dec:December`,
+    ],
 
     // main search bar
     search_bar: {
@@ -179,7 +190,9 @@ export class CommonStrDyn {
                     return EqtStrDyn.getCompanyRowTypeName(rowName)
 
                 default:
-                    return rowName
+                    const split = rowName.split("_")
+
+                    return `${split[2]} ${COMMON_STR.months_short[Number(split[1]) - 1]} '${split[0]}`
             }
 
         else {

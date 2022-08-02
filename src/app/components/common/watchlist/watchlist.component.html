@@ -33,7 +33,7 @@
                 </button>
             </mat-chip>
             <mat-chip class="cursor-pointer" *ngIf="!isLoadingWatchlist && isWatchlistExpanded"
-                (click)="showNewWatchlistDialog(); $event.stopPropagation()"> + 
+                (click)="showNewWatchlistDialog(); $event.stopPropagation()"> +
             </mat-chip>
         </div>
     </mat-chip-list>
@@ -45,14 +45,15 @@
             <mat-list-item class="wl-rl-item text-secondary cursor-pointer" (click)="listItemOnClick(item)"
                 *ngFor="let item of selectedWatchlist.children">
                 <div class="d-flex align-items-center">
-                    <p class="my-0 me-2">{{item.name}} ({{item.id}})</p>
+                    <p class="my-0 me-2">{{item.name}} ({{item.symbol?? item.id}})</p>
                     <mat-icon class="text-secondary scale-08" *ngIf="isEditMode">cancel</mat-icon>
                 </div>
             </mat-list-item>
         </mat-list>
     </div>
 
-    <div class="m-5 text-center" [ngClass]="isWatchlistsEmpty()? 'cursor-pointer' : ''" (click)="emptyWatchlistOnClick()" *ngIf="shouldShowEmptyUx()">
+    <div class="m-5 text-center" [ngClass]="isWatchlistsEmpty()? 'cursor-pointer' : ''"
+        (click)="emptyWatchlistOnClick()" *ngIf="shouldShowEmptyUx()">
         <mat-icon class="scale-2">
             {{isWatchlistsEmpty()? "playlist_add" : "search"}}
         </mat-icon>

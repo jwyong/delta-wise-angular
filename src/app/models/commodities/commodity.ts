@@ -1,19 +1,12 @@
 export interface Commodity {
-    id?: number,
-    commodity: string,
-    mainExchange: string,
-    category: string,
-    subCategory?: string,
+    category?: string,
+    contract_size?: string,
+    main_exchange?: string,
     mic?: string,
-    contractSize?: string,
+    name?: string,
+    sub_category?: string,
+
+    id?: number,
     symbol?: string | null,
     currency?: string | null
-}
-
-/**
- * for commodity searchbar (category based)
- */
-export interface CommoditySearch {
-    category: string,
-    items: Commodity[]
 }

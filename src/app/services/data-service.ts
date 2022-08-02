@@ -10,10 +10,18 @@ import { User } from '../models/common/user';
 export class DataService {
   constructor() {}
 
-  //=== app component
+  /**
+   * app component
+   */
   // for loading animation
   isLoadingSource = new BehaviorSubject(false);
   setIsLoading(isLoading: boolean) {
     this.isLoadingSource.next(isLoading);
   }
+
+  /**
+   * home compnent
+   */
+  // check if details page should refresh details after insert estimate
+  shouldRefreshDetails = new BehaviorSubject(false);
 }

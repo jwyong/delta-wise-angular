@@ -27,7 +27,7 @@ export class BaseDashboardComponent extends BaseComponent implements OnInit {
     // TODO: TEMP - set obj to ls for non-equities (hardcoded without http)
     switch (this.module) {
       case EnumModules.commodities:
-        let commodity: Commodity = { id: 23, commodity: item.name, mainExchange: item.id, category: "Category" }
+        let commodity: Commodity = { id: 23, name: item.name, main_exchange: item.id, category: "Category" }
 
         localStorage.setItem("commodity", JSON.stringify(commodity))
         break
